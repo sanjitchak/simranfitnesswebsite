@@ -1,1013 +1,452 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simran - Your Personal Fitness Coach</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            position: relative;
-            padding: 4rem 2rem 2rem;
-            background: radial-gradient(circle at 20% 50%, rgba(255, 107, 0, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255, 107, 0, 0.1) 0%, transparent 50%);
-        }
-
-        .hero-header {
-            text-align: center;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            max-width: 1400px;
-            margin: 3rem auto 0;
-            width: 100%;
-        }
-
-        .hero-image-container {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: fadeInRight 1s ease-out;
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .image-glow {
-            position: absolute;
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, rgba(255, 107, 0, 0.3) 0%, transparent 70%);
-            filter: blur(60px);
-            animation: pulse 3s ease-in-out infinite;
-            z-index: 0;
-        }
-
-        .hero-image {
-            position: relative;
-            max-width: 500px;
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 20px 60px rgba(255, 107, 0, 0.4));
-            animation: float 3s ease-in-out infinite;
-            z-index: 1;
-        }
-
-        .image-placeholder {
-            position: relative;
-            max-width: 500px;
-            width: 100%;
-            aspect-ratio: 2/3;
-            background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 165, 0, 0.05));
-            border-radius: 30px;
-            border: 2px dashed rgba(255, 107, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 1rem;
-            color: rgba(255, 107, 0, 0.6);
-            font-size: 1.2rem;
-            text-align: center;
-            padding: 2rem;
-            z-index: 1;
-        }
-
-        .placeholder-icon {
-            font-size: 4rem;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="rgba(255,107,0,0.1)"/></svg>') repeat;
-            opacity: 0.3;
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-content {
-            width: 100%;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ff6b00, #ffa500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -2px;
-            line-height: 1.1;
-        }
-
-        .subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            margin-bottom: 1rem;
-            color: #e0e0e0;
-            font-weight: 300;
-        }
-
-        .coach-name {
-            font-size: clamp(1rem, 2.5vw, 1.5rem);
-            color: #ff6b00;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-        }
-
-        .location-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            background: linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(255, 165, 0, 0.1));
-            border: 2px solid rgba(255, 107, 0, 0.4);
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-        }
-
-        .location-badge:hover {
-            background: linear-gradient(135deg, rgba(255, 107, 0, 0.25), rgba(255, 165, 0, 0.15));
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.3);
-            border-color: #ff6b00;
-        }
-
-        .location-icon {
-            font-size: 1.5rem;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        .location-text {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            line-height: 1.3;
-        }
-
-        .location-label {
-            font-size: 0.85rem;
-            color: #aaa;
-            font-weight: 400;
-        }
-
-        .location-city {
-            color: #ff6b00;
-            font-weight: 700;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 4rem 0;
-        }
-
-        .service-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 0, 0.2);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.1), transparent);
-            transition: 0.5s;
-        }
-
-        .service-card:hover::before {
-            left: 100%;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: #ff6b00;
-            box-shadow: 0 10px 40px rgba(255, 107, 0, 0.3);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #ff6b00;
-        }
-
-        .benefits-section {
-            background: rgba(255, 107, 0, 0.05);
-            padding: 4rem 2rem;
-            margin: 4rem 0;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 107, 0, 0.1);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 3rem;
-            color: #ff6b00;
-            font-weight: 800;
-        }
-
-        .benefits-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            list-style: none;
-        }
-
-        .benefit-item {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 1.5rem;
-            border-radius: 15px;
-            border-left: 4px solid #ff6b00;
-            transition: all 0.3s ease;
-        }
-
-        .benefit-item:hover {
-            background: rgba(255, 107, 0, 0.1);
-            transform: translateX(10px);
-        }
-
-        .benefit-item::before {
-            content: '✓';
-            font-size: 1.5rem;
-            color: #ff6b00;
-            margin-right: 1rem;
-            font-weight: bold;
-        }
-
-        .offer-section {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 165, 0, 0.05));
-            border-radius: 30px;
-            margin: 4rem 0;
-            border: 2px solid rgba(255, 107, 0, 0.3);
-        }
-
-        .offer-title {
-            margin-bottom: 3rem;
-        }
-
-        .offer-outcome {
-            font-size: 1.2rem;
-            color: #e0e0e0;
-            margin-top: 1rem;
-            background: rgba(255, 107, 0, 0.1);
-            padding: 1rem 2rem;
-            border-radius: 15px;
-            display: inline-block;
-        }
-
-        .offer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-            text-align: left;
-        }
-
-        .offer-column {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 0, 0.2);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .offer-column:hover {
-            transform: translateY(-5px);
-            border-color: #ff6b00;
-            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.2);
-        }
-
-        .column-title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #ff6b00;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .offer-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .offer-list li {
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 107, 0, 0.1);
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            line-height: 1.6;
-        }
-
-        .offer-list li:last-child {
-            border-bottom: none;
-        }
-
-        .check-icon {
-            color: #25D366;
-            font-size: 1.3rem;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-
-        .star-icon {
-            color: #ffa500;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-
-        .guarantee-box {
-            background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(18, 140, 126, 0.05));
-            border: 2px solid rgba(37, 211, 102, 0.3);
-            border-radius: 20px;
-            padding: 2rem;
-            margin: 3rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .guarantee-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(37, 211, 102, 0.1) 0%, transparent 70%);
-            animation: rotate 10s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .guarantee-badge {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            display: inline-block;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .guarantee-text {
-            font-size: 1.2rem;
-            color: white;
-            line-height: 1.8;
-            position: relative;
-            z-index: 1;
-        }
-
-        .pricing-box {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 20px;
-            padding: 2.5rem;
-            margin: 3rem 0 2rem;
-            border: 2px solid rgba(255, 107, 0, 0.3);
-        }
-
-        .price-wrapper {
-            margin-bottom: 2rem;
-        }
-
-        .old-price {
-            font-size: 1.5rem;
-            color: #888;
-            text-decoration: line-through;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .offer-price {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 900;
-            color: #ff6b00;
-            margin-bottom: 0.5rem;
-            line-height: 1;
-        }
-
-        .price-note {
-            font-size: 1rem;
-            color: #aaa;
-            margin-top: 0.5rem;
-        }
-
-        .scarcity-alert {
-            background: rgba(255, 107, 0, 0.15);
-            border: 1px solid rgba(255, 107, 0, 0.4);
-            border-radius: 15px;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            font-size: 1.1rem;
-            color: #ffa500;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .offer-badge {
-            display: inline-block;
-            background: #ff6b00;
-            color: white;
-            padding: 0.5rem 2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            margin-bottom: 2rem;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            padding: 1.5rem 3rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
-        }
-
-        .hero-cta {
-            text-align: center;
-            margin-bottom: 3rem;
-            animation: fadeInUp 1.2s ease-out;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
-        }
-
-        .whatsapp-icon {
-            width: 30px;
-            height: 30px;
-        }
-
-        .floating-cta {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1000;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .floating-cta-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            border-radius: 50%;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-
-        .floating-cta-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
-        }
-
-        .location-section {
-            background: linear-gradient(135deg, rgba(255, 107, 0, 0.05), rgba(255, 165, 0, 0.02));
-            border-radius: 30px;
-            padding: 3rem 2rem;
-            margin: 4rem 0;
-            border: 2px solid rgba(255, 107, 0, 0.2);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .location-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 107, 0, 0.05) 0%, transparent 70%);
-            animation: rotate 15s linear infinite;
-        }
-
-        .location-section-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .location-section-title {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #ff6b00, #ffa500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .location-section-text {
-            font-size: 1.2rem;
-            color: #e0e0e0;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .location-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            padding: 1.2rem 2.5rem;
-            font-size: 1.1rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3);
-        }
-
-        .location-cta:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
-        }
-
-        @media (max-width: 968px) {
-            .location-badge {
-                font-size: 0.95rem;
-                padding: 0.8rem 1.5rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .location-section {
-                padding: 2rem 1.5rem;
-            }
-
-            .location-section-text {
-                font-size: 1rem;
-            }
-        }
-            .hero {
-                padding: 3rem 1.5rem 2rem;
-            }
-
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                margin-top: 2rem;
-            }
-
-            .hero-image-container {
-                order: -1;
-            }
-
-            .hero-image,
-            .image-placeholder {
-                max-width: 350px;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .benefits-list {
-                grid-template-columns: 1fr;
-            }
-
-            .floating-cta {
-                bottom: 1rem;
-                right: 1rem;
-            }
-
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .coach-name {
-                font-size: 1rem;
-            }
-
-            .offer-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .offer-outcome {
-                font-size: 1rem;
-                padding: 1rem;
-            }
-
-            .offer-price {
-                font-size: 3rem;
-            }
-
-            .scarcity-alert {
-                font-size: 0.95rem;
-                text-align: center;
-            }
-
-            .guarantee-text {
-                font-size: 1rem;
-            }
-
-            .pricing-box {
-                padding: 1.5rem;
-            }
-
-            .cta-button {
-                padding: 1.2rem 2rem;
-                font-size: 1rem;
-            }
-
-            .location-cta {
-                padding: 1rem 1.8rem;
-                font-size: 1rem;
-            }
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: scrollBounce 2s ease-in-out infinite;
-        }
-
-        @keyframes scrollBounce {
-            0%, 100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, 10px); }
-        }
-
-        .scroll-indicator::before {
-            content: '↓';
-            font-size: 2rem;
-            color: #ff6b00;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simran - Your Personal Fitness Coach</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+      background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 100%);
+      color:#fff;overflow-x:hidden
+    }
+
+    .hero{
+      min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+      position:relative;padding:4rem 1rem 2rem;will-change:transform;
+      background:
+        radial-gradient(circle at 20% 50%,rgba(255,107,0,.15) 0%,transparent 50%),
+        radial-gradient(circle at 80% 80%,rgba(255,107,0,.1) 0%,transparent 50%)
+    }
+    .hero::before{
+      content:'';position:absolute;inset:0;
+      background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="rgba(255,107,0,0.1)"/></svg>') repeat;
+      opacity:.3;animation:float 20s ease-in-out infinite
+    }
+
+    .hero-header{text-align:center;margin-bottom:2rem;animation:fadeInUp 1s ease-out}
+    .hero-grid{
+      display:grid;grid-template-columns:minmax(400px,500px) 1fr;gap:4rem;align-items:center;justify-items:center;
+      max-width:1400px;margin:3rem auto 0;width:100%
+    }
+    .hero-left{display:flex;flex-direction:column;gap:2rem;justify-content:center;align-items:center}
+    .hero-image-container{position:relative;display:flex;justify-content:center;align-items:center;animation:fadeInRight 1s ease-out;width:100%;max-width:500px}
+    .image-glow{position:absolute;width:120%;height:120%;background:radial-gradient(circle,rgba(255,107,0,.3) 0%,transparent 70%);filter:blur(60px);animation:pulse 3s ease-in-out infinite;z-index:0}
+    .hero-image{position:relative;width:100%;max-width:500px;height:auto;filter:drop-shadow(0 20px 60px rgba(255,107,0,.4));animation:float 3s ease-in-out infinite;z-index:1;display:block}
+    .image-placeholder{
+      position:relative;max-width:500px;width:100%;aspect-ratio:2/3;
+      background:linear-gradient(135deg,rgba(255,107,0,.1),rgba(255,165,0,.05));
+      border-radius:30px;border:2px dashed rgba(255,107,0,.3);
+      display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;color:rgba(255,107,0,.6);
+      font-size:1.2rem;text-align:center;padding:2rem;z-index:1
+    }
+    .placeholder-icon{font-size:4rem}
+
+    .container{max-width:1200px;margin:0 auto;position:relative;z-index:1;padding:0 2rem}
+    .hero .container{max-width:1400px}
+    .hero-content{width:100%;animation:fadeInUp 1s ease-out;display:flex;align-items:center}
+
+    h1{
+      font-size:clamp(2.5rem,8vw,5rem);font-weight:900;margin-bottom:1rem;
+      background:linear-gradient(135deg,#ff6b00,#ffa500);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      letter-spacing:-2px;line-height:1.1
+    }
+    .subtitle{font-size:clamp(1.2rem,3vw,1.8rem);margin-bottom:1rem;color:#e0e0e0;font-weight:300}
+    .coach-name{font-size:clamp(1rem,2.5vw,1.5rem);color:#ff6b00;margin-bottom:1.5rem;font-weight:600;letter-spacing:2px}
+
+    .location-badge{
+      display:inline-flex;align-items:center;gap:.8rem;background:linear-gradient(135deg,rgba(255,107,0,.15),rgba(255,165,0,.1));
+      border:2px solid rgba(255,107,0,.4);padding:1rem 2rem;border-radius:50px;margin-bottom:2rem;transition:.3s;cursor:pointer;text-decoration:none;color:#fff;font-size:1.1rem;font-weight:600;backdrop-filter:blur(10px)
+    }
+    .location-badge:hover{background:linear-gradient(135deg,rgba(255,107,0,.25),rgba(255,165,0,.15));transform:translateY(-3px);box-shadow:0 10px 30px rgba(255,107,0,.3);border-color:#ff6b00}
+    .location-icon{font-size:1.5rem;animation:bounce 2s ease-in-out infinite}
+    .location-text{display:flex;flex-direction:column;align-items:flex-start;line-height:1.3}
+    .location-label{font-size:.85rem;color:#aaa;font-weight:400}
+    .location-city{color:#ff6b00;font-weight:700}
+
+    .services-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin:0;max-width:520px;margin-inline:auto}
+    .service-card{
+      background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid rgba(255,107,0,.2);
+      border-radius:20px;padding:1.8rem 1.5rem;transition:.3s;cursor:pointer;position:relative;overflow:hidden;text-align:center;display:block
+    }
+    .service-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,107,0,.1),transparent);transition:.5s}
+    .service-card:hover::before{left:100%}
+    .service-card:hover{transform:translateY(-10px);border-color:#ff6b00;box-shadow:0 10px 40px rgba(255,107,0,.3)}
+    .service-icon{font-size:2.5rem;margin-bottom:.8rem}
+    .service-title{font-size:1.2rem;font-weight:700;margin-bottom:.5rem;color:#ff6b00}
+    .service-card p{font-size:.95rem;color:#e0e0e0;line-height:1.5;margin:0}
+
+    .benefits-section{background:rgba(255,107,0,.05);padding:4rem 2rem;margin:4rem 0;border-radius:30px;border:1px solid rgba(255,107,0,.1)}
+    .section-title{text-align:center;font-size:clamp(2rem,5vw,3rem);margin-bottom:3rem;color:#ff6b00;font-weight:800}
+    .benefits-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;list-style:none}
+    .benefit-item{display:flex;align-items:center;background:rgba(255,255,255,.03);padding:1.5rem;border-radius:15px;border-left:4px solid #ff6b00;transition:.3s}
+    .benefit-item:hover{background:rgba(255,107,0,.1);transform:translateX(10px)}
+    .benefit-item::before{content:'✓';font-size:1.5rem;color:#ff6b00;margin-right:1rem;font-weight:700}
+
+    .offer-section{text-align:center;padding:4rem 2rem;background:linear-gradient(135deg,rgba(255,107,0,.1),rgba(255,165,0,.05));border-radius:30px;margin:4rem 0;border:2px solid rgba(255,107,0,.3)}
+    .offer-title{margin-bottom:3rem}
+    .offer-outcome{font-size:1.2rem;color:#e0e0e0;margin-top:1rem;background:rgba(255,107,0,.1);padding:1rem 2rem;border-radius:15px;display:inline-block}
+    .offer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin:3rem 0;text-align:left}
+    .offer-column{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid rgba(255,107,0,.2);border-radius:20px;padding:2rem;transition:.3s}
+    .offer-column:hover{transform:translateY(-5px);border-color:#ff6b00;box-shadow:0 10px 30px rgba(255,107,0,.2)}
+    .column-title{font-size:1.5rem;font-weight:800;color:#ff6b00;margin-bottom:1.5rem;text-align:center}
+    .offer-list{list-style:none;padding:0}
+    .offer-list li{padding:1rem 0;border-bottom:1px solid rgba(255,107,0,.1);display:flex;align-items:flex-start;gap:1rem;line-height:1.6}
+    .offer-list li:last-child{border-bottom:none}
+    .check-icon{color:#25D366;font-size:1.3rem;font-weight:700;flex-shrink:0}
+    .star-icon{color:#ffa500;font-size:1.3rem;flex-shrink:0}
+
+    .guarantee-box{
+      background:linear-gradient(135deg,rgba(37,211,102,.1),rgba(18,140,126,.05));
+      border:2px solid rgba(37,211,102,.3);border-radius:20px;padding:2rem;margin:3rem 0;position:relative;overflow:hidden
+    }
+    .guarantee-box::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(37,211,102,.1) 0%,transparent 70%);animation:rotate 10s linear infinite}
+    .guarantee-badge{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;padding:.5rem 1.5rem;border-radius:50px;font-weight:700;font-size:1rem;letter-spacing:1px;display:inline-block;margin-bottom:1rem;position:relative;z-index:1}
+    .guarantee-text{font-size:1.2rem;color:#fff;line-height:1.8;position:relative;z-index:1}
+
+    .pricing-box{background:rgba(0,0,0,.3);border-radius:20px;padding:2.5rem;margin:3rem 0 2rem;border:2px solid rgba(255,107,0,.3)}
+    .price-wrapper{margin-bottom:2rem}
+    .old-price{font-size:1.5rem;color:#888;text-decoration:line-through;display:block;margin-bottom:.5rem}
+    .offer-price{font-size:clamp(3rem,8vw,5rem);font-weight:900;color:#ff6b00;margin-bottom:.5rem;line-height:1}
+    .price-note{font-size:1rem;color:#aaa;margin-top:.5rem}
+
+    .scarcity-alert{
+      background:rgba(255,107,0,.15);border:1px solid rgba(255,107,0,.4);border-radius:15px;padding:1.5rem;
+      display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.5rem;font-size:1.1rem;color:#ffa500;animation:pulse 2s ease-in-out infinite
+    }
+
+    .offer-badge{display:inline-block;background:#ff6b00;color:#fff;padding:.5rem 2rem;border-radius:50px;font-weight:700;font-size:.9rem;letter-spacing:1px;margin-bottom:2rem;animation:pulse 2s ease-in-out infinite}
+    .online-badge{background:linear-gradient(135deg,#00c9ff,#0066ff);padding:.4rem 1.5rem;border-radius:50px;font-weight:700;font-size:.85rem;letter-spacing:1px;display:inline-block;margin-left:1rem;animation:pulse 2s ease-in-out infinite}
+    .offline-badge{background:linear-gradient(135deg,#11998e,#38ef7d);padding:.4rem 1.5rem;border-radius:50px;font-weight:700;font-size:.85rem;letter-spacing:1px;display:inline-block;margin-left:1rem;animation:pulse 2s ease-in-out infinite}
+    .offer-section-offline{text-align:center;padding:4rem 2rem;background:linear-gradient(135deg,rgba(17,153,142,.1),rgba(56,239,125,.05));border-radius:30px;margin:4rem 0;border:2px solid rgba(56,239,125,.3)}
+
+    .cta-button{
+      display:inline-flex;align-items:center;gap:1rem;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;
+      padding:1.5rem 3rem;font-size:1.2rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;transition:.3s;text-decoration:none;box-shadow:0 10px 30px rgba(37,211,102,.3)
+    }
+    .hero-cta{text-align:center;margin-bottom:3rem;animation:fadeInUp 1.2s ease-out}
+    .cta-button:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(37,211,102,.5)}
+    .whatsapp-icon{width:30px;height:30px}
+
+    .floating-cta{position:fixed;bottom:2rem;right:2rem;z-index:1000;animation:bounce 2s ease-in-out infinite}
+    .floating-cta-button{display:flex;align-items:center;justify-content:center;width:60px;height:60px;background:linear-gradient(135deg,#25D366,#128C7E);border-radius:50%;box-shadow:0 10px 30px rgba(37,211,102,.4);transition:.3s;cursor:pointer;border:none}
+    .floating-cta-button:hover{transform:scale(1.1);box-shadow:0 15px 40px rgba(37,211,102,.6)}
+
+    .location-section{background:linear-gradient(135deg,rgba(255,107,0,.05),rgba(255,165,0,.02));border-radius:30px;padding:3rem 2rem;margin:4rem 0;border:2px solid rgba(255,107,0,.2);text-align:center;position:relative;overflow:hidden}
+    .location-section::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,107,0,.05) 0%,transparent 70%);animation:rotate 15s linear infinite}
+    .location-section-content{position:relative;z-index:1}
+    .location-section-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;margin-bottom:1rem;background:linear-gradient(135deg,#ff6b00,#ffa500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .location-section-text{font-size:1.2rem;color:#e0e0e0;margin-bottom:2rem;line-height:1.6}
+    .location-cta{display:inline-flex;align-items:center;gap:1rem;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;padding:1.2rem 2.5rem;font-size:1.1rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;transition:.3s;text-decoration:none;box-shadow:0 8px 25px rgba(37,211,102,.3)}
+    .location-cta:hover{transform:translateY(-5px);box-shadow:0 12px 35px rgba(37,211,102,.5)}
+
+    .scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);animation:scrollBounce 2s ease-in-out infinite}
+    .scroll-indicator::before{content:'↓';font-size:2rem;color:#ff6b00}
+
+    @keyframes fadeInRight{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes rotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    @keyframes scrollBounce{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
+
+    @media (min-width:1400px){
+      .hero-grid{grid-template-columns:500px 1fr;gap:4rem}
+      .hero-left{max-width:500px}
+      .hero-image,.image-placeholder{max-width:500px}
+    }
+    @media (max-width:1200px){
+      .hero-grid{grid-template-columns:350px 1fr;gap:3rem}
+      .hero-image,.image-placeholder{max-width:350px}
+    }
+    /* Mobile */
+    @media (max-width:968px){
+      .location-badge{font-size:.95rem;padding:.8rem 1.5rem;flex-wrap:wrap;justify-content:center}
+      .location-section{padding:2rem 1.5rem}
+      .location-section-text{font-size:1rem}
+
+      .hero{padding:3rem 1.5rem 2rem}
+      .hero-grid{grid-template-columns:1fr;gap:2rem;margin-top:2rem}
+      .hero-image-container{order:-1}
+      .hero-image,.image-placeholder{max-width:350px}
+
+      .services-grid{grid-template-columns:1fr}
+      .service-card{padding:1.5rem}
+      .service-icon{font-size:2.2rem}
+      .service-title{font-size:1.1rem}
+      .service-card p{font-size:.9rem}
+
+      .benefits-list{grid-template-columns:1fr}
+      .floating-cta{bottom:1rem;right:1rem}
+      h1{font-size:2.5rem}
+      .subtitle{font-size:1.2rem}
+      .coach-name{font-size:1rem}
+
+      .offer-grid{grid-template-columns:1fr;gap:1.5rem}
+      .offer-outcome{font-size:1rem;padding:1rem}
+      .offer-price{font-size:3rem}
+      .scarcity-alert{font-size:.95rem;text-align:center}
+      .guarantee-text{font-size:1rem}
+      .pricing-box{padding:1.5rem}
+      .cta-button{padding:1.2rem 2rem;font-size:1rem}
+      .location-cta{padding:1rem 1.8rem;font-size:1rem}
+    }
+  </style>
 </head>
 <body>
-    <section class="hero">
-        <div class="container">
-            <!-- Hero Header - Always on Top -->
-            <div class="hero-header">
-                <h1>READY TO GET<br>STRONGER?</h1>
-                <p class="subtitle">Transform Your Body, Transform Your Life</p>
-                <p class="coach-name">WITH SIMRAN – YOUR PERSONAL FITNESS COACH</p>
-                
-                <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20in%20Kolkata%20and%20interested%20in%20personal%20training%21" 
-                   class="location-badge" target="_blank">
-                    <span class="location-icon">📍</span>
-                    <span class="location-text">
-                        <span class="location-label">Personal Training in</span>
-                        <span class="location-city">Kolkata</span>
-                    </span>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#25D366" style="flex-shrink: 0;">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                    </svg>
-                </a>
-            </div>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-header">
+        <h1>READY TO GET<br>STRONGER?</h1>
+        <p class="subtitle">Transform Your Body, Transform Your Life</p>
+        <p class="coach-name">WITH SIMRAN – YOUR PERSONAL FITNESS COACH</p>
 
-            <!-- CTA Button - Second Position -->
-            <div class="hero-cta">
-                <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20discussing%20my%20fitness%20goals%21" 
-                   class="cta-button" target="_blank">
-                    <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                    </svg>
-                    Discuss Your Fitness Goals
-                </a>
-            </div>
-
-            <!-- Grid Section with Image and Services -->
-            <div class="hero-grid">
-                <div class="hero-image-container">
-                    <div class="image-glow"></div>
-                    <!-- Replace the src with your image URL -->
-                    <!-- Recommended size: 1000x1500px (2:3 ratio) PNG with transparent background -->
-                    <img src="simranhero.png" alt="Simran - Fitness Coach" class="hero-image" style="display: none;">
-                    
-                    <!-- This placeholder will show until you add your image -->
-                    <div class="image-placeholder">
-                        <div class="placeholder-icon">📸</div>
-                        <div>Add Your Image Here<br>
-                        <small style="font-size: 0.9rem;">1000x1500px (PNG)<br>Transparent Background</small>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="hero-content">
-                    <div class="services-grid">
-                        <div class="service-card">
-                            <div class="service-icon">🏋️</div>
-                            <h3 class="service-title">Weight Lifting</h3>
-                            <p>Master Clean, Snatch & Olympic lifts</p>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon">🤸</div>
-                            <h3 class="service-title">Mobility Training</h3>
-                            <p>Improve flexibility & movement quality</p>
-                        </div>
-                        <div class="service-card">
-                            <div class="service-icon">🧘</div>
-                            <h3 class="service-title">Recovery</h3>
-                            <p>Passive stretching & regeneration</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator"></div>
-    </section>
-
-    <section class="benefits-section">
-        <div class="container">
-            <h2 class="section-title">Why Choose Strength Training?</h2>
-            <ul class="benefits-list">
-                <li class="benefit-item">Attain your dream figure</li>
-                <li class="benefit-item">Build a stronger body & healthier life</li>
-                <li class="benefit-item">Work more without getting tired</li>
-                <li class="benefit-item">Reduce stress & improve mental health</li>
-                <li class="benefit-item">Regain confidence & youthful energy</li>
-                <li class="benefit-item">Master kettlebell techniques for fat loss</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="location-section">
-        <div class="container">
-            <div class="location-section-content">
-                <div class="location-section-title">
-                    📍 Looking for Personal Training in Kolkata?
-                </div>
-                <p class="location-section-text">
-                    Get personalized fitness coaching right here in Kolkata.<br>
-                    Transform your body with expert guidance tailored to your goals.
-                </p>
-                <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20in%20Kolkata%20and%20interested%20in%20personal%20training%21" 
-                   class="location-cta" target="_blank">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                    </svg>
-                    WhatsApp for Kolkata Training
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="offer-section">
-        <div class="container">
-            <span class="offer-badge">FOUNDING MEMBER OFFER</span>
-            
-            <div class="offer-title">
-                <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1rem; font-weight: 900; color: white;">HomeFit Fat-Loss Sprint</h2>
-                <p class="offer-outcome">🎯 <strong>Outcome:</strong> Lose 2–4 kg in 30 days using simple home food + easy at-home workouts</p>
-            </div>
-
-            <div class="offer-grid">
-                <div class="offer-column">
-                    <h3 class="column-title">What You Get</h3>
-                    <ul class="offer-list">
-                        <li><span class="check-icon">✓</span> 4× 1:1 coaching calls each month (45 min, weekly)</li>
-                        <li><span class="check-icon">✓</span> Unlimited WhatsApp check-ins & voice notes (reply ≤12 hrs)</li>
-                        <li><span class="check-icon">✓</span> Simple exercise plan (20–30 min, no equipment)</li>
-                        <li><span class="check-icon">✓</span> Home-food diet plan (Indian meals you already eat)</li>
-                        <li><span class="check-icon">✓</span> Ongoing diet support: grocery list, eating-out swaps, plateau fixes</li>
-                    </ul>
-                </div>
-
-                <div class="offer-column">
-                    <h3 class="column-title">Premium Bonuses</h3>
-                    <ul class="offer-list bonus-list">
-                        <li><span class="star-icon">★</span> Onboarding habit & metabolism audit</li>
-                        <li><span class="star-icon">★</span> Personal calorie/macro targets + tracker</li>
-                        <li><span class="star-icon">★</span> Weekly progress dashboard & accountability prompts</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="guarantee-box">
-                <div class="guarantee-badge">💯 RESULTS GUARANTEE</div>
-                <p class="guarantee-text">Drop 2–4 kg in 30 days or your next month is <strong>FREE</strong> and I coach you until you hit it (requires check-ins + plan adherence)</p>
-            </div>
-
-            <div class="pricing-box">
-                <div class="price-wrapper">
-                    <span class="old-price">₹7,999/month</span>
-                    <div class="offer-price">₹6,499<span style="font-size: 1.5rem; font-weight: 400;">/month</span></div>
-                    <p class="price-note">Founding 10 spots only • Cancel anytime</p>
-                </div>
-                <div class="scarcity-alert">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#ff6b00" style="margin-right: 0.5rem;">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                    </svg>
-                    <strong>Only 20 client spots available</strong> • Fast responses guaranteed • Waitlist when full
-                </div>
-            </div>
-
-            <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20the%20HomeFit%20Fat-Loss%20Sprint%20founding%20offer%21" 
-               class="cta-button" target="_blank">
-                <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                </svg>
-                Claim Your Founding Member Spot
-            </a>
-        </div>
-    </section>
-
-    <div class="floating-cta">
-        <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20discussing%20my%20fitness%20goals%21" 
-           target="_blank" style="text-decoration: none;">
-            <button class="floating-cta-button">
-                <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                </svg>
-            </button>
+        <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20in%20Kolkata%20and%20interested%20in%20personal%20training%21"
+           class="location-badge" target="_blank" rel="noopener">
+          <span class="location-icon">📍</span>
+          <span class="location-text">
+            <span class="location-label">Personal Training in</span>
+            <span class="location-city">Kolkata</span>
+          </span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#25D366" style="flex-shrink:0">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
         </a>
+      </div>
+
+      <div class="hero-cta">
+        <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20discussing%20my%20fitness%20goals%21"
+           class="cta-button" target="_blank" rel="noopener">
+          <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+          Discuss Your Fitness Goals
+        </a>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="hero-image-container">
+            <div class="image-glow"></div>
+            <!-- Replace src with your PNG -->
+            <img src="simranhero.png" alt="Simran - Fitness Coach" class="hero-image" style="display:none">
+            <div class="image-placeholder">
+              <div class="placeholder-icon">📸</div>
+              <div>Add Your Image Here<br>
+                <small style="font-size:.9rem">1000x1500px (PNG)<br>Transparent Background</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-content">
+          <div class="services-grid">
+            <div class="service-card">
+              <div class="service-icon">🏋️</div>
+              <h3 class="service-title">Weight Lifting</h3>
+              <p>Master Clean, Snatch & Olympic lifts</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">🤸</div>
+              <h3 class="service-title">Mobility Training</h3>
+              <p>Improve flexibility & movement quality</p>
+            </div>
+            <div class="service-card">
+              <div class="service-icon">🧘</div>
+              <h3 class="service-title">Recovery</h3>
+              <p>Passive stretching & regeneration</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="scroll-indicator" aria-hidden="true"></div>
+  </section>
 
-    <script>
-        // Image loader - automatically shows image and hides placeholder when image loads
-        const heroImage = document.querySelector('.hero-image');
-        const placeholder = document.querySelector('.image-placeholder');
-        
-        // Check if image source is set and valid
-        if (heroImage.src && !heroImage.src.includes('YOUR_IMAGE_URL_HERE')) {
-            heroImage.onload = function() {
-                heroImage.style.display = 'block';
-                placeholder.style.display = 'none';
-            };
-            heroImage.onerror = function() {
-                heroImage.style.display = 'none';
-                placeholder.style.display = 'flex';
-            };
+  <section class="benefits-section">
+    <div class="container">
+      <h2 class="section-title">Why Choose Strength Training?</h2>
+      <ul class="benefits-list">
+        <li class="benefit-item">Attain your dream figure</li>
+        <li class="benefit-item">Build a stronger body & healthier life</li>
+        <li class="benefit-item">Work more without getting tired</li>
+        <li class="benefit-item">Reduce stress & improve mental health</li>
+        <li class="benefit-item">Regain confidence & youthful energy</li>
+        <li class="benefit-item">Master kettlebell techniques for fat loss</li>
+      </ul>
+    </div>
+  </section>
+<section class="offer-section-offline">
+    <div class="container">
+      <span class="offer-badge" style="background:linear-gradient(135deg,#11998e,#38ef7d)">LIMITED-TIME OFFER</span>
+      <span class="offline-badge">📍 IN-PERSON • KOLKATA</span>
+
+      <div class="offer-title">
+        <h2 style="font-size:clamp(2rem,5vw,3.5rem);margin-bottom:1rem;font-weight:900;color:#fff">Ready To Get Stronger?</h2>
+        <p class="offer-outcome" style="background:rgba(56,239,125,.1)">🎯 <strong>Transform Your Body:</strong> Build strength, improve mobility & master weightlifting with personalized 1-on-1 training</p>
+      </div>
+
+      <div class="offer-grid">
+        <div class="offer-column">
+          <h3 class="column-title" style="color:#38ef7d">What I Offer</h3>
+          <ul class="offer-list">
+            <li><span class="check-icon">✓</span> Mobility & Flexibility Drills</li>
+            <li><span class="check-icon">✓</span> Weightlifting (Clean, Snatch)</li>
+            <li><span class="check-icon">✓</span> Passive Stretching & Recovery</li>
+            <li><span class="check-icon">✓</span> Kettlebell for Fat Loss</li>
+            <li><span class="check-icon">✓</span> Core Strengthening</li>
+          </ul>
+        </div>
+
+        <div class="offer-column">
+          <h3 class="column-title" style="color:#38ef7d">Training Benefits</h3>
+          <ul class="offer-list bonus-list">
+            <li><span class="star-icon">★</span> Attain your dream figure</li>
+            <li><span class="star-icon">★</span> Stronger body & healthier life</li>
+            <li><span class="star-icon">★</span> Work more without getting tired</li>
+            <li><span class="star-icon">★</span> Reduce stress & improve mental health</li>
+            <li><span class="star-icon">★</span> Regain your confidence & youthful energy</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="guarantee-box" style="background:linear-gradient(135deg,rgba(56,239,125,.1),rgba(17,153,142,.05));border-color:rgba(56,239,125,.3)">
+        <div class="guarantee-badge" style="background:linear-gradient(135deg,#11998e,#38ef7d)">💪 PERSONALIZED 1-ON-1 TRAINING</div>
+        <p class="guarantee-text">Private sessions at premium Kolkata gym • 1–1.5 hours per session • Expert coaching for all fitness levels</p>
+      </div>
+
+      <div class="pricing-box" style="border-color:rgba(56,239,125,.3)">
+        <div class="price-wrapper">
+          <div class="offer-price" style="color:#38ef7d">₹50,000<span style="font-size:1.5rem;font-weight:400">/15 classes</span></div>
+          <p class="price-note">2 months program • Then upgrade to 20 classes • Book your spot now</p>
+        </div>
+        <div class="scarcity-alert" style="background:rgba(56,239,125,.15);border-color:rgba(56,239,125,.4);color:#38ef7d">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#38ef7d" style="margin-right:.5rem">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+          </svg>
+          <strong>Limited-time offer</strong> • Premium gym location in Kolkata • Book your spot & start your fitness journey
+        </div>
+      </div>
+
+      <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20the%20₹50%2C000%20for%2015%20classes%20personal%20training%20offer%21"
+         class="cta-button" target="_blank" rel="noopener">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        Book Your Spot Now
+      </a>
+    </div>
+  </section>
+  <section class="offer-section">
+    <div class="container">
+      <span class="offer-badge">FOUNDING MEMBER OFFER</span><span class="online-badge">🌐 ONLINE</span>
+
+      <div class="offer-title">
+        <h2 style="font-size:clamp(2rem,5vw,3.5rem);margin-bottom:1rem;font-weight:900;color:#fff">HomeFit Fat-Loss Sprint</h2>
+        <p class="offer-outcome">🎯 <strong>Outcome:</strong> Lose 2–4 kg in 30 days using simple home food + easy at-home workouts (100% Online)</p>
+      </div>
+
+      <div class="offer-grid">
+        <div class="offer-column">
+          <h3 class="column-title">What You Get</h3>
+          <ul class="offer-list">
+            <li><span class="check-icon">✓</span> 4× 1:1 coaching calls each month (45 min, weekly)</li>
+            <li><span class="check-icon">✓</span> Unlimited WhatsApp check-ins & voice notes (reply ≤12 hrs)</li>
+            <li><span class="check-icon">✓</span> Simple exercise plan (20–30 min, no equipment)</li>
+            <li><span class="check-icon">✓</span> Home-food diet plan (Indian meals you already eat)</li>
+            <li><span class="check-icon">✓</span> Ongoing diet support: grocery list, eating-out swaps, plateau fixes</li>
+          </ul>
+        </div>
+
+        <div class="offer-column">
+          <h3 class="column-title">Premium Bonuses</h3>
+          <ul class="offer-list bonus-list">
+            <li><span class="star-icon">★</span> Onboarding habit & metabolism audit</li>
+            <li><span class="star-icon">★</span> Personal calorie/macro targets + tracker</li>
+            <li><span class="star-icon">★</span> Weekly progress dashboard & accountability prompts</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="guarantee-box">
+        <div class="guarantee-badge">💯 RESULTS GUARANTEE</div>
+        <p class="guarantee-text">Drop 2–4 kg in 30 days or your next month is <strong>FREE</strong> and I coach you until you hit it (requires check-ins + plan adherence)</p>
+      </div>
+
+      <div class="pricing-box">
+        <div class="price-wrapper">
+          <span class="old-price">₹7,999/month</span>
+          <div class="offer-price">₹6,499<span style="font-size:1.5rem;font-weight:400">/month</span></div>
+          <p class="price-note">Founding 10 spots only • Cancel anytime</p>
+        </div>
+        <div class="scarcity-alert">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#ff6b00" style="margin-right:.5rem">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+          </svg>
+          <strong>Only 20 client spots available</strong> • Fast responses guaranteed • Waitlist when full
+        </div>
+      </div>
+
+      <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20the%20HomeFit%20Fat-Loss%20Sprint%20founding%20offer%21"
+         class="cta-button" target="_blank" rel="noopener">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        Claim Your Founding Member Spot
+      </a>
+    </div>
+  </section>
+
+  <div class="floating-cta">
+    <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20discussing%20my%20fitness%20goals%21" target="_blank" rel="noopener" style="text-decoration:none">
+      <button class="floating-cta-button" aria-label="Chat on WhatsApp">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
+        </svg>
+      </button>
+    </a>
+  </div>
+
+  <script>
+    // Image loader: show image if custom URL present
+    const heroImage = document.querySelector('.hero-image');
+    const placeholder = document.querySelector('.image-placeholder');
+    if (heroImage.src && !heroImage.src.includes('YOUR_IMAGE_URL_HERE')) {
+      heroImage.onload = () => { heroImage.style.display='block'; placeholder.style.display='none'; };
+      heroImage.onerror = () => { heroImage.style.display='none'; placeholder.style.display='flex'; };
+    }
+
+    // Smooth scroll for in-page anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if(t) t.scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+    // Reveal-on-scroll
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.style.opacity='1';
+          entry.target.style.transform='translateY(0)';
         }
+      });
+    },{threshold:.1,rootMargin:'0px 0px -100px 0px'});
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+    document.querySelectorAll('.service-card,.benefit-item').forEach(el=>{
+      el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='all .6s ease-out';observer.observe(el);
+    });
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.service-card, .benefit-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
-        });
-
-        // Parallax effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.hero::before');
-            if (parallax) {
-                document.querySelector('.hero').style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-    </script>
+    // Simple parallax on hero container
+    window.addEventListener('scroll',()=>{
+      const y = window.pageYOffset || 0;
+      document.querySelector('.hero').style.transform = `translateY(${y*0.05}px)`;
+    });
+  </script>
 </body>
 </html>
