@@ -283,6 +283,179 @@
             border: 2px solid rgba(255, 107, 0, 0.3);
         }
 
+        .offer-title {
+            margin-bottom: 3rem;
+        }
+
+        .offer-outcome {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            margin-top: 1rem;
+            background: rgba(255, 107, 0, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        .offer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+            text-align: left;
+        }
+
+        .offer-column {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 0, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .offer-column:hover {
+            transform: translateY(-5px);
+            border-color: #ff6b00;
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.2);
+        }
+
+        .column-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ff6b00;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .offer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .offer-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 107, 0, 0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            line-height: 1.6;
+        }
+
+        .offer-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            color: #25D366;
+            font-size: 1.3rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .star-icon {
+            color: #ffa500;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .guarantee-box {
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(18, 140, 126, 0.05));
+            border: 2px solid rgba(37, 211, 102, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .guarantee-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 211, 102, 0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .guarantee-badge {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .guarantee-text {
+            font-size: 1.2rem;
+            color: white;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 3rem 0 2rem;
+            border: 2px solid rgba(255, 107, 0, 0.3);
+        }
+
+        .price-wrapper {
+            margin-bottom: 2rem;
+        }
+
+        .old-price {
+            font-size: 1.5rem;
+            color: #888;
+            text-decoration: line-through;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .offer-price {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            color: #ff6b00;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .price-note {
+            font-size: 1rem;
+            color: #aaa;
+            margin-top: 0.5rem;
+        }
+
+        .scarcity-alert {
+            background: rgba(255, 107, 0, 0.15);
+            border: 1px solid rgba(255, 107, 0, 0.4);
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            color: #ffa500;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
         .offer-badge {
             display: inline-block;
             background: #ff6b00;
@@ -299,19 +472,6 @@
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
-        }
-
-        .offer-price {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 900;
-            color: #ff6b00;
-            margin-bottom: 1rem;
-        }
-
-        .offer-details {
-            font-size: 1.2rem;
-            color: #e0e0e0;
-            margin-bottom: 2rem;
         }
 
         .cta-button {
@@ -423,6 +583,38 @@
             .coach-name {
                 font-size: 1rem;
             }
+
+            .offer-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .offer-outcome {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+
+            .offer-price {
+                font-size: 3rem;
+            }
+
+            .scarcity-alert {
+                font-size: 0.95rem;
+                text-align: center;
+            }
+
+            .guarantee-text {
+                font-size: 1rem;
+            }
+
+            .pricing-box {
+                padding: 1.5rem;
+            }
+
+            .cta-button {
+                padding: 1.2rem 2rem;
+                font-size: 1rem;
+            }
         }
 
         .scroll-indicator {
@@ -523,18 +715,60 @@
 
     <section class="offer-section">
         <div class="container">
-            <span class="offer-badge">LIMITED TIME OFFER</span>
-            <div class="offer-price">₹50,000</div>
-            <p class="offer-details">
-                15 Classes | 1-1.5 Hours Per Session<br>
-                2 Months Program | Then 20 Classes
-            </p>
-            <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20the%20limited%20time%20offer%21" 
+            <span class="offer-badge">FOUNDING MEMBER OFFER</span>
+            
+            <div class="offer-title">
+                <h2 style="font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1rem; font-weight: 900; color: white;">HomeFit Fat-Loss Sprint</h2>
+                <p class="offer-outcome">🎯 <strong>Outcome:</strong> Lose 2–4 kg in 30 days using simple home food + easy at-home workouts</p>
+            </div>
+
+            <div class="offer-grid">
+                <div class="offer-column">
+                    <h3 class="column-title">What You Get</h3>
+                    <ul class="offer-list">
+                        <li><span class="check-icon">✓</span> 4× 1:1 coaching calls each month (45 min, weekly)</li>
+                        <li><span class="check-icon">✓</span> Unlimited WhatsApp check-ins & voice notes (reply ≤12 hrs)</li>
+                        <li><span class="check-icon">✓</span> Simple exercise plan (20–30 min, no equipment)</li>
+                        <li><span class="check-icon">✓</span> Home-food diet plan (Indian meals you already eat)</li>
+                        <li><span class="check-icon">✓</span> Ongoing diet support: grocery list, eating-out swaps, plateau fixes</li>
+                    </ul>
+                </div>
+
+                <div class="offer-column">
+                    <h3 class="column-title">Premium Bonuses</h3>
+                    <ul class="offer-list bonus-list">
+                        <li><span class="star-icon">★</span> Onboarding habit & metabolism audit</li>
+                        <li><span class="star-icon">★</span> Personal calorie/macro targets + tracker</li>
+                        <li><span class="star-icon">★</span> Weekly progress dashboard & accountability prompts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guarantee-box">
+                <div class="guarantee-badge">💯 RESULTS GUARANTEE</div>
+                <p class="guarantee-text">Drop 2–4 kg in 30 days or your next month is <strong>FREE</strong> and I coach you until you hit it (requires check-ins + plan adherence)</p>
+            </div>
+
+            <div class="pricing-box">
+                <div class="price-wrapper">
+                    <span class="old-price">₹7,999/month</span>
+                    <div class="offer-price">₹6,499<span style="font-size: 1.5rem; font-weight: 400;">/month</span></div>
+                    <p class="price-note">Founding 10 spots only • Cancel anytime</p>
+                </div>
+                <div class="scarcity-alert">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#ff6b00" style="margin-right: 0.5rem;">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                    </svg>
+                    <strong>Only 20 client spots available</strong> • Fast responses guaranteed • Waitlist when full
+                </div>
+            </div>
+
+            <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20the%20HomeFit%20Fat-Loss%20Sprint%20founding%20offer%21" 
                class="cta-button" target="_blank">
                 <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                 </svg>
-                Discuss Your Fitness Goals
+                Claim Your Founding Member Spot
             </a>
         </div>
     </section>
