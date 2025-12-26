@@ -89,7 +89,7 @@
             <div class="text-center md:text-left order-2 md:order-1 space-y-4 md:space-y-6">
                 <span class="inline-block px-4 py-1 rounded-full border border-brand-orange/50 bg-brand-orange/10 text-brand-orange text-sm font-bold tracking-widest uppercase mb-2">Personal Fitness Coach</span>
                 <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-bold leading-tight uppercase">
-                    I help people aged <br /> <span class="text-brand-orange">35-55</span> become <span class="text-white block mt-2">Stronger & Sexier</span>
+                    I help people aged <br /> <span class="text-brand-orange">35-60</span> become <span class="text-white block mt-2">Stronger & Sexier</span>
                 </h1>
                 <p class="text-xl md:text-2xl text-gray-200 font-medium max-w-lg mx-auto md:mx-0">
                     With weight training and personalized nutrition. Transform your body, regain your confidence.
@@ -168,14 +168,27 @@
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <!-- Calculator Form -->
                     <div class="space-y-6">
+                        <!-- Height Input: Feet & Inches -->
                         <div>
-                            <label class="block text-sm font-bold uppercase tracking-wider text-gray-400 mb-2">Height (cm)</label>
-                            <input type="number" id="height" placeholder="e.g. 175" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-whatsapp transition text-lg" oninput="resetBMI()">
+                            <label class="block text-sm font-bold uppercase tracking-wider text-gray-400 mb-2">Height</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="relative">
+                                    <input type="number" id="feet" placeholder="Feet" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-whatsapp transition text-lg" oninput="resetBMI()">
+                                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm font-bold">FT</span>
+                                </div>
+                                <div class="relative">
+                                    <input type="number" id="inches" placeholder="Inches" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-whatsapp transition text-lg" oninput="resetBMI()">
+                                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm font-bold">IN</span>
+                                </div>
+                            </div>
                         </div>
+                        
+                        <!-- Weight Input -->
                         <div>
                             <label class="block text-sm font-bold uppercase tracking-wider text-gray-400 mb-2">Weight (kg)</label>
                             <input type="number" id="weight" placeholder="e.g. 70" class="w-full bg-zinc-900 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-brand-whatsapp transition text-lg" oninput="resetBMI()">
                         </div>
+                        
                         <button onclick="calculateBMI()" class="w-full bg-white text-black hover:bg-gray-200 font-display font-bold uppercase py-4 rounded-xl transition shadow-lg transform active:scale-95">
                             Calculate Now
                         </button>
@@ -556,16 +569,25 @@
         }
 
         function calculateBMI() {
-            const heightInput = document.getElementById('height').value;
+            const feetInput = document.getElementById('feet').value;
+            const inchesInput = document.getElementById('inches').value;
             const weightInput = document.getElementById('weight').value;
             
-            if (!heightInput || !weightInput) {
-                alert("Please enter both height and weight!");
+            if (!feetInput || !weightInput) {
+                alert("Please enter height (feet) and weight!");
                 return;
             }
 
-            const heightInMeters = heightInput / 100;
-            const bmi = (weightInput / (heightInMeters * heightInMeters)).toFixed(1);
+            // Convert Feet & Inches to Meters
+            // 1 ft = 30.48 cm, 1 in = 2.54 cm
+            const feet = parseFloat(feetInput);
+            const inches = parseFloat(inchesInput) || 0; // Default to 0 if empty
+            const weight = parseFloat(weightInput);
+
+            const heightInCm = (feet * 30.48) + (inches * 2.54);
+            const heightInMeters = heightInCm / 100;
+            
+            const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
 
             let category = '';
             let message = '';
