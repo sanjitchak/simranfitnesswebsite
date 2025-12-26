@@ -65,19 +65,19 @@
             </div>
             
             <!-- Mobile Menu Button (Green) -->
-            <button class="md:hidden text-2xl text-brand-whatsapp p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-brand-whatsapp p-2">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-t border-white/10 p-4 absolute w-full shadow-2xl">
             <div class="flex flex-col gap-4 font-display uppercase tracking-wider text-center">
-                <a href="#about" class="block py-3 hover:bg-zinc-800 rounded-lg" onclick="document.getElementById('mobile-menu').classList.add('hidden')">About</a>
-                <a href="#transformations" class="block py-3 hover:bg-zinc-800 rounded-lg" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Transformations</a>
-                <a href="#services" class="block py-3 hover:bg-zinc-800 rounded-lg" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Programs</a>
-                <a href="#bmi-calculator" class="block py-3 hover:bg-zinc-800 rounded-lg" onclick="document.getElementById('mobile-menu').classList.add('hidden')">BMI Check</a>
+                <a href="#about" class="block py-3 hover:bg-zinc-800 rounded-lg">About</a>
+                <a href="#transformations" class="block py-3 hover:bg-zinc-800 rounded-lg">Transformations</a>
+                <a href="#services" class="block py-3 hover:bg-zinc-800 rounded-lg">Programs</a>
+                <a href="#bmi-calculator" class="block py-3 hover:bg-zinc-800 rounded-lg">BMI Check</a>
                 <!-- Added onclick to close menu here too -->
-                <a href="https://wa.me/916290372390" class="block py-3 text-brand-whatsapp font-bold" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact on WhatsApp</a>
+                <a href="https://wa.me/916290372390" class="block py-3 text-brand-whatsapp font-bold">Contact on WhatsApp</a>
             </div>
         </div>
     </nav>
@@ -89,7 +89,7 @@
             <div class="text-center md:text-left order-2 md:order-1 space-y-4 md:space-y-6">
                 <span class="inline-block px-4 py-1 rounded-full border border-brand-orange/50 bg-brand-orange/10 text-brand-orange text-sm font-bold tracking-widest uppercase mb-2">Personal Fitness Coach</span>
                 <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-bold leading-tight uppercase">
-                    I help people aged <span class="text-brand-orange">35-55</span> become <span class="text-white block mt-2">Stronger & Sexier</span>
+                    I help people aged <br /> <span class="text-brand-orange">35-55</span> become <span class="text-white block mt-2">Stronger & Sexier</span>
                 </h1>
                 <p class="text-xl md:text-2xl text-gray-200 font-medium max-w-lg mx-auto md:mx-0">
                     With weight training and personalized nutrition. Transform your body, regain your confidence.
@@ -189,8 +189,8 @@
                         
                         <p id="bmi-message" class="text-gray-300 text-sm italic">Enter your details to see your status.</p>
 
-                        <!-- Dynamic WhatsApp Button -->
-                        <a id="bmi-whatsapp-btn" href="#" target="_blank" class="hidden mt-4 bg-brand-whatsapp hover:bg-green-600 text-white px-6 py-3 rounded-full font-bold transition flex items-center gap-2 shadow-lg shadow-green-500/20 animate-pulse">
+                        <!-- Dynamic WhatsApp Button - Removed animate-pulse -->
+                        <a id="bmi-whatsapp-btn" href="#" target="_blank" class="hidden mt-4 bg-brand-whatsapp hover:bg-green-600 text-white px-6 py-3 rounded-full font-bold transition flex items-center gap-2 shadow-lg shadow-green-500/20">
                             <i class="fab fa-whatsapp"></i> <span id="bmi-btn-text">Get Expert Help</span>
                         </a>
                     </div>
@@ -612,6 +612,24 @@
             resultContainer.classList.remove('hidden');
             resultContainer.classList.add('flex');
         }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobile-menu');
+            const menuButton = document.getElementById('mobile-menu-btn'); // Using ID for button now
+            
+            // If menu is open and click is NOT inside menu and NOT on the toggle button
+            if (!menu.classList.contains('hidden') && !menu.contains(event.target) && !menuButton.contains(event.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // Add ID to navbar items to close menu on click (handled inline previously but good for consistency)
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
     </script>
 </body>
 </html>
