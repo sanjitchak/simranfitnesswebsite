@@ -1,460 +1,420 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Simran - Your Personal Fitness Coach</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    :root{
-      --gutter-desktop:2rem;
-      --gutter-mobile:10px; /* tighter phone gutter for full-width look */
-    }
-    body{
-      font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
-      background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 100%);
-      color:#fff;overflow-x:hidden
-    }
-
-    .hero{
-      min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-      position:relative;padding:4rem 1rem 2rem;will-change:transform;
-      background:
-        radial-gradient(circle at 20% 50%,rgba(255,107,0,.15) 0%,transparent 50%),
-        radial-gradient(circle at 80% 80%,rgba(255,107,0,.1) 0%,transparent 50%)
-    }
-    .hero::before{
-      content:'';position:absolute;inset:0;
-      background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="rgba(255,107,0,0.1)"/></svg>') repeat;
-      opacity:.3;animation:float 20s ease-in-out infinite
-    }
-
-    .hero-header{text-align:center;margin-bottom:2rem;animation:fadeInUp 1s ease-out}
-    .hero-grid{
-      display:grid;grid-template-columns:minmax(400px,500px) 1fr;gap:4rem;align-items:center;justify-items:center;
-      max-width:1400px;margin:3rem auto 0;width:100%
-    }
-    .hero-left{display:flex;flex-direction:column;gap:2rem;justify-content:center;align-items:center}
-    .hero-image-container{position:relative;display:flex;justify-content:center;align-items:center;animation:fadeInRight 1s ease-out;width:100%;max-width:500px}
-    .image-glow{position:absolute;width:120%;height:120%;background:radial-gradient(circle,rgba(255,107,0,.3) 0%,transparent 70%);filter:blur(60px);animation:pulse 3s ease-in-out infinite;z-index:0}
-    .hero-image{position:relative;width:100%;max-width:500px;height:auto;filter:drop-shadow(0 20px 60px rgba(255,107,0,.4));animation:float 3s ease-in-out infinite;z-index:1;display:block}
-    .image-placeholder{
-      position:relative;max-width:500px;width:100%;aspect-ratio:2/3;
-      background:linear-gradient(135deg,rgba(255,107,0,.1),rgba(255,165,0,.05));
-      border-radius:30px;border:2px dashed rgba(255,107,0,.3);
-      display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;color:rgba(255,107,0,.6);
-      font-size:1.2rem;text-align:center;padding:2rem;z-index:1
-    }
-    .placeholder-icon{font-size:4rem}
-
-    .container{max-width:1200px;margin:0 auto;position:relative;z-index:1;padding:0 var(--gutter-desktop)}
-    .hero .container{max-width:1400px}
-    .hero-content{width:100%;animation:fadeInUp 1s ease-out;display:flex;align-items:center}
-
-    h1{
-      font-size:clamp(2.5rem,8vw,5rem);font-weight:900;margin-bottom:1rem;
-      background:linear-gradient(135deg,#ff6b00,#ffa500);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-      letter-spacing:-2px;line-height:1.1
-    }
-    .subtitle{font-size:clamp(1.2rem,3vw,1.8rem);margin-bottom:1rem;color:#e0e0e0;font-weight:300}
-    .coach-name{font-size:clamp(1rem,2.5vw,1.5rem);color:#ff6b00;margin-bottom:1.5rem;font-weight:600;letter-spacing:2px}
-
-    .location-badge{
-      display:inline-flex;align-items:center;gap:.8rem;background:linear-gradient(135deg,rgba(255,107,0,.15),rgba(255,165,0,.1));
-      border:2px solid rgba(255,107,0,.4);padding:1rem 2rem;border-radius:50px;margin-bottom:2rem;transition:.3s;cursor:pointer;text-decoration:none;color:#fff;font-size:1.1rem;font-weight:600;backdrop-filter:blur(10px)
-    }
-    .location-badge:hover{background:linear-gradient(135deg,rgba(255,107,0,.25),rgba(255,165,0,.15));transform:translateY(-3px);box-shadow:0 10px 30px rgba(255,107,0,.3);border-color:#ff6b00}
-    .location-icon{font-size:1.5rem;animation:bounce 2s ease-in-out infinite}
-    .location-text{display:flex;flex-direction:column;align-items:flex-start;line-height:1.3}
-    .location-label{font-size:.85rem;color:#aaa;font-weight:400}
-    .location-city{color:#ff6b00;font-weight:700}
-
-    .services-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin:0;max-width:520px;margin-inline:auto}
-    .service-card{
-      background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid rgba(255,107,0,.2);
-      border-radius:20px;padding:1.8rem 1.5rem;transition:.3s;cursor:pointer;position:relative;overflow:hidden;text-align:center;display:block
-    }
-    .service-card::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,107,0,.1),transparent);transition:.5s}
-    .service-card:hover::before{left:100%}
-    .service-card:hover{transform:translateY(-10px);border-color:#ff6b00;box-shadow:0 10px 40px rgba(255,107,0,.3)}
-    .service-icon{font-size:2.5rem;margin-bottom:.8rem}
-    .service-title{font-size:1.2rem;font-weight:700;margin-bottom:.5rem;color:#ff6b00}
-    .service-card p{font-size:.95rem;color:#e0e0e0;line-height:1.5;margin:0}
-
-    .benefits-section{background:rgba(255,107,0,.05);padding:4rem 2rem;margin:4rem 0;border-radius:30px;border:1px solid rgba(255,107,0,.1)}
-    .section-title{text-align:center;font-size:clamp(2rem,5vw,3rem);margin-bottom:3rem;color:#ff6b00;font-weight:800}
-    .benefits-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;list-style:none}
-    .benefit-item{display:flex;align-items:center;background:rgba(255,255,255,.03);padding:1.5rem;border-radius:15px;border-left:4px solid #ff6b00;transition:.3s}
-    .benefit-item:hover{background:rgba(255,107,0,.1);transform:translateX(10px)}
-    .benefit-item::before{content:'✓';font-size:1.5rem;color:#ff6b00;margin-right:1rem;font-weight:700}
-
-    .offer-section{text-align:center;padding:4rem 2rem;background:linear-gradient(135deg,rgba(255,107,0,.1),rgba(255,165,0,.05));border-radius:30px;margin:4rem 0;border:2px solid rgba(255,107,0,.3)}
-    .offer-title{margin-bottom:3rem}
-    .offer-outcome{font-size:1.2rem;color:#e0e0e0;margin-top:1rem;background:rgba(255,107,0,.1);padding:1rem 2rem;border-radius:15px;display:inline-block}
-    .offer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin:3rem 0;text-align:left}
-    .offer-column{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid rgba(255,107,0,.2);border-radius:20px;padding:2rem;transition:.3s}
-    .offer-column:hover{transform:translateY(-5px);border-color:#ff6b00;box-shadow:0 10px 30px rgba(255,107,0,.2)}
-    .column-title{font-size:1.5rem;font-weight:800;color:#ff6b00;margin-bottom:1.5rem;text-align:center}
-    .offer-list{list-style:none;padding:0}
-    .offer-list li{padding:1rem 0;border-bottom:1px solid rgba(255,107,0,.1);display:flex;align-items:flex-start;gap:1rem;line-height:1.6}
-    .offer-list li:last-child{border-bottom:none}
-    .check-icon{color:#25D366;font-size:1.3rem;font-weight:700;flex-shrink:0}
-    .star-icon{color:#ffa500;font-size:1.3rem;flex-shrink:0}
-
-    .guarantee-box{
-      background:linear-gradient(135deg,rgba(37,211,102,.1),rgba(18,140,126,.05));
-      border:2px solid rgba(37,211,102,.3);border-radius:20px;padding:2rem;margin:3rem 0;position:relative;overflow:hidden
-    }
-    .guarantee-box::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(37,211,102,.1) 0%,transparent 70%);animation:rotate 10s linear infinite}
-    .guarantee-badge{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;padding:.5rem 1.5rem;border-radius:50px;font-weight:700;font-size:1rem;letter-spacing:1px;display:inline-block;margin-bottom:1rem;position:relative;z-index:1}
-    .guarantee-text{font-size:1.2rem;color:#fff;line-height:1.8;position:relative;z-index:1}
-
-    .pricing-box{background:rgba(0,0,0,.3);border-radius:20px;padding:2.5rem;margin:3rem 0 2rem;border:2px solid rgba(255,107,0,.3)}
-    .price-wrapper{margin-bottom:2rem}
-    .old-price{font-size:1.5rem;color:#888;text-decoration:line-through;display:block;margin-bottom:.5rem}
-    .offer-price{font-size:clamp(3rem,8vw,5rem);font-weight:900;color:#ff6b00;margin-bottom:.5rem;line-height:1}
-    .price-note{font-size:1rem;color:#aaa;margin-top:.5rem}
-
-    .scarcity-alert{
-      background:rgba(255,107,0,.15);border:1px solid rgba(255,107,0,.4);border-radius:15px;padding:1.5rem;
-      display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.5rem;font-size:1.1rem;color:#ffa500;animation:pulse 2s ease-in-out infinite
-    }
-
-    .offer-badge{display:inline-block;background:#ff6b00;color:#fff;padding:.5rem 2rem;border-radius:50px;font-weight:700;font-size:.9rem;letter-spacing:1px;margin-bottom:2rem;animation:pulse 2s ease-in-out infinite}
-    .online-badge{background:linear-gradient(135deg,#00c9ff,#0066ff);padding:.4rem 1.5rem;border-radius:50px;font-weight:700;font-size:.85rem;letter-spacing:1px;display:inline-block;margin-left:1rem;animation:pulse 2s ease-in-out infinite}
-    .offline-badge{background:linear-gradient(135deg,#11998e,#38ef7d);padding:.4rem 1.5rem;border-radius:50px;font-weight:700;font-size:.85rem;letter-spacing:1px;display:inline-block;margin-left:1rem;animation:pulse 2s ease-in-out infinite}
-    .offer-section-offline{text-align:center;padding:4rem 2rem;background:linear-gradient(135deg,rgba(17,153,142,.1),rgba(56,239,125,.05));border-radius:30px;margin:4rem 0;border:2px solid rgba(56,239,125,.3)}
-
-    .cta-button{
-      display:inline-flex;align-items:center;gap:1rem;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;
-      padding:1.5rem 3rem;font-size:1.2rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;transition:.3s;text-decoration:none;box-shadow:0 10px 30px rgba(37,211,102,.3)
-    }
-    .hero-cta{text-align:center;margin-bottom:3rem;animation:fadeInUp 1.2s ease-out}
-    .cta-button:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(37,211,102,.5)}
-    .whatsapp-icon{width:30px;height:30px}
-
-    .floating-cta{position:fixed;bottom:2rem;right:2rem;z-index:1000;animation:bounce 2s ease-in-out infinite}
-    .floating-cta-button{display:flex;align-items:center;justify-content:center;width:60px;height:60px;background:linear-gradient(135deg,#25D366,#128C7E);border-radius:50%;box-shadow:0 10px 30px rgba(37,211,102,.4);transition:.3s;cursor:pointer;border:none}
-    .floating-cta-button:hover{transform:scale(1.1);box-shadow:0 15px 40px rgba(37,211,102,.6)}
-
-    .location-section{background:linear-gradient(135deg,rgba(255,107,0,.05),rgba(255,165,0,.02));border-radius:30px;padding:3rem 2rem;margin:4rem 0;border:2px solid rgba(255,107,0,.2);text-align:center;position:relative;overflow:hidden}
-    .location-section::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,107,0,.05) 0%,transparent 70%);animation:rotate 15s linear infinite}
-    .location-section-content{position:relative;z-index:1}
-    .location-section-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;margin-bottom:1rem;background:linear-gradient(135deg,#ff6b00,#ffa500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .location-section-text{font-size:1.2rem;color:#e0e0e0;margin-bottom:2rem;line-height:1.6}
-    .location-cta{display:inline-flex;align-items:center;gap:1rem;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;padding:1.2rem 2.5rem;font-size:1.1rem;font-weight:700;border:none;border-radius:50px;cursor:pointer;transition:.3s;text-decoration:none;box-shadow:0 8px 25px rgba(37,211,102,.3)}
-    .location-cta:hover{transform:translateY(-5px);box-shadow:0 12px 35px rgba(37,211,102,.5)}
-
-    .scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);animation:scrollBounce 2s ease-in-out infinite}
-    .scroll-indicator::before{content:'↓';font-size:2rem;color:#ff6b00}
-
-    @keyframes fadeInRight{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes rotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-    @keyframes scrollBounce{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,10px)}}
-
-    @media (min-width:1400px){
-      .hero-grid{grid-template-columns:500px 1fr;gap:4rem}
-      .hero-left{max-width:500px}
-      .hero-image,.image-placeholder{max-width:500px}
-    }
-    @media (max-width:1200px){
-      .hero-grid{grid-template-columns:350px 1fr;gap:3rem}
-      .hero-image,.image-placeholder{max-width:350px}
-    }
-    /* Mobile */
-    @media (max-width:968px){
-      /* wider feel on phones */
-      .container{padding:0 var(--gutter-mobile)}
-      .hero{padding:2.25rem var(--gutter-mobile) 1.5rem}
-      .benefits-section,
-      .offer-section,
-      .offer-section-offline,
-      .location-section{padding:2rem var(--gutter-mobile);margin:3rem 0;border-radius:20px}
-
-      .location-badge{font-size:.95rem;padding:.8rem 1.2rem;flex-wrap:wrap;justify-content:center}
-      .location-section-text{font-size:1rem}
-
-      .hero-grid{grid-template-columns:1fr;gap:2rem;margin-top:1.25rem}
-      .hero-image-container{order:-1}
-      .hero-image,.image-placeholder{max-width:360px}
-
-      .services-grid{grid-template-columns:1fr;max-width:none;width:100%} /* span full width */
-      .service-card{padding:1.25rem}
-
-      .benefits-list{grid-template-columns:1fr}
-      .floating-cta{bottom:1rem;right:1rem}
-      h1{font-size:2.3rem}
-      .subtitle{font-size:1.15rem}
-      .coach-name{font-size:.95rem}
-
-      .offer-grid{grid-template-columns:1fr;gap:1rem}
-      .offer-outcome{font-size:1rem;padding:.9rem}
-      .offer-price{font-size:2.6rem}
-      .scarcity-alert{font-size:.95rem;text-align:center}
-      .guarantee-text{font-size:1rem}
-      .pricing-box{padding:1.25rem}
-
-      .cta-button{padding:1rem 1.25rem;font-size:1rem;width:100%;justify-content:center;border-radius:16px}
-      .location-cta{padding:.9rem 1.2rem;font-size:1rem;width:100%;justify-content:center;border-radius:16px}
-    }
-  </style>
-</head>
-<body>
-  <section class="hero">
-    <div class="container">
-      <div class="hero-header">
-        <h1>READY TO GET<br>STRONGER?</h1>
-        <p class="subtitle">Transform Your Body, Transform Your Life</p>
-        <p class="coach-name">WITH SIMRAN – YOUR PERSONAL FITNESS COACH</p>
-
-        <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20in%20Kolkata%20and%20interested%20in%20personal%20training%21"
-           class="location-badge" target="_blank" rel="noopener">
-          <span class="location-icon">📍</span>
-          <span class="location-text">
-            <span class="location-label">Personal Training in</span>
-            <span class="location-city">Kolkata</span>
-          </span>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="#25D366" style="flex-shrink:0">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-          </svg>
-        </a>
-      </div>
-
-      <div class="hero-cta">
-        <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20discussing%20my%20fitness%20goals%21"
-           class="cta-button" target="_blank" rel="noopener">
-          <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-          </svg>
-          Discuss Your Fitness Goals
-        </a>
-      </div>
-
-      <div class="hero-grid">
-        <div class="hero-left">
-          <div class="hero-image-container">
-            <div class="image-glow"></div>
-            <!-- Replace src with your PNG -->
-            <img src="simranhero.png" alt="Simran - Fitness Coach" class="hero-image" style="display:none">
-            <div class="image-placeholder">
-              <div class="placeholder-icon">📸</div>
-              <div>Add Your Image Here<br>
-                <small style="font-size:.9rem">1000x1500px (PNG)<br>Transparent Background</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-content">
-          <div class="services-grid">
-            <div class="service-card">
-              <div class="service-icon">🏋️</div>
-              <h3 class="service-title">Weight Lifting</h3>
-              <p>Master Clean, Snatch & Olympic lifts</p>
-            </div>
-            <div class="service-card">
-              <div class="service-icon">🤸</div>
-              <h3 class="service-title">Mobility Training</h3>
-              <p>Improve flexibility & movement quality</p>
-            </div>
-            <div class="service-card">
-              <div class="service-icon">🧘</div>
-              <h3 class="service-title">Recovery</h3>
-              <p>Passive stretching & regeneration</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="scroll-indicator" aria-hidden="true"></div>
-  </section>
-
-  <section class="benefits-section">
-    <div class="container">
-      <h2 class="section-title">Why Choose Strength Training?</h2>
-      <ul class="benefits-list">
-        <li class="benefit-item">Attain your dream figure</li>
-        <li class="benefit-item">Build a stronger body & healthier life</li>
-        <li class="benefit-item">Work more without getting tired</li>
-        <li class="benefit-item">Reduce stress & improve mental health</li>
-        <li class="benefit-item">Regain confidence & youthful energy</li>
-        <li class="benefit-item">Master kettlebell techniques for fat loss</li>
-      </ul>
-    </div>
-  </section>
-<section class="offer-section-offline">
-    <div class="container">
-      <span class="offer-badge" style="background:linear-gradient(135deg,#11998e,#38ef7d)">LIMITED-TIME OFFER</span>
-      <span class="offline-badge">📍 IN-PERSON • KOLKATA</span>
-
-      <div class="offer-title">
-        <h2 style="font-size:clamp(2rem,5vw,3.5rem);margin-bottom:1rem;font-weight:900;color:#fff">Ready To Get Stronger?</h2>
-        <p class="offer-outcome" style="background:rgba(56,239,125,.1)">🎯 <strong>Transform Your Body:</strong> Build strength, improve mobility & master weightlifting with personalized 1-on-1 training</p>
-      </div>
-
-      <div class="offer-grid">
-        <div class="offer-column">
-          <h3 class="column-title" style="color:#38ef7d">What I Offer</h3>
-          <ul class="offer-list">
-            <li><span class="check-icon">✓</span> Mobility & Flexibility Drills</li>
-            <li><span class="check-icon">✓</span> Weightlifting (Clean, Snatch)</li>
-            <li><span class="check-icon">✓</span> Passive Stretching & Recovery</li>
-            <li><span class="check-icon">✓</span> Kettlebell for Fat Loss</li>
-            <li><span class="check-icon">✓</span> Core Strengthening</li>
-          </ul>
-        </div>
-
-        <div class="offer-column">
-          <h3 class="column-title" style="color:#38ef7d">Training Benefits</h3>
-          <ul class="offer-list bonus-list">
-            <li><span class="star-icon">★</span> Attain your dream figure</li>
-            <li><span class="star-icon">★</span> Stronger body & healthier life</li>
-            <li><span class="star-icon">★</span> Work more without getting tired</li>
-            <li><span class="star-icon">★</span> Reduce stress & improve mental health</li>
-            <li><span class="star-icon">★</span> Regain your confidence & youthful energy</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="guarantee-box" style="background:linear-gradient(135deg,rgba(56,239,125,.1),rgba(17,153,142,.05));border-color:rgba(56,239,125,.3)">
-        <div class="guarantee-badge" style="background:linear-gradient(135deg,#11998e,#38ef7d)">💪 PERSONALIZED 1-ON-1 TRAINING</div>
-        <p class="guarantee-text">Private sessions at premium Kolkata gym • 1–1.5 hours per session • Expert coaching for all fitness levels</p>
-      </div>
-
-      <div class="pricing-box" style="border-color:rgba(56,239,125,.3)">
-        <div class="price-wrapper">
-          <div class="offer-price" style="color:#38ef7d">₹50,000<span style="font-size:1.5rem;font-weight:400">/15 classes</span></div>
-          <p class="price-note">2 months program • Then upgrade to 20 classes • Book your spot now</p>
-        </div>
-        <div class="scarcity-alert" style="background:rgba(56,239,125,.15);border-color:rgba(56,239,125,.4);color:#38ef7d">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#38ef7d" style="margin-right:.5rem">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-          </svg>
-          <strong>Limited-time offer</strong> • Premium gym location in Kolkata • Book your spot & start your fitness journey
-        </div>
-      </div>
-
-      <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20the%20₹50%2C000%20for%2015%20classes%20personal%20training%20offer%21"
-         class="cta-button" target="_blank" rel="noopener">
-        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-        </svg>
-        Book Your Spot Now
-      </a>
-    </div>
-  </section>
-  <section class="offer-section">
-    <div class="container">
-      <span class="offer-badge">FOUNDING MEMBER OFFER</span><span class="online-badge">🌐 ONLINE</span>
-
-      <div class="offer-title">
-        <h2 style="font-size:clamp(2rem,5vw,3.5rem);margin-bottom:1rem;font-weight:900;color:#fff">HomeFit Fat-Loss Sprint</h2>
-        <p class="offer-outcome">🎯 <strong>Outcome:</strong> Lose 2–4 kg in 30 days using simple home food + easy at-home workouts (100% Online)</p>
-      </div>
-
-      <div class="offer-grid">
-        <div class="offer-column">
-          <h3 class="column-title">What You Get</h3>
-          <ul class="offer-list">
-            <li><span class="check-icon">✓</span> 4× 1:1 coaching calls each month (45 min, weekly)</li>
-            <li><span class="check-icon">✓</span> Unlimited WhatsApp check-ins & voice notes (reply ≤12 hrs)</li>
-            <li><span class="check-icon">✓</span> Simple exercise plan (20–30 min, no equipment)</li>
-            <li><span class="check-icon">✓</span> Home-food diet plan (Indian meals you already eat)</li>
-            <li><span class="check-icon">✓</span> Ongoing diet support: grocery list, eating-out swaps, plateau fixes</li>
-          </ul>
-        </div>
-
-        <div class="offer-column">
-          <h3 class="column-title">Premium Bonuses</h3>
-          <ul class="offer-list bonus-list">
-            <li><span class="star-icon">★</span> Onboarding habit & metabolism audit</li>
-            <li><span class="star-icon">★</span> Personal calorie/macro targets + tracker</li>
-            <li><span class="star-icon">★</span> Weekly progress dashboard & accountability prompts</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="guarantee-box">
-        <div class="guarantee-badge">💯 RESULTS GUARANTEE</div>
-        <p class="guarantee-text">Drop 2–4 kg in 30 days or your next month is <strong>FREE</strong> and I coach you until you hit it (requires check-ins + plan adherence)</p>
-      </div>
-
-      <div class="pricing-box">
-        <div class="price-wrapper">
-          <span class="old-price">₹7,999/month</span>
-          <div class="offer-price">₹6,499<span style="font-size:1.5rem;font-weight:400">/month</span></div>
-          <p class="price-note">Founding 10 spots only • Cancel anytime</p>
-        </div>
-        <div class="scarcity-alert">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#ff6b00" style="margin-right:.5rem">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-          </svg>
-          <strong>Only 20 client spots available</strong> • Fast responses guaranteed • Waitlist when full
-        </div>
-      </div>
-
-      <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20the%20HomeFit%20Fat-Loss%20Sprint%20founding%20offer%21"
-         class="cta-button" target="_blank" rel="noopener">
-        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
-        </svg>
-        Claim Your Founding Member Spot
-      </a>
-    </div>
-  </section>
-
-  <div class="floating-cta">
-    <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20discussing%20my%20fitness%20goals%21" target="_blank" rel="noopener" style="text-decoration:none">
-      <button class="floating-cta-button" aria-label="Chat on WhatsApp">
-        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="white" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/>
-        </svg>
-      </button>
-    </a>
-  </div>
-
-  <script>
-    // Image loader: show image if custom URL present
-    const heroImage = document.querySelector('.hero-image');
-    const placeholder = document.querySelector('.image-placeholder');
-    if (heroImage.src && !heroImage.src.includes('YOUR_IMAGE_URL_HERE')) {
-      heroImage.onload = () => { heroImage.style.display='block'; placeholder.style.display='none'; };
-      heroImage.onerror = () => { heroImage.style.display='none'; placeholder.style.display='flex'; };
-    }
-
-    // Smooth scroll for in-page anchors
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        e.preventDefault();
-        const t = document.querySelector(a.getAttribute('href'));
-        if(t) t.scrollIntoView({behavior:'smooth'});
-      });
-    });
-
-    // Reveal-on-scroll
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.style.opacity='1';
-          entry.target.style.transform='translateY(0)';
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EatFitMove - Stronger & Sexier | Personal Fitness Coach</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#ff6b00',
+                            dark: '#0a0a0a',
+                            gray: '#1a1a1a',
+                            light: '#e0e0e0',
+                            whatsapp: '#25D366'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif'],
+                    }
+                }
+            }
         }
-      });
-    },{threshold:.1,rootMargin:'0px 0px -100px 0px'});
+    </script>
+    <style>
+        .text-shadow { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero-bg {
+            background: radial-gradient(circle at 20% 50%, rgba(255,107,0,0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255,107,0,0.1) 0%, transparent 50%),
+                        linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+        /* Hide scrollbar for gallery but keep functionality */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Modal Transitions */
+        .modal { transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
+        .modal-active { opacity: 1; visibility: visible; pointer-events: auto; }
+        .modal-inactive { opacity: 0; visibility: hidden; pointer-events: none; }
+    </style>
+</head>
+<body class="bg-brand-dark text-white font-sans antialiased">
 
-    document.querySelectorAll('.service-card,.benefit-item').forEach(el=>{
-      el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='all .6s ease-out';observer.observe(el);
-    });
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-black/90 backdrop-blur-md border-b border-white/10">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="font-display text-2xl font-bold tracking-wider text-white">EAT<span class="text-brand-orange">FITMOVE</span></a>
+            
+            <div class="hidden md:flex gap-8 items-center font-display tracking-wide uppercase text-sm">
+                <a href="#about" class="hover:text-brand-orange transition">About</a>
+                <a href="#transformations" class="hover:text-brand-orange transition">Transformations</a>
+                <a href="#services" class="hover:text-brand-orange transition">Programs</a>
+                <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20training!" class="bg-brand-orange hover:bg-orange-600 px-6 py-2 rounded-full font-bold transition flex items-center gap-2">
+                    <i class="fab fa-whatsapp"></i> Get Started
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-2xl text-brand-orange" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 border-t border-white/10 p-4 absolute w-full">
+            <div class="flex flex-col gap-4 font-display uppercase tracking-wider text-center">
+                <a href="#about" class="block py-2">About</a>
+                <a href="#transformations" class="block py-2">Transformations</a>
+                <a href="#services" class="block py-2">Programs</a>
+                <a href="https://wa.me/916290372390" class="block py-2 text-brand-orange">Contact on WhatsApp</a>
+            </div>
+        </div>
+    </nav>
 
-    // Simple parallax on hero container
-    window.addEventListener('scroll',()=>{
-      const y = window.pageYOffset || 0;
-      document.querySelector('.hero').style.transform = `translateY(${y*0.05}px)`;
-    });
-  </script>
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center pt-20 relative overflow-hidden">
+        <div class="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="text-center md:text-left order-2 md:order-1 space-y-6">
+                <span class="inline-block px-4 py-1 rounded-full border border-brand-orange/50 bg-brand-orange/10 text-brand-orange text-sm font-bold tracking-widest uppercase mb-2">Personal Fitness Coach</span>
+                <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight uppercase">
+                    I help people aged <span class="text-brand-orange">35-55</span> become <span class="text-white block mt-2">Stronger & Sexier</span>
+                </h1>
+                <p class="text-xl text-gray-300 font-light max-w-lg mx-auto md:mx-0">
+                    With scientific weight training and personalized nutrition. Transform your body, regain your confidence.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
+                    <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%20want%20to%20become%20stronger%20and%20sexier!" 
+                       class="bg-brand-whatsapp hover:bg-green-600 text-white px-8 py-4 rounded-full font-display font-bold text-lg tracking-wide uppercase transition shadow-lg shadow-green-500/20 flex items-center justify-center gap-3">
+                        <i class="fab fa-whatsapp text-2xl"></i> Start Transformation
+                    </a>
+                </div>
+                <div class="flex items-center justify-center md:justify-start gap-8 pt-6 text-gray-400 text-sm font-display uppercase tracking-widest">
+                    <div class="flex items-center gap-2"><i class="fas fa-dumbbell text-brand-orange"></i> Strength</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-heart text-brand-orange"></i> Mobility</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-fire text-brand-orange"></i> Fat Loss</div>
+                </div>
+            </div>
+            <div class="order-1 md:order-2 relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-brand-orange to-orange-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+                <!-- Added onclick for consistency, though hero is usually static -->
+                <img src="https://eatliftmove.in/myphotoForWebsiteHeader.webp" onclick="openModal(this.src)" alt="Simran Fitness Coach" class="relative rounded-2xl shadow-2xl w-full max-w-lg mx-auto object-cover transform transition hover:scale-[1.01] cursor-pointer">
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro Video Section -->
+    <section class="py-20 bg-zinc-900/50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="font-display text-3xl md:text-5xl font-bold mb-8 uppercase">Proven <span class="text-brand-orange">Strength</span></h2>
+            <div class="max-w-4xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                <iframe class="w-full h-full" src="https://www.youtube.com/embed/-EsjoNll8vU" title="Simran Competition Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p class="mt-6 text-gray-400 italic">"By wearing a 20 KG jacket, I won 1st prize in the Decathlon competition"</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-black relative">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-16 items-start">
+                <div class="space-y-6 sticky top-24">
+                    <h2 class="font-display text-4xl md:text-5xl font-bold uppercase leading-none">Meet Your <span class="text-brand-orange">Coach</span></h2>
+                    <p class="text-gray-300 leading-relaxed text-lg">
+                        I'm Simran. I don't just teach fitness; I live it. My mission is to help you build a body that not only looks incredible but performs at its peak. Whether you are recovering from an injury or looking to get into the best shape of your life, I bring professional expertise and personal experience to every session.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        <div class="bg-zinc-900 p-4 rounded-xl border border-white/5">
+                            <i class="fas fa-certificate text-brand-orange text-2xl mb-2"></i>
+                            <h4 class="font-display font-bold uppercase">Certified Expert</h4>
+                            <p class="text-sm text-gray-500">Professional training & nutrition</p>
+                        </div>
+                        <div class="bg-zinc-900 p-4 rounded-xl border border-white/5">
+                            <i class="fas fa-users text-brand-orange text-2xl mb-2"></i>
+                            <h4 class="font-display font-bold uppercase">Community</h4>
+                            <p class="text-sm text-gray-500">Clients worldwide</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- About Image Grid - MASONRY LAYOUT to prevent cutting and gaps -->
+                <div class="columns-2 gap-4 space-y-4">
+                    <!-- Image 1 -->
+                    <div class="break-inside-avoid mb-4">
+                        <img src="https://eatliftmove.in/photowithbollywoodcelebrityjohnabrahim.webp" onclick="openModal(this.src)" class="w-full rounded-xl shadow-lg border border-white/10 hover:opacity-90 transition cursor-pointer" alt="With John Abraham">
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="break-inside-avoid mb-4">
+                        <img src="https://eatliftmove.in/InNewspaperAsBiker.webp" onclick="openModal(this.src)" class="w-full rounded-xl shadow-lg border border-white/10 hover:opacity-90 transition cursor-pointer" alt="Newspaper feature">
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="break-inside-avoid mb-4">
+                        <img src="https://eatliftmove.in/MyOwnBeforeAfter.jpg.jpeg" onclick="openModal(this.src)" class="w-full rounded-xl shadow-lg border border-white/10 hover:opacity-90 transition cursor-pointer" alt="My Transformation">
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="break-inside-avoid mb-4">
+                        <img src="https://eatliftmove.in/photowithHarleyDavidsonGroup.webp" onclick="openModal(this.src)" class="w-full rounded-xl shadow-lg border border-white/10 hover:opacity-90 transition cursor-pointer" alt="Biker Group">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Offers -->
+    <section id="services" class="py-24 bg-zinc-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl md:text-6xl font-bold uppercase mb-4">Choose Your <span class="text-brand-orange">Path</span></h2>
+                <p class="text-xl text-gray-400">Online or Offline, I have a program for you.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Offline Offer -->
+                <div class="bg-black border border-brand-orange/30 rounded-3xl p-8 md:p-12 relative overflow-hidden group hover:border-brand-orange transition duration-500">
+                    <div class="absolute top-0 right-0 bg-brand-orange text-black font-bold text-xs uppercase px-4 py-2 rounded-bl-xl z-20">In-Person • Kolkata</div>
+                    <div class="relative z-10">
+                        <h3 class="font-display text-3xl font-bold uppercase mb-2">1-on-1 Personal Training</h3>
+                        <p class="text-gray-400 mb-6">Premium Gym Location in Kolkata</p>
+                        <div class="space-y-4 mb-8">
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-brand-orange mt-1"></i> <span>Mobility & Flexibility Drills</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-brand-orange mt-1"></i> <span>Weightlifting (Clean, Snatch)</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-brand-orange mt-1"></i> <span>Passive Stretching & Recovery</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-check text-brand-orange mt-1"></i> <span>Kettlebell for Fat Loss</span></li>
+                        </div>
+                        <div class="bg-zinc-900 rounded-xl p-6 mb-8 border border-white/5">
+                            <p class="text-gray-400 text-sm line-through">Previous Price: Call for details</p>
+                            <div class="text-4xl font-display font-bold text-brand-orange">₹50,000 <span class="text-lg text-white font-normal">/ 15 Classes</span></div>
+                            <p class="text-xs text-gray-500 mt-2">2 Months Program. Limited Spots.</p>
+                        </div>
+                        <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20Offline%20Training%20in%20Kolkata" class="block w-full text-center bg-white text-black hover:bg-gray-200 font-display font-bold uppercase py-4 rounded-xl transition">
+                            Book Kolkata Spot
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Online Offer -->
+                <div class="bg-gradient-to-br from-zinc-800 to-black border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden group hover:border-brand-orange transition duration-500">
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white font-bold text-xs uppercase px-4 py-2 rounded-bl-xl z-20">Worldwide • Online</div>
+                    <div class="relative z-10">
+                        <h3 class="font-display text-3xl font-bold uppercase mb-2">HomeFit Fat-Loss Sprint</h3>
+                        <p class="text-gray-400 mb-6">Simple Home Food + At-Home Workouts</p>
+                        <div class="space-y-4 mb-8">
+                            <li class="flex items-start gap-3"><i class="fas fa-video text-blue-500 mt-1"></i> <span>4x 1:1 Coaching Calls Monthly</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-mobile-alt text-blue-500 mt-1"></i> <span>Unlimited WhatsApp Check-ins</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-utensils text-blue-500 mt-1"></i> <span>Home-Food Diet Plan (No Starving)</span></li>
+                            <li class="flex items-start gap-3"><i class="fas fa-dumbbell text-blue-500 mt-1"></i> <span>20-30 min No-Equipment Workouts</span></li>
+                        </div>
+                        <div class="bg-zinc-900 rounded-xl p-6 mb-8 border border-white/5">
+                            <p class="text-gray-400 text-sm line-through">₹7,999/month</p>
+                            <div class="text-4xl font-display font-bold text-brand-orange">₹6,499 <span class="text-lg text-white font-normal">/ Month</span></div>
+                            <p class="text-xs text-gray-500 mt-2">Founding Member Offer. Cancel Anytime.</p>
+                        </div>
+                        <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20interested%20in%20Online%20HomeFit%20Training" class="block w-full text-center bg-brand-orange hover:bg-orange-600 text-white font-display font-bold uppercase py-4 rounded-xl transition">
+                            Join Online Program
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories (Video) -->
+    <section id="transformations" class="py-24 bg-black">
+        <div class="container mx-auto px-4">
+            <h2 class="font-display text-4xl md:text-5xl font-bold uppercase text-center mb-16">Real People. <span class="text-brand-orange">Real Results.</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <!-- Video 1 -->
+                <div class="bg-zinc-900 rounded-xl overflow-hidden shadow-lg border border-white/5">
+                    <div class="aspect-video">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/OYm23QxQpkU" loading="lazy" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">Srinivas's Journey</h4>
+                        <p class="text-sm text-gray-400">Personalized Diet & Exercise Regime</p>
+                    </div>
+                </div>
+                <!-- Video 2 -->
+                <div class="bg-zinc-900 rounded-xl overflow-hidden shadow-lg border border-white/5">
+                    <div class="aspect-video">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/iuLYKxhy7GU" loading="lazy" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">Sonal's Comeback</h4>
+                        <p class="text-sm text-gray-400">From Injury to Empowerment</p>
+                    </div>
+                </div>
+                <!-- Video 3 -->
+                <div class="bg-zinc-900 rounded-xl overflow-hidden shadow-lg border border-white/5">
+                    <div class="aspect-video">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/azM7VMbviiw" loading="lazy" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">Sanjit's Story</h4>
+                        <p class="text-sm text-gray-400">Client Testimonial</p>
+                    </div>
+                </div>
+                <!-- Video 4 -->
+                <div class="bg-zinc-900 rounded-xl overflow-hidden shadow-lg border border-white/5">
+                    <div class="aspect-video">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/od2ofEzoxXY" loading="lazy" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">Srishti's Testimonial</h4>
+                        <p class="text-sm text-gray-400">Transformation Story</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Results Gallery (Before/After) - Masonry -->
+    <section class="py-20 bg-zinc-900">
+        <div class="container mx-auto px-4">
+            <h3 class="font-display text-3xl font-bold uppercase text-center mb-12 text-gray-200">Visual <span class="text-brand-orange">Evidence</span></h3>
+            
+            <!-- Masonry Columns: columns-1 (mobile) -> columns-2 (tablet) -> columns-3 (desktop) -->
+            <!-- 'break-inside-avoid' prevents images from splitting between columns -->
+            <!-- 'mb-4' adds bottom spacing for vertical gap consistency -->
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
+                <div class="break-inside-avoid mb-4">
+                    <img src="https://eatliftmove.in/beforeafter.webp" onclick="openModal(this.src)" class="w-full rounded-xl shadow-lg border border-white/10 hover:scale-[1.02] transition duration-300 cursor-pointer" loading="lazy" alt="Client Result">
+                </div>
+                <div class="break-inside-avoid mb-4">
+                    <img src="https://eatliftmove.in/beforeafter1.webp" onclick="openModal(this.src)" class="w-full rounded-xl shadow-lg border border-white/10 hover:scale-[1.02] transition duration-300 cursor-pointer" loading="lazy" alt="Client Result">
+                </div>
+                <div class="break-inside-avoid mb-4">
+                    <img src="https://eatliftmove.in/beforeafter2.webp" onclick="openModal(this.src)" class="w-full rounded-xl shadow-lg border border-white/10 hover:scale-[1.02] transition duration-300 cursor-pointer" loading="lazy" alt="Client Result">
+                </div>
+                <div class="break-inside-avoid mb-4">
+                    <img src="https://eatliftmove.in/beforeafter3.webp" onclick="openModal(this.src)" class="w-full rounded-xl shadow-lg border border-white/10 hover:scale-[1.02] transition duration-300 cursor-pointer" loading="lazy" alt="Client Result">
+                </div>
+                <div class="break-inside-avoid mb-4">
+                    <img src="https://eatliftmove.in/beforeafter4.webp" onclick="openModal(this.src)" class="w-full rounded-xl shadow-lg border border-white/10 hover:scale-[1.02] transition duration-300 cursor-pointer" loading="lazy" alt="Client Result">
+                </div>
+                <div class="break-inside-avoid mb-4">
+                    <img src="https://eatliftmove.in/beforeafter5.webp" onclick="openModal(this.src)" class="w-full rounded-xl shadow-lg border border-white/10 hover:scale-[1.02] transition duration-300 cursor-pointer" loading="lazy" alt="Client Result">
+                </div>
+                <div class="break-inside-avoid mb-4">
+                    <img src="https://eatliftmove.in/beforeafter6.webp" onclick="openModal(this.src)" class="w-full rounded-xl shadow-lg border border-white/10 hover:scale-[1.02] transition duration-300 cursor-pointer" loading="lazy" alt="Client Result">
+                </div>
+                <div class="break-inside-avoid mb-4">
+                    <img src="https://eatliftmove.in/MyClientsGroupPhoto.webp" onclick="openModal(this.src)" class="w-full rounded-xl shadow-lg border border-white/10 hover:scale-[1.02] transition duration-300 cursor-pointer" loading="lazy" alt="Happy Clients">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Reviews -->
+    <section class="py-20 bg-brand-whatsapp/5">
+        <div class="container mx-auto px-4">
+            <h3 class="font-display text-3xl font-bold uppercase text-center mb-12"><span class="text-brand-whatsapp">Client</span> Love</h3>
+            <div class="flex overflow-x-auto gap-6 pb-8 hide-scroll snap-x">
+                <img src="https://eatliftmove.in/whatsappscreenshot1.webp" onclick="openModal(this.src)" class="snap-center shrink-0 w-72 h-auto cursor-pointer rounded-2xl shadow-xl border border-white/10 hover:scale-105 transition" alt="Review 1">
+                <img src="https://eatliftmove.in/whatsappscreenshot2.webp" onclick="openModal(this.src)" class="snap-center shrink-0 w-72 h-auto cursor-pointer rounded-2xl shadow-xl border border-white/10 hover:scale-105 transition" alt="Review 2">
+                <img src="https://eatliftmove.in/whatsappscreenshot3.webp" onclick="openModal(this.src)" class="snap-center shrink-0 w-72 h-auto cursor-pointer rounded-2xl shadow-xl border border-white/10 hover:scale-105 transition" alt="Review 3">
+                <img src="https://eatliftmove.in/whatsappscreenshot4.webp" onclick="openModal(this.src)" class="snap-center shrink-0 w-72 h-auto cursor-pointer rounded-2xl shadow-xl border border-white/10 hover:scale-105 transition" alt="Review 4">
+                <img src="https://eatliftmove.in/whatsappscreenshot5.webp" onclick="openModal(this.src)" class="snap-center shrink-0 w-72 h-auto cursor-pointer rounded-2xl shadow-xl border border-white/10 hover:scale-105 transition" alt="Review 5">
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="py-20 bg-black">
+        <div class="container mx-auto px-4">
+            <h3 class="font-display text-2xl font-bold uppercase text-center mb-12 text-gray-500 tracking-widest">Qualifications & Certifications</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 opacity-70 hover:opacity-100 transition duration-500">
+                <img src="https://eatliftmove.in/certificates1.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+                <img src="https://eatliftmove.in/certificates2.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+                <img src="https://eatliftmove.in/certificates3.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+                <img src="https://eatliftmove.in/certificates4.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+                <img src="https://eatliftmove.in/certificates5.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+                <img src="https://eatliftmove.in/certificates6.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+                <img src="https://eatliftmove.in/certificates7.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+                <img src="https://eatliftmove.in/certificates8.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+                <img src="https://eatliftmove.in/certificates9.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+                <img src="https://eatliftmove.in/certificates10.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+                <img src="https://eatliftmove.in/certificates11.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+                <img src="https://eatliftmove.in/certificates12.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+                <img src="https://eatliftmove.in/certificates13.webp" onclick="openModal(this.src)" class="rounded-lg border border-white/5 cursor-pointer" alt="Cert">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-zinc-900 border-t border-white/10 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="font-display text-4xl font-bold text-white mb-8">READY TO <span class="text-brand-orange">START?</span></h2>
+            
+            <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%27m%20ready%20to%20start%20my%20fitness%20journey%21" 
+               class="inline-block bg-brand-whatsapp hover:bg-green-600 text-white px-10 py-4 rounded-full font-display font-bold text-xl uppercase transition shadow-lg shadow-green-500/20 mb-12">
+               <i class="fab fa-whatsapp mr-2"></i> Chat on WhatsApp
+            </a>
+
+            <div class="flex justify-center gap-8 mb-8">
+                <a href="https://www.youtube.com/@simfitindia/videos" target="_blank" class="text-3xl text-gray-400 hover:text-red-600 transition"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com/simfitindia" target="_blank" class="text-3xl text-gray-400 hover:text-blue-600 transition"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/simfitindia/" target="_blank" class="text-3xl text-gray-400 hover:text-pink-600 transition"><i class="fab fa-instagram"></i></a>
+            </div>
+            
+            <p class="text-gray-600 text-sm">© 2024 EatFitMove. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating CTA -->
+    <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%20have%20a%20question..." 
+       class="fixed bottom-6 right-6 z-40 bg-brand-whatsapp w-16 h-16 rounded-full flex items-center justify-center text-white text-3xl shadow-lg hover:scale-110 transition animate-bounce">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Image Modal (Hidden by default) -->
+    <div id="imgModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 modal-inactive modal p-4" onclick="closeModal()">
+        <!-- Close Button -->
+        <button class="absolute top-6 right-6 text-white text-4xl hover:text-brand-orange transition" aria-label="Close Modal">
+            <i class="fas fa-times"></i>
+        </button>
+        <!-- Modal Image -->
+        <img id="modalImage" src="" alt="Full view" class="max-w-full max-h-full rounded-lg shadow-2xl object-contain">
+        <p class="absolute bottom-6 text-gray-400 text-sm">Click anywhere to close</p>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Modal Logic
+        const modal = document.getElementById('imgModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(src) {
+            modalImg.src = src;
+            modal.classList.remove('modal-inactive');
+            modal.classList.add('modal-active');
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('modal-active');
+            modal.classList.add('modal-inactive');
+            // Restore body scroll
+            document.body.style.overflow = 'auto';
+            setTimeout(() => {
+                modalImg.src = '';
+            }, 300); // Clear src after transition
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
