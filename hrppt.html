@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EatLiftMove HR Corporate Wellness Proposal</title>
+<style>
+  :root{
+    --ink:#101712;
+    --muted:#58645a;
+    --paper:#f6f2e8;
+    --paper-2:#fbf8f0;
+    --green:#1f6b45;
+    --green-soft:#dce9d6;
+    --lime:#d7ff6b;
+    --line:rgba(16,23,18,.11);
+    --shadow:0 26px 70px rgba(16,23,18,.16);
+    --radius:30px;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background:#181d19;
+    color:var(--ink);
+    overflow-x:hidden;
+  }
+
+  .toolbar{
+    position:fixed;
+    right:16px;
+    top:16px;
+    z-index:50;
+    display:flex;
+    gap:10px;
+  }
+
+  .btn{
+    border:0;
+    background:var(--lime);
+    color:#101712;
+    font-weight:800;
+    padding:12px 18px;
+    border-radius:999px;
+    box-shadow:0 10px 24px rgba(0,0,0,.18);
+    cursor:pointer;
+  }
+
+  .deck{
+    width:100%;
+    padding:34px 20px 80px;
+  }
+
+  .slide{
+    width:min(1180px, 100%);
+    margin:0 auto 30px;
+    background:var(--paper);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+    page-break-after:always;
+  }
+
+  .slide::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(circle at 87% 15%, rgba(215,255,107,.32), transparent 22%),
+      radial-gradient(circle at 12% 86%, rgba(31,107,69,.08), transparent 26%);
+    pointer-events:none;
+  }
+
+  .inner{
+    position:relative;
+    z-index:2;
+    min-height:clamp(680px, 56.25vw, 760px);
+    padding:clamp(34px, 4vw, 56px);
+    display:flex;
+    flex-direction:column;
+  }
+
+  h1,h2,h3,p,ul{margin:0}
+
+  .topline{
+    font-size:13px;
+    line-height:1.2;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    font-weight:900;
+    color:var(--green);
+    margin-bottom:14px;
+  }
+
+  h1{
+    font-size:clamp(42px, 6vw, 74px);
+    line-height:.96;
+    letter-spacing:-.055em;
+    max-width:820px;
+  }
+
+  h2{
+    font-size:clamp(34px, 4.8vw, 54px);
+    line-height:.98;
+    letter-spacing:-.045em;
+    max-width:900px;
+  }
+
+  h3{
+    font-size:clamp(20px, 2.3vw, 28px);
+    line-height:1.1;
+    letter-spacing:-.03em;
+  }
+
+  p,li{
+    font-size:clamp(16px, 1.8vw, 20px);
+    line-height:1.45;
+    color:var(--muted);
+  }
+
+  .large-p{
+    font-size:clamp(19px, 2.2vw, 27px);
+    line-height:1.34;
+    color:#243028;
+    max-width:930px;
+  }
+
+  .hero-grid,
+  .two-col,
+  .grid-3,
+  .timeline,
+  .offer-table,
+  .metric-grid,
+  .contact-card{
+    width:100%;
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+    gap:30px;
+    align-items:stretch;
+    flex:1;
+  }
+
+  .hero-card{
+    background:#101712;
+    color:#fff;
+    border-radius:28px;
+    padding:30px;
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero-card::after{
+    content:"";
+    position:absolute;
+    width:280px;
+    height:280px;
+    background:var(--lime);
+    border-radius:50%;
+    right:-90px;
+    top:-82px;
+    opacity:.92;
+  }
+
+  .hero-card h3,
+  .hero-card p,
+  .hero-card .badge-row{
+    position:relative;
+    z-index:2;
+  }
+
+  .hero-card h3{color:#fff;font-size:clamp(26px, 3vw, 34px);max-width:360px}
+  .hero-card p{color:rgba(255,255,255,.76)}
+
+  .badge-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:24px;
+  }
+
+  .badge{
+    padding:10px 14px;
+    border-radius:999px;
+    background:#fff;
+    border:1px solid var(--line);
+    font-weight:800;
+    color:#243028;
+    font-size:14px;
+    line-height:1;
+  }
+
+  .hero-card .badge{
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    border-color:rgba(255,255,255,.14);
+  }
+
+  .quote{
+    margin-top:30px;
+    background:#101712;
+    border-radius:28px;
+    padding:30px;
+    max-width:960px;
+  }
+
+  .quote p{
+    color:rgba(255,255,255,.85);
+    font-size:clamp(22px, 2.7vw, 32px);
+    line-height:1.24;
+    font-weight:760;
+    letter-spacing:-.025em;
+  }
+
+  .band{
+    margin-top:auto;
+    background:#101712;
+    color:#fff;
+    border-radius:26px;
+    padding:24px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:22px;
+  }
+
+  .band strong{
+    font-size:clamp(24px, 2.8vw, 30px);
+    line-height:1.05;
+    letter-spacing:-.03em;
+    max-width:260px;
+    flex:0 0 auto;
+  }
+
+  .band p{
+    color:rgba(255,255,255,.78);
+    font-size:clamp(16px, 1.7vw, 19px);
+    max-width:720px;
+  }
+
+  .two-col{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:24px;
+    margin-top:30px;
+    flex:1;
+  }
+
+  .card,
+  .mini,
+  .step,
+  .offer,
+  .metric{
+    min-width:0;
+  }
+
+  .card{
+    background:rgba(255,255,255,.74);
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:24px;
+  }
+
+  .card.dark{
+    background:#101712;
+    color:#fff;
+  }
+
+  .card h3{margin-bottom:12px}
+  .card.dark p,.card.dark li{color:rgba(255,255,255,.78)}
+
+  .list{
+    padding-left:0;
+    list-style:none;
+    display:grid;
+    gap:14px;
+  }
+
+  .list li{
+    padding-left:22px;
+    position:relative;
+  }
+
+  .list li::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:.62em;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--green);
+  }
+
+  .grid-3{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:18px;
+    margin-top:28px;
+  }
+
+  .mini{
+    background:rgba(255,255,255,.78);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:22px;
+    min-height:170px;
+  }
+
+  .mini .kicker{
+    font-size:13px;
+    color:var(--green);
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-weight:900;
+    margin-bottom:10px;
+  }
+
+  .mini h3{
+    font-size:clamp(20px, 2.2vw, 24px);
+    margin-bottom:10px;
+  }
+
+  .mini p{font-size:clamp(15px, 1.55vw, 18px)}
+
+  .timeline{
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0,1fr));
+    gap:16px;
+    margin-top:30px;
+  }
+
+  .step{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:22px;
+    min-height:210px;
+  }
+
+  .step .num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:var(--lime);
+    font-weight:950;
+    margin-bottom:16px;
+    font-size:16px;
+  }
+
+  .step h3{
+    font-size:clamp(20px, 2vw, 23px);
+    margin-bottom:10px;
+  }
+
+  .step p{font-size:clamp(15px, 1.45vw, 17px)}
+
+  .offer-table{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0,1fr));
+    gap:18px;
+    margin-top:28px;
+  }
+
+  .offer{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:24px;
+    min-height:320px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+
+  .offer.featured{
+    background:#101712;
+    color:#fff;
+    transform:translateY(-6px);
+  }
+
+  .offer.featured p,.offer.featured li{color:rgba(255,255,255,.78)}
+
+  .price{
+    font-size:clamp(24px, 2.5vw, 30px);
+    font-weight:950;
+    color:var(--green);
+    margin:10px 0 14px;
+  }
+
+  .offer.featured .price{color:var(--lime)}
+
+  .tiny-list{
+    list-style:none;
+    padding:0;
+    margin:14px 0 0;
+    display:grid;
+    gap:9px;
+  }
+
+  .tiny-list li{
+    font-size:15px;
+    line-height:1.35;
+    color:#364139;
+  }
+
+  .tiny-list li::before{content:"✓ ";font-weight:900;color:var(--green)}
+  .offer.featured .tiny-list li::before{color:var(--lime)}
+
+  .metric-grid{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:16px;
+    margin-top:28px;
+  }
+
+  .metric{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:20px;
+    display:grid;
+    grid-template-columns:70px minmax(0,1fr);
+    gap:16px;
+    align-items:start;
+  }
+
+  .metric .icon{
+    width:58px;
+    height:58px;
+    border-radius:18px;
+    background:var(--green-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+  }
+
+  .metric h3{font-size:clamp(20px, 2vw, 23px);margin-bottom:6px}
+  .metric p{font-size:clamp(15px, 1.45vw, 17px)}
+
+  .contact-card{
+    margin-top:30px;
+    background:#101712;
+    color:#fff;
+    border-radius:30px;
+    padding:30px;
+    display:grid;
+    grid-template-columns:minmax(0,1.2fr) minmax(240px,.8fr);
+    gap:24px;
+    align-items:end;
+  }
+
+  .contact-card h3{
+    font-size:clamp(32px, 3.6vw, 44px);
+    line-height:1;
+  }
+
+  .contact-card p{color:rgba(255,255,255,.78);font-size:clamp(18px, 2vw, 22px)}
+
+  .cta-box{
+    background:var(--lime);
+    color:#101712;
+    border-radius:24px;
+    padding:26px;
+    text-align:center;
+    font-weight:950;
+    font-size:clamp(22px, 2.2vw, 24px);
+    line-height:1.15;
+  }
+
+  .small-source{
+    font-size:12px;
+    color:rgba(16,23,18,.42);
+    margin-top:auto;
+    padding-top:12px;
+  }
+
+  .slide-num{
+    position:absolute;
+    right:28px;
+    bottom:24px;
+    font-size:13px;
+    color:rgba(16,23,18,.36);
+    font-weight:900;
+  }
+
+  @media (max-width: 1120px){
+    .inner{min-height:unset}
+    .timeline{grid-template-columns:repeat(2, minmax(0,1fr));}
+    .grid-3{grid-template-columns:repeat(2, minmax(0,1fr));}
+    .offer-table{grid-template-columns:repeat(2, minmax(0,1fr));}
+  }
+
+  @media (max-width: 860px){
+    .deck{padding:20px 12px 60px}
+    .toolbar{position:sticky;top:10px;justify-content:flex-end;margin-bottom:8px}
+    .hero-grid,
+    .two-col,
+    .metric-grid,
+    .contact-card,
+    .grid-3,
+    .timeline,
+    .offer-table{
+      grid-template-columns:1fr;
+    }
+    .band{
+      flex-direction:column;
+      align-items:flex-start;
+    }
+    .slide{border-radius:20px}
+    .slide-num{right:20px;bottom:18px}
+  }
+
+  @media print{
+    body{background:#fff}
+    .toolbar{display:none}
+    .deck{padding:0}
+    .slide{
+      width:100%;
+      margin:0;
+      border-radius:0;
+      box-shadow:none;
+      break-after:page;
+    }
+    .slide::before{display:none}
+  }
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <button class="btn" onclick="window.print()">Print / Save PDF</button>
+  </div>
+
+  <main class="deck">
+    <section class="slide">
+      <div class="inner hero-grid">
+        <div>
+          <div class="topline">Proposal for HR & Admin Teams</div>
+          <h1>Employee Energy & Wellness Reset</h1>
+          <p class="large-p" style="margin-top:22px;">A practical wellness program for IT and corporate teams in Kolkata who sit long hours, carry stress, and need better energy at work.</p>
+          <div class="badge-row">
+            <span class="badge">Strength</span>
+            <span class="badge">Mobility</span>
+            <span class="badge">Fat Loss</span>
+            <span class="badge">Food Habits</span>
+            <span class="badge">Accountability</span>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h3>Powered by EatLiftMove</h3>
+          <p>Personal coaching principles adapted for corporate employees. The program focuses on simple movement, basic strength, practical nutrition, stress support, and follow-through.</p>
+          <div class="badge-row">
+            <span class="badge">Kolkata based</span>
+            <span class="badge">In-person + online</span>
+            <span class="badge">Desk-worker friendly</span>
+          </div>
+        </div>
+      </div>
+      <div class="slide-num">01</div>
+    </section>
+
+    <section class="slide">
+      <div class="inner">
+        <div class="topline">The HR Reality</div>
+        <h2>Most employees are not lazy. They are drained.</h2>
+        <div class="quote">
+          <p>Long sitting hours slowly turn into low energy, body stiffness, weight gain, stress eating, poor sleep, and lower work focus.</p>
+        </div>
+        <div class="band" style="margin-top:24px;">
+          <strong>This becomes a business issue.</strong>
+          <p>When employees show up tired, uncomfortable, and mentally overloaded, the company loses energy, consistency, and daily output even if nobody says it out loud.</p>
+        </div>
+      </div>
+      <div class="slide-num">02</div>
+    </section>
+
+    <section class="slide">
+      <div class="inner">
+        <div class="topline">Why Companies Should Care</div>
+        <h2>Employee wellness protects the company’s daily output.</h2>
+        <div class="grid-3">
+          <div class="mini"><div class="kicker">01</div><h3>Better energy</h3><p>Employees with better movement, food habits, and sleep feel sharper during work hours.</p></div>
+          <div class="mini"><div class="kicker">02</div><h3>Better focus</h3><p>Less stiffness and fewer energy crashes help people stay present in meetings and deep work.</p></div>
+          <div class="mini"><div class="kicker">03</div><h3>Better culture</h3><p>A serious wellness program shows employees the company cares about people, not only deadlines.</p></div>
+          <div class="mini"><div class="kicker">04</div><h3>Lower burnout risk</h3><p>Small daily habits reduce the silent stress that keeps building in desk-heavy roles.</p></div>
+          <div class="mini"><div class="kicker">05</div><h3>Stronger retention</h3><p>People stay longer when the workplace feels supportive, human, and growth focused.</p></div>
+          <div class="mini"><div class="kicker">06</div><h3>Employer brand</h3><p>Wellness becomes a real HR advantage in competitive talent markets like IT and services.</p></div>
+        </div>
+      </div>
+      <div class="slide-num">03</div>
+    </section>
+
+    <section class="slide">
+      <div class="inner">
+        <div class="topline">Why EatLiftMove Fits</div>
+        <h2>A wellness partner built around real life, not extreme fitness.</h2>
+        <div class="two-col">
+          <div class="card">
+            <h3>Current positioning</h3>
+            <ul class="list">
+              <li>Helps adults become stronger, fitter, and more confident.</li>
+              <li>Uses strength training, personalized nutrition, mobility, and fat-loss support.</li>
+              <li>Offers Kolkata-based coaching with a practical, human approach.</li>
+            </ul>
+          </div>
+          <div class="card dark">
+            <h3>Corporate translation</h3>
+            <ul class="list">
+              <li>No extreme diet culture.</li>
+              <li>No unrealistic gym pressure.</li>
+              <li>Simple strength, food, posture, and habit systems that busy employees can actually follow.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="small-source">Source basis: EatLiftMove website positioning, services, and public brand messaging.</p>
+      </div>
+      <div class="slide-num">04</div>
+    </section>
+
+    <section class="slide">
+      <div class="inner">
+        <div class="topline">The Proposed Program</div>
+        <h2>Corporate Energy & Strength Reset</h2>
+        <p class="large-p" style="margin-top:18px;">A simple employee-friendly wellness system designed for desk workers, managers, and senior professionals who want better health without disrupting work.</p>
+        <div class="grid-3">
+          <div class="mini"><div class="kicker">Pillar 1</div><h3>Assess</h3><p>Understand energy, movement, pain points, food habits, sleep, and stress patterns.</p></div>
+          <div class="mini"><div class="kicker">Pillar 2</div><h3>Move</h3><p>Desk mobility, posture relief, walking targets, and beginner strength routines.</p></div>
+          <div class="mini"><div class="kicker">Pillar 3</div><h3>Eat</h3><p>Simple food choices that improve energy, protein intake, and afternoon focus.</p></div>
+          <div class="mini"><div class="kicker">Pillar 4</div><h3>Reset</h3><p>Sleep, stress, recovery, breathing, and habits that reduce daily burnout.</p></div>
+          <div class="mini"><div class="kicker">Pillar 5</div><h3>Track</h3><p>Weekly accountability, habit scorecards, and progress visibility for employees.</p></div>
+          <div class="mini"><div class="kicker">Pillar 6</div><h3>Report</h3><p>HR receives a clean summary of participation, feedback, and progress trends.</p></div>
+        </div>
+      </div>
+      <div class="slide-num">05</div>
+    </section>
+
+    <section class="slide">
+      <div class="inner">
+        <div class="topline">Employee Experience</div>
+        <h2>It feels useful from the first session.</h2>
+        <div class="timeline">
+          <div class="step"><div class="num">1</div><h3>Energy Audit</h3><p>Employees answer a short wellness survey and discover where their energy is leaking.</p></div>
+          <div class="step"><div class="num">2</div><h3>Desk Reset</h3><p>They learn easy movements for neck, shoulder, back, hips, and posture.</p></div>
+          <div class="step"><div class="num">3</div><h3>Food Reset</h3><p>They get practical meal and snack changes without strict dieting or guilt.</p></div>
+          <div class="step"><div class="num">4</div><h3>30-Day Action</h3><p>They follow simple daily habits with weekly check-ins and visible progress.</p></div>
+        </div>
+      </div>
+      <div class="slide-num">06</div>
+    </section>
+
+    <section class="slide">
+      <div class="inner">
+        <div class="topline">Program Options</div>
+        <h2>Start small. Prove value. Then scale.</h2>
+        <div class="offer-table">
+          <div class="offer">
+            <div>
+              <h3>Intro Workshop</h3>
+              <div class="price">Free Pilot</div>
+              <p>Best for first entry and trust building.</p>
+              <ul class="tiny-list">
+                <li>45-minute live session</li>
+                <li>Desk mobility routine</li>
+                <li>Energy and food basics</li>
+                <li>Employee wellness survey</li>
+                <li>HR debrief after session</li>
+              </ul>
+            </div>
+          </div>
+          <div class="offer featured">
+            <div>
+              <h3>30-Day Challenge</h3>
+              <div class="price">Starter Program</div>
+              <p>A simple team wellness reset.</p>
+              <ul class="tiny-list">
+                <li>Opening workshop</li>
+                <li>Weekly group check-in</li>
+                <li>Habit tracker</li>
+                <li>Food and movement guide</li>
+                <li>Final HR report</li>
+              </ul>
+            </div>
+          </div>
+          <div class="offer">
+            <div>
+              <h3>90-Day Reset</h3>
+              <div class="price">Full Program</div>
+              <p>Best for visible culture and behavior change.</p>
+              <ul class="tiny-list">
+                <li>Employee audit</li>
+                <li>3 live workshops</li>
+                <li>Weekly online support</li>
+                <li>Team challenge format</li>
+                <li>Monthly HR progress report</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-num">07</div>
+    </section>
+
+    <section class="slide">
+      <div class="inner">
+        <div class="topline">90-Day Rollout</div>
+        <h2>A clean plan HR can approve.</h2>
+        <div class="timeline">
+          <div class="step"><div class="num">01</div><h3>Week 1</h3><p>Kickoff, employee survey, habit baseline, and first workshop.</p></div>
+          <div class="step"><div class="num">02</div><h3>Weeks 2 to 4</h3><p>Movement, posture, walking, beginner strength, and simple tracking.</p></div>
+          <div class="step"><div class="num">03</div><h3>Weeks 5 to 8</h3><p>Food habits, protein, hydration, travel meals, stress, and sleep reset.</p></div>
+          <div class="step"><div class="num">04</div><h3>Weeks 9 to 12</h3><p>Consistency, progress review, team challenge, final report, and next-step plan.</p></div>
+        </div>
+      </div>
+      <div class="slide-num">08</div>
+    </section>
+
+    <section class="slide">
+      <div class="inner">
+        <div class="topline">What HR Can Measure</div>
+        <h2>Keep the program practical and measurable.</h2>
+        <div class="metric-grid">
+          <div class="metric"><div class="icon">⚡</div><div><h3>Energy score</h3><p>Simple before-after self-rating to see how employees feel at work.</p></div></div>
+          <div class="metric"><div class="icon">🧍</div><div><h3>Stiffness score</h3><p>Track neck, shoulder, back, and hip discomfort trends.</p></div></div>
+          <div class="metric"><div class="icon">🥗</div><div><h3>Habit completion</h3><p>Weekly tracking for movement, meals, water, sleep, and screen breaks.</p></div></div>
+          <div class="metric"><div class="icon">📊</div><div><h3>Participation rate</h3><p>Attendance, engagement, feedback, and challenge completion.</p></div></div>
+          <div class="metric"><div class="icon">💬</div><div><h3>Employee feedback</h3><p>What employees found useful, what they want next, and what changed.</p></div></div>
+          <div class="metric"><div class="icon">🏢</div><div><h3>HR summary</h3><p>A clean report that helps HR show the value of wellness internally.</p></div></div>
+        </div>
+      </div>
+      <div class="slide-num">09</div>
+    </section>
+
+    <section class="slide">
+      <div class="inner">
+        <div class="topline">Sample Intro Workshop</div>
+        <h2>45-minute Employee Energy Audit</h2>
+        <div class="two-col">
+          <div class="card">
+            <h3>Session flow</h3>
+            <ul class="list">
+              <li>Why desk jobs drain energy quietly.</li>
+              <li>5-minute posture and mobility test.</li>
+              <li>Neck, back, shoulder, and hip reset routine.</li>
+              <li>Food habits that stop the afternoon crash.</li>
+              <li>Simple 7-day employee challenge.</li>
+            </ul>
+          </div>
+          <div class="card dark">
+            <h3>What employees leave with</h3>
+            <ul class="list">
+              <li>A routine they can do at their desk.</li>
+              <li>A simple plate rule for better energy.</li>
+              <li>A clear reason to take their health seriously.</li>
+              <li>A realistic next step, not guilt.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-num">10</div>
+    </section>
+
+    <section class="slide">
+      <div class="inner">
+        <div class="topline">Suggested HR Pitch</div>
+        <h2>Simple message for first approval.</h2>
+        <div class="quote" style="max-width:990px;">
+          <p>“We want to run one practical wellness session for your employees. No heavy theory. No extreme fitness. Just simple movement, food, and energy habits they can use from the same day.”</p>
+        </div>
+        <div class="band" style="margin-top:24px;">
+          <strong>The ask</strong>
+          <p>Approve one 45-minute session for one department. After the session, HR receives employee feedback and a recommendation for the next step.</p>
+        </div>
+      </div>
+      <div class="slide-num">11</div>
+    </section>
+
+    <section class="slide">
+      <div class="inner">
+        <div class="topline">Next Step</div>
+        <h2>Run a pilot with one team first.</h2>
+        <div class="contact-card">
+          <div>
+            <h3>Proposed pilot</h3>
+            <p style="margin-top:14px;">A 45-minute Employee Energy Audit Workshop for 25 to 50 employees, followed by a short HR debrief and wellness recommendation.</p>
+          </div>
+          <div class="cta-box">Book a date<br>for the pilot session</div>
+        </div>
+        <div class="grid-3" style="margin-top:22px;">
+          <div class="mini"><div class="kicker">Step 1</div><h3>Select team</h3><p>Pick one department or floor.</p></div>
+          <div class="mini"><div class="kicker">Step 2</div><h3>Run session</h3><p>Deliver practical value in 45 minutes.</p></div>
+          <div class="mini"><div class="kicker">Step 3</div><h3>Review report</h3><p>Decide whether to scale to 30 or 90 days.</p></div>
+        </div>
+      </div>
+      <div class="slide-num">12</div>
+    </section>
+  </main>
+</body>
+</html>
