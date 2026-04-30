@@ -568,6 +568,13 @@
             <label class="field"><span class="field-title">Low libido, low mood, or constant tiredness?</span><textarea name="male_energy_mood"></textarea></label>
           </div>
         </div>
+
+        <!-- NEW: Block for "Other / Prefer not to say" -->
+        <div id="otherBlock" class="conditional" style="margin-top:0;">
+          <div class="section-kicker" style="color:var(--elm-secondary);">Not Applicable</div>
+          <p style="margin-top: 16px;">There are no specific biological questions for this selection. You can proceed to the next step.</p>
+        </div>
+
       </div>
 
       <!-- STEP 5 -->
@@ -894,12 +901,20 @@
       calculateOverallProgress();
     }
 
+    // Helper to determine if an input is inside a currently hidden conditional block
+    function isInputVisible(el) {
+      if (el.type === 'hidden' || el.disabled || !el.closest('.step-section')) return false;
+      let parent = el.closest('.conditional');
+      while (parent) {
+        if (!parent.classList.contains('show')) return false;
+        parent = parent.parentElement.closest('.conditional');
+      }
+      return true;
+    }
+
     function calculateOverallProgress() {
-      const allInputs = Array.from(form.querySelectorAll('input, select, textarea')).filter(el => 
-        el.type !== 'hidden' && 
-        !el.disabled && 
-        el.closest('.step-section')
-      );
+      // FIX: Only calculate progress based on fields that are actually visible/relevant
+      const allInputs = Array.from(form.querySelectorAll('input, select, textarea')).filter(isInputVisible);
       
       let answeredCount = 0;
       allInputs.forEach(el => {
@@ -924,8 +939,7 @@
       let isValid = true;
       for (let input of inputs) {
         // Only validate if the input is visible (not inside a hidden conditional block)
-        const isHidden = input.closest('.conditional') && !input.closest('.conditional').classList.contains('show');
-        if (!isHidden && !input.reportValidity()) {
+        if (isInputVisible(input) && !input.reportValidity()) {
           isValid = false;
           break; // Stop checking and show browser's native error bubble
         }
@@ -961,12 +975,20 @@
       // Step 4 Conditionals
       showBlock('femaleBlock', sex.value === 'Female');
       showBlock('maleBlock', sex.value === 'Male');
+      // Fix: Add a block for "Other / Prefer not to say" so it isn't totally empty
+      showBlock('otherBlock', sex.value === 'Other / Prefer not to say');
+      
       showBlock('pregnancyBlock', pregnant && pregnant.value === 'Yes');
       showBlock('lactationBlock', lactating && lactating.value === 'Yes');
+
+      calculateOverallProgress(); // Recalculate progress when blocks change
     }
 
     document.querySelectorAll('.toggleCondition').forEach(cb => {
-      cb.addEventListener('change', () => showBlock(cb.dataset.target, cb.checked));
+      cb.addEventListener('change', () => {
+        showBlock(cb.dataset.target, cb.checked);
+        calculateOverallProgress();
+      });
     });
 
     [sex, mainGoal, pregnant, lactating].forEach(el => {
