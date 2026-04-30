@@ -156,6 +156,7 @@
       padding: 32px;
       box-shadow: var(--shadow-md);
       animation: fadeIn 0.4s ease forwards;
+      margin-bottom: 24px;
     }
 
     .step-section.active {
@@ -259,7 +260,6 @@
       background: #f9fafb;
     }
 
-    /* Modern CSS :has selector to style checked parent */
     .choice:has(input:checked) {
       border-color: var(--elm-primary);
       background: var(--elm-primary-light);
@@ -298,15 +298,20 @@
       margin-bottom: 20px;
     }
 
-    /* Navigation Buttons */
+    /* Sticky Navigation Buttons */
     .wizard-controls {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 32px;
-      padding-top: 24px;
-      border-top: 1px solid var(--elm-border);
+      padding: 20px;
+      background: var(--elm-card);
+      border: 1px solid var(--elm-border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
       gap: 16px;
+      position: sticky;
+      bottom: 20px;
+      z-index: 100;
     }
 
     button {
@@ -361,7 +366,7 @@
     @media (max-width: 768px) {
       .grid, .choice-grid.three { grid-template-columns: 1fr; }
       .step-section { padding: 24px 20px; }
-      .wizard-controls { flex-direction: column-reverse; }
+      .wizard-controls { flex-direction: column-reverse; bottom: 0; border-radius: 0; border-left: none; border-right: none; }
       .btn-primary, .btn-secondary { width: 100%; max-width: none; }
     }
   </style>
@@ -404,7 +409,7 @@
           <label class="field"><span class="field-title">Phone number *</span><input name="phone" type="tel" required placeholder="+91 98765 43210" /></label>
           <label class="field"><span class="field-title">Email</span><input type="email" name="email" placeholder="rahul@example.com" /></label>
           <label class="field"><span class="field-title">City / Country</span><input name="city_country" placeholder="Mumbai, India" /></label>
-          <label class="field"><span class="field-title">Age *</span><input type="number" name="age" min="12" max="100" required placeholder="e.g. 28" /></label>
+          <label class="field"><span class="field-title">Age *</span><input type="number" name="age" min="12" max="100" required placeholder="e.g. 28" onkeydown="if(['e', 'E', '+', '-', '.'].includes(event.key)) event.preventDefault();" /></label>
           <label class="field"><span class="field-title">Sex *</span>
             <select name="sex" id="sex" required>
               <option value="">Select your biological sex</option>
@@ -413,9 +418,14 @@
               <option>Other / Prefer not to say</option>
             </select>
           </label>
-          <label class="field"><span class="field-title">Height in cm *</span><input type="number" name="height_cm" required placeholder="e.g. 175" /></label>
-          <label class="field"><span class="field-title">Weight in kg *</span><input type="number" step="0.1" name="weight_kg" required placeholder="e.g. 70.5" /></label>
-          <label class="field"><span class="field-title">Waist in inches</span><input type="number" step="0.1" name="waist_inches" placeholder="e.g. 32" /></label>
+          <label class="field"><span class="field-title">Height *</span>
+            <div style="display: flex; gap: 10px;">
+              <input type="number" name="height_ft" min="1" max="9" required placeholder="Feet (e.g. 5)" style="flex: 1;" onkeydown="if(['e', 'E', '+', '-', '.'].includes(event.key)) event.preventDefault();" />
+              <input type="number" name="height_in" min="0" max="11" required placeholder="Inches (e.g. 8)" style="flex: 1;" onkeydown="if(['e', 'E', '+', '-', '.'].includes(event.key)) event.preventDefault();" />
+            </div>
+          </label>
+          <label class="field"><span class="field-title">Weight in kg *</span><input type="number" step="0.1" name="weight_kg" required placeholder="e.g. 70.5" onkeydown="if(['e', 'E', '+', '-'].includes(event.key)) event.preventDefault();" /></label>
+          <label class="field"><span class="field-title">Waist in inches</span><input type="number" step="0.1" name="waist_inches" placeholder="e.g. 32" onkeydown="if(['e', 'E', '+', '-'].includes(event.key)) event.preventDefault();" /></label>
           <label class="field"><span class="field-title">Assessment date</span><input type="date" name="assessment_date" id="assessmentDate" readonly style="background-color: #f3f4f6; color: #9ca3af; pointer-events: none;" /></label>
         </div>
       </div>
@@ -427,6 +437,205 @@
         <p class="section-note">This decides your daily calories, protein, and coaching style.</p>
         
         <div class="grid">
+          <label class="field"><span class="field-title">Main goal *</span>
+            <select name="main_goal" id="mainGoal" required>
+              <option value="">Select your primary goal</option>
+              <option>Fat loss</option>
+              <option>Muscle gain</option>
+              <option>Strength and fitness</option>
+              <option>Medical nutrition support</option>
+              <option>Pregnancy nutrition</option>
+              <option>Lactation nutrition</option>
+              <option>Energy and lifestyle improvement</option>
+              <option>Weight gain</option>
+            </select>
+          </label>
+          <label class="field"><span class="field-title">Target weight or body goal</span><input name="target_goal" placeholder="e.g. 65kg or 'visible abs'" /></label>
+          <label class="field"><span class="field-title">Timeline you want</span><input name="goal_timeline" placeholder="Example: 12 weeks, 6 months" /></label>
+          <label class="field"><span class="field-title">How serious are you?</span>
+            <select name="seriousness">
+              <option value="">Select</option>
+              <option>Just exploring</option>
+              <option>Ready but need guidance</option>
+              <option>Fully committed</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="fatLossBlock" class="conditional">
+          <div class="grid">
+            <label class="field"><span class="field-title">Past weight loss attempts</span><textarea name="fat_loss_past_attempts" placeholder="What diets have you tried before?"></textarea></label>
+            <label class="field"><span class="field-title">Biggest reason you regain weight or quit</span><textarea name="fat_loss_barrier" placeholder="e.g. Binge eating on weekends"></textarea></label>
+            <label class="field"><span class="field-title">Do you get strong cravings?</span>
+              <select name="cravings"><option value="">Select</option><option>Yes</option><option>No</option><option>Sometimes</option></select>
+            </label>
+            <label class="field"><span class="field-title">Preferred weekly deficit style</span>
+              <select name="deficit_style"><option value="">Select</option><option>Slow and sustainable</option><option>Moderate</option><option>Aggressive but safe</option></select>
+            </label>
+          </div>
+        </div>
+
+        <div id="muscleGainBlock" class="conditional">
+          <div class="grid">
+            <label class="field"><span class="field-title">Training experience</span>
+              <select name="training_experience"><option value="">Select</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select>
+            </label>
+            <label class="field"><span class="field-title">Current protein intake estimate</span><input name="protein_estimate" placeholder="Example: 60g per day" /></label>
+            <label class="field"><span class="field-title">Gym access?</span>
+              <select name="gym_access"><option value="">Select</option><option>Yes</option><option>No</option><option>Home setup</option></select>
+            </label>
+            <label class="field"><span class="field-title">Any injury while training?</span><textarea name="training_injury" placeholder="Knee pain, shoulder impingement, etc."></textarea></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step-section" id="step-medical">
+        <div class="section-kicker">Step 3</div>
+        <h2>Medical profile</h2>
+        <p class="section-note">Crucial for avoiding unsafe dietary advice.</p>
+        
+        <div class="field-group">
+          <span class="field-title">Select all that apply</span>
+          <div class="choice-grid three">
+            <label class="choice"><input type="checkbox" name="medical_conditions" value="Diabetes" /> Diabetes</label>
+            <label class="choice"><input type="checkbox" name="medical_conditions" value="High BP" /> High BP</label>
+            <label class="choice"><input type="checkbox" name="medical_conditions" value="Heart disease" /> Heart disease</label>
+            <label class="choice"><input type="checkbox" name="medical_conditions" value="Thyroid" /> Thyroid</label>
+            <label class="choice"><input type="checkbox" name="medical_conditions" value="PCOD/PCOS" /> PCOD / PCOS</label>
+            <label class="choice"><input type="checkbox" name="medical_conditions" value="Kidney disease" /> Kidney disease</label>
+            <label class="choice"><input type="checkbox" name="medical_conditions" value="Fatty liver" /> Fatty liver</label>
+            <label class="choice"><input type="checkbox" name="medical_conditions" value="High uric acid" /> High uric acid</label>
+            <label class="choice"><input type="checkbox" name="medical_conditions" value="Anaemia" /> Anaemia</label>
+            <label class="choice"><input type="checkbox" name="medical_conditions" value="Osteoporosis" /> Osteoporosis</label>
+            <label class="choice"><input type="checkbox" name="medical_conditions" value="None" /> None</label>
+            <label class="choice"><input type="checkbox" name="medical_conditions" value="Other" /> Other</label>
+          </div>
+        </div>
+
+        <div class="grid" style="margin-top:24px;">
+          <label class="field"><span class="field-title">Current medications</span><textarea name="current_medications" placeholder="Medicine name, dose, timing"></textarea></label>
+          <label class="field"><span class="field-title">Doctor restrictions</span><textarea name="doctor_restrictions" placeholder="E.g., limit salt, avoid high potassium..."></textarea></label>
+          <label class="field"><span class="field-title">Food allergy or intolerance</span><textarea name="allergies" placeholder="Lactose, gluten, nuts..."></textarea></label>
+          <label class="field"><span class="field-title">Past surgery, injury, or major illness</span><textarea name="medical_history" placeholder="Details here"></textarea></label>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step-section" id="step-gender">
+        <div class="section-kicker">Step 4</div>
+        <h2>Biology specific questions</h2>
+        <p class="section-note">These questions dynamically adapt based on your selected sex.</p>
+        
+        <div id="femaleBlock" class="conditional" style="margin-top:0;">
+          <div class="section-kicker" style="color:var(--elm-secondary);">Women-specific</div>
+          <div class="grid" style="margin-top: 16px;">
+            <label class="field"><span class="field-title">Period cycle</span><select name="period_cycle"><option value="">Select</option><option>Regular</option><option>Irregular</option><option>Menopause</option><option>Not applicable</option></select></label>
+            <label class="field"><span class="field-title">Heavy bleeding?</span><select name="heavy_bleeding"><option value="">Select</option><option>Yes</option><option>No</option><option>Sometimes</option></select></label>
+            <label class="field"><span class="field-title">Painful periods?</span><select name="painful_periods"><option value="">Select</option><option>Yes</option><option>No</option><option>Sometimes</option></select></label>
+            <label class="field"><span class="field-title">PCOS diagnosed?</span><select name="pcos_diagnosed"><option value="">Select</option><option>Yes</option><option>No</option><option>Suspected</option></select></label>
+            <label class="field"><span class="field-title">Pregnant?</span><select name="pregnant" id="pregnant"><option value="">Select</option><option>No</option><option>Yes</option></select></label>
+            <label class="field"><span class="field-title">Lactating?</span><select name="lactating" id="lactating"><option value="">Select</option><option>No</option><option>Yes</option></select></label>
+          </div>
+          
+          <div id="pregnancyBlock" class="conditional">
+            <h4 style="margin:0 0 12px;">Pregnancy Details</h4>
+            <div class="grid">
+              <label class="field"><span class="field-title">Trimester</span><select name="pregnancy_trimester"><option value="">Select</option><option>1st trimester</option><option>2nd trimester</option><option>3rd trimester</option></select></label>
+              <label class="field"><span class="field-title">Doctor advice</span><textarea name="pregnancy_doctor_advice" placeholder="Any specific instructions from your OBGYN?"></textarea></label>
+              <label class="field"><span class="field-title">Nausea / acidity?</span><textarea name="pregnancy_symptoms"></textarea></label>
+              <label class="field"><span class="field-title">Prenatal supplements</span><textarea name="prenatal_supplements"></textarea></label>
+            </div>
+          </div>
+          
+          <div id="lactationBlock" class="conditional">
+            <h4 style="margin:0 0 12px;">Lactation Details</h4>
+            <div class="grid">
+              <label class="field"><span class="field-title">Baby age</span><input name="baby_age" placeholder="Example: 4 months" /></label>
+              <label class="field"><span class="field-title">Exclusive breastfeeding?</span><select name="exclusive_breastfeeding"><option value="">Select</option><option>Yes</option><option>No</option><option>Mixed feeding</option></select></label>
+              <label class="field"><span class="field-title">Milk supply concern?</span><select name="milk_supply_concern"><option value="">Select</option><option>Low supply</option><option>Oversupply</option><option>No concern</option></select></label>
+              <label class="field"><span class="field-title">Postpartum concerns</span><textarea name="postpartum_concerns"></textarea></label>
+            </div>
+          </div>
+        </div>
+
+        <div id="maleBlock" class="conditional" style="margin-top:0;">
+          <div class="section-kicker" style="color:var(--elm-secondary);">Men-specific</div>
+          <div class="grid" style="margin-top: 16px;">
+            <label class="field"><span class="field-title">Main concern</span><select name="male_main_concern"><option value="">Select</option><option>Belly fat</option><option>Low muscle</option><option>Low energy</option><option>Strength</option><option>Stress and sleep</option><option>Medical fitness</option></select></label>
+            <label class="field"><span class="field-title">Alcohol frequency</span><select name="alcohol_frequency"><option value="">Select</option><option>Never</option><option>Occasionally</option><option>Weekly</option><option>Daily</option></select></label>
+            <label class="field"><span class="field-title">Smoking or tobacco?</span><select name="smoking_tobacco"><option value="">Select</option><option>No</option><option>Yes</option><option>Trying to quit</option></select></label>
+            <label class="field"><span class="field-title">Low libido, low mood, or constant tiredness?</span><textarea name="male_energy_mood"></textarea></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="step-section" id="step-reports">
+        <div class="section-kicker">Step 5</div>
+        <h2>Blood reports & Screening</h2>
+        <p class="section-note">We prefer reviewing actual blood data before suggesting any supplements.</p>
+        
+        <div class="grid">
+          <label class="field"><span class="field-title">Do you have recent blood reports?</span>
+            <select name="recent_reports">
+              <option value="">Select</option>
+              <option>Yes, within 3 months</option>
+              <option>Yes, within 6 months</option>
+              <option>Older than 6 months</option>
+              <option>No</option>
+            </select>
+          </label>
+          <label class="field"><span class="field-title">Upload link to reports</span><input name="report_link" placeholder="Google Drive or Dropbox link" /></label>
+          <label class="field"><span class="field-title">Vitamin D value</span><input name="vitamin_d_value" placeholder="e.g. 24 ng/mL" /></label>
+          <label class="field"><span class="field-title">Vitamin B12 value</span><input name="b12_value" placeholder="e.g. 210 pg/mL" /></label>
+          <label class="field"><span class="field-title">Haemoglobin / CBC</span><input name="hb_cbc_value" /></label>
+          <label class="field"><span class="field-title">Ferritin / Iron</span><input name="ferritin_iron_value" /></label>
+          <label class="field"><span class="field-title">Thyroid profile (TSH)</span><input name="thyroid_values" /></label>
+          <label class="field"><span class="field-title">HbA1c / Fasting Sugar</span><input name="sugar_values" /></label>
+          <label class="field"><span class="field-title">Lipid profile</span><input name="lipid_values" placeholder="Cholesterol, Triglycerides" /></label>
+          <label class="field"><span class="field-title">Liver / Kidney / Uric Acid</span><input name="liver_kidney_uric_values" /></label>
+        </div>
+      </div>
+
+      <!-- STEP 6 -->
+      <div class="step-section" id="step-symptoms">
+        <div class="section-kicker">Step 6</div>
+        <h2>Symptoms and digestion</h2>
+        <p class="section-note">Symptoms help us spot hidden gaps in your daily intake.</p>
+        
+        <div class="field-group">
+          <span class="field-title">Current symptoms (Select all that apply)</span>
+          <div class="choice-grid three">
+            <label class="choice"><input type="checkbox" name="symptoms" value="Fatigue" /> Fatigue</label>
+            <label class="choice"><input type="checkbox" name="symptoms" value="Hair fall" /> Hair fall</label>
+            <label class="choice"><input type="checkbox" name="symptoms" value="Muscle cramps" /> Cramps</label>
+            <label class="choice"><input type="checkbox" name="symptoms" value="Poor sleep" /> Poor sleep</label>
+            <label class="choice"><input type="checkbox" name="symptoms" value="Mouth ulcers" /> Mouth ulcers</label>
+            <label class="choice"><input type="checkbox" name="symptoms" value="Dizziness" /> Dizziness</label>
+            <label class="choice"><input type="checkbox" name="symptoms" value="Brain fog" /> Brain fog</label>
+            <label class="choice"><input type="checkbox" name="symptoms" value="Joint pain" /> Joint pain</label>
+            <label class="choice"><input type="checkbox" name="symptoms" value="Sugar cravings" /> Sugar cravings</label>
+          </div>
+        </div>
+
+        <div class="grid" style="margin-top:24px;">
+          <label class="field"><span class="field-title">Bloating, gas, acidity?</span><textarea name="digestion_issues" placeholder="Describe frequency and triggers"></textarea></label>
+          <label class="field"><span class="field-title">Constipation or loose motion?</span><textarea name="bowel_movements"></textarea></label>
+          <label class="field"><span class="field-title">Appetite level</span>
+            <select name="appetite"><option value="">Select</option><option>Low</option><option>Normal</option><option>High</option><option>Unstable</option></select>
+          </label>
+          <label class="field"><span class="field-title">Energy level (1 = Exhausted, 10 = Great)</span><input type="number" min="1" max="10" name="energy_level" placeholder="1-10 scale" onkeydown="if(['e', 'E', '+', '-', '.'].includes(event.key)) event.preventDefault();" /></label>
+        </div>
+      </div>
+
+      <!-- STEP 7 -->
+      <div class="step-section" id="step-food">
+        <div class="section-kicker">Step 7</div>
+        <h2>24-hour food recall</h2>
+        <p class="section-note">Be honest. Tell us exactly what a typical day of eating looks like right now.</p>
+        
+        <div class="grid">
           <label class="field"><span class="field-title">Wake-up drink</span><input name="wake_up_drink" placeholder="e.g. Warm water, Masala Chai, Jeera water" /></label>
           <label class="field"><span class="field-title">Breakfast</span><textarea name="breakfast" placeholder="e.g. 2 Poha plates, 2 Idlis, or Aloo Paratha"></textarea></label>
           <label class="field"><span class="field-title">Mid-morning snack</span><textarea name="mid_morning_snack"></textarea></label>
@@ -434,8 +643,8 @@
           <label class="field"><span class="field-title">Evening snack</span><textarea name="evening_snack"></textarea></label>
           <label class="field"><span class="field-title">Dinner</span><textarea name="dinner"></textarea></label>
           <label class="field"><span class="field-title">Late-night eating</span><textarea name="late_night_eating" placeholder="Do you snack after dinner?"></textarea></label>
-          <label class="field"><span class="field-title">Tea / coffee count per day</span><input name="tea_coffee_count" placeholder="e.g. 3 cups" /></label>
-          <label class="field"><span class="field-title">Outside food frequency per week</span><input name="outside_food_frequency" placeholder="e.g. 2-3 times" /></label>
+          <label class="field"><span class="field-title">Tea / coffee count per day</span><input type="number" name="tea_coffee_count" placeholder="e.g. 3" onkeydown="if(['e', 'E', '+', '-', '.'].includes(event.key)) event.preventDefault();" /></label>
+          <label class="field"><span class="field-title">Outside food frequency per week</span><input type="number" name="outside_food_frequency" placeholder="e.g. 2" onkeydown="if(['e', 'E', '+', '-', '.'].includes(event.key)) event.preventDefault();" /></label>
           <label class="field"><span class="field-title">Water intake per day</span><input name="water_intake" placeholder="e.g. 2 liters" /></label>
         </div>
       </div>
@@ -457,11 +666,11 @@
               <option>Extremely active (Manual labor)</option>
             </select>
           </label>
-          <label class="field"><span class="field-title">Workout days per week</span><input type="number" min="0" max="7" name="workout_days" placeholder="0-7" /></label>
+          <label class="field"><span class="field-title">Workout days per week</span><input type="number" min="0" max="7" name="workout_days" placeholder="0-7" onkeydown="if(['e', 'E', '+', '-', '.'].includes(event.key)) event.preventDefault();" /></label>
           <label class="field"><span class="field-title">Sleep time</span><input type="time" name="sleep_time" /></label>
           <label class="field"><span class="field-title">Wake-up time</span><input type="time" name="wake_time" /></label>
           <label class="field"><span class="field-title">Sleep quality</span><select name="sleep_quality"><option value="">Select</option><option>Poor</option><option>Average</option><option>Good</option></select></label>
-          <label class="field"><span class="field-title">Stress level (1 to 10)</span><input type="number" min="1" max="10" name="stress_level" placeholder="1-10 scale" /></label>
+          <label class="field"><span class="field-title">Stress level (1 to 10)</span><input type="number" min="1" max="10" name="stress_level" placeholder="1-10 scale" onkeydown="if(['e', 'E', '+', '-', '.'].includes(event.key)) event.preventDefault();" /></label>
           <label class="field"><span class="field-title">Work hours</span><input name="work_hours" placeholder="e.g. 9 AM to 6 PM" /></label>
           <label class="field"><span class="field-title">Travel frequency</span><select name="travel_frequency"><option value="">Select</option><option>Rare</option><option>Monthly</option><option>Weekly</option><option>Very frequent</option></select></label>
         </div>
@@ -614,9 +823,9 @@
         </div>
       </div>
 
-      <!-- Controls -->
+      <!-- Sticky Controls (Buttons) -->
       <div class="wizard-controls">
-        <button type="button" id="prevBtn" class="btn-secondary" style="display: none;">← Previous Step</button>
+        <button type="button" id="prevBtn" class="btn-secondary" style="display: none;">← Previous</button>
         <button type="button" id="nextBtn" class="btn-primary">Next Step →</button>
         <button type="submit" id="submitBtn" class="btn-primary" style="display: none;">Submit Assessment ✓</button>
       </div>
@@ -628,6 +837,16 @@
 
   <script>
     const GOOGLE_SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzxa0Cr9VkX0Z5atXEjE_SbAo8d5Xq2Gt3UgP5QRcxvf7MhcUD7a3Wlwld4TC9CznOe/exec";
+
+    // Immediate Date population (Fixed)
+    const dateInput = document.getElementById('assessmentDate');
+    if (dateInput) {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      dateInput.value = `${yyyy}-${mm}-${dd}`;
+    }
 
     const form = document.getElementById('intakeForm');
     const steps = Array.from(document.querySelectorAll('.step-section'));
@@ -672,8 +891,6 @@
 
       // Update Top Progress Bar
       stepIndicatorText.textContent = `Step ${currentStepIndex + 1} of ${steps.length}`;
-      
-      // Calculate overall completion based on answered fields (optional, but requested in original)
       calculateOverallProgress();
     }
 
@@ -681,8 +898,7 @@
       const allInputs = Array.from(form.querySelectorAll('input, select, textarea')).filter(el => 
         el.type !== 'hidden' && 
         !el.disabled && 
-        el.closest('.step-section') &&
-        el.closest('.step-section.active, .step-section') // Just checking all inputs
+        el.closest('.step-section')
       );
       
       let answeredCount = 0;
@@ -729,7 +945,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 2. Conditional Logic (Same as original but tweaked for new UI)
+    // 2. Conditional Logic
     function showBlock(id, shouldShow) {
       const el = document.getElementById(id);
       if (el) el.classList.toggle('show', !!shouldShow);
@@ -777,12 +993,6 @@
       document.getElementById('submittedAt').value = new Date().toISOString();
       const payload = formToObject(form);
 
-      if (!GOOGLE_SHEET_WEB_APP_URL || GOOGLE_SHEET_WEB_APP_URL.includes('PASTE_YOUR')) {
-        statusMessage.style.color = "var(--elm-danger-text)";
-        statusMessage.textContent = 'Setup required: Paste your Google Apps Script Web App URL in the HTML code.';
-        return;
-      }
-
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
       statusMessage.style.color = "var(--elm-text-muted)";
@@ -818,15 +1028,6 @@
     // Initialize
     updateConditionalBlocks();
     updateWizardUI();
-
-    // Set and lock today's date
-    const dateInput = document.getElementById('assessmentDate');
-    if (dateInput) {
-      const today = new Date();
-      const offset = today.getTimezoneOffset() * 60000;
-      const localISOTime = (new Date(today - offset)).toISOString().slice(0, 10);
-      dateInput.value = localISOTime;
-    }
 
   </script>
 </body>
