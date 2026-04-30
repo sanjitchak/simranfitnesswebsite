@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EatLiftMove Complete Nutrition & Fitness Intake Form</title>
+  <style>
+    :root {
+      --elm-black: #080808;
+      --elm-charcoal: #111111;
+      --elm-card: #181818;
+      --elm-gold: #f4c542;
+      --elm-orange: #f97316;
+      --elm-cream: #fff8e7;
+      --elm-white: #ffffff;
+      --elm-muted: #b8b8b8;
+      --elm-border: rgba(255,255,255,0.12);
+      --elm-success: #22c55e;
+      --elm-danger: #ef4444;
+      --radius: 22px;
+      --shadow: 0 24px 70px rgba(0,0,0,0.45);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(249,115,22,0.18), transparent 34%),
+        radial-gradient(circle at top right, rgba(244,197,66,0.14), transparent 30%),
+        linear-gradient(135deg, #050505 0%, #111 50%, #080808 100%);
+      color: var(--elm-white);
+      min-height: 100vh;
+    }
+
+    .page-shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 80px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--elm-gold), var(--elm-orange));
+      color: #111;
+      display: grid;
+      place-items: center;
+      font-weight: 950;
+      box-shadow: 0 12px 30px rgba(249,115,22,0.28);
+    }
+
+    .save-status {
+      color: var(--elm-muted);
+      font-size: 13px;
+      border: 1px solid var(--elm-border);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 26px;
+      align-items: stretch;
+      margin-bottom: 26px;
+    }
+
+    .hero-copy, .quick-card {
+      border: 1px solid var(--elm-border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.035));
+      border-radius: 32px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-copy { padding: 42px; }
+
+    .eyebrow {
+      color: var(--elm-gold);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 68px);
+      line-height: 0.94;
+      letter-spacing: -0.055em;
+    }
+
+    .hero-copy p {
+      color: #dedede;
+      font-size: 18px;
+      line-height: 1.55;
+      margin: 20px 0 0;
+      max-width: 660px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .pill {
+      border: 1px solid rgba(244,197,66,0.28);
+      color: var(--elm-cream);
+      background: rgba(244,197,66,0.08);
+      padding: 10px 13px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .quick-card { padding: 28px; }
+
+    .quick-card h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .quick-card p { color: var(--elm-muted); line-height: 1.55; }
+
+    .progress-wrap {
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(0,0,0,0.28);
+      border: 1px solid var(--elm-border);
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--elm-muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--elm-gold), var(--elm-orange));
+      transition: width 0.25s ease;
+    }
+
+    .form-layout {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 26px;
+      align-items: start;
+    }
+
+    .side-nav {
+      position: sticky;
+      top: 18px;
+      border: 1px solid var(--elm-border);
+      background: rgba(17,17,17,0.86);
+      backdrop-filter: blur(18px);
+      border-radius: 26px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .side-nav a {
+      display: block;
+      color: #d8d8d8;
+      text-decoration: none;
+      padding: 11px 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 750;
+      border: 1px solid transparent;
+    }
+
+    .side-nav a:hover {
+      background: rgba(244,197,66,0.09);
+      border-color: rgba(244,197,66,0.18);
+      color: var(--elm-white);
+    }
+
+    form { display: grid; gap: 18px; }
+
+    .section {
+      border: 1px solid var(--elm-border);
+      background: rgba(24,24,24,0.92);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.28);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--elm-border);
+    }
+
+    .section-kicker {
+      color: var(--elm-gold);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      margin-bottom: 8px;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.035em;
+    }
+
+    .section-note {
+      color: var(--elm-muted);
+      line-height: 1.5;
+      margin: 8px 0 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 16px;
+    }
+
+    .grid.three { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .grid.one { grid-template-columns: 1fr; }
+
+    label.field, .field-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field-title {
+      font-size: 13px;
+      color: #f4f4f4;
+      font-weight: 800;
+    }
+
+    .hint {
+      color: var(--elm-muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--elm-border);
+      background: rgba(255,255,255,0.055);
+      color: var(--elm-white);
+      border-radius: 15px;
+      padding: 13px 14px;
+      outline: none;
+      font: inherit;
+      min-height: 48px;
+    }
+
+    textarea { min-height: 96px; resize: vertical; }
+    select option { color: #111; }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(244,197,66,0.8);
+      box-shadow: 0 0 0 4px rgba(244,197,66,0.12);
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+    }
+
+    .choice-grid.three { grid-template-columns: repeat(3, minmax(0,1fr)); }
+
+    .choice {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--elm-border);
+      background: rgba(255,255,255,0.045);
+      border-radius: 15px;
+      padding: 12px;
+      cursor: pointer;
+      color: #e9e9e9;
+      font-size: 13px;
+      font-weight: 700;
+      min-height: 48px;
+    }
+
+    .choice input { width: auto; min-height: unset; accent-color: var(--elm-orange); }
+
+    .conditional {
+      display: none;
+      margin-top: 18px;
+      padding: 20px;
+      border: 1px solid rgba(244,197,66,0.18);
+      border-radius: 22px;
+      background: rgba(244,197,66,0.055);
+    }
+
+    .conditional.show { display: block; }
+
+    .warning-box {
+      border: 1px solid rgba(239,68,68,0.35);
+      background: rgba(239,68,68,0.08);
+      color: #ffe1e1;
+      border-radius: 18px;
+      padding: 16px;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .submit-zone {
+      position: sticky;
+      bottom: 0;
+      z-index: 5;
+      padding: 16px 0 0;
+      background: linear-gradient(180deg, transparent, rgba(5,5,5,0.92) 42%);
+    }
+
+    .submit-card {
+      border: 1px solid rgba(244,197,66,0.24);
+      background: rgba(17,17,17,0.96);
+      border-radius: 26px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    button {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 15px 24px;
+      background: linear-gradient(135deg, var(--elm-gold), var(--elm-orange));
+      color: #111;
+      font-weight: 950;
+      cursor: pointer;
+      min-width: 210px;
+      box-shadow: 0 14px 35px rgba(249,115,22,0.3);
+    }
+
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    .status-message { color: var(--elm-muted); font-size: 14px; line-height: 1.45; }
+
+    .small-code {
+      margin-top: 18px;
+      white-space: pre-wrap;
+      background: rgba(0,0,0,0.42);
+      border: 1px solid var(--elm-border);
+      border-radius: 18px;
+      padding: 16px;
+      color: #f1f1f1;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      overflow-x: auto;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 980px) {
+      .hero, .form-layout { grid-template-columns: 1fr; }
+      .side-nav { position: static; }
+      .grid, .grid.three { grid-template-columns: 1fr; }
+      .choice-grid, .choice-grid.three { grid-template-columns: 1fr; }
+      .submit-card { flex-direction: column; align-items: stretch; }
+      button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">ELM</div><div>EatLiftMove</div></div>
+      <div class="save-status">Nutrition Intake • Google Sheets Ready</div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Complete Assessment Before Diet Chart</div>
+        <h1>Build a stronger food routine with the right data first.</h1>
+        <p>This form collects body details, lifestyle, health history, food habits, symptoms, blood reports, gender-specific needs, and condition-specific risk points before creating a food, vitamin, mineral, or supplement plan.</p>
+        <div class="hero-pills">
+          <span class="pill">Personal Fitness</span>
+          <span class="pill">Weight Training</span>
+          <span class="pill">Nutrition</span>
+          <span class="pill">Deficiency Screening</span>
+        </div>
+      </div>
+      <aside class="quick-card">
+        <h2>Form completion</h2>
+        <p>Use this for serious intake. Do not prescribe supplements only from symptoms. Use blood reports, medical history, medication details, and professional judgement.</p>
+        <div class="progress-wrap">
+          <div class="progress-label"><span>Answered fields</span><span id="progressText">0%</span></div>
+          <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="form-layout">
+      <nav class="side-nav">
+        <a href="#personal">1. Personal Details</a>
+        <a href="#goal">2. Goal & History</a>
+        <a href="#medical">3. Medical Profile</a>
+        <a href="#gender">4. Men/Women Blocks</a>
+        <a href="#reports">5. Blood Reports</a>
+        <a href="#symptoms">6. Symptoms</a>
+        <a href="#food">7. Food Recall</a>
+        <a href="#lifestyle">8. Lifestyle</a>
+        <a href="#preferences">9. Preferences</a>
+        <a href="#conditions">10. Condition Blocks</a>
+        <a href="#supplements">11. Supplements</a>
+        <a href="#consent">12. Consent</a>
+      </nav>
+
+      <form id="intakeForm">
+        <input type="hidden" name="form_name" value="EatLiftMove Complete Intake Form" />
+        <input type="hidden" name="submitted_at" id="submittedAt" />
+
+        <section class="section" id="personal">
+          <div class="section-header"><div><div class="section-kicker">Step 1</div><h2>Personal details</h2><p class="section-note">Basic client information for assessment and follow-up.</p></div></div>
+          <div class="grid">
+            <label class="field"><span class="field-title">Full name *</span><input name="full_name" required /></label>
+            <label class="field"><span class="field-title">Phone number *</span><input name="phone" required /></label>
+            <label class="field"><span class="field-title">Email</span><input type="email" name="email" /></label>
+            <label class="field"><span class="field-title">City / Country</span><input name="city_country" /></label>
+            <label class="field"><span class="field-title">Age *</span><input type="number" name="age" min="12" max="100" required /></label>
+            <label class="field"><span class="field-title">Sex *</span><select name="sex" id="sex" required><option value="">Select</option><option>Female</option><option>Male</option><option>Other / Prefer not to say</option></select></label>
+            <label class="field"><span class="field-title">Height in cm *</span><input type="number" name="height_cm" required /></label>
+            <label class="field"><span class="field-title">Weight in kg *</span><input type="number" step="0.1" name="weight_kg" required /></label>
+            <label class="field"><span class="field-title">Waist in inches</span><input type="number" step="0.1" name="waist_inches" /></label>
+            <label class="field"><span class="field-title">Assessment date</span><input type="date" name="assessment_date" /></label>
+          </div>
+        </section>
+
+        <section class="section" id="goal">
+          <div class="section-header"><div><div class="section-kicker">Step 2</div><h2>Goal and past history</h2><p class="section-note">This decides calories, protein, meal timing, and coaching style.</p></div></div>
+          <div class="grid">
+            <label class="field"><span class="field-title">Main goal *</span><select name="main_goal" id="mainGoal" required><option value="">Select</option><option>Fat loss</option><option>Muscle gain</option><option>Strength and fitness</option><option>Medical nutrition support</option><option>Pregnancy nutrition</option><option>Lactation nutrition</option><option>Energy and lifestyle improvement</option><option>Weight gain</option></select></label>
+            <label class="field"><span class="field-title">Target weight or body goal</span><input name="target_goal" /></label>
+            <label class="field"><span class="field-title">Timeline you want</span><input name="goal_timeline" placeholder="Example: 12 weeks, 6 months" /></label>
+            <label class="field"><span class="field-title">How serious are you?</span><select name="seriousness"><option value="">Select</option><option>Just exploring</option><option>Ready but need guidance</option><option>Fully committed</option></select></label>
+          </div>
+          <div id="fatLossBlock" class="conditional">
+            <div class="grid">
+              <label class="field"><span class="field-title">Past weight loss attempts</span><textarea name="fat_loss_past_attempts"></textarea></label>
+              <label class="field"><span class="field-title">Biggest reason you regain weight or quit</span><textarea name="fat_loss_barrier"></textarea></label>
+              <label class="field"><span class="field-title">Do you get strong cravings?</span><select name="cravings"><option value="">Select</option><option>Yes</option><option>No</option><option>Sometimes</option></select></label>
+              <label class="field"><span class="field-title">Preferred weekly deficit style</span><select name="deficit_style"><option value="">Select</option><option>Slow and sustainable</option><option>Moderate</option><option>Aggressive but safe</option></select></label>
+            </div>
+          </div>
+          <div id="muscleGainBlock" class="conditional">
+            <div class="grid">
+              <label class="field"><span class="field-title">Training experience</span><select name="training_experience"><option value="">Select</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label>
+              <label class="field"><span class="field-title">Current protein intake estimate</span><input name="protein_estimate" placeholder="Example: 60g per day" /></label>
+              <label class="field"><span class="field-title">Gym access?</span><select name="gym_access"><option value="">Select</option><option>Yes</option><option>No</option><option>Home setup</option></select></label>
+              <label class="field"><span class="field-title">Any injury while training?</span><textarea name="training_injury"></textarea></label>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="medical">
+          <div class="section-header"><div><div class="section-kicker">Step 3</div><h2>Medical profile</h2><p class="section-note">This is where unsafe advice gets avoided.</p></div></div>
+          <div class="field-group"><span class="field-title">Select all that apply</span>
+            <div class="choice-grid three">
+              <label class="choice"><input type="checkbox" name="medical_conditions" value="Diabetes" /> Diabetes</label>
+              <label class="choice"><input type="checkbox" name="medical_conditions" value="High BP" /> High BP</label>
+              <label class="choice"><input type="checkbox" name="medical_conditions" value="Heart disease" /> Heart disease</label>
+              <label class="choice"><input type="checkbox" name="medical_conditions" value="Thyroid" /> Thyroid</label>
+              <label class="choice"><input type="checkbox" name="medical_conditions" value="PCOD/PCOS" /> PCOD / PCOS</label>
+              <label class="choice"><input type="checkbox" name="medical_conditions" value="Kidney disease" /> Kidney disease</label>
+              <label class="choice"><input type="checkbox" name="medical_conditions" value="Fatty liver" /> Fatty liver</label>
+              <label class="choice"><input type="checkbox" name="medical_conditions" value="High uric acid" /> High uric acid</label>
+              <label class="choice"><input type="checkbox" name="medical_conditions" value="Anaemia" /> Anaemia</label>
+              <label class="choice"><input type="checkbox" name="medical_conditions" value="Osteoporosis" /> Osteoporosis</label>
+              <label class="choice"><input type="checkbox" name="medical_conditions" value="None" /> None</label>
+              <label class="choice"><input type="checkbox" name="medical_conditions" value="Other" /> Other</label>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:16px;">
+            <label class="field"><span class="field-title">Current medications</span><textarea name="current_medications" placeholder="Medicine name, dose, timing"></textarea></label>
+            <label class="field"><span class="field-title">Doctor restrictions</span><textarea name="doctor_restrictions" placeholder="Protein, salt, fluid, potassium, sugar, etc."></textarea></label>
+            <label class="field"><span class="field-title">Food allergy or intolerance</span><textarea name="allergies"></textarea></label>
+            <label class="field"><span class="field-title">Past surgery, injury, or major illness</span><textarea name="medical_history"></textarea></label>
+          </div>
+        </section>
+
+        <section class="section" id="gender">
+          <div class="section-header"><div><div class="section-kicker">Step 4</div><h2>Gender-specific blocks</h2><p class="section-note">These blocks open based on sex selection.</p></div></div>
+          <div id="femaleBlock" class="conditional">
+            <div class="section-kicker">Women-specific questions</div>
+            <div class="grid">
+              <label class="field"><span class="field-title">Period cycle</span><select name="period_cycle"><option value="">Select</option><option>Regular</option><option>Irregular</option><option>Menopause</option><option>Not applicable</option></select></label>
+              <label class="field"><span class="field-title">Heavy bleeding?</span><select name="heavy_bleeding"><option value="">Select</option><option>Yes</option><option>No</option><option>Sometimes</option></select></label>
+              <label class="field"><span class="field-title">Painful periods?</span><select name="painful_periods"><option value="">Select</option><option>Yes</option><option>No</option><option>Sometimes</option></select></label>
+              <label class="field"><span class="field-title">PCOS diagnosed?</span><select name="pcos_diagnosed"><option value="">Select</option><option>Yes</option><option>No</option><option>Suspected</option></select></label>
+              <label class="field"><span class="field-title">Pregnant?</span><select name="pregnant" id="pregnant"><option value="">Select</option><option>No</option><option>Yes</option></select></label>
+              <label class="field"><span class="field-title">Lactating?</span><select name="lactating" id="lactating"><option value="">Select</option><option>No</option><option>Yes</option></select></label>
+            </div>
+            <div id="pregnancyBlock" class="conditional"><div class="grid"><label class="field"><span class="field-title">Trimester</span><select name="pregnancy_trimester"><option value="">Select</option><option>1st trimester</option><option>2nd trimester</option><option>3rd trimester</option></select></label><label class="field"><span class="field-title">Doctor advice during pregnancy</span><textarea name="pregnancy_doctor_advice"></textarea></label><label class="field"><span class="field-title">Nausea / vomiting / acidity?</span><textarea name="pregnancy_symptoms"></textarea></label><label class="field"><span class="field-title">Current prenatal supplements</span><textarea name="prenatal_supplements"></textarea></label></div></div>
+            <div id="lactationBlock" class="conditional"><div class="grid"><label class="field"><span class="field-title">Baby age</span><input name="baby_age" placeholder="Example: 4 months" /></label><label class="field"><span class="field-title">Exclusive breastfeeding?</span><select name="exclusive_breastfeeding"><option value="">Select</option><option>Yes</option><option>No</option><option>Mixed feeding</option></select></label><label class="field"><span class="field-title">Milk supply concern?</span><select name="milk_supply_concern"><option value="">Select</option><option>Low supply concern</option><option>Oversupply concern</option><option>No concern</option></select></label><label class="field"><span class="field-title">Postpartum concerns</span><textarea name="postpartum_concerns"></textarea></label></div></div>
+          </div>
+          <div id="maleBlock" class="conditional">
+            <div class="section-kicker">Men-specific questions</div>
+            <div class="grid">
+              <label class="field"><span class="field-title">Main concern</span><select name="male_main_concern"><option value="">Select</option><option>Belly fat</option><option>Low muscle</option><option>Low energy</option><option>Strength</option><option>Stress and sleep</option><option>Medical fitness</option></select></label>
+              <label class="field"><span class="field-title">Alcohol frequency</span><select name="alcohol_frequency"><option value="">Select</option><option>Never</option><option>Occasionally</option><option>Weekly</option><option>Daily</option></select></label>
+              <label class="field"><span class="field-title">Smoking or tobacco?</span><select name="smoking_tobacco"><option value="">Select</option><option>No</option><option>Yes</option><option>Trying to quit</option></select></label>
+              <label class="field"><span class="field-title">Low libido, low mood, or constant tiredness?</span><textarea name="male_energy_mood"></textarea></label>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="reports">
+          <div class="section-header"><div><div class="section-kicker">Step 5</div><h2>Blood reports and deficiency screening</h2><p class="section-note">Use this before vitamins, minerals, or supplement advice.</p></div></div>
+          <div class="grid">
+            <label class="field"><span class="field-title">Do you have recent blood reports?</span><select name="recent_reports"><option value="">Select</option><option>Yes, within 3 months</option><option>Yes, within 6 months</option><option>Older than 6 months</option><option>No</option></select></label>
+            <label class="field"><span class="field-title">Upload link to reports</span><input name="report_link" placeholder="Google Drive link if available" /></label>
+            <label class="field"><span class="field-title">Vitamin D value</span><input name="vitamin_d_value" /></label>
+            <label class="field"><span class="field-title">Vitamin B12 value</span><input name="b12_value" /></label>
+            <label class="field"><span class="field-title">Haemoglobin / CBC</span><input name="hb_cbc_value" /></label>
+            <label class="field"><span class="field-title">Ferritin / Iron</span><input name="ferritin_iron_value" /></label>
+            <label class="field"><span class="field-title">Thyroid profile</span><input name="thyroid_values" /></label>
+            <label class="field"><span class="field-title">HbA1c / fasting sugar</span><input name="sugar_values" /></label>
+            <label class="field"><span class="field-title">Lipid profile</span><input name="lipid_values" /></label>
+            <label class="field"><span class="field-title">Liver / kidney / uric acid</span><input name="liver_kidney_uric_values" /></label>
+          </div>
+        </section>
+
+        <section class="section" id="symptoms">
+          <div class="section-header"><div><div class="section-kicker">Step 6</div><h2>Symptoms and digestion</h2><p class="section-note">Symptoms help you spot gaps. Reports confirm the real problem.</p></div></div>
+          <div class="field-group"><span class="field-title">Current symptoms</span>
+            <div class="choice-grid three">
+              <label class="choice"><input type="checkbox" name="symptoms" value="Fatigue" /> Fatigue</label>
+              <label class="choice"><input type="checkbox" name="symptoms" value="Hair fall" /> Hair fall</label>
+              <label class="choice"><input type="checkbox" name="symptoms" value="Muscle cramps" /> Cramps</label>
+              <label class="choice"><input type="checkbox" name="symptoms" value="Poor sleep" /> Poor sleep</label>
+              <label class="choice"><input type="checkbox" name="symptoms" value="Mouth ulcers" /> Mouth ulcers</label>
+              <label class="choice"><input type="checkbox" name="symptoms" value="Dizziness" /> Dizziness</label>
+              <label class="choice"><input type="checkbox" name="symptoms" value="Brain fog" /> Brain fog</label>
+              <label class="choice"><input type="checkbox" name="symptoms" value="Joint pain" /> Joint pain</label>
+              <label class="choice"><input type="checkbox" name="symptoms" value="Sugar cravings" /> Sugar cravings</label>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:16px;">
+            <label class="field"><span class="field-title">Bloating, gas, acidity?</span><textarea name="digestion_issues"></textarea></label>
+            <label class="field"><span class="field-title">Constipation or loose motion?</span><textarea name="bowel_movements"></textarea></label>
+            <label class="field"><span class="field-title">Appetite level</span><select name="appetite"><option value="">Select</option><option>Low</option><option>Normal</option><option>High</option><option>Unstable</option></select></label>
+            <label class="field"><span class="field-title">Energy level from 1 to 10</span><input type="number" min="1" max="10" name="energy_level" /></label>
+          </div>
+        </section>
+
+        <section class="section" id="food">
+          <div class="section-header"><div><div class="section-kicker">Step 7</div><h2>24-hour food recall</h2><p class="section-note">This shows the real diet before you change it.</p></div></div>
+          <div class="grid">
+            <label class="field"><span class="field-title">Wake-up drink</span><input name="wake_up_drink" /></label>
+            <label class="field"><span class="field-title">Breakfast</span><textarea name="breakfast"></textarea></label>
+            <label class="field"><span class="field-title">Mid-morning snack</span><textarea name="mid_morning_snack"></textarea></label>
+            <label class="field"><span class="field-title">Lunch</span><textarea name="lunch"></textarea></label>
+            <label class="field"><span class="field-title">Evening snack</span><textarea name="evening_snack"></textarea></label>
+            <label class="field"><span class="field-title">Dinner</span><textarea name="dinner"></textarea></label>
+            <label class="field"><span class="field-title">Late-night eating</span><textarea name="late_night_eating"></textarea></label>
+            <label class="field"><span class="field-title">Tea / coffee count</span><input name="tea_coffee_count" /></label>
+            <label class="field"><span class="field-title">Outside food per week</span><input name="outside_food_frequency" /></label>
+            <label class="field"><span class="field-title">Water intake per day</span><input name="water_intake" /></label>
+          </div>
+        </section>
+
+        <section class="section" id="lifestyle">
+          <div class="section-header"><div><div class="section-kicker">Step 8</div><h2>Lifestyle and activity</h2><p class="section-note">Routine decides what plan the client can actually follow.</p></div></div>
+          <div class="grid">
+            <label class="field"><span class="field-title">Activity level</span><select name="activity_level"><option value="">Select</option><option>Sedentary</option><option>Lightly active</option><option>Moderately active</option><option>Very active</option><option>Extremely active</option></select></label>
+            <label class="field"><span class="field-title">Workout days per week</span><input type="number" min="0" max="7" name="workout_days" /></label>
+            <label class="field"><span class="field-title">Sleep time</span><input name="sleep_time" placeholder="Example: 11:30 PM" /></label>
+            <label class="field"><span class="field-title">Wake-up time</span><input name="wake_time" placeholder="Example: 6:30 AM" /></label>
+            <label class="field"><span class="field-title">Sleep quality</span><select name="sleep_quality"><option value="">Select</option><option>Poor</option><option>Average</option><option>Good</option></select></label>
+            <label class="field"><span class="field-title">Stress level from 1 to 10</span><input type="number" min="1" max="10" name="stress_level" /></label>
+            <label class="field"><span class="field-title">Work hours</span><input name="work_hours" /></label>
+            <label class="field"><span class="field-title">Travel frequency</span><select name="travel_frequency"><option value="">Select</option><option>Rare</option><option>Monthly</option><option>Weekly</option><option>Very frequent</option></select></label>
+          </div>
+        </section>
+
+        <section class="section" id="preferences">
+          <div class="section-header"><div><div class="section-kicker">Step 9</div><h2>Food preferences and barriers</h2><p class="section-note">This keeps the chart realistic.</p></div></div>
+          <div class="grid">
+            <label class="field"><span class="field-title">Diet preference</span><select name="diet_preference"><option value="">Select</option><option>Vegetarian</option><option>Eggetarian</option><option>Non-vegetarian</option><option>Vegan</option><option>Jain</option></select></label>
+            <label class="field"><span class="field-title">Who cooks your food?</span><input name="food_prepared_by" /></label>
+            <label class="field"><span class="field-title">Can you cook daily?</span><select name="can_cook"><option value="">Select</option><option>Yes</option><option>No</option><option>Sometimes</option></select></label>
+            <label class="field"><span class="field-title">Food budget comfort</span><select name="food_budget"><option value="">Select</option><option>Basic home food</option><option>Moderate</option><option>Premium options allowed</option></select></label>
+            <label class="field"><span class="field-title">Foods you love</span><textarea name="foods_love"></textarea></label>
+            <label class="field"><span class="field-title">Foods you hate or cannot eat</span><textarea name="foods_hate"></textarea></label>
+            <label class="field"><span class="field-title">Religious or cultural restrictions</span><textarea name="religious_restrictions"></textarea></label>
+            <label class="field"><span class="field-title">Biggest practical barrier</span><textarea name="practical_barrier"></textarea></label>
+          </div>
+        </section>
+
+        <section class="section" id="conditions">
+          <div class="section-header"><div><div class="section-kicker">Step 10</div><h2>Condition-specific blocks</h2><p class="section-note">Open these manually when relevant from medical history.</p></div></div>
+          <div class="choice-grid three">
+            <label class="choice"><input type="checkbox" class="toggleCondition" data-target="diabetesBlock" /> Diabetes block</label>
+            <label class="choice"><input type="checkbox" class="toggleCondition" data-target="thyroidBlock" /> Thyroid block</label>
+            <label class="choice"><input type="checkbox" class="toggleCondition" data-target="kidneyBlock" /> Kidney block</label>
+            <label class="choice"><input type="checkbox" class="toggleCondition" data-target="heartBlock" /> Heart / BP block</label>
+            <label class="choice"><input type="checkbox" class="toggleCondition" data-target="anaemiaBlock" /> Anaemia block</label>
+            <label class="choice"><input type="checkbox" class="toggleCondition" data-target="fattyLiverBlock" /> Fatty liver / uric acid block</label>
+          </div>
+          <div id="diabetesBlock" class="conditional"><div class="grid"><label class="field"><span class="field-title">Diabetes type and duration</span><input name="diabetes_type_duration" /></label><label class="field"><span class="field-title">Current sugar readings</span><textarea name="diabetes_readings"></textarea></label><label class="field"><span class="field-title">Hypoglycemia episodes?</span><select name="hypoglycemia"><option value="">Select</option><option>Yes</option><option>No</option></select></label><label class="field"><span class="field-title">Sugar medication or insulin</span><textarea name="diabetes_meds"></textarea></label></div></div>
+          <div id="thyroidBlock" class="conditional"><div class="grid"><label class="field"><span class="field-title">Thyroid type</span><select name="thyroid_type"><option value="">Select</option><option>Hypothyroid</option><option>Hyperthyroid</option><option>Hashimoto</option><option>Not sure</option></select></label><label class="field"><span class="field-title">Medicine timing</span><input name="thyroid_medicine_timing" /></label><label class="field"><span class="field-title">Latest TSH/T3/T4</span><input name="thyroid_latest_values" /></label><label class="field"><span class="field-title">Symptoms</span><textarea name="thyroid_symptoms"></textarea></label></div></div>
+          <div id="kidneyBlock" class="conditional"><div class="warning-box">Kidney disease needs doctor-aligned protein, potassium, sodium, and fluid planning. Do not prescribe high protein or mineral supplements casually.</div><div class="grid" style="margin-top:16px;"><label class="field"><span class="field-title">Diagnosis/stage if known</span><input name="kidney_stage" /></label><label class="field"><span class="field-title">Creatinine / eGFR</span><input name="kidney_values" /></label><label class="field"><span class="field-title">Fluid restriction?</span><select name="fluid_restriction"><option value="">Select</option><option>Yes</option><option>No</option></select></label><label class="field"><span class="field-title">Potassium restriction?</span><select name="potassium_restriction"><option value="">Select</option><option>Yes</option><option>No</option></select></label></div></div>
+          <div id="heartBlock" class="conditional"><div class="grid"><label class="field"><span class="field-title">BP reading</span><input name="bp_reading" /></label><label class="field"><span class="field-title">Sodium limit advised?</span><input name="sodium_limit" /></label><label class="field"><span class="field-title">Cholesterol medication?</span><input name="cholesterol_meds" /></label><label class="field"><span class="field-title">Cardiac history</span><textarea name="cardiac_history"></textarea></label></div></div>
+          <div id="anaemiaBlock" class="conditional"><div class="grid"><label class="field"><span class="field-title">Haemoglobin level</span><input name="anaemia_hb" /></label><label class="field"><span class="field-title">Ferritin / B12 / folate</span><input name="anaemia_values" /></label><label class="field"><span class="field-title">Heavy bleeding or known cause?</span><textarea name="anaemia_cause"></textarea></label><label class="field"><span class="field-title">Iron supplement history</span><textarea name="iron_history"></textarea></label></div></div>
+          <div id="fattyLiverBlock" class="conditional"><div class="grid"><label class="field"><span class="field-title">Fatty liver grade / LFT</span><input name="fatty_liver_values" /></label><label class="field"><span class="field-title">Uric acid value</span><input name="uric_acid_value" /></label><label class="field"><span class="field-title">Alcohol intake details</span><textarea name="alcohol_details"></textarea></label><label class="field"><span class="field-title">High purine foods frequency</span><textarea name="purine_food_frequency"></textarea></label></div></div>
+        </section>
+
+        <section class="section" id="supplements">
+          <div class="section-header"><div><div class="section-kicker">Step 11</div><h2>Current supplements and safety</h2><p class="section-note">This prevents overdose, clashes, and unnecessary pills.</p></div></div>
+          <div class="grid">
+            <label class="field"><span class="field-title">Current supplements</span><textarea name="current_supplements" placeholder="Name, dose, timing"></textarea></label>
+            <label class="field"><span class="field-title">Any supplement caused side effects?</span><textarea name="supplement_side_effects"></textarea></label>
+            <label class="field"><span class="field-title">Open to supplements only if needed?</span><select name="open_to_supplements"><option value="">Select</option><option>Yes</option><option>No</option><option>Only food first</option></select></label>
+            <label class="field"><span class="field-title">Monthly supplement budget</span><input name="supplement_budget" /></label>
+          </div>
+        </section>
+
+        <section class="section" id="consent">
+          <div class="section-header"><div><div class="section-kicker">Step 12</div><h2>Consent and declaration</h2><p class="section-note">Use this before assessment.</p></div></div>
+          <div class="warning-box">This form is for nutrition and fitness assessment. It does not replace medical diagnosis or doctor treatment. Supplements will be suggested only when needed based on food history, symptoms, reports, medical status, and professional judgement.</div>
+          <div class="choice-grid" style="margin-top:16px;">
+            <label class="choice"><input type="checkbox" name="consent" value="I confirm the information is accurate" required /> I confirm the information is accurate.</label>
+            <label class="choice"><input type="checkbox" name="medical_consent" value="I understand doctor approval may be needed" required /> I understand doctor approval may be needed for medical conditions.</label>
+          </div>
+        </section>
+
+        <div class="submit-zone">
+          <div class="submit-card">
+            <div class="status-message" id="statusMessage">Connect your Google Sheet Web App URL in the script before using live.</div>
+            <button type="submit" id="submitBtn">Submit Assessment</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const GOOGLE_SHEET_WEB_APP_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+    const form = document.getElementById('intakeForm');
+    const sex = document.getElementById('sex');
+    const mainGoal = document.getElementById('mainGoal');
+    const pregnant = document.getElementById('pregnant');
+    const lactating = document.getElementById('lactating');
+    const statusMessage = document.getElementById('statusMessage');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function showBlock(id, shouldShow) {
+      const el = document.getElementById(id);
+      if (el) el.classList.toggle('show', !!shouldShow);
+    }
+
+    function updateConditionalBlocks() {
+      showBlock('femaleBlock', sex.value === 'Female');
+      showBlock('maleBlock', sex.value === 'Male');
+      showBlock('fatLossBlock', mainGoal.value === 'Fat loss');
+      showBlock('muscleGainBlock', mainGoal.value === 'Muscle gain' || mainGoal.value === 'Strength and fitness' || mainGoal.value === 'Weight gain');
+      showBlock('pregnancyBlock', pregnant && pregnant.value === 'Yes');
+      showBlock('lactationBlock', lactating && lactating.value === 'Yes');
+    }
+
+    document.querySelectorAll('.toggleCondition').forEach(cb => {
+      cb.addEventListener('change', () => showBlock(cb.dataset.target, cb.checked));
+    });
+
+    [sex, mainGoal, pregnant, lactating].forEach(el => el && el.addEventListener('change', updateConditionalBlocks));
+
+    function updateProgress() {
+      const fields = Array.from(form.querySelectorAll('input, select, textarea')).filter(el => el.type !== 'hidden' && !el.disabled);
+      const answered = fields.filter(el => {
+        if (el.type === 'checkbox' || el.type === 'radio') return el.checked;
+        return String(el.value || '').trim().length > 0;
+      }).length;
+      const percent = fields.length ? Math.round((answered / fields.length) * 100) : 0;
+      document.getElementById('progressFill').style.width = percent + '%';
+      document.getElementById('progressText').textContent = percent + '%';
+    }
+
+    form.addEventListener('input', updateProgress);
+    form.addEventListener('change', updateProgress);
+
+    function formToObject(formEl) {
+      const data = new FormData(formEl);
+      const obj = {};
+      for (const [key, value] of data.entries()) {
+        if (obj[key]) obj[key] += ', ' + value;
+        else obj[key] = value;
+      }
+      return obj;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      document.getElementById('submittedAt').value = new Date().toISOString();
+      const payload = formToObject(form);
+
+      if (!GOOGLE_SHEET_WEB_APP_URL || GOOGLE_SHEET_WEB_APP_URL.includes('PASTE_YOUR')) {
+        statusMessage.textContent = 'Form is ready. Paste your Google Apps Script Web App URL inside GOOGLE_SHEET_WEB_APP_URL.';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      statusMessage.textContent = 'Submitting assessment...';
+      try {
+        await fetch(GOOGLE_SHEET_WEB_APP_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        statusMessage.textContent = 'Assessment submitted successfully.';
+        form.reset();
+        updateConditionalBlocks();
+        updateProgress();
+      } catch (error) {
+        statusMessage.textContent = 'Submission failed. Check the Web App URL and deployment permissions.';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+    updateConditionalBlocks();
+    updateProgress();
+  </script>
+</body>
+</html>
