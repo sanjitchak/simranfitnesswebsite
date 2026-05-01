@@ -54,6 +54,24 @@
       box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
     }
 
+    .mobile-form-btn {
+      display: none;
+      width: 100%;
+      max-width: 420px;
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 17px;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+      text-decoration: none;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
     .sheet {
       width: 210mm;
       min-height: 297mm;
@@ -501,10 +519,11 @@
       }
 
       .print-btn {
-        width: 100%;
-        max-width: 420px;
-        padding: 13px 17px;
-        font-size: 14px;
+        display: none !important;
+      }
+
+      .mobile-form-btn {
+        display: flex !important;
       }
 
       .sheet {
@@ -948,6 +967,7 @@
 <body>
   <div class="toolbar">
     <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
+    <a class="mobile-form-btn" href="https://forms.gle/io56Rj8usdyXJTs36" target="_blank" rel="noopener">Apply For Wellness Program</a>
   </div>
 
   <section class="sheet">
