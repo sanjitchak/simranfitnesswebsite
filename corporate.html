@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corporate Energy & Strength Reset Proposal</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b00'><rect x='1' y='5' width='3' height='14' rx='1'/><rect x='5' y='7' width='3' height='10' rx='1'/><rect x='8' y='10' width='8' height='4'/><rect x='16' y='7' width='3' height='10' rx='1'/><rect x='20' y='5' width='3' height='14' rx='1'/></svg>">
+  <style>
+    :root {
+      --ink: #17120f;
+      --muted: #675c53;
+      --paper: #fff8ef;
+      --card: #ffffff;
+      --cream: #fff0df;
+      --orange: #ff6b00;
+      --orange-dark: #d95600;
+      --green: #2b6040;
+      --line: rgba(23, 18, 15, 0.10);
+      --shadow: 0 16px 46px rgba(23, 18, 15, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #e9dfd2;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+
+    .toolbar {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 20;
+    }
+
+    .print-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 17px;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .sheet {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 24px auto;
+      background: var(--paper);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 28px 90px rgba(23, 18, 15, 0.18);
+    }
+
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 96% 5%, rgba(255, 107, 0, 0.10), transparent 24%),
+        radial-gradient(circle at 3% 96%, rgba(43, 96, 64, 0.07), transparent 28%);
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 297mm;
+      padding: 10mm;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 20px;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .logo svg { width: 27px; height: 27px; fill: var(--orange); }
+
+    .tag {
+      padding: 8px 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 10.8px;
+      font-weight: 900;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--orange-dark);
+      white-space: nowrap;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 2px;
+    }
+
+    .headline-box { padding: 8px 0 2px; }
+
+    .eyebrow {
+      color: var(--orange-dark);
+      font-weight: 950;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      font-size: 36px;
+      line-height: 0.96;
+      letter-spacing: -0.055em;
+      color: var(--ink);
+      max-width: 455px;
+    }
+
+    .subhead {
+      margin-top: 8px;
+      font-size: 13.5px;
+      line-height: 1.38;
+      color: #3b3029;
+      max-width: 480px;
+      font-weight: 650;
+    }
+
+    .photo-card {
+      height: 218px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-card img {
+      width: auto;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      display: block;
+      border-radius: 20px;
+      background: transparent;
+      box-shadow: var(--shadow);
+    }
+
+    .proof-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .proof {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 10px 12px;
+      min-height: 58px;
+      box-shadow: 0 8px 24px rgba(23,18,15,0.035);
+    }
+
+    .proof strong {
+      display: block;
+      font-size: 17px;
+      line-height: 1;
+      color: var(--orange-dark);
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+
+    .proof span {
+      display: block;
+      font-size: 10.5px;
+      line-height: 1.3;
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px 14px;
+      box-shadow: 0 8px 24px rgba(23,18,15,0.03);
+    }
+
+    .card.accent {
+      background: #fff2e4;
+      border-color: rgba(255, 107, 0, 0.17);
+    }
+
+    .section-title {
+      font-size: 16px;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      margin-bottom: 9px;
+    }
+
+    .list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+
+    .list li {
+      color: var(--muted);
+      font-size: 10.8px;
+      line-height: 1.33;
+      position: relative;
+      padding-left: 16px;
+      font-weight: 640;
+    }
+
+    .list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.52em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+    }
+
+    .program-row {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .audit-box {
+      background: #fff;
+      border: 1px solid rgba(255, 107, 0, 0.17);
+      border-radius: 18px;
+      padding: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .mini-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 950;
+      color: var(--orange-dark);
+      margin-bottom: 7px;
+    }
+
+    .audit-box h2 {
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: var(--ink);
+    }
+
+    .audit-box p {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 10.8px;
+      line-height: 1.33;
+      font-weight: 640;
+    }
+
+    .sessions {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 12px;
+      box-shadow: 0 8px 24px rgba(23,18,15,0.03);
+    }
+
+    .session-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+      margin-top: 10px;
+    }
+
+    .session {
+      background: #fff8ef;
+      border: 1px solid rgba(23,18,15,0.09);
+      border-radius: 12px;
+      padding: 8px 9px;
+      min-height: 48px;
+    }
+
+    .session strong {
+      display: block;
+      font-size: 11px;
+      color: var(--orange-dark);
+      margin-bottom: 4px;
+    }
+
+    .session span {
+      display: block;
+      font-size: 9.6px;
+      line-height: 1.22;
+      color: var(--muted);
+      font-weight: 640;
+    }
+
+    .value-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+    }
+
+    .value {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 10px 11px;
+      min-height: 62px;
+    }
+
+    .value strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+
+    .value span {
+      display: block;
+      font-size: 9.7px;
+      line-height: 1.3;
+      color: var(--muted);
+      font-weight: 640;
+    }
+
+    .bottom {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: 1.22fr 0.78fr;
+      gap: 13px;
+      align-items: stretch;
+    }
+
+    .cta {
+      background: #fff;
+      border: 1px solid rgba(255, 107, 0, 0.18);
+      border-radius: 20px;
+      padding: 13px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta h2 {
+      font-size: 21px;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: var(--ink);
+    }
+
+    .cta p {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 10.8px;
+      line-height: 1.35;
+      font-weight: 640;
+    }
+
+    .contact-line {
+      margin-top: 11px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .qr-card {
+      background: var(--orange);
+      color: white;
+      border-radius: 20px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 12px;
+      align-items: center;
+      min-height: 128px;
+    }
+
+    .qr {
+      width: 82px;
+      height: 82px;
+      border-radius: 14px;
+      background: #fff;
+      padding: 6px;
+    }
+
+    .qr img { width: 100%; height: 100%; display: block; }
+
+    .qr-copy strong {
+      display: block;
+      font-size: 16px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 6px;
+    }
+
+    .qr-copy span {
+      display: block;
+      font-size: 9.8px;
+      line-height: 1.3;
+      color: rgba(255,255,255,0.86);
+      font-weight: 750;
+    }
+
+    .footer-note {
+      margin-top: 1px;
+      color: rgba(23, 18, 15, 0.45);
+      font-size: 10.4px;
+      font-weight: 750;
+      text-align: center;
+    }
+
+    @media print {
+      @page { size: A4; margin: 0; }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      html, body {
+        width: 210mm;
+        height: 297mm;
+        background: #fff !important;
+        overflow: hidden;
+      }
+      .toolbar { display: none; }
+      .sheet {
+        width: 210mm;
+        height: 297mm;
+        min-height: 297mm;
+        margin: 0;
+        box-shadow: none;
+        overflow: hidden;
+      }
+      .content {
+        height: 297mm;
+        min-height: 0;
+        padding: 9mm 10mm;
+        gap: 8px;
+      }
+      .sheet::before { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
+  </div>
+
+  <section class="sheet">
+    <div class="content">
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo" aria-label="EatLiftMove logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="1" y="5" width="3" height="14" rx="1"/><rect x="5" y="7" width="3" height="10" rx="1"/><rect x="8" y="10" width="8" height="4"/><rect x="16" y="7" width="3" height="10" rx="1"/><rect x="20" y="5" width="3" height="14" rx="1"/></svg>
+          </div>
+          <div>EatLiftMove</div>
+        </div>
+        <div class="tag">Corporate Wellness Training</div>
+      </div>
+
+      <div class="hero">
+        <div class="headline-box">
+          <div class="eyebrow">30 Day Corporate Energy & Strength Reset</div>
+          <h1>Help Your Team Beat The 3 PM Energy Crash.</h1>
+          <p class="subhead">A practical wellness program for desk-heavy teams to improve energy, posture, strength, and daily focus through beginner strength training, movement, and simple food habits.</p>
+        </div>
+        <div class="photo-card">
+          <img src="https://EatLiftMove.in/trainer.webp" alt="EatLiftMove trainer photo" />
+        </div>
+      </div>
+
+      <div class="proof-strip">
+        <div class="proof"><strong>30 days</strong><span>Action-based program, not one more health lecture.</span></div>
+        <div class="proof"><strong>12 sessions</strong><span>3 guided strength and mobility sessions every week.</span></div>
+        <div class="proof"><strong>Tracked</strong><span>Energy, stiffness, attendance, and feedback measured.</span></div>
+      </div>
+
+      <div class="main-grid">
+        <div class="card accent">
+          <div class="section-title">Best For Employees Who</div>
+          <ul class="list">
+            <li>Feel tired after lunch or depend on caffeine.</li>
+            <li>Sit long hours and feel neck, back, or shoulder stiffness.</li>
+            <li>Want to start fitness but feel confused or intimidated.</li>
+            <li>Feel their strength and stamina dropping after 30.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-title">Why HR Should Care</div>
+          <ul class="list">
+            <li>Tired employees do not perform at full capacity.</li>
+            <li>Low energy and stiffness reduce focus, mood, and morale.</li>
+            <li>This program gives HR participation, feedback, and progress visibility.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="program-row">
+        <div class="audit-box">
+          <div class="mini-label">Free Intro Workshop</div>
+          <h2>Energy & Strength Audit</h2>
+          <p>45 to 60 minute session where employees discover why they feel tired, stiff, weak, and unfocused during work hours.</p>
+          <p><strong>Includes:</strong> scorecard, posture check, strength readiness check, desk mobility demo, and 7 day reset plan.</p>
+        </div>
+        <div class="sessions">
+          <div class="section-title">30 Day Program Flow</div>
+          <div class="session-grid">
+            <div class="session"><strong>Week 1</strong><span>Strength basics, posture, stability.</span></div>
+            <div class="session"><strong>Week 2</strong><span>Energy circuits, back relief, balance.</span></div>
+            <div class="session"><strong>Week 3</strong><span>Strength progressions and stamina.</span></div>
+            <div class="session"><strong>Week 4</strong><span>Personal routine and reassessment.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="value-row">
+        <div class="value"><strong>Energy</strong><span>Reduce the afternoon crash with food, movement, hydration, and sleep habits.</span></div>
+        <div class="value"><strong>Posture</strong><span>Improve desk-job stiffness with mobility and posture resets.</span></div>
+        <div class="value"><strong>Strength</strong><span>Start safe beginner strength training without gym pressure.</span></div>
+        <div class="value"><strong>Focus</strong><span>Help employees feel more active, alert, and consistent at work.</span></div>
+      </div>
+
+      <div class="main-grid">
+        <div class="card">
+          <div class="section-title">Employees Get</div>
+          <ul class="list">
+            <li>12 beginner strength and mobility sessions.</li>
+            <li>Energy, posture, and strength readiness scorecards.</li>
+            <li>30 day habit tracker for steps, water, protein, sleep, stress, and attendance.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="section-title">HR Gets</div>
+          <ul class="list">
+            <li>Participation and attendance summary.</li>
+            <li>Employee feedback summary.</li>
+            <li>Before-after energy, stiffness, and strength readiness trends.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bottom">
+        <div class="cta">
+          <h2>Start With One Free Pilot Workshop.</h2>
+          <p>Book a 45 to 60 minute Corporate Energy & Strength Audit for one department. If employees find it useful, continue with the 30 day reset program.</p>
+          <div class="contact-line">
+            <div class="contact-pill">Website: EatLiftMove.in</div>
+            <div class="contact-pill">WhatsApp: +91 62903 72390</div>
+          </div>
+        </div>
+        <div class="qr-card">
+          <div class="qr">
+            <img alt="QR code for corporate wellness enquiry form" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=8&data=https%3A%2F%2FEatLiftMove.in%2Fform.html" />
+          </div>
+          <div class="qr-copy">
+            <strong>Scan To Book</strong>
+            <span>Fill the quick form to schedule the free pilot workshop for your team.<br><br>EatLiftMove.in/form.html</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-note">Corporate Energy & Strength Reset by EatLiftMove. Built for desk-heavy teams, IT employees, managers, and high-pressure departments.</div>
+    </div>
+  </section>
+</body>
+</html>
