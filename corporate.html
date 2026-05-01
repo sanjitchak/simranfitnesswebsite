@@ -125,10 +125,10 @@
 
     .hero {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 18px;
-      align-items: stretch;
-      margin-top: 2px;
+      align-items: center;
+      margin-top: 4px;
     }
 
     .headline-box { padding: 8px 0 2px; }
@@ -143,26 +143,26 @@
     }
 
     h1 {
-      font-size: 36px;
-      line-height: 0.96;
-      letter-spacing: -0.055em;
+      font-size: 34px;
+      line-height: 0.98;
+      letter-spacing: -0.052em;
       color: var(--ink);
-      max-width: 455px;
+      max-width: 430px;
     }
 
     .subhead {
       margin-top: 8px;
-      font-size: 13.5px;
-      line-height: 1.38;
+      font-size: 13px;
+      line-height: 1.36;
       color: #3b3029;
-      max-width: 480px;
+      max-width: 440px;
       font-weight: 650;
     }
 
     .photo-card {
-      height: 218px;
+      height: 192px;
       border-radius: 24px;
-      overflow: hidden;
+      overflow: visible;
       background: transparent;
       border: 0;
       box-shadow: none;
@@ -174,10 +174,11 @@
     .photo-card img {
       width: auto;
       height: 100%;
+      max-width: 100%;
       object-fit: contain;
       object-position: center center;
       display: block;
-      border-radius: 20px;
+      border-radius: 22px;
       background: transparent;
       box-shadow: var(--shadow);
     }
@@ -186,6 +187,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
+      margin-top: 2px;
     }
 
     .proof {
