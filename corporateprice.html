@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corporate Wellness Pricing & Contract Prompt Generator</title>
+  <style>
+    :root {
+      --bg: #f7f8f4;
+      --card: #ffffff;
+      --text: #172018;
+      --muted: #5f6b61;
+      --primary: #1f5c3b;
+      --primary-dark: #16462d;
+      --accent: #d7a84f;
+      --line: #dfe5dc;
+      --soft: #eef3eb;
+      --danger: #9c2f2f;
+      --radius: 18px;
+      --shadow: 0 14px 35px rgba(23, 32, 24, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .wrap {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 32px 18px 60px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #173b27, #23704a);
+      color: #fff;
+      border-radius: 28px;
+      padding: 34px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.08;
+      max-width: 900px;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 820px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 17px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 22px 0;
+    }
+
+    .tab {
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      padding: 12px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .tab.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 24px;
+      }
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+    }
+
+    .panel h3 {
+      margin: 22px 0 10px;
+      font-size: 17px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: -5px;
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin: 14px 0 6px;
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 13px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(31, 92, 59, 0.1);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 620px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font: inherit;
+    }
+
+    .primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .secondary {
+      background: var(--soft);
+      color: var(--primary-dark);
+    }
+
+    .secondary:hover {
+      background: #e1eadc;
+    }
+
+    .output {
+      background: #fbfcfa;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      min-height: 420px;
+      white-space: pre-wrap;
+      font-size: 14px;
+    }
+
+    .price-card {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .price-big {
+      font-size: 31px;
+      line-height: 1.1;
+      font-weight: 900;
+      color: var(--primary);
+      margin: 8px 0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(215, 168, 79, 0.2);
+      color: #78551a;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .note {
+      border-left: 4px solid var(--accent);
+      padding: 12px 14px;
+      background: #fff9ea;
+      color: #5f4411;
+      border-radius: 10px;
+      margin-top: 14px;
+      font-size: 14px;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    .mini-table th, .mini-table td {
+      border: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .mini-table th {
+      background: var(--soft);
+    }
+
+    .footer-note {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .copy-status {
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 700;
+      margin-left: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Corporate Wellness Pricing & Contract Prompt Generator</h1>
+      <p>
+        Generate clean pricing for corporate wellness programs and create a ready-to-use contract prompt after filling company details.
+      </p>
+    </section>
+
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('pricing', this)">Pricing Generator</button>
+      <button class="tab" onclick="showTab('contract', this)">Contract Prompt Generator</button>
+      <button class="tab" onclick="showTab('reference', this)">Pricing Reference</button>
+    </div>
+
+    <section id="pricing" class="section active">
+      <div class="grid">
+        <div class="panel">
+          <h2>Pricing Generator</h2>
+          <p class="hint">Fill the details. The tool will calculate batches, suggested pricing, payment terms, and sales notes.</p>
+
+          <label>Company Name</label>
+          <input id="companyName" placeholder="Example: ABC Technologies Pvt. Ltd." />
+
+          <div class="row">
+            <div>
+              <label>Company Type</label>
+              <select id="companyType">
+                <option value="small">Small Company</option>
+                <option value="mid">Mid-size Company</option>
+                <option value="large">Large Company</option>
+                <option value="mnc">MNC / Premium Corporate</option>
+              </select>
+            </div>
+            <div>
+              <label>Location</label>
+              <input id="location" placeholder="Example: Noida Sector 62" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Total Employees</label>
+              <input id="totalEmployees" type="number" min="1" value="75" />
+            </div>
+            <div>
+              <label>Expected Participants</label>
+              <input id="participants" type="number" min="1" value="50" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Program Type</label>
+              <select id="programType">
+                <option value="pilot">Free Pilot Workshop</option>
+                <option value="workshop">Paid One-Time Workshop</option>
+                <option value="30day" selected>30-Day Program</option>
+                <option value="90day">90-Day Program</option>
+                <option value="retainer">Monthly Retainer</option>
+              </select>
+            </div>
+            <div>
+              <label>Delivery Type</label>
+              <select id="deliveryType">
+                <option value="offline" selected>Offline</option>
+                <option value="online">Online</option>
+                <option value="hybrid">Hybrid</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>HR Reporting</label>
+              <select id="reporting">
+                <option value="basic">Basic HR Summary</option>
+                <option value="advanced">Advanced HR Report</option>
+              </select>
+            </div>
+            <div>
+              <label>Customization Level</label>
+              <select id="customization">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Travel Required?</label>
+              <select id="travel">
+                <option value="nearby">Nearby, Noida / East Delhi / Ghaziabad</option>
+                <option value="far">Far Location, Delhi NCR</option>
+                <option value="outstation">Outstation / Quote Separately</option>
+                <option value="none">No Travel</option>
+              </select>
+            </div>
+            <div>
+              <label>Commitment</label>
+              <select id="commitment">
+                <option value="one">One-Time</option>
+                <option value="three">3 Months</option>
+                <option value="six">6 Months</option>
+              </select>
+            </div>
+          </div>
+
+          <h3>Add-ons</h3>
+          <div class="row">
+            <div>
+              <label>Nutrition Workshop</label>
+              <select id="nutrition">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </div>
+            <div>
+              <label>Manager Burnout Reset</label>
+              <select id="burnout">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Women’s Strength & Energy Workshop</label>
+              <select id="womenWorkshop">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </div>
+            <div>
+              <label>1-on-1 Consultation Count</label>
+              <input id="consultCount" type="number" min="0" value="0" />
+            </div>
+          </div>
+
+          <div class="btns">
+            <button class="primary" onclick="generatePricing()">Generate Pricing</button>
+            <button class="secondary" onclick="copyOutput('pricingOutput', 'pricingCopyStatus')">Copy Output</button>
+            <span id="pricingCopyStatus" class="copy-status"></span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Generated Quote</h2>
+          <div id="pricingOutput" class="output">Fill the form and click Generate Pricing.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contract" class="section">
+      <div class="grid">
+        <div class="panel">
+          <h2>Contract Prompt Generator</h2>
+          <p class="hint">Fill this after the company agrees. It creates a prompt you can paste into ChatGPT to generate a corporate agreement.</p>
+
+          <label>Service Provider Name</label>
+          <input id="providerName" placeholder="Example: EatLiftMove" value="EatLiftMove" />
+
+          <div class="row">
+            <div>
+              <label>Provider Legal Name</label>
+              <input id="providerLegal" placeholder="Example: EatLiftMove Wellness Services" />
+            </div>
+            <div>
+              <label>Provider Address</label>
+              <input id="providerAddress" placeholder="Full address" />
+            </div>
+          </div>
+
+          <label>Client Company Legal Name</label>
+          <input id="clientLegal" placeholder="Example: ABC Technologies Pvt. Ltd." />
+
+          <div class="row">
+            <div>
+              <label>Client Address</label>
+              <input id="clientAddress" placeholder="Full address" />
+            </div>
+            <div>
+              <label>Client GSTIN</label>
+              <input id="clientGstin" placeholder="Optional" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Authorized Person Name</label>
+              <input id="authPerson" placeholder="Example: HR Manager Name" />
+            </div>
+            <div>
+              <label>Authorized Person Designation</label>
+              <input id="authDesignation" placeholder="Example: HR Manager" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Program Name</label>
+              <input id="contractProgram" value="Corporate Energy & Strength Reset" />
+            </div>
+            <div>
+              <label>Program Duration</label>
+              <input id="contractDuration" placeholder="Example: 30 days / 90 days / 3 months" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Start Date</label>
+              <input id="startDate" type="date" />
+            </div>
+            <div>
+              <label>End Date</label>
+              <input id="endDate" type="date" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Total Participants</label>
+              <input id="contractParticipants" type="number" min="1" value="50" />
+            </div>
+            <div>
+              <label>Number of Batches</label>
+              <input id="contractBatches" type="number" min="1" value="2" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Total Fee</label>
+              <input id="totalFee" placeholder="Example: ₹1,70,000 + GST" />
+            </div>
+            <div>
+              <label>Payment Terms</label>
+              <select id="paymentTerms">
+                <option value="100% advance">100% advance</option>
+                <option value="50% advance and 50% before session 7">50% advance and 50% before session 7</option>
+                <option value="40% advance, 30% after month 1, 30% after month 2">40%, 30%, 30%</option>
+                <option value="100% advance every month">100% advance every month</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+          </div>
+
+          <label>Custom Payment Terms, if any</label>
+          <textarea id="customPayment" placeholder="Write only if custom selected."></textarea>
+
+          <label>Deliverables</label>
+          <textarea id="deliverables">Opening wellness audit
+Employee scorecards
+Guided corporate wellness sessions
+Habit tracker
+Attendance tracking
+Employee feedback form
+Final HR summary report</textarea>
+
+          <label>Important Terms</label>
+          <textarea id="importantTerms">Fees are non-refundable once the program starts.
+Session dates will be mutually agreed in advance.
+Rescheduling requires at least 48 hours notice.
+The service provider is not offering medical treatment.
+Employees with medical conditions should consult their doctor before participating.
+Company must provide suitable space, basic coordination support, and employee communication.
+GST and taxes will be charged as applicable.</textarea>
+
+          <div class="btns">
+            <button class="primary" onclick="generateContractPrompt()">Generate Contract Prompt</button>
+            <button class="secondary" onclick="copyOutput('contractOutput', 'contractCopyStatus')">Copy Prompt</button>
+            <span id="contractCopyStatus" class="copy-status"></span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Generated Contract Prompt</h2>
+          <div id="contractOutput" class="output">Fill the form and click Generate Contract Prompt.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reference" class="section">
+      <div class="panel">
+        <h2>Pricing Reference</h2>
+        <p class="hint">Use this as the internal pricing guide. Do not show all options in the first proposal.</p>
+
+        <table class="mini-table">
+          <thead>
+            <tr>
+              <th>Offer</th>
+              <th>Best For</th>
+              <th>Recommended Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Free Pilot Workshop</td>
+              <td>First entry into selected companies</td>
+              <td>Free, one-time only</td>
+            </tr>
+            <tr>
+              <td>Paid One-Time Workshop</td>
+              <td>Wellness day, HR event, employee engagement</td>
+              <td>₹25,000 to ₹45,000 for most Noida companies</td>
+            </tr>
+            <tr>
+              <td>30-Day Program</td>
+              <td>Main paid offer for one department</td>
+              <td>₹1,25,000 to ₹2,00,000</td>
+            </tr>
+            <tr>
+              <td>90-Day Program</td>
+              <td>Quarterly wellness initiative</td>
+              <td>₹3,00,000 to ₹5,00,000+</td>
+            </tr>
+            <tr>
+              <td>Monthly Retainer</td>
+              <td>Long-term corporate wellness club</td>
+              <td>₹1,00,000 to ₹2,50,000/month</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          Best simple offer ladder for first 5 corporate clients: Free Pilot, 30-Day Program, 90-Day Program. Do not confuse HR with too many choices.
+        </div>
+
+        <h3>Verbal Pricing Script</h3>
+        <div class="output" style="min-height: 180px;">We usually work in three formats.
+
+The first is a one-time Energy & Strength Audit workshop, which is good for a wellness day or pilot.
+
+The second is our 30-day reset, where employees go through a structured corporate wellness program with tracking and a final HR summary.
+
+The third is a 90-day transformation program for companies that want deeper behavior change.
+
+For most companies, I recommend starting with the free pilot workshop. If your team likes it, the 30-day program usually starts from around ₹1.25 lakh depending on team size and number of batches.</div>
+
+        <p class="footer-note">Internal rule: If you price the 30-day program below ₹50,000, it will look like a local trainer service. The sweet spot is ₹1 lakh to ₹2 lakh for a department-level corporate program.</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function showTab(id, el) {
+      document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      el.classList.add('active');
+    }
+
+    function currency(n) {
+      return '₹' + Math.round(n).toLocaleString('en-IN');
+    }
+
+    function getRangeText(min, max) {
+      if (min === 0 && max === 0) return 'Free';
+      if (min === max) return currency(min);
+      return currency(min) + ' to ' + currency(max);
+    }
+
+    function baseRange(program, participants, batches) {
+      let min = 0, max = 0;
+
+      if (program === 'pilot') {
+        return { min: 0, max: 0, label: 'Free Pilot Workshop' };
+      }
+
+      if (program === 'workshop') {
+        if (participants <= 30) { min = 15000; max = 25000; }
+        else if (participants <= 60) { min = 25000; max = 45000; }
+        else if (participants <= 100) { min = 45000; max = 75000; }
+        else { min = 75000; max = 125000; }
+        return { min, max, label: 'Paid One-Time Workshop' };
+      }
+
+      if (program === '30day') {
+        if (participants <= 40) { min = 75000; max = 100000; }
+        else if (participants <= 75) { min = 125000; max = 200000; }
+        else if (participants <= 150) { min = 225000; max = 350000; }
+        else { min = 350000; max = 600000; }
+        return { min, max, label: '30-Day Corporate Energy & Strength Reset' };
+      }
+
+      if (program === '90day') {
+        if (participants <= 40) { min = 200000; max = 300000; }
+        else if (participants <= 75) { min = 300000; max = 500000; }
+        else if (participants <= 150) { min = 500000; max = 800000; }
+        else { min = 800000; max = 1500000; }
+        return { min, max, label: '90-Day Corporate Wellness Transformation' };
+      }
+
+      if (program === 'retainer') {
+        if (batches <= 1) { min = 75000; max = 125000; }
+        else if (batches === 2) { min = 150000; max = 225000; }
+        else if (batches === 3) { min = 225000; max = 325000; }
+        else if (batches === 4) { min = 300000; max = 450000; }
+        else { min = 500000; max = 700000; }
+        return { min, max, label: 'Monthly Corporate Wellness Retainer' };
+      }
+
+      return { min, max, label: 'Corporate Wellness Program' };
+    }
+
+    function generatePricing() {
+      const companyName = document.getElementById('companyName').value || 'the company';
+      const companyType = document.getElementById('companyType').value;
+      const location = document.getElementById('location').value || 'Not specified';
+      const totalEmployees = Number(document.getElementById('totalEmployees').value || 0);
+      const participants = Number(document.getElementById('participants').value || 0);
+      const programType = document.getElementById('programType').value;
+      const deliveryType = document.getElementById('deliveryType').value;
+      const reporting = document.getElementById('reporting').value;
+      const customization = document.getElementById('customization').value;
+      const travel = document.getElementById('travel').value;
+      const commitment = document.getElementById('commitment').value;
+      const nutrition = document.getElementById('nutrition').value;
+      const burnout = document.getElementById('burnout').value;
+      const womenWorkshop = document.getElementById('womenWorkshop').value;
+      const consultCount = Number(document.getElementById('consultCount').value || 0);
+
+      const batches = Math.max(1, Math.ceil(participants / 35));
+      let range = baseRange(programType, participants, batches);
+
+      let addOnMin = 0;
+      let addOnMax = 0;
+      let addOnLines = [];
+
+      if (reporting === 'advanced') {
+        addOnMin += 25000;
+        addOnMax += 75000;
+        addOnLines.push('Advanced HR Report: ₹25,000 to ₹75,000');
+      }
+
+      if (nutrition === 'yes') {
+        addOnMin += 25000;
+        addOnMax += 75000;
+        addOnLines.push('Nutrition Workshop: ₹25,000 to ₹75,000');
+      }
+
+      if (burnout === 'yes') {
+        addOnMin += 40000;
+        addOnMax += 100000;
+        addOnLines.push('Manager Burnout Reset Workshop: ₹40,000 to ₹1,00,000');
+      }
+
+      if (womenWorkshop === 'yes') {
+        addOnMin += 30000;
+        addOnMax += 100000;
+        addOnLines.push('Women’s Strength & Energy Workshop: ₹30,000 to ₹1,00,000');
+      }
+
+      if (consultCount > 0) {
+        addOnMin += consultCount * 1500;
+        addOnMax += consultCount * 5000;
+        addOnLines.push('1-on-1 Consultations: ' + consultCount + ' employees x ₹1,500 to ₹5,000');
+      }
+
+      let travelMin = 0;
+      let travelMax = 0;
+      let travelLine = 'Travel: Included or not applicable';
+
+      if (travel === 'far') {
+        travelMin = 3000;
+        travelMax = 10000;
+        travelLine = 'Travel: Add ₹3,000 to ₹10,000 per visit';
+      }
+
+      if (travel === 'outstation') {
+        travelLine = 'Travel: Quote separately for outstation delivery';
+      }
+
+      let adjustmentNote = [];
+      if (customization === 'high') {
+        adjustmentNote.push('High customization selected. Quote near the higher end.');
+      } else if (customization === 'low') {
+        adjustmentNote.push('Low customization selected. You can quote closer to the lower or middle range.');
+      } else {
+        adjustmentNote.push('Medium customization selected. Quote around the middle range.');
+      }
+
+      if (deliveryType === 'online') {
+        adjustmentNote.push('Online delivery selected. You can quote slightly lower only if HR pushes back.');
+      }
+
+      if (deliveryType === 'hybrid') {
+        adjustmentNote.push('Hybrid delivery selected. Quote near the higher end because coordination is higher.');
+      }
+
+      let discountLine = 'No discount recommended.';
+      if (commitment === 'three') {
+        discountLine = 'Optional discount: 10% for 3-month commitment.';
+      }
+      if (commitment === 'six') {
+        discountLine = 'Optional discount: 15% for 6-month commitment.';
+      }
+
+      let paymentTerms = '';
+      if (programType === 'workshop') paymentTerms = 'Payment Terms: 100% advance.';
+      else if (programType === '30day') paymentTerms = 'Payment Terms: 50% advance and 50% before session 7.';
+      else if (programType === '90day') paymentTerms = 'Payment Terms: 40% advance, 30% after month 1, and 30% after month 2.';
+      else if (programType === 'retainer') paymentTerms = 'Payment Terms: 100% advance every month. Minimum 3-month commitment.';
+      else paymentTerms = 'Payment Terms: Free pilot. Paid program terms to be shared after HR feedback.';
+
+      const totalMin = range.min + addOnMin + travelMin;
+      const totalMax = range.max + addOnMax + travelMax;
+
+      let recommended = '';
+      if (programType === 'pilot') {
+        recommended = 'Recommended Quote: Free, one-time pilot only';
+      } else {
+        recommended = 'Recommended Quote: ' + getRangeText(totalMin, totalMax);
+      }
+
+      let anchor = '';
+      if (programType === '30day' && participants >= 40 && participants <= 75) {
+        anchor = 'Suggested first quote: ₹1,50,000 to ₹1,75,000 + GST';
+      } else if (programType === '30day') {
+        anchor = 'Suggested first quote: Start near the middle of the generated range + GST';
+      } else if (programType === 'workshop') {
+        anchor = 'Suggested first quote: ₹25,000 to ₹45,000 + GST for most Noida companies';
+      } else if (programType === '90day') {
+        anchor = 'Suggested first quote: ₹3,00,000 to ₹5,00,000 + GST unless it is a large multi-batch company';
+      } else if (programType === 'retainer') {
+        anchor = 'Suggested first quote: Monthly fee with minimum 3-month commitment';
+      } else {
+        anchor = 'Suggested next step: Offer the free pilot, then pitch the 30-day program.';
+      }
+
+      let output = '';
+
+      output += 'CORPORATE WELLNESS PRICING QUOTE\n\n';
+      output += 'Company: ' + companyName + '\n';
+      output += 'Location: ' + location + '\n';
+      output += 'Total Employees: ' + totalEmployees + '\n';
+      output += 'Expected Participants: ' + participants + '\n';
+      output += 'Calculated Batches: ' + batches + ' batch(es)\n';
+      output += 'Program: ' + range.label + '\n';
+      output += 'Delivery Type: ' + deliveryType.charAt(0).toUpperCase() + deliveryType.slice(1) + '\n\n';
+
+      output += 'BASE PROGRAM PRICE\n';
+      output += getRangeText(range.min, range.max) + '\n\n';
+
+      output += 'ADD-ONS\n';
+      if (addOnLines.length) {
+        output += addOnLines.join('\n') + '\n\n';
+      } else {
+        output += 'No add-ons selected.\n\n';
+      }
+
+      output += 'TRAVEL\n';
+      output += travelLine + '\n\n';
+
+      output += 'TOTAL ESTIMATED QUOTE\n';
+      output += recommended + '\n';
+      output += anchor + '\n\n';
+
+      output += 'PAYMENT TERMS\n';
+      output += paymentTerms + '\n\n';
+
+      output += 'DISCOUNT RULE\n';
+      output += discountLine + '\n\n';
+
+      output += 'POSITIONING NOTE\n';
+      output += 'Do not position this as fitness classes. Position it as a corporate wellness program focused on employee energy, participation, consistency, and HR reporting.\n\n';
+
+      output += 'QUOTE GUIDANCE\n';
+      output += adjustmentNote.join('\n') + '\n\n';
+
+      output += 'WHAT TO SAY TO HR\n';
+      output += 'For your team size, I would recommend starting with the ' + range.label + '. ';
+      output += 'The pricing depends on the number of participants, number of batches, delivery format, and reporting depth. ';
+      if (programType === 'pilot') {
+        output += 'We can do this as a one-time pilot for selected teams. After the session, we can suggest the right paid program if your team finds it useful.';
+      } else {
+        output += 'For this scope, the investment will usually come around ' + getRangeText(totalMin, totalMax) + ' + GST.';
+      }
+
+      document.getElementById('pricingOutput').textContent = output;
+    }
+
+    function generateContractPrompt() {
+      const providerName = document.getElementById('providerName').value || 'Service Provider';
+      const providerLegal = document.getElementById('providerLegal').value || '[Provider Legal Name]';
+      const providerAddress = document.getElementById('providerAddress').value || '[Provider Address]';
+      const clientLegal = document.getElementById('clientLegal').value || '[Client Company Legal Name]';
+      const clientAddress = document.getElementById('clientAddress').value || '[Client Address]';
+      const clientGstin = document.getElementById('clientGstin').value || 'Not provided';
+      const authPerson = document.getElementById('authPerson').value || '[Authorized Person Name]';
+      const authDesignation = document.getElementById('authDesignation').value || '[Designation]';
+      const contractProgram = document.getElementById('contractProgram').value || 'Corporate Wellness Program';
+      const contractDuration = document.getElementById('contractDuration').value || '[Program Duration]';
+      const startDate = document.getElementById('startDate').value || '[Start Date]';
+      const endDate = document.getElementById('endDate').value || '[End Date]';
+      const participants = document.getElementById('contractParticipants').value || '[Participants]';
+      const batches = document.getElementById('contractBatches').value || '[Batches]';
+      const totalFee = document.getElementById('totalFee').value || '[Total Fee]';
+      const paymentSelect = document.getElementById('paymentTerms').value;
+      const customPayment = document.getElementById('customPayment').value;
+      const paymentTerms = paymentSelect === 'custom' ? (customPayment || '[Custom Payment Terms]') : paymentSelect;
+      const deliverables = document.getElementById('deliverables').value || '[Deliverables]';
+      const importantTerms = document.getElementById('importantTerms').value || '[Important Terms]';
+
+      const prompt = `Create a professional corporate wellness service agreement using the details below.
+
+Keep the agreement simple, clear, and legally structured for India.
+
+Use plain business language.
+
+Do not make it too complicated.
+
+Do not include exercise details.
+
+Make it suitable for signing between a wellness service provider and a corporate client.
+
+Include these sections:
+1. Agreement title
+2. Parties involved
+3. Scope of services
+4. Program duration
+5. Participants and batches
+6. Deliverables
+7. Fees and payment terms
+8. Client responsibilities
+9. Service provider responsibilities
+10. Rescheduling and cancellation
+11. Medical disclaimer
+12. Confidentiality
+13. Limitation of liability
+14. Taxes
+15. Termination
+16. Governing law
+17. Signatures
+
+COMPANY AND PROVIDER DETAILS
+
+Service Provider Brand Name:
+${providerName}
+
+Service Provider Legal Name:
+${providerLegal}
+
+Service Provider Address:
+${providerAddress}
+
+Client Company Legal Name:
+${clientLegal}
+
+Client Company Address:
+${clientAddress}
+
+Client GSTIN:
+${clientGstin}
+
+Authorized Client Representative:
+${authPerson}
+
+Designation:
+${authDesignation}
+
+PROGRAM DETAILS
+
+Program Name:
+${contractProgram}
+
+Program Duration:
+${contractDuration}
+
+Start Date:
+${startDate}
+
+End Date:
+${endDate}
+
+Total Participants:
+${participants}
+
+Number of Batches:
+${batches}
+
+DELIVERABLES
+
+${deliverables}
+
+COMMERCIAL TERMS
+
+Total Fee:
+${totalFee}
+
+Payment Terms:
+${paymentTerms}
+
+IMPORTANT TERMS TO INCLUDE
+
+${importantTerms}
+
+Draft the agreement in a clean format with proper headings.
+
+At the end, add signature blocks for both parties.
+
+Also add a short note saying this draft should be reviewed by a legal professional before signing.`;
+
+      document.getElementById('contractOutput').textContent = prompt;
+    }
+
+    function copyOutput(id, statusId) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        document.getElementById(statusId).textContent = 'Copied';
+        setTimeout(() => {
+          document.getElementById(statusId).textContent = '';
+        }, 2000);
+      });
+    }
+
+    generatePricing();
+  </script>
+</body>
+</html>
