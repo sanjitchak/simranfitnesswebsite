@@ -3,49 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Corporate Wellness Pricing & Contract Prompt Generator</title>
+  <title>Physiotherapist-Led Corporate Wellness Pricing & Contract Generator</title>
   <style>
     :root {
-      --bg: #f7f8f4;
+      --bg: #f6f7f2;
       --card: #ffffff;
       --text: #172018;
-      --muted: #5f6b61;
-      --primary: #1f5c3b;
-      --primary-dark: #16462d;
+      --muted: #627066;
+      --primary: #123f2a;
+      --primary-2: #1f6b45;
+      --primary-soft: #eaf3ed;
       --accent: #d7a84f;
       --accent-soft: #fff4d6;
-      --line: #dfe5dc;
-      --soft: #eef3eb;
-      --soft-2: #f4f7f1;
-      --radius: 22px;
-      --shadow: 0 14px 35px rgba(23, 32, 24, 0.08);
+      --line: #dde5dc;
+      --soft: #f1f5ef;
+      --shadow: 0 18px 45px rgba(23, 32, 24, 0.09);
+      --radius: 24px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background:
         radial-gradient(circle at top left, rgba(215,168,79,0.18), transparent 34%),
-        radial-gradient(circle at top right, rgba(31,92,59,0.12), transparent 30%),
+        radial-gradient(circle at top right, rgba(31,107,69,0.13), transparent 30%),
         var(--bg);
       color: var(--text);
       line-height: 1.5;
     }
 
     .wrap {
-      max-width: 1240px;
+      max-width: 1260px;
       margin: 0 auto;
-      padding: 32px 18px 60px;
+      padding: 30px 18px 60px;
     }
 
     .hero {
-      background: linear-gradient(135deg, #173b27, #23704a);
+      background: linear-gradient(135deg, #123f2a, #1f6b45);
       color: #fff;
-      border-radius: 30px;
+      border-radius: 34px;
       padding: 34px;
       margin-bottom: 24px;
       box-shadow: var(--shadow);
@@ -56,27 +54,40 @@
     .hero:after {
       content: "";
       position: absolute;
-      width: 260px;
-      height: 260px;
+      width: 290px;
+      height: 290px;
       border-radius: 50%;
       background: rgba(255,255,255,0.08);
-      right: -70px;
-      top: -80px;
+      right: -80px;
+      top: -90px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.16);
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 12px;
+      margin-bottom: 13px;
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 {
       margin: 0 0 10px;
       font-size: clamp(28px, 4vw, 48px);
       line-height: 1.08;
-      max-width: 900px;
+      max-width: 980px;
       position: relative;
       z-index: 1;
     }
 
     .hero p {
       margin: 0;
-      max-width: 820px;
-      color: rgba(255, 255, 255, 0.88);
+      max-width: 850px;
+      color: rgba(255,255,255,0.86);
       font-size: 17px;
       position: relative;
       z-index: 1;
@@ -96,7 +107,7 @@
       padding: 12px 18px;
       border-radius: 999px;
       cursor: pointer;
-      font-weight: 800;
+      font-weight: 900;
       transition: 0.2s ease;
       box-shadow: 0 6px 16px rgba(23, 32, 24, 0.04);
     }
@@ -107,13 +118,8 @@
       border-color: var(--primary);
     }
 
-    .section {
-      display: none;
-    }
-
-    .section.active {
-      display: block;
-    }
+    .section { display: none; }
+    .section.active { display: block; }
 
     .grid {
       display: grid;
@@ -123,17 +129,12 @@
     }
 
     @media (max-width: 960px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding: 24px;
-      }
+      .grid { grid-template-columns: 1fr; }
+      .hero { padding: 24px; }
     }
 
     .panel {
-      background: rgba(255,255,255,0.92);
+      background: rgba(255,255,255,0.94);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 22px;
@@ -169,18 +170,13 @@
     .progress-fill {
       height: 100%;
       width: 0;
-      background: linear-gradient(90deg, var(--accent), var(--primary));
+      background: linear-gradient(90deg, var(--accent), var(--primary-2));
       border-radius: 999px;
       transition: 0.25s ease;
     }
 
-    .quiz-step {
-      display: none;
-    }
-
-    .quiz-step.active {
-      display: block;
-    }
+    .quiz-step { display: none; }
+    .quiz-step.active { display: block; }
 
     .step-pill {
       display: inline-flex;
@@ -188,17 +184,17 @@
       gap: 8px;
       padding: 7px 12px;
       border-radius: 999px;
-      background: var(--soft);
-      color: var(--primary-dark);
+      background: var(--primary-soft);
+      color: var(--primary);
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 900;
       margin-bottom: 14px;
     }
 
     .question {
       font-size: 25px;
       line-height: 1.18;
-      font-weight: 900;
+      font-weight: 950;
       margin: 0 0 10px;
     }
 
@@ -225,29 +221,23 @@
     }
 
     .option:hover {
-      border-color: var(--primary);
+      border-color: var(--primary-2);
       transform: translateY(-1px);
       box-shadow: 0 10px 25px rgba(23, 32, 24, 0.08);
     }
 
     .option.selected {
-      border-color: var(--primary);
-      background: #f0f7f1;
-      box-shadow: 0 0 0 3px rgba(31, 92, 59, 0.09);
+      border-color: var(--primary-2);
+      background: #eff8f1;
+      box-shadow: 0 0 0 3px rgba(31, 107, 69, 0.09);
     }
 
-    .option strong {
-      font-size: 16px;
-    }
-
-    .option span {
-      color: var(--muted);
-      font-size: 14px;
-    }
+    .option strong { font-size: 16px; }
+    .option span { color: var(--muted); font-size: 14px; }
 
     label {
       display: block;
-      font-weight: 800;
+      font-weight: 900;
       margin: 14px 0 6px;
       font-size: 14px;
     }
@@ -269,8 +259,8 @@
     }
 
     input:focus, select:focus, textarea:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(31, 92, 59, 0.1);
+      border-color: var(--primary-2);
+      box-shadow: 0 0 0 3px rgba(31, 107, 69, 0.1);
     }
 
     .row {
@@ -280,9 +270,7 @@
     }
 
     @media (max-width: 680px) {
-      .row {
-        grid-template-columns: 1fr;
-      }
+      .row { grid-template-columns: 1fr; }
     }
 
     .btns {
@@ -297,7 +285,7 @@
       border: 0;
       border-radius: 999px;
       padding: 12px 18px;
-      font-weight: 900;
+      font-weight: 950;
       cursor: pointer;
       transition: 0.2s ease;
       font: inherit;
@@ -308,33 +296,29 @@
       color: #fff;
     }
 
-    .primary:hover {
-      background: var(--primary-dark);
-    }
+    .primary:hover { background: #0c2f1f; }
 
     .secondary {
-      background: var(--soft);
-      color: var(--primary-dark);
+      background: var(--primary-soft);
+      color: var(--primary);
     }
 
-    .secondary:hover {
-      background: #e1eadc;
-    }
+    .secondary:hover { background: #dfeee4; }
 
     .ghost {
       background: transparent;
-      color: var(--primary-dark);
+      color: var(--primary);
       border: 1px solid var(--line);
     }
 
     .quote-shell {
       background: linear-gradient(180deg, #ffffff, #fbfcfa);
       border: 1px solid var(--line);
-      border-radius: 28px;
+      border-radius: 30px;
       overflow: hidden;
-      box-shadow: 0 18px 45px rgba(23, 32, 24, 0.1);
+      box-shadow: 0 20px 52px rgba(23, 32, 24, 0.11);
       position: relative;
-      min-height: 620px;
+      min-height: 650px;
     }
 
     .quote-shell.locked .quote-content {
@@ -344,9 +328,7 @@
       user-select: none;
     }
 
-    .quote-lock {
-      display: none;
-    }
+    .quote-lock { display: none; }
 
     .quote-shell.locked .quote-lock {
       display: flex;
@@ -365,7 +347,7 @@
       border: 1px solid var(--line);
       border-radius: 24px;
       padding: 24px;
-      max-width: 360px;
+      max-width: 380px;
       text-align: center;
       box-shadow: var(--shadow);
     }
@@ -374,7 +356,7 @@
       display: block;
       font-size: 22px;
       margin-bottom: 8px;
-      color: var(--primary-dark);
+      color: var(--primary);
     }
 
     .quote-lock-card span {
@@ -383,9 +365,9 @@
     }
 
     .quote-top {
-      background: linear-gradient(135deg, #183c29, #2c7a52);
+      background: linear-gradient(135deg, #123f2a, #1f6b45);
       color: #fff;
-      padding: 24px;
+      padding: 25px;
       position: relative;
       overflow: hidden;
     }
@@ -393,12 +375,12 @@
     .quote-top:after {
       content: "";
       position: absolute;
-      width: 220px;
-      height: 220px;
+      width: 230px;
+      height: 230px;
       border-radius: 50%;
       background: rgba(255,255,255,0.08);
-      right: -60px;
-      top: -70px;
+      right: -65px;
+      top: -75px;
     }
 
     .quote-kicker {
@@ -407,7 +389,7 @@
       padding: 6px 11px;
       border-radius: 999px;
       font-size: 12px;
-      font-weight: 900;
+      font-weight: 950;
       margin-bottom: 12px;
       position: relative;
       z-index: 1;
@@ -415,7 +397,7 @@
 
     .quote-title {
       font-size: 25px;
-      font-weight: 900;
+      font-weight: 950;
       margin: 0;
       position: relative;
       z-index: 1;
@@ -428,9 +410,7 @@
       z-index: 1;
     }
 
-    .quote-body {
-      padding: 22px;
-    }
+    .quote-body { padding: 22px; }
 
     .quote-price-card {
       background: var(--accent-soft);
@@ -443,7 +423,7 @@
     .quote-price-card .label {
       color: #735116;
       font-size: 13px;
-      font-weight: 900;
+      font-weight: 950;
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
@@ -457,7 +437,7 @@
     }
 
     .quote-anchor {
-      font-weight: 900;
+      font-weight: 950;
       color: #47320d;
     }
 
@@ -469,13 +449,11 @@
     }
 
     @media (max-width: 760px) {
-      .quote-metrics {
-        grid-template-columns: 1fr;
-      }
+      .quote-metrics { grid-template-columns: 1fr; }
     }
 
     .metric {
-      background: var(--soft-2);
+      background: var(--soft);
       border: 1px solid var(--line);
       border-radius: 18px;
       padding: 14px;
@@ -484,14 +462,14 @@
     .metric small {
       display: block;
       color: var(--muted);
-      font-weight: 800;
+      font-weight: 900;
       font-size: 12px;
       margin-bottom: 4px;
     }
 
     .metric strong {
       display: block;
-      font-size: 19px;
+      font-size: 18px;
       color: var(--text);
     }
 
@@ -512,9 +490,7 @@
       color: var(--text);
     }
 
-    .clean-list li {
-      margin: 7px 0;
-    }
+    .clean-list li { margin: 7px 0; }
 
     .script-box {
       background: #f6faf4;
@@ -559,9 +535,7 @@
       vertical-align: top;
     }
 
-    .mini-table th {
-      background: var(--soft);
-    }
+    .mini-table th { background: var(--primary-soft); }
 
     .footer-note {
       margin-top: 24px;
@@ -571,8 +545,8 @@
 
     .copy-status {
       font-size: 13px;
-      color: var(--primary);
-      font-weight: 800;
+      color: var(--primary-2);
+      font-weight: 900;
       margin-left: 6px;
     }
 
@@ -587,9 +561,10 @@
 <body>
   <div class="wrap">
     <section class="hero">
-      <h1>Corporate Wellness Pricing & Contract Generator</h1>
+      <span class="eyebrow">Physiotherapist-Led Corporate Wellness</span>
+      <h1>Pricing & Contract Generator for Biomechanical Corporate Wellness Programs</h1>
       <p>
-        Step 1 gives you a clean quote. Step 2 creates a contract prompt only after pricing is clear.
+        Quote programs based on postural screening, ergonomic audit, movement risk stratification, HR reporting, breathing and stress-movement education, and WRMSD prevention.
       </p>
     </section>
 
@@ -603,170 +578,186 @@
       <div class="grid">
         <div class="panel">
           <h2>Pricing Quiz</h2>
-          <p class="hint">Only answer what affects pricing. No company name needed here.</p>
+          <p class="hint">Only answer what affects pricing. Company details come in Step 2.</p>
 
           <div class="progress">
             <div id="progressFill" class="progress-fill"></div>
           </div>
 
           <div id="step1" class="quiz-step active">
-            <div class="step-pill">Question 1 of 7</div>
-            <p class="question">What type of program do they want?</p>
-            <p class="sub">Choose the closest option. You can always pitch a better option after the quote.</p>
-            <div class="options" data-key="programType">
+            <div class="step-pill">Question 1 of 8</div>
+            <p class="question">What type of corporate program are you quoting?</p>
+            <p class="sub">Choose the closest commercial structure.</p>
+            <div class="options">
               <div class="option selected" onclick="selectOption(this, 'programType', '30day')">
-                <strong>30-Day Program</strong>
-                <span>Best main offer for one department or team.</span>
+                <strong>30-Day Biomechanical Reset</strong>
+                <span>Main paid offer for one team or department.</span>
               </div>
-              <div class="option" onclick="selectOption(this, 'programType', 'workshop')">
-                <strong>Paid One-Time Workshop</strong>
-                <span>Best for wellness day, HR activity, or pilot event.</span>
+              <div class="option" onclick="selectOption(this, 'programType', 'assessment')">
+                <strong>Assessment-Only Audit</strong>
+                <span>Postural, ergonomic, gait, ROM, and risk screening without full program delivery.</span>
+              </div>
+              <div class="option" onclick="selectOption(this, 'programType', 'pilot')">
+                <strong>Free / Low-Cost Pilot</strong>
+                <span>Entry point for selected companies only.</span>
               </div>
               <div class="option" onclick="selectOption(this, 'programType', '90day')">
-                <strong>90-Day Program</strong>
-                <span>Best for quarterly wellness initiative.</span>
+                <strong>90-Day Prevention Program</strong>
+                <span>Premium quarterly program for measurable movement health change.</span>
               </div>
               <div class="option" onclick="selectOption(this, 'programType', 'retainer')">
                 <strong>Monthly Retainer</strong>
-                <span>Best for long-term corporate wellness club.</span>
-              </div>
-              <div class="option" onclick="selectOption(this, 'programType', 'pilot')">
-                <strong>Free Pilot Workshop</strong>
-                <span>Use only once to enter selected companies.</span>
+                <span>Ongoing employee movement health, risk tracking, and HR reporting.</span>
               </div>
             </div>
           </div>
 
           <div id="step2" class="quiz-step">
-            <div class="step-pill">Question 2 of 7</div>
-            <p class="question">How many employees are expected to participate?</p>
-            <p class="sub">This decides the pricing band and number of batches.</p>
+            <div class="step-pill">Question 2 of 8</div>
+            <p class="question">How many employees will participate?</p>
+            <p class="sub">This decides batches, assessment load, reporting load, and quote range.</p>
             <label>Expected Participants</label>
             <input id="participants" type="number" min="1" value="50" oninput="syncQuiz()" />
           </div>
 
           <div id="step3" class="quiz-step">
-            <div class="step-pill">Question 3 of 7</div>
-            <p class="question">How will the program be delivered?</p>
-            <p class="sub">Offline and hybrid usually need stronger pricing because coordination is higher.</p>
-            <div class="options" data-key="deliveryType">
-              <div class="option selected" onclick="selectOption(this, 'deliveryType', 'offline')">
-                <strong>Offline</strong>
-                <span>Best for corporate offices near your area.</span>
+            <div class="step-pill">Question 3 of 8</div>
+            <p class="question">How deep is the assessment?</p>
+            <p class="sub">This is the real edge over generic gym trainers.</p>
+            <div class="options">
+              <div class="option" onclick="selectOption(this, 'assessmentDepth', 'basic')">
+                <strong>Basic Screening</strong>
+                <span>Static posture observation, employee scorecard, and simple risk notes.</span>
               </div>
-              <div class="option" onclick="selectOption(this, 'deliveryType', 'online')">
-                <strong>Online</strong>
-                <span>Good for remote teams. Can be quoted slightly lower if needed.</span>
+              <div class="option selected" onclick="selectOption(this, 'assessmentDepth', 'standard')">
+                <strong>Standard Biomechanical Screening</strong>
+                <span>Postural screening, functional movement screen, ergonomic check, and risk categories.</span>
               </div>
-              <div class="option" onclick="selectOption(this, 'deliveryType', 'hybrid')">
-                <strong>Hybrid</strong>
-                <span>Quote near the higher end.</span>
+              <div class="option" onclick="selectOption(this, 'assessmentDepth', 'advanced')">
+                <strong>Advanced Assessment</strong>
+                <span>Includes ROM checks, gait observation, job-role correlation, and individual risk notes.</span>
               </div>
             </div>
           </div>
 
           <div id="step4" class="quiz-step">
-            <div class="step-pill">Question 4 of 7</div>
-            <p class="question">What level of HR reporting do they need?</p>
-            <p class="sub">Basic reporting is included. Advanced reporting should be charged extra.</p>
-            <div class="options" data-key="reporting">
+            <div class="step-pill">Question 4 of 8</div>
+            <p class="question">What level of HR reporting is needed?</p>
+            <p class="sub">Basic reporting is included. Advanced reporting should increase the deal size.</p>
+            <div class="options">
               <div class="option selected" onclick="selectOption(this, 'reporting', 'basic')">
                 <strong>Basic HR Summary</strong>
-                <span>Attendance, feedback, summary, and next-step recommendation.</span>
+                <span>Participation, feedback, broad risk observations, and next-step recommendation.</span>
               </div>
               <div class="option" onclick="selectOption(this, 'reporting', 'advanced')">
                 <strong>Advanced HR Report</strong>
-                <span>Department trends, participation insights, and before-after comparison.</span>
+                <span>Risk categories, department trends, ergonomic findings, and prevention roadmap.</span>
+              </div>
+              <div class="option" onclick="selectOption(this, 'reporting', 'individual')">
+                <strong>Individual + HR Reports</strong>
+                <span>Individual employee summaries plus HR leadership report.</span>
               </div>
             </div>
           </div>
 
           <div id="step5" class="quiz-step">
-            <div class="step-pill">Question 5 of 7</div>
-            <p class="question">How customized is the program?</p>
-            <p class="sub">More customization means quote higher.</p>
-            <div class="options" data-key="customization">
-              <div class="option" onclick="selectOption(this, 'customization', 'low')">
-                <strong>Low</strong>
-                <span>Standard flow, basic coordination.</span>
+            <div class="step-pill">Question 5 of 8</div>
+            <p class="question">How detailed is the ergonomic audit?</p>
+            <p class="sub">Workstation review adds strong HR value because it links daily work habits with physical risk.</p>
+            <div class="options">
+              <div class="option selected" onclick="selectOption(this, 'ergonomicAudit', 'basic')">
+                <strong>Basic Ergonomic Review</strong>
+                <span>General sitting, desk, screen, and lumbar support guidance.</span>
               </div>
-              <div class="option selected" onclick="selectOption(this, 'customization', 'medium')">
-                <strong>Medium</strong>
-                <span>Some changes based on team, role, and HR objective.</span>
+              <div class="option" onclick="selectOption(this, 'ergonomicAudit', 'department')">
+                <strong>Department-Level Audit</strong>
+                <span>Sample workstations, role-based patterns, and department recommendations.</span>
               </div>
-              <div class="option" onclick="selectOption(this, 'customization', 'high')">
-                <strong>High</strong>
-                <span>Custom reporting, leadership alignment, and deeper planning.</span>
+              <div class="option" onclick="selectOption(this, 'ergonomicAudit', 'individual')">
+                <strong>Individual Workstation Checks</strong>
+                <span>Higher-touch review for employees, managers, or leadership teams.</span>
               </div>
             </div>
           </div>
 
           <div id="step6" class="quiz-step">
-            <div class="step-pill">Question 6 of 7</div>
-            <p class="question">Is travel required?</p>
-            <p class="sub">Nearby travel can be included. Far locations should be charged.</p>
-            <div class="options" data-key="travel">
-              <div class="option selected" onclick="selectOption(this, 'travel', 'nearby')">
-                <strong>Nearby</strong>
-                <span>Noida, East Delhi, Ghaziabad.</span>
+            <div class="step-pill">Question 6 of 8</div>
+            <p class="question">Will mental wellness integration be included?</p>
+            <p class="sub">Use this when including stress-movement science, breathing mechanics, and decompression education.</p>
+            <div class="options">
+              <div class="option selected" onclick="selectOption(this, 'mentalWellness', 'no')">
+                <strong>No</strong>
+                <span>Physical and ergonomic movement health only.</span>
               </div>
-              <div class="option" onclick="selectOption(this, 'travel', 'far')">
-                <strong>Far Location</strong>
-                <span>Gurgaon, Faridabad, distant Delhi NCR zones.</span>
+              <div class="option" onclick="selectOption(this, 'mentalWellness', 'basic')">
+                <strong>Basic Integration</strong>
+                <span>Breathing mechanics and stress-movement education.</span>
               </div>
-              <div class="option" onclick="selectOption(this, 'travel', 'outstation')">
-                <strong>Outstation</strong>
-                <span>Quote separately.</span>
-              </div>
-              <div class="option" onclick="selectOption(this, 'travel', 'none')">
-                <strong>No Travel</strong>
-                <span>Online or client-managed arrangement.</span>
+              <div class="option" onclick="selectOption(this, 'mentalWellness', 'full')">
+                <strong>Full Integration</strong>
+                <span>Stress-movement correlation, breathing education, and decompression protocols.</span>
               </div>
             </div>
           </div>
 
           <div id="step7" class="quiz-step">
-            <div class="step-pill">Question 7 of 7</div>
-            <p class="question">Any add-ons or longer commitment?</p>
-            <p class="sub">Use add-ons to increase deal size only when HR wants more depth.</p>
+            <div class="step-pill">Question 7 of 8</div>
+            <p class="question">How will the program be delivered?</p>
+            <p class="sub">Offline is strongest for assessment. Hybrid works for follow-up. Online should be priced carefully.</p>
+            <div class="options">
+              <div class="option selected" onclick="selectOption(this, 'deliveryType', 'offline')">
+                <strong>Offline</strong>
+                <span>Best for postural screening, ROM checks, and ergonomic audits.</span>
+              </div>
+              <div class="option" onclick="selectOption(this, 'deliveryType', 'hybrid')">
+                <strong>Hybrid</strong>
+                <span>Offline assessment with online follow-up and tracking.</span>
+              </div>
+              <div class="option" onclick="selectOption(this, 'deliveryType', 'online')">
+                <strong>Online</strong>
+                <span>Best for education and group follow-up. Limited for physical assessment.</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="step8" class="quiz-step">
+            <div class="step-pill">Question 8 of 8</div>
+            <p class="question">Any location or commitment details?</p>
+            <p class="sub">Travel, commitment, and leadership support affect final quote.</p>
 
             <div class="row">
               <div>
-                <label>Nutrition Workshop</label>
-                <select id="nutrition" onchange="syncQuiz()">
-                  <option value="no">No</option>
-                  <option value="yes">Yes</option>
+                <label>Travel Required?</label>
+                <select id="travel" onchange="syncQuiz()">
+                  <option value="nearby">Nearby, Noida / East Delhi / Ghaziabad</option>
+                  <option value="far">Far Location, Delhi NCR</option>
+                  <option value="outstation">Outstation / Quote Separately</option>
+                  <option value="none">No Travel</option>
                 </select>
               </div>
               <div>
-                <label>Manager Burnout Reset</label>
-                <select id="burnout" onchange="syncQuiz()">
-                  <option value="no">No</option>
-                  <option value="yes">Yes</option>
+                <label>Commitment</label>
+                <select id="commitment" onchange="syncQuiz()">
+                  <option value="one">One-Time</option>
+                  <option value="three">3 Months</option>
+                  <option value="six">6 Months</option>
                 </select>
               </div>
             </div>
 
             <div class="row">
               <div>
-                <label>Women’s Strength & Energy Workshop</label>
-                <select id="womenWorkshop" onchange="syncQuiz()">
+                <label>Leadership Summary Call</label>
+                <select id="leadershipCall" onchange="syncQuiz()">
                   <option value="no">No</option>
                   <option value="yes">Yes</option>
                 </select>
               </div>
               <div>
-                <label>1-on-1 Consultation Count</label>
+                <label>Individual Consultations Count</label>
                 <input id="consultCount" type="number" min="0" value="0" oninput="syncQuiz()" />
               </div>
             </div>
-
-            <label>Commitment</label>
-            <select id="commitment" onchange="syncQuiz()">
-              <option value="one">One-Time</option>
-              <option value="three">3 Months</option>
-              <option value="six">6 Months</option>
-            </select>
           </div>
 
           <div class="btns">
@@ -777,68 +768,7 @@
           </div>
         </div>
 
-        <div class="quote-shell locked" id="quoteVisual">
-          <div class="quote-lock">
-            <div class="quote-lock-card">
-              <strong>Complete the pricing quiz</strong>
-              <span>Your generated quote will unlock on the final step.</span>
-            </div>
-          </div>
-          <div class="quote-content">
-          <div class="quote-top">
-            <span class="quote-kicker">Generated Corporate Quote</span>
-            <h2 class="quote-title">30-Day Corporate Energy & Strength Reset</h2>
-            <p class="quote-sub">Built for employee energy, participation, consistency, and HR reporting.</p>
-          </div>
-          <div class="quote-body">
-            <div class="quote-price-card">
-              <div class="label">Recommended Quote Range</div>
-              <div class="quote-price">₹1,25,000 to ₹2,00,000</div>
-              <div class="quote-anchor">Suggested first quote: ₹1,50,000 to ₹1,75,000 + GST</div>
-            </div>
-
-            <div class="quote-metrics">
-              <div class="metric">
-                <small>Participants</small>
-                <strong>50</strong>
-              </div>
-              <div class="metric">
-                <small>Batches</small>
-                <strong>2</strong>
-              </div>
-              <div class="metric">
-                <small>Delivery</small>
-                <strong>Offline</strong>
-              </div>
-            </div>
-
-            <div class="quote-section">
-              <h4>Included Scope</h4>
-              <ul class="clean-list">
-                <li>Structured corporate wellness program</li>
-                <li>Employee scorecards and habit tracking</li>
-                <li>Attendance tracking and final HR summary</li>
-              </ul>
-            </div>
-
-            <div class="quote-section">
-              <h4>Payment Terms</h4>
-              <div class="script-box">50% advance and 50% before session 7.</div>
-            </div>
-
-            <div class="quote-section">
-              <h4>What To Say To HR</h4>
-              <div class="script-box">
-                For your team size, I would recommend the 30-day reset. The pricing depends on participants, batches, delivery format, and reporting depth. For this scope, the investment usually comes around ₹1,25,000 to ₹2,00,000 + GST.
-              </div>
-            </div>
-
-            <div class="warning">
-              Position this as employee energy, participation, consistency, and HR reporting. Do not sell it like local fitness classes.
-            </div>
-          </div>
-          </div>
-        </div>
+        <div class="quote-shell locked" id="quoteVisual"></div>
       </div>
 
       <div id="pricingCopyText" class="hidden-text"></div>
@@ -848,7 +778,7 @@
       <div class="grid">
         <div class="panel">
           <h2>Step 2: Contract Prompt Generator</h2>
-          <p class="hint">Fill this only after the quote is ready and the company is interested.</p>
+          <p class="hint">Fill company details after quote is ready. This creates a contract prompt around the exact physiotherapist-led plan.</p>
 
           <label>Service Provider Brand Name</label>
           <input id="providerName" placeholder="Example: EatLiftMove" value="EatLiftMove" />
@@ -892,7 +822,7 @@
           <div class="row">
             <div>
               <label>Program Name</label>
-              <input id="contractProgram" value="Corporate Energy & Strength Reset" />
+              <input id="contractProgram" value="30-Day Biomechanical Corporate Wellness Reset" />
             </div>
             <div>
               <label>Program Duration</label>
@@ -925,13 +855,13 @@
           <div class="row">
             <div>
               <label>Total Fee</label>
-              <input id="totalFee" placeholder="Example: ₹1,70,000 + GST" />
+              <input id="totalFee" placeholder="Example: ₹2,25,000 + GST" />
             </div>
             <div>
               <label>Payment Terms</label>
               <select id="paymentTerms">
                 <option value="100% advance">100% advance</option>
-                <option value="50% advance and 50% before session 7">50% advance and 50% before session 7</option>
+                <option value="50% advance and 50% before the midpoint of the program">50% advance and 50% before midpoint</option>
                 <option value="40% advance, 30% after month 1, 30% after month 2">40%, 30%, 30%</option>
                 <option value="100% advance every month">100% advance every month</option>
                 <option value="custom">Custom</option>
@@ -943,21 +873,28 @@
           <textarea id="customPayment" placeholder="Write only if custom selected."></textarea>
 
           <label>Deliverables</label>
-          <textarea id="deliverables">Opening wellness audit
+          <textarea id="deliverables">Static postural and structural screening
+Functional movement screening
+Gait observation, if included in selected scope
+Goniometric ROM measurement, if included in selected scope
+Ergonomic audit and workstation risk review
+Biomechanical risk stratification into low, moderate, and high-risk categories
 Employee scorecards
-Guided corporate wellness sessions
-Habit tracker
-Attendance tracking
-Employee feedback form
-Final HR summary report</textarea>
+Role-wise movement health observations
+Breathing mechanics and stress-movement education, if included
+Attendance and participation tracking
+Final HR summary report
+Recommendations for next steps</textarea>
 
           <label>Important Terms</label>
           <textarea id="importantTerms">Fees are non-refundable once the program starts.
 Session dates will be mutually agreed in advance.
 Rescheduling requires at least 48 hours notice.
-The service provider is not offering medical treatment.
-Employees with medical conditions should consult their doctor before participating.
-Company must provide suitable space, basic coordination support, and employee communication.
+The service provider is not offering medical treatment, diagnosis, physiotherapy treatment, rehabilitation, or emergency care under this agreement unless separately agreed in writing.
+The program is preventive, educational, and wellness-oriented.
+Employees with pain, injury, medical conditions, pregnancy, surgery history, or chronic illness should consult their doctor before participation.
+Company must provide suitable space, basic coordination support, employee communication, and access to relevant workplace areas for ergonomic review.
+Individual employee health information will be handled with reasonable confidentiality.
 GST and taxes will be charged as applicable.</textarea>
 
           <div class="btns">
@@ -976,8 +913,8 @@ GST and taxes will be charged as applicable.</textarea>
 
     <section id="reference" class="section">
       <div class="panel">
-        <h2>Pricing Reference</h2>
-        <p class="hint">Use this as the internal pricing guide. Do not show all options in the first proposal.</p>
+        <h2>Reference Pricing</h2>
+        <p class="hint">Internal guide. Show simple options to HR, not the whole menu.</p>
 
         <table class="mini-table">
           <thead>
@@ -989,49 +926,55 @@ GST and taxes will be charged as applicable.</textarea>
           </thead>
           <tbody>
             <tr>
-              <td>Free Pilot Workshop</td>
-              <td>First entry into selected companies</td>
-              <td>Free, one-time only</td>
+              <td>Free / Low-Cost Pilot</td>
+              <td>Opening door with selected companies</td>
+              <td>Free to ₹15,000</td>
             </tr>
             <tr>
-              <td>Paid One-Time Workshop</td>
-              <td>Wellness day, HR event, employee engagement</td>
-              <td>₹25,000 to ₹45,000 for most Noida companies</td>
+              <td>Assessment-Only Audit</td>
+              <td>Postural screening, ergonomic review, movement risk summary</td>
+              <td>₹35,000 to ₹2,50,000</td>
             </tr>
             <tr>
-              <td>30-Day Program</td>
-              <td>Main paid offer for one department</td>
-              <td>₹1,25,000 to ₹2,00,000</td>
+              <td>30-Day Biomechanical Reset</td>
+              <td>Main paid program for one department</td>
+              <td>₹1,25,000 to ₹8,00,000 depending on participants and scope</td>
             </tr>
             <tr>
-              <td>90-Day Program</td>
-              <td>Quarterly wellness initiative</td>
-              <td>₹3,00,000 to ₹5,00,000+</td>
+              <td>90-Day Prevention Program</td>
+              <td>Quarterly WRMSD prevention and employee movement health program</td>
+              <td>₹3,50,000 to ₹25,00,000 depending on scale</td>
             </tr>
             <tr>
               <td>Monthly Retainer</td>
-              <td>Long-term corporate wellness club</td>
-              <td>₹1,00,000 to ₹2,50,000/month</td>
+              <td>Ongoing workplace movement health, tracking, and HR reports</td>
+              <td>₹1,25,000 to ₹9,00,000/month depending on batches</td>
             </tr>
           </tbody>
         </table>
 
         <div class="warning">
-          Best simple offer ladder for first 5 corporate clients: Free Pilot, 30-Day Program, 90-Day Program. Do not confuse HR with too many choices.
+          Best offer ladder: Free or low-cost pilot, Assessment-Only Audit, 30-Day Reset, 90-Day Prevention Program. The paid program should be sold as physiotherapist-led prevention of work-related musculoskeletal disorders, not fitness classes.
         </div>
 
-        <h3>Verbal Pricing Script</h3>
-        <div class="output" style="min-height: 180px;">We usually work in three formats.
+        <h3>HR Positioning Script</h3>
+        <div class="output" style="min-height: 250px;">We do not run a generic fitness program.
 
-The first is a one-time Energy & Strength Audit workshop, which is good for a wellness day or pilot.
+We start with a physiotherapist-led movement health assessment.
 
-The second is our 30-day reset, where employees go through a structured corporate wellness program with tracking and a final HR summary.
+First, we screen employee posture, workplace sitting patterns, functional movement, and ergonomic risk.
 
-The third is a 90-day transformation program for companies that want deeper behavior change.
+Then we classify employees into low, moderate, and high-risk groups.
 
-For most companies, I recommend starting with the free pilot workshop. If your team likes it, the 30-day program usually starts from around ₹1.25 lakh depending on team size and number of batches.</div>
+From there, we run a structured corporate wellness program focused on postural correction, movement efficiency, stress-movement education, and workplace injury prevention.
 
-        <p class="footer-note">Internal rule: If you price the 30-day program below ₹50,000, it will look like a local trainer service. The sweet spot is ₹1 lakh to ₹2 lakh for a department-level corporate program.</p>
+The company gets a clear HR summary, participation data, risk insights, and recommendations for the next step.
+
+This is not gym training.
+
+This is preventive workplace movement health.</div>
+
+        <p class="footer-note">Internal rule: Do not price this like a simple wellness workshop. The scientific edge is the postural screening, ergonomic audit, risk stratification, and HR reporting.</p>
       </div>
     </section>
   </div>
@@ -1040,19 +983,19 @@ For most companies, I recommend starting with the free pilot workshop. If your t
     let quiz = {
       programType: '30day',
       participants: 50,
-      deliveryType: 'offline',
+      assessmentDepth: 'standard',
       reporting: 'basic',
-      customization: 'medium',
+      ergonomicAudit: 'basic',
+      mentalWellness: 'no',
+      deliveryType: 'offline',
       travel: 'nearby',
-      nutrition: 'no',
-      burnout: 'no',
-      womenWorkshop: 'no',
-      consultCount: 0,
-      commitment: 'one'
+      commitment: 'one',
+      leadershipCall: 'no',
+      consultCount: 0
     };
 
     let currentStep = 1;
-    const totalSteps = 7;
+    const totalSteps = 8;
 
     function showTab(id, el) {
       document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
@@ -1070,13 +1013,22 @@ For most companies, I recommend starting with the free pilot workshop. If your t
     }
 
     function syncQuiz() {
-      quiz.participants = Number(document.getElementById('participants')?.value || 50);
-      quiz.nutrition = document.getElementById('nutrition')?.value || 'no';
-      quiz.burnout = document.getElementById('burnout')?.value || 'no';
-      quiz.womenWorkshop = document.getElementById('womenWorkshop')?.value || 'no';
-      quiz.consultCount = Number(document.getElementById('consultCount')?.value || 0);
-      quiz.commitment = document.getElementById('commitment')?.value || 'one';
+      syncFieldsOnly();
       generatePricing();
+    }
+
+    function syncFieldsOnly() {
+      const participantsEl = document.getElementById('participants');
+      const travelEl = document.getElementById('travel');
+      const commitmentEl = document.getElementById('commitment');
+      const leadershipEl = document.getElementById('leadershipCall');
+      const consultEl = document.getElementById('consultCount');
+
+      if (participantsEl) quiz.participants = Number(participantsEl.value || 50);
+      if (travelEl) quiz.travel = travelEl.value;
+      if (commitmentEl) quiz.commitment = commitmentEl.value;
+      if (leadershipEl) quiz.leadershipCall = leadershipEl.value;
+      if (consultEl) quiz.consultCount = Number(consultEl.value || 0);
     }
 
     function updateStep() {
@@ -1116,7 +1068,7 @@ For most companies, I recommend starting with the free pilot workshop. If your t
       return '₹' + Math.round(n).toLocaleString('en-IN');
     }
 
-    function getRangeText(min, max) {
+    function rangeText(min, max) {
       if (min === 0 && max === 0) return 'Free';
       if (min === max) return currency(min);
       return currency(min) + ' to ' + currency(max);
@@ -1124,66 +1076,80 @@ For most companies, I recommend starting with the free pilot workshop. If your t
 
     function labelize(value) {
       const map = {
+        pilot: 'Free / Low-Cost Pilot',
+        assessment: 'Assessment-Only Audit',
+        '30day': '30-Day Biomechanical Reset',
+        '90day': '90-Day Prevention Program',
+        retainer: 'Monthly Retainer',
+        basic: 'Basic',
+        standard: 'Standard',
+        advanced: 'Advanced',
+        individual: 'Individual-Level',
+        department: 'Department-Level',
+        no: 'No',
+        full: 'Full',
         offline: 'Offline',
-        online: 'Online',
         hybrid: 'Hybrid',
-        basic: 'Basic HR Summary',
-        advanced: 'Advanced HR Report',
-        low: 'Low',
-        medium: 'Medium',
-        high: 'High',
+        online: 'Online',
         nearby: 'Nearby',
         far: 'Far Location',
         outstation: 'Outstation',
         none: 'No Travel',
         one: 'One-Time',
         three: '3 Months',
-        six: '6 Months'
+        six: '6 Months',
+        yes: 'Yes'
       };
       return map[value] || value;
     }
 
     function baseRange(program, participants, batches) {
-      let min = 0, max = 0;
+      let min = 0, max = 0, label = '', short = '';
 
       if (program === 'pilot') {
-        return { min: 0, max: 0, label: 'Free Pilot Workshop', short: 'Free Pilot' };
+        label = 'Free / Low-Cost Pilot Biomechanical Awareness Session';
+        short = 'Pilot Session';
+        min = 0; max = 15000;
       }
 
-      if (program === 'workshop') {
-        if (participants <= 30) { min = 15000; max = 25000; }
-        else if (participants <= 60) { min = 25000; max = 45000; }
-        else if (participants <= 100) { min = 45000; max = 75000; }
-        else { min = 75000; max = 125000; }
-        return { min, max, label: 'Paid One-Time Workshop', short: 'One-Time Workshop' };
+      if (program === 'assessment') {
+        label = 'Physiotherapist-Led Assessment-Only Audit';
+        short = 'Assessment Audit';
+        if (participants <= 30) { min = 35000; max = 60000; }
+        else if (participants <= 60) { min = 60000; max = 95000; }
+        else if (participants <= 100) { min = 95000; max = 125000; }
+        else { min = 125000; max = 250000; }
       }
 
       if (program === '30day') {
-        if (participants <= 40) { min = 75000; max = 100000; }
-        else if (participants <= 75) { min = 125000; max = 200000; }
-        else if (participants <= 150) { min = 225000; max = 350000; }
-        else { min = 350000; max = 600000; }
-        return { min, max, label: '30-Day Corporate Energy & Strength Reset', short: '30-Day Program' };
+        label = '30-Day Biomechanical Corporate Wellness Reset';
+        short = '30-Day Reset';
+        if (participants <= 35) { min = 125000; max = 175000; }
+        else if (participants <= 70) { min = 175000; max = 300000; }
+        else if (participants <= 140) { min = 300000; max = 525000; }
+        else { min = 525000; max = 800000; }
       }
 
       if (program === '90day') {
-        if (participants <= 40) { min = 200000; max = 300000; }
-        else if (participants <= 75) { min = 300000; max = 500000; }
-        else if (participants <= 150) { min = 500000; max = 800000; }
-        else { min = 800000; max = 1500000; }
-        return { min, max, label: '90-Day Corporate Wellness Transformation', short: '90-Day Program' };
+        label = '90-Day Workplace Movement Health & WRMSD Prevention Program';
+        short = '90-Day Prevention Program';
+        if (participants <= 35) { min = 350000; max = 500000; }
+        else if (participants <= 70) { min = 500000; max = 900000; }
+        else if (participants <= 140) { min = 900000; max = 1500000; }
+        else { min = 1500000; max = 2500000; }
       }
 
       if (program === 'retainer') {
-        if (batches <= 1) { min = 75000; max = 125000; }
-        else if (batches === 2) { min = 150000; max = 225000; }
-        else if (batches === 3) { min = 225000; max = 325000; }
-        else if (batches === 4) { min = 300000; max = 450000; }
-        else { min = 500000; max = 700000; }
-        return { min, max, label: 'Monthly Corporate Wellness Retainer', short: 'Monthly Retainer' };
+        label = 'Monthly Workplace Movement Health Retainer';
+        short = 'Monthly Retainer';
+        if (batches <= 1) { min = 125000; max = 175000; }
+        else if (batches === 2) { min = 200000; max = 325000; }
+        else if (batches === 3) { min = 325000; max = 450000; }
+        else if (batches === 4) { min = 450000; max = 600000; }
+        else { min = 600000; max = 900000; }
       }
 
-      return { min, max, label: 'Corporate Wellness Program', short: 'Program' };
+      return { min, max, label, short };
     }
 
     function generatePricing() {
@@ -1191,186 +1157,198 @@ For most companies, I recommend starting with the free pilot workshop. If your t
 
       const participants = Math.max(1, quiz.participants);
       const batches = Math.max(1, Math.ceil(participants / 35));
-      let range = baseRange(quiz.programType, participants, batches);
+      const base = baseRange(quiz.programType, participants, batches);
 
-      let addOnMin = 0;
-      let addOnMax = 0;
+      let addMin = 0;
+      let addMax = 0;
       let addOnLines = [];
+      let scopeItems = [];
 
+      scopeItems.push('Physiotherapist-led corporate movement health framework');
+
+      if (quiz.assessmentDepth === 'basic') {
+        scopeItems.push('Static postural screening and employee scorecard');
+      }
+      if (quiz.assessmentDepth === 'standard') {
+        addMin += 15000; addMax += 35000;
+        addOnLines.push('Standard biomechanical screening upgrade: ₹15,000 to ₹35,000');
+        scopeItems.push('Postural screening, functional movement screen, ergonomic review, and risk categories');
+      }
+      if (quiz.assessmentDepth === 'advanced') {
+        addMin += 40000; addMax += 100000;
+        addOnLines.push('Advanced assessment upgrade: ₹40,000 to ₹1,00,000');
+        scopeItems.push('ROM checks, gait observation, job-role correlation, and individual risk notes');
+      }
+
+      if (quiz.reporting === 'basic') {
+        scopeItems.push('Basic HR summary with participation and recommendation');
+      }
       if (quiz.reporting === 'advanced') {
-        addOnMin += 25000;
-        addOnMax += 75000;
-        addOnLines.push('Advanced HR Report: ₹25,000 to ₹75,000');
+        addMin += 25000; addMax += 75000;
+        addOnLines.push('Advanced HR report: ₹25,000 to ₹75,000');
+        scopeItems.push('Advanced HR report with risk categories, ergonomic findings, and prevention roadmap');
+      }
+      if (quiz.reporting === 'individual') {
+        addMin += participants * 500;
+        addMax += participants * 1500;
+        addOnLines.push('Individual employee reports: ₹500 to ₹1,500 per employee');
+        scopeItems.push('Individual employee risk summaries plus leadership report');
       }
 
-      if (quiz.nutrition === 'yes') {
-        addOnMin += 25000;
-        addOnMax += 75000;
-        addOnLines.push('Nutrition Workshop: ₹25,000 to ₹75,000');
+      if (quiz.ergonomicAudit === 'basic') {
+        scopeItems.push('Basic ergonomic guidance');
+      }
+      if (quiz.ergonomicAudit === 'department') {
+        addMin += 25000; addMax += 75000;
+        addOnLines.push('Department-level ergonomic audit: ₹25,000 to ₹75,000');
+        scopeItems.push('Department-level ergonomic audit and workstation risk summary');
+      }
+      if (quiz.ergonomicAudit === 'individual') {
+        addMin += participants * 500;
+        addMax += participants * 1500;
+        addOnLines.push('Individual workstation checks: ₹500 to ₹1,500 per employee');
+        scopeItems.push('Individual workstation checks and ergonomic recommendations');
       }
 
-      if (quiz.burnout === 'yes') {
-        addOnMin += 40000;
-        addOnMax += 100000;
-        addOnLines.push('Manager Burnout Reset Workshop: ₹40,000 to ₹1,00,000');
+      if (quiz.mentalWellness === 'basic') {
+        addMin += 15000; addMax += 35000;
+        addOnLines.push('Basic mental wellness integration: ₹15,000 to ₹35,000');
+        scopeItems.push('Breathing mechanics and stress-movement education');
+      }
+      if (quiz.mentalWellness === 'full') {
+        addMin += 40000; addMax += 100000;
+        addOnLines.push('Full mental wellness integration: ₹40,000 to ₹1,00,000');
+        scopeItems.push('Stress-movement correlation, breathing education, and decompression protocols');
       }
 
-      if (quiz.womenWorkshop === 'yes') {
-        addOnMin += 30000;
-        addOnMax += 100000;
-        addOnLines.push('Women’s Strength & Energy Workshop: ₹30,000 to ₹1,00,000');
+      if (quiz.leadershipCall === 'yes') {
+        addMin += 15000; addMax += 30000;
+        addOnLines.push('Leadership summary call: ₹15,000 to ₹30,000');
+        scopeItems.push('Leadership summary call with HR and management');
       }
 
       if (quiz.consultCount > 0) {
-        addOnMin += quiz.consultCount * 1500;
-        addOnMax += quiz.consultCount * 5000;
-        addOnLines.push('1-on-1 Consultations: ' + quiz.consultCount + ' employees x ₹1,500 to ₹5,000');
+        addMin += quiz.consultCount * 1500;
+        addMax += quiz.consultCount * 5000;
+        addOnLines.push('Individual consultations: ' + quiz.consultCount + ' employees x ₹1,500 to ₹5,000');
+        scopeItems.push(quiz.consultCount + ' individual consultations');
       }
 
+      let travelLine = 'Travel included or not applicable.';
       let travelMin = 0;
       let travelMax = 0;
-      let travelLine = 'Travel included or not applicable.';
 
       if (quiz.travel === 'far') {
-        travelMin = 3000;
-        travelMax = 10000;
-        travelLine = 'Add ₹3,000 to ₹10,000 per visit for travel.';
+        travelMin = 3000; travelMax = 10000;
+        travelLine = 'Add ₹3,000 to ₹10,000 per visit for far Delhi NCR locations.';
       }
-
       if (quiz.travel === 'outstation') {
-        travelLine = 'Quote travel separately for outstation delivery.';
+        travelLine = 'Quote travel, stay, and logistics separately for outstation delivery.';
       }
 
-      let totalMin = range.min + addOnMin + travelMin;
-      let totalMax = range.max + addOnMax + travelMax;
-
-      let quoteRange = range.min === 0 ? 'Free' : getRangeText(totalMin, totalMax);
+      let totalMin = base.min + addMin + travelMin;
+      let totalMax = base.max + addMax + travelMax;
+      let quoteRange = rangeText(totalMin, totalMax);
 
       let anchor = '';
-      if (quiz.programType === '30day' && participants >= 40 && participants <= 75) {
-        anchor = 'Suggested first quote: ₹1,50,000 to ₹1,75,000 + GST';
-      } else if (quiz.programType === '30day') {
-        anchor = 'Suggested first quote: Start near the middle of this range + GST';
-      } else if (quiz.programType === 'workshop') {
-        anchor = 'Suggested first quote: ₹25,000 to ₹45,000 + GST for most Noida companies';
-      } else if (quiz.programType === '90day') {
-        anchor = 'Suggested first quote: ₹3,00,000 to ₹5,00,000 + GST unless it is a large multi-batch company';
-      } else if (quiz.programType === 'retainer') {
-        anchor = 'Suggested first quote: Monthly fee with minimum 3-month commitment';
-      } else {
-        anchor = 'Suggested next step: Offer this as a one-time pilot, then pitch the 30-day program.';
-      }
+      if (quiz.programType === 'pilot') anchor = 'Suggested first quote: Free for selected teams or ₹10,000 to ₹15,000 if HR needs formal billing.';
+      if (quiz.programType === 'assessment') anchor = 'Suggested first quote: Position as a scientific workplace movement health audit, not a workshop.';
+      if (quiz.programType === '30day') anchor = 'Suggested first quote: Quote the middle to upper range if assessment and HR reporting are included.';
+      if (quiz.programType === '90day') anchor = 'Suggested first quote: Present as a quarterly WRMSD prevention initiative.';
+      if (quiz.programType === 'retainer') anchor = 'Suggested first quote: Monthly fee with minimum 3-month commitment.';
 
       let paymentTerms = '';
-      if (quiz.programType === 'workshop') paymentTerms = '100% advance.';
-      else if (quiz.programType === '30day') paymentTerms = '50% advance and 50% before session 7.';
-      else if (quiz.programType === '90day') paymentTerms = '40% advance, 30% after month 1, and 30% after month 2.';
-      else if (quiz.programType === 'retainer') paymentTerms = '100% advance every month. Minimum 3-month commitment.';
-      else paymentTerms = 'Free pilot. Paid program terms to be shared after HR feedback.';
+      if (quiz.programType === 'pilot') paymentTerms = 'Free pilot or 100% advance if paid pilot.';
+      if (quiz.programType === 'assessment') paymentTerms = '100% advance before audit date.';
+      if (quiz.programType === '30day') paymentTerms = '50% advance and 50% before the midpoint of the program.';
+      if (quiz.programType === '90day') paymentTerms = '40% advance, 30% after month 1, and 30% after month 2.';
+      if (quiz.programType === 'retainer') paymentTerms = '100% advance every month. Minimum 3-month commitment.';
 
       let discountLine = 'No discount recommended.';
       if (quiz.commitment === 'three') discountLine = 'Optional discount: 10% for 3-month commitment.';
       if (quiz.commitment === 'six') discountLine = 'Optional discount: 15% for 6-month commitment.';
 
-      let scopeItems = [
-        'Structured corporate wellness program',
-        'Employee scorecards and habit tracking',
-        'Attendance tracking and final HR summary'
-      ];
+      let deliveryNote = '';
+      if (quiz.deliveryType === 'offline') deliveryNote = 'Offline delivery is recommended because assessment and ergonomic review are stronger in person.';
+      if (quiz.deliveryType === 'hybrid') deliveryNote = 'Hybrid delivery works well when assessment is offline and follow-up is online.';
+      if (quiz.deliveryType === 'online') deliveryNote = 'Online delivery may reduce assessment precision. Avoid overpromising individual physical assessment.';
 
-      if (quiz.reporting === 'advanced') scopeItems.push('Advanced HR report with deeper insights');
-      if (quiz.nutrition === 'yes') scopeItems.push('Nutrition workshop');
-      if (quiz.burnout === 'yes') scopeItems.push('Manager burnout reset workshop');
-      if (quiz.womenWorkshop === 'yes') scopeItems.push('Women’s strength and energy workshop');
-      if (quiz.consultCount > 0) scopeItems.push(quiz.consultCount + ' individual consultations');
+      const isUnlocked = currentStep === totalSteps;
 
-      let isUnlocked = currentStep === totalSteps;
-      let quoteHTML = `
+      const quoteHTML = `
         <div class="quote-lock">
           <div class="quote-lock-card">
             <strong>Complete the pricing quiz</strong>
-            <span>Your generated quote will unlock on the final step.</span>
+            <span>Your quote unlocks on the final step.</span>
           </div>
         </div>
         <div class="quote-content">
-        <div class="quote-top">
-          <span class="quote-kicker">Generated Corporate Quote</span>
-          <h2 class="quote-title">${range.label}</h2>
-          <p class="quote-sub">Built for employee energy, participation, consistency, and HR reporting.</p>
-        </div>
-        <div class="quote-body">
-          <div class="quote-price-card">
-            <div class="label">Recommended Quote Range</div>
-            <div class="quote-price">${quoteRange}</div>
-            <div class="quote-anchor">${anchor}</div>
+          <div class="quote-top">
+            <span class="quote-kicker">Generated Corporate Quote</span>
+            <h2 class="quote-title">${base.label}</h2>
+            <p class="quote-sub">Positioned as workplace movement health, biomechanical screening, ergonomic risk reduction, and WRMSD prevention.</p>
           </div>
 
-          <div class="quote-metrics">
-            <div class="metric">
-              <small>Participants</small>
-              <strong>${participants}</strong>
+          <div class="quote-body">
+            <div class="quote-price-card">
+              <div class="label">Recommended Quote Range</div>
+              <div class="quote-price">${quoteRange}</div>
+              <div class="quote-anchor">${anchor}</div>
             </div>
-            <div class="metric">
-              <small>Batches</small>
-              <strong>${batches}</strong>
+
+            <div class="quote-metrics">
+              <div class="metric"><small>Participants</small><strong>${participants}</strong></div>
+              <div class="metric"><small>Batches</small><strong>${batches}</strong></div>
+              <div class="metric"><small>Delivery</small><strong>${labelize(quiz.deliveryType)}</strong></div>
             </div>
-            <div class="metric">
-              <small>Delivery</small>
-              <strong>${labelize(quiz.deliveryType)}</strong>
+
+            <div class="quote-metrics">
+              <div class="metric"><small>Assessment</small><strong>${labelize(quiz.assessmentDepth)}</strong></div>
+              <div class="metric"><small>Reporting</small><strong>${labelize(quiz.reporting)}</strong></div>
+              <div class="metric"><small>Ergonomics</small><strong>${labelize(quiz.ergonomicAudit)}</strong></div>
             </div>
-          </div>
 
-          <div class="quote-metrics">
-            <div class="metric">
-              <small>Reporting</small>
-              <strong>${labelize(quiz.reporting)}</strong>
+            <div class="quote-section">
+              <h4>Included Scope</h4>
+              <ul class="clean-list">
+                ${scopeItems.map(item => `<li>${item}</li>`).join('')}
+              </ul>
             </div>
-            <div class="metric">
-              <small>Customization</small>
-              <strong>${labelize(quiz.customization)}</strong>
+
+            <div class="quote-section">
+              <h4>Add-ons and Pricing Adjustments</h4>
+              <ul class="clean-list">
+                ${addOnLines.length ? addOnLines.map(item => `<li>${item}</li>`).join('') : '<li>No premium add-ons selected.</li>'}
+                <li>${travelLine}</li>
+              </ul>
             </div>
-            <div class="metric">
-              <small>Commitment</small>
-              <strong>${labelize(quiz.commitment)}</strong>
+
+            <div class="quote-section">
+              <h4>Payment Terms</h4>
+              <div class="script-box">${paymentTerms}</div>
             </div>
-          </div>
 
-          <div class="quote-section">
-            <h4>Included Scope</h4>
-            <ul class="clean-list">
-              ${scopeItems.map(item => `<li>${item}</li>`).join('')}
-            </ul>
-          </div>
+            <div class="quote-section">
+              <h4>Discount Rule</h4>
+              <div class="script-box">${discountLine}</div>
+            </div>
 
-          <div class="quote-section">
-            <h4>Add-ons and Travel</h4>
-            <ul class="clean-list">
-              ${addOnLines.length ? addOnLines.map(item => `<li>${item}</li>`).join('') : '<li>No add-ons selected.</li>'}
-              <li>${travelLine}</li>
-            </ul>
-          </div>
+            <div class="quote-section">
+              <h4>Delivery Note</h4>
+              <div class="script-box">${deliveryNote}</div>
+            </div>
 
-          <div class="quote-section">
-            <h4>Payment Terms</h4>
-            <div class="script-box">${paymentTerms}</div>
-          </div>
+            <div class="quote-section">
+              <h4>What To Say To HR</h4>
+              <div class="script-box">
+                This is not a generic fitness activity. This is a physiotherapist-led workplace movement health program. We begin with postural and ergonomic screening, classify employee risk, and then give HR a clear summary with participation data and prevention recommendations. For this scope, the investment usually comes around ${quoteRange}${totalMin === 0 ? '' : ' + GST'}.
+              </div>
+            </div>
 
-          <div class="quote-section">
-            <h4>Discount Rule</h4>
-            <div class="script-box">${discountLine}</div>
-          </div>
-
-          <div class="quote-section">
-            <h4>What To Say To HR</h4>
-            <div class="script-box">
-              For your team size, I would recommend the ${range.short}. The pricing depends on participants, batches, delivery format, and reporting depth. For this scope, the investment usually comes around ${quoteRange}${range.min === 0 ? '' : ' + GST'}.
+            <div class="warning">
+              Sell this as prevention of work-related musculoskeletal disorders, not as fitness classes. The premium value is assessment, risk stratification, ergonomics, and HR reporting.
             </div>
           </div>
-
-          <div class="warning">
-            Position this as employee energy, participation, consistency, and HR reporting. Do not sell it like local fitness classes.
-          </div>
-        </div>
         </div>
       `;
 
@@ -1378,15 +1356,15 @@ For most companies, I recommend starting with the free pilot workshop. If your t
       quoteVisual.innerHTML = quoteHTML;
       quoteVisual.classList.toggle('locked', !isUnlocked);
 
-      const copyText = `CORPORATE WELLNESS QUOTE
+      const copyText = `PHYSIOTHERAPIST-LED CORPORATE WELLNESS QUOTE
 
 Program:
-${range.label}
+${base.label}
 
 Recommended Quote:
-${quoteRange}${range.min === 0 ? '' : ' + GST'}
+${quoteRange}${totalMin === 0 ? '' : ' + GST'}
 
-Suggested First Quote:
+Suggested Positioning:
 ${anchor}
 
 Participants:
@@ -1398,20 +1376,24 @@ ${batches}
 Delivery:
 ${labelize(quiz.deliveryType)}
 
-Reporting:
+Assessment Depth:
+${labelize(quiz.assessmentDepth)}
+
+HR Reporting:
 ${labelize(quiz.reporting)}
 
-Customization:
-${labelize(quiz.customization)}
+Ergonomic Audit:
+${labelize(quiz.ergonomicAudit)}
+
+Mental Wellness Integration:
+${labelize(quiz.mentalWellness)}
 
 Included Scope:
 ${scopeItems.map(item => '- ' + item).join('\n')}
 
-Add-ons:
-${addOnLines.length ? addOnLines.map(item => '- ' + item).join('\n') : '- No add-ons selected'}
-
-Travel:
-${travelLine}
+Add-ons and Adjustments:
+${addOnLines.length ? addOnLines.map(item => '- ' + item).join('\n') : '- No premium add-ons selected'}
+- ${travelLine}
 
 Payment Terms:
 ${paymentTerms}
@@ -1419,40 +1401,26 @@ ${paymentTerms}
 Discount Rule:
 ${discountLine}
 
-What to say to HR:
-For your team size, I would recommend the ${range.short}. The pricing depends on participants, batches, delivery format, and reporting depth. For this scope, the investment usually comes around ${quoteRange}${range.min === 0 ? '' : ' + GST'}.
+Delivery Note:
+${deliveryNote}
 
-Positioning note:
-Position this as employee energy, participation, consistency, and HR reporting. Do not sell it like local fitness classes.`;
+HR Pitch:
+This is not a generic fitness activity. This is a physiotherapist-led workplace movement health program. We begin with postural and ergonomic screening, classify employee risk, and then give HR a clear summary with participation data and prevention recommendations. For this scope, the investment usually comes around ${quoteRange}${totalMin === 0 ? '' : ' + GST'}.
+
+Positioning Warning:
+Sell this as prevention of work-related musculoskeletal disorders, not as fitness classes. The premium value is assessment, risk stratification, ergonomics, and HR reporting.`;
 
       document.getElementById('pricingCopyText').textContent = copyText;
 
       document.getElementById('contractParticipants').value = participants;
       document.getElementById('contractBatches').value = batches;
-      document.getElementById('contractProgram').value = range.label;
-      document.getElementById('totalFee').value = range.min === 0 ? 'Free pilot' : quoteRange + ' + GST';
+      document.getElementById('contractProgram').value = base.label;
+      document.getElementById('totalFee').value = quoteRange + (totalMin === 0 ? '' : ' + GST');
 
-      if (quiz.programType === 'workshop') document.getElementById('paymentTerms').value = '100% advance';
-      if (quiz.programType === '30day') document.getElementById('paymentTerms').value = '50% advance and 50% before session 7';
+      if (quiz.programType === 'assessment' || quiz.programType === 'pilot') document.getElementById('paymentTerms').value = '100% advance';
+      if (quiz.programType === '30day') document.getElementById('paymentTerms').value = '50% advance and 50% before the midpoint of the program';
       if (quiz.programType === '90day') document.getElementById('paymentTerms').value = '40% advance, 30% after month 1, 30% after month 2';
       if (quiz.programType === 'retainer') document.getElementById('paymentTerms').value = '100% advance every month';
-    }
-
-    function syncFieldsOnly() {
-      const participantsEl = document.getElementById('participants');
-      if (participantsEl) quiz.participants = Number(participantsEl.value || 50);
-
-      const nutritionEl = document.getElementById('nutrition');
-      const burnoutEl = document.getElementById('burnout');
-      const womenEl = document.getElementById('womenWorkshop');
-      const consultEl = document.getElementById('consultCount');
-      const commitmentEl = document.getElementById('commitment');
-
-      if (nutritionEl) quiz.nutrition = nutritionEl.value;
-      if (burnoutEl) quiz.burnout = burnoutEl.value;
-      if (womenEl) quiz.womenWorkshop = womenEl.value;
-      if (consultEl) quiz.consultCount = Number(consultEl.value || 0);
-      if (commitmentEl) quiz.commitment = commitmentEl.value;
     }
 
     function generateContractPrompt() {
@@ -1485,28 +1453,33 @@ Use plain business language.
 
 Do not make it too complicated.
 
-Do not include exercise details.
+Do not include exercise details or workout programming.
 
-Make it suitable for signing between a wellness service provider and a corporate client.
+Make it suitable for signing between a physiotherapist-led corporate wellness service provider and a corporate client.
+
+Position the service as preventive workplace movement health, biomechanical screening, ergonomic risk reduction, employee risk stratification, stress-movement education, and HR reporting.
 
 Include these sections:
 1. Agreement title
 2. Parties involved
-3. Scope of services
-4. Program duration
-5. Participants and batches
-6. Deliverables
-7. Fees and payment terms
-8. Client responsibilities
-9. Service provider responsibilities
-10. Rescheduling and cancellation
-11. Medical disclaimer
-12. Confidentiality
-13. Limitation of liability
-14. Taxes
-15. Termination
-16. Governing law
-17. Signatures
+3. Purpose of agreement
+4. Scope of services
+5. Assessment and screening scope
+6. Program duration
+7. Participants and batches
+8. Deliverables
+9. Fees and payment terms
+10. Client responsibilities
+11. Service provider responsibilities
+12. Employee participation and consent
+13. Health and medical disclaimer
+14. Confidentiality and employee data handling
+15. Rescheduling and cancellation
+16. Limitation of liability
+17. Taxes
+18. Termination
+19. Governing law and dispute resolution
+20. Signatures
 
 COMPANY AND PROVIDER DETAILS
 
@@ -1570,11 +1543,15 @@ IMPORTANT TERMS TO INCLUDE
 
 ${importantTerms}
 
-Draft the agreement in a clean format with proper headings.
-
-At the end, add signature blocks for both parties.
-
-Also add a short note saying this draft should be reviewed by a legal professional before signing.`;
+Important drafting instructions:
+- Do not call this medical treatment.
+- Do not promise cure, diagnosis, or rehabilitation outcomes.
+- Do not include detailed exercise prescription.
+- Include that employees with medical conditions must seek medical clearance.
+- Include that any individual employee information shared with HR should follow consent and reasonable confidentiality.
+- Keep the tone professional and corporate-friendly.
+- Add signature blocks for both parties.
+- Add a final note saying this draft should be reviewed by a legal professional before signing.`;
 
       document.getElementById('contractOutput').textContent = prompt;
     }
