@@ -185,36 +185,28 @@
       font-weight: 650;
     }
 
-    .photo-stack {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      height: 192px;
-    }
-
     .photo-card {
-      border-radius: 22px;
-      overflow: hidden;
-      background: #fff;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-    }
-
-    .photo-card.primary {
-      grid-column: span 2;
-      height: 112px;
-    }
-
-    .photo-card.secondary {
-      height: 72px;
+      height: 192px;
+      border-radius: 24px;
+      overflow: visible;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .photo-card img {
-      width: 100%;
+      width: auto;
       height: 100%;
-      object-fit: cover;
+      max-width: 100%;
+      object-fit: contain;
       object-position: center center;
       display: block;
+      border-radius: 22px;
+      background: transparent;
+      box-shadow: var(--shadow);
     }
 
     .proof-strip {
@@ -571,15 +563,16 @@
         max-width: 100%;
       }
 
-      .photo-stack {
+      .photo-card {
         height: auto;
-        grid-template-columns: 1fr;
+        justify-content: flex-start;
       }
 
-      .photo-card.primary,
-      .photo-card.secondary {
-        grid-column: auto;
-        height: 210px;
+      .photo-card img {
+        width: 100%;
+        height: auto;
+        max-height: 360px;
+        object-fit: contain;
       }
 
       .proof-strip,
@@ -669,8 +662,7 @@
       .tag { max-width: 100%; width: 100%; }
       h1 { font-size: clamp(34px, 13vw, 46px); }
       .subhead { font-size: 14.5px; }
-      .photo-card.primary,
-      .photo-card.secondary { height: 190px; }
+      .photo-card img { max-height: 320px; }
       .section-title { font-size: 20px; }
 
       .qr-card {
@@ -758,20 +750,16 @@
         max-width: 440px !important;
       }
 
-      .photo-stack {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 8px !important;
+      .photo-card {
         height: 192px !important;
+        justify-content: center !important;
       }
 
-      .photo-card.primary {
-        grid-column: span 2 !important;
-        height: 112px !important;
-      }
-
-      .photo-card.secondary {
-        height: 72px !important;
+      .photo-card img {
+        width: auto !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: none !important;
       }
 
       .proof-strip {
@@ -847,16 +835,8 @@
           <h1>Help Teachers And Students Beat The Daily Energy Crash.</h1>
           <p class="subhead">A practical wellness program for teachers and students to improve energy, posture, strength, focus, and daily movement through beginner strength training, mobility, and simple food habits.</p>
         </div>
-        <div class="photo-stack">
-          <div class="photo-card primary">
-            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=900&q=80" alt="Indian classroom with students" />
-          </div>
-          <div class="photo-card secondary">
-            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80" alt="Students in school classroom" />
-          </div>
-          <div class="photo-card secondary">
-            <img src="https://EatLiftMove.in/trainer.webp" alt="EatLiftMove trainer photo" />
-          </div>
+        <div class="photo-card">
+          <img src="https://EatLiftMove.in/trainer.webp?v=original" alt="EatLiftMove trainer photo" />
         </div>
       </div>
 
