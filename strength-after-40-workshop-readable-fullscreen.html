@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why Your Body Needs Strength Training After 40 — EatLiftMove Workshop</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#ff6b00;
+    --orange-soft:rgba(255,107,0,.14);
+    --green:#25D366;
+    --dark:#0a0a0a;
+    --panel:#141414;
+    --panel-2:#1c1c1c;
+    --line:rgba(255,255,255,.08);
+    --light:#e6e6e6;
+    --muted:#9a9a9a;
+    --display:'Oswald',sans-serif;
+    --body:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:#000;
+    color:#fff;
+    font-family:var(--body);
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Stage ---------- */
+  .stage{
+    position:fixed;inset:0;
+    display:flex;align-items:stretch;justify-content:stretch;
+    padding:0;
+  }
+  .slide{
+    position:absolute;
+    inset:0;
+    width:100vw;
+    height:100dvh;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(255,107,0,.16) 0%, transparent 42%),
+      radial-gradient(circle at 88% 90%, rgba(37,211,102,.08) 0%, transparent 45%),
+      linear-gradient(150deg,#0a0a0a 0%,#181818 100%);
+    border:0;
+    border-radius:0;
+    overflow:hidden;
+    box-shadow:none;
+    opacity:0;visibility:hidden;
+    transform:translateY(24px) scale(.985);
+    transition:opacity .5s ease, transform .5s ease, visibility .5s;
+    padding:clamp(34px,5.2vw,76px) clamp(34px,6vw,92px) calc(clamp(34px,5.2vw,76px) + 58px);
+    display:flex;flex-direction:column;
+  }
+  .slide.active{opacity:1;visibility:visible;transform:none;z-index:2}
+
+
+  .slide::before{
+    content:"";
+    position:absolute;
+    right:clamp(28px,5vw,90px);
+    top:clamp(92px,13vh,150px);
+    width:clamp(180px,25vw,360px);
+    height:clamp(180px,25vw,360px);
+    opacity:.18;
+    pointer-events:none;
+    background:
+      radial-gradient(circle at 50% 50%, transparent 0 38%, rgba(37,211,102,.38) 39% 41%, transparent 42%),
+      radial-gradient(circle at 50% 50%, rgba(255,107,0,.42) 0 8%, transparent 9%),
+      linear-gradient(90deg, transparent 0 44%, rgba(255,255,255,.22) 45% 55%, transparent 56%);
+    border-radius:50%;
+    filter:blur(.1px);
+    transform:rotate(-14deg);
+  }
+
+  .slide-art{
+    position:absolute;
+    right:clamp(28px,5vw,82px);
+    bottom:clamp(90px,12vh,140px);
+    width:clamp(190px,24vw,330px);
+    min-height:clamp(92px,11vw,150px);
+    padding:clamp(16px,1.8vw,24px);
+    border:1px solid rgba(255,255,255,.10);
+    border-radius:24px;
+    background:linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+    backdrop-filter:blur(10px);
+    box-shadow:0 28px 70px rgba(0,0,0,.34);
+    z-index:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:8px;
+    overflow:hidden;
+  }
+  .slide-art .scene{
+    position:relative;
+    height:clamp(86px,7.8vw,118px);
+    margin:-4px 0 8px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.08);
+    background:
+      radial-gradient(circle at 78% 24%, rgba(37,211,102,.26), transparent 0 26%, transparent 27%),
+      linear-gradient(135deg, rgba(255,107,0,.16), rgba(37,211,102,.08));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  .slide-art .scene::before,
+  .slide-art .scene::after{
+    content:"";
+    position:absolute;
+    border-radius:999px;
+  }
+  .slide-art .scene::before{
+    left:18px;
+    bottom:18px;
+    width:48%;
+    height:10px;
+    background:linear-gradient(90deg, var(--orange), rgba(255,107,0,.18));
+  }
+  .slide-art .scene::after{
+    right:24px;
+    top:20px;
+    width:52px;
+    height:52px;
+    border:2px solid rgba(37,211,102,.48);
+    box-shadow:0 0 0 12px rgba(37,211,102,.07);
+  }
+  .scene .mark{
+    position:absolute;
+    left:24px;
+    top:22px;
+    width:54px;
+    height:54px;
+    border-radius:16px;
+    background:rgba(0,0,0,.28);
+    border:1px solid rgba(255,255,255,.10);
+  }
+  .scene .mark::before,
+  .scene .mark::after{
+    content:"";
+    position:absolute;
+    background:var(--green);
+    border-radius:999px;
+  }
+  .scene .mark::before{width:8px;height:34px;left:24px;top:9px}
+  .scene .mark::after{width:34px;height:8px;left:9px;top:24px}
+  .slide-art.photo-art .scene{
+    height:clamp(170px,13vw,230px);
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.54)),
+      linear-gradient(90deg, rgba(255,107,0,.18), rgba(37,211,102,.10)),
+      var(--photo);
+    background-size:100% 100%, 100% 100%, contain;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-color:#070b09;
+  }
+  .slide-art.photo-art .scene::before{
+    left:0;
+    right:0;
+    bottom:0;
+    width:auto;
+    height:56%;
+    border-radius:0 0 18px 18px;
+    background:linear-gradient(0deg, rgba(0,0,0,.66), rgba(0,0,0,0));
+    border:0;
+  }
+  .slide-art.photo-art .scene::after{
+    right:16px;
+    top:16px;
+    width:44px;
+    height:44px;
+    border:2px solid rgba(37,211,102,.55);
+    background:rgba(0,0,0,.18);
+    box-shadow:0 0 0 10px rgba(37,211,102,.07);
+  }
+  .slide-art.photo-art .scene .mark{display:none}
+  .slide-art.photo-art.photo-left .scene,
+  .slide-art.photo-art.photo-top .scene{background-position:center, center, center}
+  .slide-art .eyebrow{
+    font-family:var(--display);
+    color:var(--green);
+    font-size:clamp(10px,.8vw,12px);
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    font-weight:700;
+  }
+  .slide-art .line{
+    font-family:var(--display);
+    font-size:clamp(18px,2.2vw,31px);
+    line-height:1.06;
+    text-transform:uppercase;
+    color:#fff;
+  }
+  .slide-art .small{
+    color:var(--muted);
+    font-size:clamp(12px,1vw,14px);
+    line-height:1.4;
+  }
+  .slide-art::after{
+    content:"";
+    position:absolute;
+    right:18px;top:18px;
+    width:42px;height:42px;
+    border-radius:14px;
+    background:linear-gradient(135deg, rgba(255,107,0,.9), rgba(37,211,102,.78));
+    opacity:.75;
+  }
+  .slide > *:not(.slide-art):not(.visual-bubble){position:relative;z-index:1}
+  .slide > .slide-art{position:absolute;z-index:1}
+  .slide > .visual-bubble{position:absolute}
+
+  /* grain overlay */
+  .slide::after{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- Reveal animation ---------- */
+  .slide.active .reveal{animation:rise .6s both}
+  .slide.active .reveal:nth-child(1){animation-delay:.05s}
+  .slide.active .reveal:nth-child(2){animation-delay:.13s}
+  .slide.active .reveal:nth-child(3){animation-delay:.21s}
+  .slide.active .reveal:nth-child(4){animation-delay:.29s}
+  .slide.active .reveal:nth-child(5){animation-delay:.37s}
+  .slide.active .reveal:nth-child(6){animation-delay:.45s}
+  @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+  /* ---------- Typography ---------- */
+  .kicker{
+    font-family:var(--display);text-transform:uppercase;letter-spacing:.28em;
+    font-size:clamp(11px,1vw,13px);font-weight:600;color:var(--orange);
+    display:inline-flex;align-items:center;gap:10px;
+  }
+  .kicker::before{content:"";width:30px;height:2px;background:var(--orange)}
+  h1{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:1.02;
+     font-size:clamp(30px,5vw,62px);letter-spacing:-.5px}
+  h2{font-family:var(--display);font-weight:700;text-transform:uppercase;line-height:1.05;
+     font-size:clamp(26px,3.6vw,46px);letter-spacing:-.3px}
+  .accent{color:var(--orange)}
+  .accent-g{color:var(--green)}
+  p.lead{color:var(--light);font-size:clamp(15px,1.5vw,19px);line-height:1.55;max-width:62ch}
+  .slide-head{margin-bottom:clamp(18px,2.4vw,30px)}
+  .slide-head h2{margin-top:12px}
+
+  /* ---------- Point list ---------- */
+  .points{list-style:none;display:flex;flex-direction:column;gap:clamp(14px,1.8vw,22px);max-width:900px}
+  .points li{display:flex;gap:16px;align-items:flex-start}
+  .points .dot{
+    flex:0 0 auto;width:30px;height:30px;border-radius:9px;
+    background:var(--orange-soft);border:1px solid rgba(255,107,0,.35);
+    display:flex;align-items:center;justify-content:center;color:var(--orange);
+    font-family:var(--display);font-weight:700;font-size:14px;margin-top:2px;
+  }
+  .points li span.txt{color:var(--light);font-size:clamp(15px,1.55vw,20px);line-height:1.45}
+  .points li b{color:#fff}
+
+  .grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,64px);flex:1;align-items:center;min-height:0}
+  .grid2.tight{align-items:stretch}
+
+  /* ---------- Presenter line ---------- */
+  .presenter{
+    margin-top:auto;padding-top:20px;border-top:1px solid var(--line);
+    font-style:italic;color:var(--muted);font-size:clamp(13px,1.05vw,15px);display:flex;gap:10px;align-items:center;
+  }
+  .presenter b{color:var(--green);font-style:normal;font-family:var(--display);
+    text-transform:uppercase;letter-spacing:.12em;font-size:11px}
+
+  /* ---------- Stat callouts ---------- */
+  .stat-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:6px}
+  .stat{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:18px 20px;flex:1;min-width:150px;
+  }
+  .stat .big{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.4vw,40px);color:var(--orange);line-height:1}
+  .stat .big.g{color:var(--green)}
+  .stat .cap{color:var(--muted);font-size:12.5px;margin-top:8px;line-height:1.35}
+
+  /* ---------- Title slide ---------- */
+  .title-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;flex:1;align-items:center;min-height:0}
+  .coach{position:relative;min-height:0;display:flex;align-items:center}
+  .coach .ring{position:absolute;inset:-10px;border-radius:24px;
+    background:linear-gradient(135deg,var(--orange),#ff9d4d);filter:blur(22px);opacity:.35}
+  .coach img{position:relative;width:100%;max-height:min(58dvh,540px);border-radius:20px;object-fit:cover;
+    border:1px solid var(--line);box-shadow:0 30px 60px rgba(0,0,0,.6);aspect-ratio:4/5}
+  .coach-tag{position:absolute;left:14px;bottom:14px;z-index:3;background:rgba(0,0,0,.72);
+    backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+  .coach-tag .n{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:15px}
+  .coach-tag .r{color:var(--orange);font-size:11px;text-transform:uppercase;letter-spacing:.18em;font-weight:600}
+  .hook{margin-top:22px;font-family:var(--display);font-weight:300;font-size:clamp(16px,1.8vw,22px);
+    color:#fff;border-left:3px solid var(--orange);padding-left:16px;line-height:1.3}
+  .brand{font-family:var(--display);font-weight:700;letter-spacing:.04em;font-size:20px;text-transform:uppercase}
+  .brand .o{color:var(--orange)} .brand .g{color:var(--green)}
+
+  /* compare slide */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:22px;flex:1;align-items:stretch}
+  .col{border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px}
+  .col.bad{background:linear-gradient(160deg,#1a1414,#120e0e);border:1px solid rgba(255,80,80,.25)}
+  .col.good{background:linear-gradient(160deg,#0f1a12,#0c130d);border:1px solid rgba(37,211,102,.3)}
+  .col h3{font-family:var(--display);text-transform:uppercase;font-size:20px;letter-spacing:.04em}
+  .col.bad h3{color:#ff7a7a} .col.good h3{color:var(--green)}
+  .col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .col li{font-size:14.5px;color:var(--light);display:flex;gap:10px;line-height:1.4}
+  .col li::before{content:"";flex:0 0 auto;width:7px;height:7px;border-radius:50%;margin-top:7px}
+  .col.bad li::before{background:#ff7a7a} .col.good li::before{background:var(--green)}
+
+  /* program cards */
+  .prog{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;flex:1;align-items:stretch}
+  .pcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;overflow:hidden;position:relative}
+  .pcard .ico{width:42px;height:42px;border-radius:11px;background:var(--orange-soft);display:flex;align-items:center;justify-content:center}
+  .pcard h4{font-family:var(--display);text-transform:uppercase;font-size:16px;letter-spacing:.03em}
+  .pcard p{color:var(--muted);font-size:13px;line-height:1.45}
+  .pcard-visual{
+    margin-top:auto;
+    min-height:118px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.08);
+    background:
+      radial-gradient(circle at 86% 18%, rgba(37,211,102,.18), transparent 0 28%, transparent 29%),
+      linear-gradient(150deg, rgba(255,107,0,.11), rgba(255,255,255,.025));
+    padding:14px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    gap:9px;
+  }
+  .pcard-visual .bar-row{display:flex;align-items:end;gap:7px;height:50px}
+  .pcard-visual .bar{flex:1;border-radius:7px 7px 3px 3px;background:linear-gradient(180deg, rgba(37,211,102,.95), rgba(37,211,102,.26))}
+  .pcard-visual .bar:nth-child(1){height:38%}
+  .pcard-visual .bar:nth-child(2){height:62%;background:linear-gradient(180deg, rgba(255,107,0,.95), rgba(255,107,0,.28))}
+  .pcard-visual .bar:nth-child(3){height:82%}
+  .pcard-visual .label{font-size:11px;color:#d7d7d7;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+  .card-points{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:2px}
+  .card-points li{display:flex;align-items:flex-start;gap:8px;color:#cfcfcf;font-size:12.5px;line-height:1.35}
+  .card-points li::before{content:"";flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:var(--green);margin-top:6px}
+
+  /* CTA slide */
+  .cta-lines{display:flex;flex-direction:column;gap:14px;margin:8px 0 20px}
+  .cta-lines .q{font-family:var(--display);font-weight:300;font-size:clamp(16px,1.7vw,21px);
+    padding-left:16px;border-left:2px solid var(--green);line-height:1.3;color:#fff}
+  .cta-btn{display:inline-flex;align-items:center;gap:12px;background:var(--green);color:#06210f;
+    font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+    padding:16px 28px;border-radius:999px;font-size:16px;text-decoration:none;width:fit-content;
+    box-shadow:0 14px 34px rgba(37,211,102,.28)}
+
+
+
+  /* ---------- Visual polish and mobile overflow fixes ---------- */
+  .visual-bubble{
+    position:absolute;
+    right:clamp(18px,3vw,46px);
+    bottom:clamp(72px,8vw,108px);
+    width:clamp(120px,17vw,220px);
+    aspect-ratio:1;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 38% 34%, rgba(37,211,102,.34), transparent 0 34%, rgba(255,107,0,.16) 35% 56%, transparent 57%),
+      linear-gradient(135deg, rgba(37,211,102,.13), rgba(255,107,0,.12));
+    border:1px solid rgba(255,255,255,.10);
+    filter:drop-shadow(0 24px 40px rgba(0,0,0,.45));
+    opacity:.9;
+    pointer-events:none;
+  }
+  .visual-bubble::before,
+  .visual-bubble::after{
+    content:"";
+    position:absolute;
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(6px);
+  }
+  .visual-bubble::before{width:34%;height:34%;left:-6%;top:20%;transform:rotate(-10deg)}
+  .visual-bubble::after{width:42%;height:42%;right:-7%;bottom:10%;transform:rotate(12deg)}
+
+  .quote-highlight{
+    border-left:0!important;
+    position:relative;
+    padding:clamp(15px,1.8vw,22px) clamp(16px,2vw,26px)!important;
+    border-radius:18px;
+    background:
+      linear-gradient(100deg, rgba(255,107,0,.22), rgba(37,211,102,.12)),
+      rgba(255,255,255,.035);
+    border:1px solid rgba(255,107,0,.36)!important;
+    box-shadow:0 18px 44px rgba(255,107,0,.10), inset 0 1px 0 rgba(255,255,255,.08);
+    font-size:clamp(18px,2.05vw,28px)!important;
+    line-height:1.25!important;
+    max-width:820px;
+  }
+  .quote-highlight::before{
+    content:"BIRTHDAY STRENGTH RULE";
+    display:block;
+    width:max-content;
+    max-width:100%;
+    font-family:var(--display);
+    font-weight:700;
+    letter-spacing:.18em;
+    color:var(--orange);
+    font-size:clamp(9px,.85vw,12px);
+    margin-bottom:8px;
+  }
+  .quote-highlight::after{
+    content:"";
+    position:absolute;
+    inset:10px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.05);
+    pointer-events:none;
+  }
+
+  .slide:nth-of-type(12){
+    background:
+      radial-gradient(circle at 12% 12%, rgba(255,107,0,.22) 0%, transparent 36%),
+      radial-gradient(circle at 90% 78%, rgba(37,211,102,.16) 0%, transparent 42%),
+      linear-gradient(150deg,#080808 0%,#151915 100%);
+  }
+  .slide:nth-of-type(12) h2{max-width:860px}
+  .slide:nth-of-type(12) .cta-btn{position:relative;z-index:2;margin-top:4px}
+  .slide:nth-of-type(12) .presenter{position:relative;z-index:2}
+
+  /* ---------- Controls ---------- */
+  .controls{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:50;
+    display:flex;align-items:center;gap:14px;background:rgba(0,0,0,.62);
+    border:1px solid var(--line);backdrop-filter:blur(10px);border-radius:999px;padding:8px 14px}
+  .nav-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:transparent;
+    color:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:.2s}
+  .nav-btn:hover{background:var(--orange);border-color:var(--orange);color:#000}
+  .counter{font-family:var(--display);font-size:14px;letter-spacing:.1em;color:var(--light);min-width:54px;text-align:center}
+  .counter b{color:var(--orange)}
+  .dots{display:flex;gap:7px;align-items:center}
+  .dot-nav{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.22);border:none;cursor:pointer;padding:0;transition:.2s}
+  .dot-nav.on{background:var(--orange);width:22px;border-radius:5px}
+  .fs{margin-left:4px}
+
+  .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--green));z-index:60;transition:width .4s ease}
+
+  .hint{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:12px;z-index:40;
+    letter-spacing:.05em;opacity:.8;animation:fade 5s forwards}
+  @keyframes fade{0%,70%{opacity:.8}100%{opacity:0}}
+
+
+
+  /* ---------- Readability + full-screen controls refinement ---------- */
+  body{font-size:16px;text-rendering:optimizeLegibility}
+  h1,h2{letter-spacing:.01em;text-wrap:balance}
+  h1{font-size:clamp(42px,5.2vw,78px);line-height:1.04}
+  h2{font-size:clamp(38px,4.25vw,64px);line-height:1.08}
+  .kicker{letter-spacing:.16em;font-weight:700}
+  .points{max-width:min(980px,58vw);gap:clamp(15px,1.5vw,22px)}
+  .points li span.txt{font-size:clamp(18px,1.35vw,24px);line-height:1.42;font-weight:450;letter-spacing:.005em}
+  .points .dot{width:28px;height:28px;min-width:28px;font-family:var(--body);font-size:13px;font-weight:800}
+  p.lead{font-size:clamp(18px,1.25vw,23px);line-height:1.55;font-weight:450}
+  .presenter{font-family:var(--body);font-size:clamp(14px,1vw,18px);line-height:1.4}
+  .presenter b{font-family:var(--body);font-weight:800;letter-spacing:.08em}
+  .slide-art{right:clamp(58px,6vw,120px);bottom:clamp(205px,23vh,260px);width:clamp(270px,25vw,430px);z-index:.2;opacity:.92}
+  .slide-art .line{font-size:clamp(28px,2.4vw,44px);letter-spacing:.01em}
+  .slide-art .small{font-size:clamp(14px,1vw,17px);line-height:1.45;color:#c9c9c9}
+  .slide-art .eyebrow{font-family:var(--body);font-size:clamp(10px,.75vw,13px);letter-spacing:.16em}
+  .slide.active > .slide-art{z-index:1}
+  .slide-head{max-width:900px}
+  .stat .cap,.pcard p,.col li{font-family:var(--body);font-size:clamp(14px,1vw,17px);line-height:1.45;color:#c7c7c7}
+  .stat .big{font-size:clamp(42px,3.8vw,70px)}
+  .brand{font-family:var(--body);font-weight:900;letter-spacing:.04em}
+  .cta-lines .q{font-family:var(--body);font-weight:500;font-size:clamp(20px,1.45vw,28px);line-height:1.45;max-width:980px}
+  .quote-highlight{font-family:var(--body)!important;font-weight:600;letter-spacing:.005em}
+  .quote-highlight::before{font-family:var(--body)}
+  .wa-direct{margin-top:14px;color:#dfffe9;font-family:var(--body);font-size:clamp(15px,1vw,18px);font-weight:700;letter-spacing:.02em}
+  .wa-direct span{color:var(--green)}
+  .mini-proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;max-width:min(980px,68vw)}
+  .mini-proof{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.035);border-radius:18px;padding:18px 20px;min-height:110px}
+  .mini-proof b{display:block;font-family:var(--display);color:var(--orange);font-size:clamp(22px,1.7vw,34px);line-height:1;text-transform:uppercase;margin-bottom:10px}
+  .mini-proof span{color:#d2d2d2;font-size:clamp(14px,1vw,17px);line-height:1.45}
+  .program-note{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .program-note div{border:1px solid rgba(37,211,102,.22);background:rgba(37,211,102,.045);border-radius:18px;padding:18px 20px;color:#d9d9d9;font-size:clamp(15px,1vw,18px);line-height:1.45}
+  .program-note b{color:var(--green)}
+  .controls{transition:opacity .22s ease, transform .22s ease;opacity:1}
+  body.fullscreen-mode.controls-hidden .controls{opacity:0;pointer-events:none;transform:translate(-50%,18px)}
+  body.fullscreen-mode.controls-hidden .hint{opacity:0}
+  body.fullscreen-mode.controls-hidden{cursor:none}
+
+  @media (max-width:760px){
+    body{overflow:hidden}
+    .stage{align-items:stretch;padding:0}
+    .title-grid,.grid2{grid-template-columns:1fr;gap:20px}
+    .coach{display:none}
+    .prog{grid-template-columns:repeat(2,1fr)}
+    .compare{grid-template-columns:1fr}
+    .slide{
+      inset:0;
+      width:100vw;
+      height:100dvh;
+      max-height:none;
+      overflow-y:auto;
+      padding:26px 20px 100px;
+      border-radius:0;
+      -webkit-overflow-scrolling:touch;
+    }
+    h1{font-size:clamp(34px,11vw,50px);line-height:1.04}
+    h2{font-size:clamp(28px,8.5vw,40px);line-height:1.08}
+    p.lead{font-size:15.5px;line-height:1.48}
+    .points{gap:13px;max-width:100%}
+    .points li{gap:12px}
+    .points li span.txt{font-size:15px;line-height:1.48}
+    .cta-lines{gap:13px;margin:14px 0 20px}
+    .cta-lines .q{font-size:18px;line-height:1.42;padding-left:12px}
+    .quote-highlight{font-size:20px!important;line-height:1.38!important;padding:16px 16px!important}
+    .cta-btn{width:100%;justify-content:center;text-align:center;padding:15px 18px;font-size:15px;line-height:1.2}
+    .visual-bubble{right:8px;bottom:98px;width:118px;opacity:.42}
+    .slide::before{right:-60px;top:70px;width:210px;height:210px;opacity:.12}
+    .slide > .slide-art{position:relative}
+    .slide-art{right:auto;bottom:auto;left:auto;width:auto;max-width:100%;align-self:stretch;min-height:auto;margin:18px 0 0;padding:15px 16px;border-radius:18px;z-index:1}
+    .slide-art .scene{height:80px}
+    .slide-art .line{font-size:24px}
+    .slide-art .small{font-size:12.5px}
+    .pcard-visual{min-height:88px}.card-points li{font-size:12px}
+    .presenter{font-size:13.5px;line-height:1.45;padding-top:14px;margin-top:18px}.mini-proof-grid{grid-template-columns:1fr;max-width:100%;margin-top:18px}.program-note{grid-template-columns:1fr}.wa-direct{font-size:14px;text-align:center}
+    .controls{bottom:10px;gap:9px;padding:7px 10px;max-width:calc(100vw - 16px)}
+    .dots{gap:5px;max-width:42vw;overflow:hidden}
+    .dot-nav{width:7px;height:7px;flex:0 0 auto}
+    .dot-nav.on{width:18px}
+    .hint{display:none}
+  }
+
+  @media (max-width:420px){
+    .slide{padding:22px 16px 30px}
+    .brand{font-size:17px}
+    .kicker{font-size:10px;letter-spacing:.2em;gap:8px}
+    .kicker::before{width:22px}
+    .slide:nth-of-type(12) h2{font-size:32px;line-height:1.08;margin-top:16px!important}
+    .quote-highlight{font-size:19px!important;line-height:1.4!important}
+    .cta-btn{font-size:14px;letter-spacing:.05em}
+  }
+
+  @media print{
+    @page{size:13.333in 7.5in;margin:0}
+    html,body{
+      width:13.333in;
+      height:auto;
+      overflow:visible;
+      background:#000;
+      print-color-adjust:exact;
+      -webkit-print-color-adjust:exact;
+    }
+    .progress,.hint,.controls{display:none!important}
+    .stage{
+      position:static;
+      inset:auto;
+      display:block;
+      width:13.333in;
+      height:auto;
+      padding:0;
+    }
+    .slide{
+      position:relative!important;
+      inset:auto!important;
+      width:13.333in!important;
+      height:7.5in!important;
+      min-height:7.5in!important;
+      max-height:7.5in!important;
+      opacity:1!important;
+      visibility:visible!important;
+      transform:none!important;
+      transition:none!important;
+      break-after:page;
+      page-break-after:always;
+      page-break-inside:avoid;
+      overflow:hidden!important;
+    }
+    .slide:last-child{break-after:auto;page-break-after:auto}
+    .slide > *,
+    .slide.active > *{
+      opacity:1!important;
+      visibility:visible!important;
+      transform:none!important;
+      animation:none!important;
+      transition:none!important;
+    }
+    .slide-art{bottom:1.72in}
+    .slide-art.photo-art .scene{
+      background-size:100% 100%, 100% 100%, contain;
+      background-repeat:no-repeat;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="stage" id="stage">
+
+  <!-- 1 — TITLE -->
+  <section class="slide active">
+    <div class="reveal" style="display:flex;justify-content:space-between;align-items:center">
+      <span class="brand">EAT<span class="o">LIFT</span><span class="g">MOVE</span></span>
+      <span class="kicker">Strength After 40</span>
+    </div>
+    <div class="title-grid">
+      <div>
+        <h1 class="reveal">Why Your Body<br>Needs <span class="accent">Strength<br>Training</span> After 40</h1>
+        <p class="reveal lead" style="margin-top:18px">The science of muscle, metabolism, bones, hormones and healthy aging.</p>
+        <div class="reveal hook">"You don't get old and then weak.<br>You get weak and then old."</div>
+      </div>
+      <div class="reveal coach">
+        <div class="ring"></div>
+        <img src="https://eatliftmove.in/myphotoForWebsiteHeader.webp" alt="Simran — Personal Fitness Coach">
+        <div class="coach-tag">
+          <div class="n">Simran</div>
+          <div class="r">Your Coach</div>
+        </div>
+      </div>
+    </div>
+    <div class="presenter reveal"><b>Say</b> Today is about staying strong, mobile, independent and confident as the body ages.</div>
+  </section>
+
+  <!-- 2 — WHAT CHANGES -->
+  <section class="slide">
+    <div class="slide-head reveal">
+      <span class="kicker">Slide 02</span>
+      <h2>What Aging Starts To <span class="accent">Change</span></h2>
+    </div>
+    <ul class="points">
+      <li class="reveal"><span class="dot">1</span><span class="txt"><b>Muscle mass and strength begin to decline</b> with age.</span></li>
+      <li class="reveal"><span class="dot">2</span><span class="txt">The drop in muscle strength <b>starts around age 40</b> and accelerates later in life.</span></li>
+      <li class="reveal"><span class="dot">3</span><span class="txt">Bone mass falls with age, with <b>faster loss in women after menopause</b>.</span></li>
+      <li class="reveal"><span class="dot">4</span><span class="txt">Lean body mass drops and <b>body fat tends to rise</b>.</span></li>
+    </ul>
+    <div class="slide-art photo-art photo-top reveal" style="--photo:url('https://images.pexels.com/photos/36626645/pexels-photo-36626645.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200')"><div class="scene"><span class="mark"></span></div><div class="eyebrow">Body signal</div><div class="line">Muscle is your aging buffer</div><div class="small">Less strength means less freedom. Training protects both.</div></div>
+    <div class="presenter reveal"><b>Say</b> Aging isn't just getting older. It means less muscle, less bone and less daily capacity unless you train against it.</div>
+  </section>
+
+  <!-- 3 — SARCOPENIA -->
+  <section class="slide">
+    <div class="grid2">
+      <div>
+        <div class="slide-head reveal">
+          <span class="kicker">Slide 03</span>
+          <h2>Sarcopenia:<br>The Real Reason People <span class="accent">Feel Old</span></h2>
+        </div>
+        <ul class="points">
+          <li class="reveal"><span class="dot">•</span><span class="txt">Age-related loss of <b>muscle mass and strength</b>.</span></li>
+          <li class="reveal"><span class="dot">•</span><span class="txt">Raises risk of frailty, falls and <b>loss of independence</b>.</span></li>
+          <li class="reveal"><span class="dot">•</span><span class="txt">Resistance training is <b>central to slowing or reversing it</b>.</span></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <!-- muscle decline chart -->
+        <svg viewBox="0 0 360 250" width="100%" role="img" aria-label="Muscle loss per decade after 25">
+          <text x="0" y="18" fill="#9a9a9a" font-family="Oswald" font-size="13" letter-spacing="1">MUSCLE LOSS PER DECADE (AFTER ~25)</text>
+          <line x1="30" y1="40" x2="30" y2="210" stroke="rgba(255,255,255,.12)"/>
+          <line x1="30" y1="210" x2="350" y2="210" stroke="rgba(255,255,255,.12)"/>
+          <polyline points="30,60 110,90 190,128 270,170 340,205" fill="none" stroke="#ff6b00" stroke-width="3"/>
+          <polygon points="30,60 110,90 190,128 270,170 340,205 340,210 30,210" fill="#ff6b00" opacity=".12"/>
+          <circle cx="30" cy="60" r="4" fill="#ff6b00"/><circle cx="110" cy="90" r="4" fill="#ff6b00"/>
+          <circle cx="190" cy="128" r="4" fill="#ff6b00"/><circle cx="270" cy="170" r="4" fill="#ff6b00"/>
+          <circle cx="340" cy="205" r="4" fill="#ff6b00"/>
+          <text x="22" y="228" fill="#9a9a9a" font-size="11" font-family="Montserrat">25</text>
+          <text x="100" y="228" fill="#9a9a9a" font-size="11" font-family="Montserrat">35</text>
+          <text x="180" y="228" fill="#9a9a9a" font-size="11" font-family="Montserrat">45</text>
+          <text x="262" y="228" fill="#9a9a9a" font-size="11" font-family="Montserrat">55</text>
+          <text x="330" y="228" fill="#9a9a9a" font-size="11" font-family="Montserrat">65</text>
+        </svg>
+        <div class="stat-row" style="margin-top:14px">
+          <div class="stat"><div class="big">3–5%</div><div class="cap">Muscle lost per decade after ~25, accelerating later in life.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="presenter reveal"><b>Say</b> People don't first lose youth. They first lose strength, power and balance. That's why lifting isn't optional after 40.</div>
+  </section>
+
+  <!-- 4 — WHY IT WORKS -->
+  <section class="slide">
+    <div class="slide-head reveal">
+      <span class="kicker">Slide 04</span>
+      <h2>Why Lifting <span class="accent">Changes The Body</span></h2>
+    </div>
+    <ul class="points">
+      <li class="reveal"><span class="dot">1</span><span class="txt">Strength rises through <b>neural adaptation first</b>, then muscle growth over time.</span></li>
+      <li class="reveal"><span class="dot">2</span><span class="txt">Muscle fibres get larger with <b>progressive overload</b>.</span></li>
+      <li class="reveal"><span class="dot">3</span><span class="txt">Gains show up in <b>daily tasks</b>: stairs, carrying loads, walking.</span></li>
+      <li class="reveal"><span class="dot">4</span><span class="txt">The overload principle: the body only changes when <b>challenged beyond usual demand</b>.</span></li>
+    </ul>
+    <div class="slide-art photo-art reveal" style="--photo:url('https://images.pexels.com/photos/7801493/pexels-photo-7801493.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200')"><div class="scene"><span class="mark"></span></div><div class="eyebrow">Training rule</div><div class="line">Challenge creates change</div><div class="small">Safe overload tells your body to rebuild stronger.</div></div>
+    <div class="presenter reveal"><b>Say</b> The body is adaptive. Demand nothing and it shrinks capacity. Demand force safely and it builds it.</div>
+  </section>
+
+  <!-- 5 — METABOLISM -->
+  <section class="slide">
+    <div class="grid2">
+      <div>
+        <div class="slide-head reveal">
+          <span class="kicker">Slide 05</span>
+          <h2>More Muscle =<br>A Better <span class="accent">Metabolism</span></h2>
+        </div>
+        <ul class="points">
+          <li class="reveal"><span class="dot">•</span><span class="txt">Preserves or builds <b>lean mass</b> during aging and weight loss.</span></li>
+          <li class="reveal"><span class="dot">•</span><span class="txt">Lean mass is tied to <b>resting metabolic rate</b>, which falls with age.</span></li>
+          <li class="reveal"><span class="dot">•</span><span class="txt">Helps counter <b>age-related metabolic slowdown</b>.</span></li>
+          <li class="reveal"><span class="dot">•</span><span class="txt">Improves <b>blood sugar control</b> and insulin action.</span></li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <svg viewBox="0 0 320 230" width="100%" role="img" aria-label="Muscle vs metabolism">
+          <circle cx="160" cy="115" r="78" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="14"/>
+          <circle cx="160" cy="115" r="78" fill="none" stroke="#ff6b00" stroke-width="14" stroke-linecap="round"
+            stroke-dasharray="490" stroke-dashoffset="150" transform="rotate(-90 160 115)"/>
+          <text x="160" y="108" text-anchor="middle" fill="#fff" font-family="Oswald" font-size="34" font-weight="700">More</text>
+          <text x="160" y="140" text-anchor="middle" fill="#ff6b00" font-family="Oswald" font-size="20" font-weight="600" letter-spacing="2">ACTIVE TISSUE</text>
+        </svg>
+        <p class="lead reveal" style="text-align:center;font-size:14px;color:var(--muted);margin-top:6px">Want easier weight control and energy? You need more active muscle, not just more cardio.</p>
+      </div>
+    </div>
+    <div class="presenter reveal"><b>Say</b> Cardio burns the hour. Muscle changes the other 23.</div>
+  </section>
+
+  <!-- 6 — BONES & FALLS -->
+  <section class="slide">
+    <div class="slide-head reveal">
+      <span class="kicker">Slide 06</span>
+      <h2>Strong Muscles <span class="accent">Protect Strong Bones</span></h2>
+    </div>
+    <ul class="points">
+      <li class="reveal"><span class="dot">1</span><span class="txt">Bone mass declines with age, <b>more sharply in women after menopause</b>.</span></li>
+      <li class="reveal"><span class="dot">2</span><span class="txt"><b>Weight-bearing and resistance training</b> are recommended for bone health.</span></li>
+      <li class="reveal"><span class="dot">3</span><span class="txt">Strength work improves <b>muscle, balance and activity levels</b> in older adults.</span></li>
+      <li class="reveal"><span class="dot">4</span><span class="txt">Better strength and balance <b>reduce fall and fracture risk</b>.</span></li>
+    </ul>
+    <div class="slide-art photo-art reveal" style="--photo:url('https://images.pexels.com/photos/6815693/pexels-photo-6815693.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200')"><div class="scene"><span class="mark"></span></div><div class="eyebrow">Bone insurance</div><div class="line">Strong legs prevent weak outcomes</div><div class="small">Strength, balance and confidence work together.</div></div>
+    <div class="presenter reveal"><b>Say</b> Treat strength training as bone insurance. Stronger legs, hips and posture mean you fall less in the first place.</div>
+  </section>
+
+  <!-- 7 — PROOF -->
+  <section class="slide">
+    <div class="slide-head reveal">
+      <span class="kicker">Slide 07</span>
+      <h2>It Works <span class="accent">Even When You Start Late</span></h2>
+    </div>
+    <div class="stat-row reveal">
+      <div class="stat"><div class="big">60–72</div><div class="cap">Older men: 12 weeks of training produced major gains in knee strength and muscle size.</div></div>
+      <div class="stat"><div class="big">80s–90s</div><div class="cap">Frail older adults improved lifting capacity, walking speed and stair-climbing.</div></div>
+      <div class="stat"><div class="big g">Weeks</div><div class="cap">Very old, institutionalised adults gained strength and size in just weeks.</div></div>
+    </div>
+    <p class="lead reveal" style="margin-top:24px;font-family:var(--display);text-transform:uppercase;letter-spacing:.04em;font-size:22px;color:#fff">It is never <span class="accent">too late</span> to get stronger.</p>
+    <div class="mini-proof-grid reveal">
+      <div class="mini-proof"><b>Late start</b><span>Still better than no start. Strength responds when the body gets the right signal.</span></div>
+      <div class="mini-proof"><b>Daily wins</b><span>Better stairs, better walking, better lifting, better confidence.</span></div>
+      <div class="mini-proof"><b>Safe progress</b><span>Start light. Build control. Add load only when form is clean.</span></div>
+    </div>
+    <div class="presenter reveal"><b>Say</b> You don't need to be athletic to benefit. Even frail, very old adults improved meaningfully.</div>
+  </section>
+
+  <!-- 8 — WOMEN / MENOPAUSE -->
+  <section class="slide">
+    <div class="grid2">
+      <div>
+        <div class="slide-head reveal">
+          <span class="kicker">Slide 08 — For Women</span>
+          <h2>Why Women Need It<br><span class="accent-g">Even More</span> After 40</h2>
+        </div>
+        <ul class="points">
+          <li class="reveal"><span class="dot">•</span><span class="txt">Aging brings declines in <b>estrogen and other anabolic signals</b>.</span></li>
+          <li class="reveal"><span class="dot">•</span><span class="txt">After menopause, <b>bone loss speeds up</b> and muscle decline becomes more concerning.</span></li>
+          <li class="reveal"><span class="dot">•</span><span class="txt">These shifts raise risk of <b>osteoporosis, weakness and lost function</b>.</span></li>
+          <li class="reveal"><span class="dot">•</span><span class="txt">Strength training gives the body <b>a reason to hold on to tissue</b>.</span></li>
+        </ul>
+      </div>
+      <div class="reveal" style="display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 280 260" width="100%" role="img" aria-label="Hormonal shift after menopause">
+          <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#25D366"/><stop offset="1" stop-color="#ff6b00"/></linearGradient></defs>
+          <path d="M40 60 C40 60 120 30 240 60" fill="none" stroke="url(#g1)" stroke-width="3" opacity=".5"/>
+          <text x="40" y="50" fill="#25D366" font-family="Oswald" font-size="13" letter-spacing="1">PRE-MENOPAUSE</text>
+          <path d="M40 200 C120 230 200 210 240 200" fill="none" stroke="#ff6b00" stroke-width="3" stroke-dasharray="5 5"/>
+          <text x="40" y="225" fill="#ff6b00" font-family="Oswald" font-size="13" letter-spacing="1">POST-MENOPAUSE</text>
+          <line x1="140" y1="70" x2="140" y2="195" stroke="rgba(255,255,255,.25)" stroke-width="1.5"/>
+          <polygon points="140,195 135,182 145,182" fill="#ff6b00"/>
+          <text x="150" y="135" fill="#9a9a9a" font-family="Montserrat" font-size="12">faster bone</text>
+          <text x="150" y="152" fill="#9a9a9a" font-family="Montserrat" font-size="12">&amp; muscle loss</text>
+        </svg>
+      </div>
+    </div>
+    <div class="presenter reveal"><b>Say</b> Menopause isn't only symptoms. It reshapes bone, muscle, body composition and confidence.</div>
+  </section>
+
+  <!-- 9 — OSTEOPOROSIS CHART -->
+  <section class="slide">
+    <div class="grid2 tight">
+      <div>
+        <div class="slide-head reveal">
+          <span class="kicker">Slide 09 — The Proof</span>
+          <h2>Bone Loss Is <span class="accent">Not Something To Ignore</span></h2>
+        </div>
+        <ul class="points">
+          <li class="reveal"><span class="dot">•</span><span class="txt">Women lose bone <b>earlier than men</b>, with a sharper drop after menopause.</span></li>
+          <li class="reveal"><span class="dot">•</span><span class="txt">A year of <b>high-intensity resistance training</b> improved bone density in postmenopausal women.</span></li>
+          <li class="reveal"><span class="dot">•</span><span class="txt">It supports <b>bone, balance, muscle and activity</b> all at once.</span></li>
+        </ul>
+      </div>
+      <div class="reveal" style="display:flex;flex-direction:column;justify-content:center">
+        <svg viewBox="0 0 360 250" width="100%" role="img" aria-label="Bone change: trained vs sedentary">
+          <text x="0" y="16" fill="#9a9a9a" font-family="Oswald" font-size="12.5" letter-spacing=".8">BONE MINERAL CHANGE — WOMEN 50–73, 8 MONTHS</text>
+          <line x1="40" y1="130" x2="350" y2="130" stroke="rgba(255,255,255,.18)"/>
+          <!-- trained +3.5% -->
+          <rect x="80" y="50" width="80" height="80" rx="6" fill="#25D366"/>
+          <text x="120" y="42" text-anchor="middle" fill="#25D366" font-family="Oswald" font-size="22" font-weight="700">+3.5%</text>
+          <text x="120" y="150" text-anchor="middle" fill="#e6e6e6" font-family="Montserrat" font-size="12">Trained 2×/week</text>
+          <!-- sedentary -2.7% -->
+          <rect x="230" y="130" width="80" height="62" rx="6" fill="#ff4d4d" opacity=".85"/>
+          <text x="270" y="212" text-anchor="middle" fill="#ff7a7a" font-family="Oswald" font-size="22" font-weight="700">−2.7%</text>
+          <text x="270" y="232" text-anchor="middle" fill="#e6e6e6" font-family="Montserrat" font-size="12">Sedentary</text>
+        </svg>
+      </div>
+    </div>
+    <div class="presenter reveal"><b>Say</b> Same eight months. Training built bone. Sitting still lost it. The choice is that clear.</div>
+  </section>
+
+  <!-- 10 — CONFIDENCE -->
+  <section class="slide">
+    <div class="slide-head reveal">
+      <span class="kicker">Slide 10</span>
+      <h2>Strength Training Changes<br><span class="accent">More Than The Body</span></h2>
+    </div>
+    <ul class="points">
+      <li class="reveal"><span class="dot">1</span><span class="txt">Linked with <b>greater self-confidence</b> and proactive health behaviour.</span></li>
+      <li class="reveal"><span class="dot">2</span><span class="txt">Trainers report better <b>movement confidence and well-being</b>.</span></li>
+      <li class="reveal"><span class="dot">3</span><span class="txt">Supports <b>independence and social participation</b>.</span></li>
+      <li class="reveal"><span class="dot">4</span><span class="txt">Feeling capable is often the <b>first step to feeling younger</b>.</span></li>
+    </ul>
+    <div class="slide-art photo-art photo-left reveal" style="--photo:url('https://images.pexels.com/photos/36917061/pexels-photo-36917061.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1200')"><div class="scene"><span class="mark"></span></div><div class="eyebrow">Real goal</div><div class="line">Move like life is still yours</div><div class="small">Confidence comes back when daily tasks feel easy again.</div></div>
+    <div class="presenter reveal"><b>Say</b> People don't just want stronger muscles. They want to get up easily, carry groceries and feel proud of their body again.</div>
+  </section>
+
+  <!-- 11 — BEGINNER PROGRAM -->
+  <section class="slide">
+    <div class="slide-head reveal">
+      <span class="kicker">Slide 11 — Start Here</span>
+      <h2>What To Start With <span class="accent">After 40</span></h2>
+    </div>
+    <div class="prog">
+      <div class="pcard reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2"><path d="M3 12h2M19 12h2M6 9v6M18 9v6M9 7v10M15 7v10M9 12h6"/></svg></div>
+        <h4>Frequency</h4><p>Train 2–3 times a week on non-consecutive days.</p>
+        <ul class="card-points"><li>Start with two full-body sessions.</li><li>Keep at least 48 hours between hard days.</li></ul>
+        <div class="pcard-visual"><div class="bar-row"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div><div class="label">Weekly rhythm</div></div>
+      </div>
+      <div class="pcard reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2"><path d="M12 2v20M5 9l7-7 7 7M5 15l7 7 7-7"/></svg></div>
+        <h4>Movements</h4><p>Squat, hinge, push, pull, carry and core stability.</p>
+        <ul class="card-points"><li>Pick one move from each pattern.</li><li>Use machines, bands or weights as needed.</li></ul>
+        <div class="pcard-visual"><div class="bar-row"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div><div class="label">Six patterns</div></div>
+      </div>
+      <div class="pcard reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h4>Volume</h4><p>1–3 sets of controlled reps with gradual overload.</p>
+        <ul class="card-points"><li>Stop 1–3 reps before failure.</li><li>Add load only after reps feel steady.</li></ul>
+        <div class="pcard-visual"><div class="bar-row"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div><div class="label">Build slowly</div></div>
+      </div>
+      <div class="pcard reveal">
+        <div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div>
+        <h4>Priority</h4><p>Form, joint comfort and consistency over heavy lifting.</p>
+        <ul class="card-points"><li>No sharp pain, bouncing or rushing.</li><li>Leave each session feeling capable.</li></ul>
+        <div class="pcard-visual"><div class="bar-row"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div><div class="label">Form first</div></div>
+      </div>
+    </div>
+    <div class="program-note reveal">
+      <div><b>Simple rule:</b> choose movements you can repeat without pain.</div>
+      <div><b>Progress rule:</b> add reps, range, control or load slowly.</div>
+    </div>
+    <div class="presenter reveal"><b>Say</b> Think squats, lunges, rows, chest press, lat pulldown and basic carries, scaled to the person in front of you.</div>
+  </section>
+
+  <!-- 12 — CTA -->
+  <section class="slide">
+    <div class="visual-bubble" aria-hidden="true"></div>
+    <div class="reveal" style="display:flex;justify-content:space-between;align-items:center">
+      <span class="kicker">The Real Anti-Aging Strategy</span>
+      <span class="brand">EAT<span class="o">LIFT</span><span class="g">MOVE</span></span>
+    </div>
+    <h2 class="reveal" style="margin-top:18px">Strength Is A <span class="accent">Health Marker</span>,<br>Not Just A Fitness Goal</h2>
+    <div class="cta-lines">
+      <div class="q reveal">Muscle protects metabolism, bone, balance and independence.</div>
+      <div class="q reveal">For women, the payoff is biggest during and after menopause.</div>
+      <div class="q reveal quote-highlight">"You can't control your birthday — but you can control how strong you are when the next one comes."</div>
+    </div>
+    <a class="cta-btn reveal" href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%20want%20to%20get%20stronger%20after%2040!" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#06210f"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1 1 12 20zm4.4-5.6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.6 6.6 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2a.5.5 0 0 0 0-.5l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-1 2.3 5.3 5.3 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4 4.7 4.7 0 0 0 2.9.6 2.6 2.6 0 0 0 1.7-1.2 2 2 0 0 0 .2-1.2c0-.1-.2-.2-.4-.3z"/></svg>
+      Book Your Strength Assessment
+    </a>
+    <div class="wa-direct reveal">WhatsApp: <span>+91 62903 72390</span></div>
+    <div class="presenter reveal"><b>Say</b> The best time to start was years ago. The next best time is now.</div>
+  </section>
+
+</div>
+
+<div class="hint">Use ← → arrow keys to navigate</div>
+
+<div class="controls">
+  <button class="nav-btn" id="prev" aria-label="Previous">‹</button>
+  <div class="counter"><b id="cur">1</b> / <span id="total">12</span></div>
+  <div class="dots" id="dots"></div>
+  <button class="nav-btn" id="next" aria-label="Next">›</button>
+  <button class="nav-btn fs" id="fs" aria-label="Fullscreen">⛶</button>
+</div>
+
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  const total=slides.length;
+  let i=0;
+  const cur=document.getElementById('cur');
+  const progress=document.getElementById('progress');
+  const dotsWrap=document.getElementById('dots');
+  document.getElementById('total').textContent=total;
+
+  slides.forEach((_,n)=>{
+    const d=document.createElement('button');
+    d.className='dot-nav'+(n===0?' on':'');
+    d.addEventListener('click',()=>go(n));
+    dotsWrap.appendChild(d);
+  });
+  const dots=[...dotsWrap.children];
+
+  function go(n){
+    i=Math.max(0,Math.min(total-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    dots.forEach((d,k)=>d.classList.toggle('on',k===i));
+    cur.textContent=i+1;
+    progress.style.width=((i+1)/total*100)+'%';
+  }
+  const next=()=>go(i+1), prev=()=>go(i-1);
+  document.getElementById('next').onclick=next;
+  document.getElementById('prev').onclick=prev;
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key===' ')next();
+    else if(e.key==='ArrowLeft')prev();
+    else if(e.key==='Home')go(0);
+    else if(e.key==='End')go(total-1);
+  });
+  document.getElementById('fs').onclick=()=>{
+    if(!document.fullscreenElement)document.documentElement.requestFullscreen();
+    else document.exitFullscreen();
+  };
+
+  let controlsTimer;
+  function setFullscreenControlState(){
+    const isFs=!!document.fullscreenElement;
+    document.body.classList.toggle('fullscreen-mode', isFs);
+    document.body.classList.toggle('controls-hidden', false);
+    if(isFs){
+      clearTimeout(controlsTimer);
+      controlsTimer=setTimeout(()=>document.body.classList.add('controls-hidden'), 1600);
+    }
+  }
+  function revealControls(){
+    if(!document.fullscreenElement)return;
+    document.body.classList.remove('controls-hidden');
+    clearTimeout(controlsTimer);
+    controlsTimer=setTimeout(()=>document.body.classList.add('controls-hidden'), 1600);
+  }
+  document.addEventListener('fullscreenchange', setFullscreenControlState);
+  document.addEventListener('mousemove', revealControls);
+  document.addEventListener('touchstart', revealControls, {passive:true});
+  // swipe
+  let sx=0;
+  document.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
+  document.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-sx;
+    if(Math.abs(dx)>50){dx<0?next():prev();}
+  },{passive:true});
+  go(0);
+</script>
+</body>
+</html>
