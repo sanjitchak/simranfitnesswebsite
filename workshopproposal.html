@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corporate Strength & Fascia Wellness Workshop Proposal</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #eef0ed;
+      color: #151515;
+      font-family: Arial, Helvetica, sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      padding: 10px;
+    }
+
+    .print-toolbar {
+      width: min(210mm, calc(100vw - 20px));
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .print-toolbar button {
+      border: 0;
+      border-radius: 6px;
+      background: #202225;
+      color: #ffffff;
+      font: 700 13px/1 Arial, Helvetica, sans-serif;
+      letter-spacing: 0.02em;
+      padding: 11px 15px;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+    }
+
+    .print-toolbar button:hover {
+      background: #c32127;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(196, 35, 42, 0.08), transparent 36%),
+        linear-gradient(180deg, #ffffff 0%, #faf9f4 100%);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.16);
+      position: relative;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 7mm;
+      background: linear-gradient(90deg, #202225 0%, #c32127 48%, #d9a441 100%);
+    }
+
+    .sheet {
+      position: relative;
+      height: 100%;
+      padding: 13mm 12mm 9mm;
+      display: grid;
+      grid-template-rows: auto auto auto 1fr auto;
+      gap: 4.6mm;
+    }
+
+    .topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8mm;
+      font-size: 8.5pt;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #606060;
+      font-weight: 700;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 2mm;
+      color: #1d1d1d;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-mark span {
+      display: inline-block;
+      width: 4mm;
+      height: 4mm;
+      background: #c32127;
+      border-radius: 50%;
+      box-shadow: 5mm 0 0 #d9a441, 10mm 0 0 #202225;
+      margin-right: 10mm;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: stretch;
+      gap: 7mm;
+      min-height: 47mm;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 26pt;
+      line-height: 0.96;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #151515;
+    }
+
+    .accent {
+      color: #c32127;
+    }
+
+    .intro {
+      margin: 3mm 0 0;
+      font-size: 9.5pt;
+      line-height: 1.38;
+      color: #333333;
+      max-width: 112mm;
+    }
+
+    .hero-photo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3mm;
+      height: 47mm;
+    }
+
+    .portrait {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4mm;
+      background: #222;
+      border: 0.7mm solid #fff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.13);
+    }
+
+    .portrait img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .portrait.simran img {
+      object-position: center 18%;
+    }
+
+    .portrait.anurag img {
+      object-position: center 20%;
+    }
+
+    .portrait strong {
+      position: absolute;
+      left: 3mm;
+      right: 3mm;
+      bottom: 3mm;
+      color: #fff;
+      font-size: 8.8pt;
+      line-height: 1.15;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.75);
+    }
+
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 45%;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.72), transparent);
+    }
+
+    .portrait strong {
+      z-index: 1;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3mm;
+    }
+
+    .summary-item,
+    .panel,
+    .expert,
+    .module,
+    .proof {
+      border: 0.35mm solid rgba(32, 34, 37, 0.12);
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 3mm;
+    }
+
+    .summary-item {
+      padding: 2.8mm;
+      min-height: 17mm;
+    }
+
+    .summary-item strong {
+      display: block;
+      font-size: 12.5pt;
+      line-height: 1;
+      color: #c32127;
+      margin-bottom: 1.2mm;
+    }
+
+    .summary-item span {
+      display: block;
+      font-size: 7.4pt;
+      line-height: 1.3;
+      color: #3b3b3b;
+      font-weight: 700;
+    }
+
+    .main {
+      display: grid;
+      grid-template-columns: 1fr 0.95fr;
+      gap: 4mm;
+      min-height: 0;
+    }
+
+    .left,
+    .right {
+      display: grid;
+      gap: 3mm;
+      align-content: start;
+      min-height: 0;
+    }
+
+    .panel {
+      padding: 3.5mm;
+    }
+
+    .section-label {
+      margin: 0 0 2.5mm;
+      color: #c32127;
+      font-size: 7.6pt;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h2,
+    h3 {
+      margin: 0;
+      color: #151515;
+    }
+
+    h2 {
+      font-size: 13.2pt;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+    }
+
+    h3 {
+      font-size: 10.8pt;
+      line-height: 1.18;
+    }
+
+    p {
+      margin: 1.6mm 0 0;
+      font-size: 7.9pt;
+      line-height: 1.35;
+      color: #393939;
+    }
+
+    .bullets {
+      list-style: none;
+      margin: 3mm 0 0;
+      padding: 0;
+      display: grid;
+      gap: 1.1mm;
+    }
+
+    .bullets li {
+      position: relative;
+      padding-left: 4.2mm;
+      font-size: 7.8pt;
+      line-height: 1.26;
+      color: #333333;
+    }
+
+    .bullets li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 1.7mm;
+      width: 2mm;
+      height: 2mm;
+      border-radius: 50%;
+      background: #d9a441;
+    }
+
+    .modules {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.4mm;
+      margin-top: 2.6mm;
+    }
+
+    .module {
+      padding: 2.6mm;
+      min-height: 23mm;
+    }
+
+    .module strong {
+      display: block;
+      font-size: 8.2pt;
+      line-height: 1.18;
+      color: #171717;
+      margin-bottom: 1.4mm;
+    }
+
+    .module span {
+      display: block;
+      font-size: 7.15pt;
+      line-height: 1.22;
+      color: #4b4b4b;
+    }
+
+    .expert-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.4mm;
+    }
+
+    .expert {
+      padding: 2.8mm;
+      display: grid;
+      grid-template-columns: 17mm 1fr;
+      gap: 2.7mm;
+      align-items: center;
+    }
+
+    .headshot {
+      width: 17mm;
+      height: 17mm;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #ddd;
+      border: 0.55mm solid #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+    }
+
+    .headshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .expert small {
+      display: block;
+      margin-top: 0.8mm;
+      font-size: 6.9pt;
+      line-height: 1.25;
+      color: #565656;
+      font-weight: 700;
+    }
+
+    .credential-list {
+      margin-top: 2mm;
+      display: grid;
+      gap: 1.15mm;
+      font-size: 7.1pt;
+      line-height: 1.2;
+      color: #3c3c3c;
+    }
+
+    .credential-list div {
+      padding-left: 3.6mm;
+      position: relative;
+    }
+
+    .credential-list div::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 1.4mm;
+      width: 2mm;
+      height: 0.55mm;
+      background: #c32127;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 0.35mm solid rgba(32, 34, 37, 0.16);
+      padding-top: 2.4mm;
+      color: #565656;
+      font-size: 7.1pt;
+      line-height: 1.3;
+    }
+
+    .footer strong {
+      color: #202225;
+    }
+
+    @media print {
+      html,
+      body {
+        width: 210mm;
+        height: 297mm;
+        padding: 0;
+        background: #fff;
+      }
+
+      body {
+        display: block;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+        box-shadow: none;
+        page-break-after: avoid;
+      }
+
+      .print-toolbar {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-toolbar">
+    <button type="button" onclick="window.print()">Print / Save PDF</button>
+  </div>
+
+  <main class="page">
+    <section class="sheet">
+      <header class="topline">
+        <div class="brand-mark"><span></span>Combined Corporate Workshop Proposal</div>
+        <div>Fitness + Physiotherapy</div>
+      </header>
+
+      <section class="hero">
+        <div>
+          <h1>Corporate <span class="accent">Strength</span> & Fascia Wellness Workshop</h1>
+          <p class="intro">A practical, high-credibility workshop for employees, leaders, and desk-heavy teams who need better energy, stronger bodies, improved posture, and clear guidance on pain prevention.</p>
+        </div>
+        <div class="hero-photo" aria-label="Workshop experts">
+          <div class="portrait simran">
+            <img src="proposal-images/simran-agarwal-full.jpeg" alt="Simran Agarwal">
+            <strong>Simran Agarwal<br>Fitness Coach</strong>
+          </div>
+          <div class="portrait anurag">
+            <img src="proposal-images/anurag-jaiswal-full.jpeg" alt="Dr Anuraag Jaiswal">
+            <strong>Dr Anuraag Jaiswal (PT)<br>Musculoskeletal Physical Therapist</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="summary" aria-label="Workshop highlights">
+        <div class="summary-item"><strong>60-90</strong><span>minute corporate-ready learning session</span></div>
+        <div class="summary-item"><strong>2</strong><span>experts: strength coaching + pain science</span></div>
+        <div class="summary-item"><strong>Live</strong><span>fascia and posture demonstration on select volunteers</span></div>
+        <div class="summary-item"><strong>Zero</strong><span>gym intimidation, crash diets, or extreme fitness talk</span></div>
+      </section>
+
+      <section class="main">
+        <div class="left">
+          <div class="panel">
+            <div class="section-label">Workshop Aim</div>
+            <h2>Help employees understand why they feel stiff, tired, weak, or in pain, and what to do next.</h2>
+            <p>The session combines Simran's practical strength and nutrition approach with Dr Anuraag's musculoskeletal therapy and fascia expertise. The result is simple, credible wellness education that employees can use immediately.</p>
+          </div>
+
+          <div class="panel">
+            <div class="section-label">Core Topics</div>
+            <div class="modules">
+              <div class="module"><strong>What is fascia?</strong><span>Why connective tissue matters for movement, pain, flexibility, strength, and daily comfort.</span></div>
+              <div class="module"><strong>Pain and posture</strong><span>How long sitting, overload, dehydration, and poor movement can contribute to musculoskeletal problems.</span></div>
+              <div class="module"><strong>Strength after 40</strong><span>Why resistance training supports muscle, bone health, stamina, hormones, confidence, and ageing well.</span></div>
+              <div class="module"><strong>Fitness beyond weight loss</strong><span>Reframing fitness as energy, mobility, disease prevention, performance, and long-term independence.</span></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="section-label">Corporate Outcomes</div>
+            <ul class="bullets">
+              <li>Employees learn the link between sitting, stiffness, fascia, posture, food habits, and energy crashes.</li>
+              <li>Teams receive beginner-friendly strength and mobility principles without gym pressure.</li>
+              <li>Selected attendees experience practical fascia or posture assessment demonstrations.</li>
+              <li>HR gets a premium, expert-led wellness session suitable for mixed-age corporate audiences.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <aside class="right">
+          <div class="panel">
+            <div class="section-label">Expert Profiles</div>
+            <div class="expert-grid">
+              <div class="expert">
+                <div class="headshot"><img src="proposal-images/simran-agarwal-headshot.jpeg" alt="Simran Agarwal headshot"></div>
+                <div>
+                  <h3>Simran Agarwal</h3>
+                  <small>Fitness Coach | Strength Training | Corporate Wellness | Founder, EatLiftMove</small>
+                </div>
+              </div>
+              <div class="expert">
+                <div class="headshot"><img src="proposal-images/anurag-jaiswal-full.jpeg" alt="Dr Anuraag Jaiswal headshot"></div>
+                <div>
+                  <h3>Dr Anuraag Jaiswal (PT)</h3>
+                  <small>Consultant Musculoskeletal Physical Therapist | Founder, Swasthaya Clinic</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="section-label">Simran Credentials</div>
+            <div class="credential-list">
+              <div>Founder of EatLiftMove; trained 200+ clients including premium and celebrity clients in Mumbai and Kolkata.</div>
+              <div>CrossFit Level 1 & 2, Kettlebell Level 1 & 2, EKFA Kettlebell, University of Mumbai personal fitness training.</div>
+              <div>Pilates, functional strength, plyometrics, advanced physique transformation, sports nutrition from Precision Nutrition and NESTA.</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="section-label">Anurag Credentials</div>
+            <div class="credential-list">
+              <div>B.P.T. (WBUHS), Certified Musculoskeletal Therapy (LASHS), Certified Clinical Neurodynamics (NDS Sydney).</div>
+              <div>Clinical Dry Needling, MIAP, KIASTM practitioner, PEMF therapy pioneer in Eastern India.</div>
+              <div>Fascial Manipulation Expert Level 1, Stecco Institute Italy; focuses on pain relief and movement restoration.</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="section-label">Credibility Snapshot</div>
+            <p>Simran Agarwal and Dr Anuraag Jaiswal were invited together as distinguished chief guests for Rotary Club Calcutta Mahanagar, bringing fitness coaching and musculoskeletal physiotherapy into one wellness conversation.</p>
+          </div>
+        </aside>
+      </section>
+
+      <footer class="footer">
+        <div><strong>Session flow:</strong> awareness, fascia/posture demonstration, then simple strength, food, and recovery actions.</div>
+        <div><strong>Theme:</strong> stronger bodies, better posture, less pain, higher daily energy.</div>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>
