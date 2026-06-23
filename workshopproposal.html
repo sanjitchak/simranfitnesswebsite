@@ -30,13 +30,21 @@
       flex-direction: column;
       align-items: center;
       gap: 10px;
-      padding: 12px;
+      padding: 0;
+      background: linear-gradient(180deg, #f4f0e8 0%, #ffffff 100%);
     }
 
     .print-toolbar {
-      width: min(210mm, calc(100vw - 24px));
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      width: 100%;
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid rgba(23, 25, 27, 0.1);
+      backdrop-filter: blur(10px);
     }
 
     .print-toolbar button {
@@ -48,6 +56,7 @@
       font: 700 13px/1 Arial, Helvetica, sans-serif;
       padding: 11px 15px;
       box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+      width: min(100%, 340px);
     }
 
     .print-toolbar button:hover {
@@ -55,31 +64,37 @@
     }
 
     .page {
-      width: 210mm;
-      height: 297mm;
-      overflow: hidden;
+      width: 100%;
+      max-width: 1180px;
+      height: auto;
+      min-height: 0;
+      overflow: visible;
       position: relative;
       background:
-        linear-gradient(90deg, rgba(195, 33, 39, 0.08), transparent 42%),
+        linear-gradient(90deg, rgba(195, 33, 39, 0.06), transparent 55%),
         linear-gradient(180deg, #fff 0%, #fbfaf4 100%);
-      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.16);
+      box-shadow: none;
+    }
+
+    .page + .page {
+      border-top: 1px solid rgba(23, 25, 27, 0.12);
     }
 
     .page::before {
       content: "";
       position: absolute;
       inset: 0 0 auto;
-      height: 7mm;
+      height: 6px;
       background: linear-gradient(90deg, #17191b 0%, #c32127 52%, #d9a441 100%);
     }
 
     .sheet {
-      height: 100%;
-      padding: 13mm 12mm 8mm;
+      height: auto;
+      padding: clamp(32px, 5vw, 64px) clamp(18px, 4vw, 52px);
       position: relative;
       display: grid;
-      grid-template-rows: auto auto auto 1fr auto;
-      gap: 4mm;
+      grid-template-rows: none;
+      gap: clamp(18px, 2.6vw, 30px);
     }
 
     .topline,
@@ -87,9 +102,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8mm;
+      gap: 18px;
       color: #5e5e5e;
-      font-size: 7.5pt;
+      font-size: 12px;
       font-weight: 700;
       line-height: 1.25;
       text-transform: uppercase;
@@ -98,18 +113,18 @@
     .brand-mark {
       display: inline-flex;
       align-items: center;
-      gap: 2mm;
+      gap: 8px;
       color: #1b1b1b;
     }
 
     .brand-mark span {
       display: inline-block;
-      width: 4mm;
-      height: 4mm;
-      margin-right: 9mm;
+      width: 13px;
+      height: 13px;
+      margin-right: 28px;
       border-radius: 50%;
       background: #c32127;
-      box-shadow: 5mm 0 0 #d9a441, 10mm 0 0 #17191b;
+      box-shadow: 18px 0 0 #d9a441, 36px 0 0 #17191b;
     }
 
     h1,
@@ -121,27 +136,28 @@
 
     h1 {
       color: #141414;
-      font-size: 29pt;
+      font-size: clamp(44px, 6.5vw, 78px);
       line-height: 0.98;
       text-transform: uppercase;
+      overflow-wrap: anywhere;
     }
 
     h2 {
       color: #141414;
-      font-size: 13.4pt;
-      line-height: 1.12;
+      font-size: clamp(24px, 2.6vw, 34px);
+      line-height: 1.08;
     }
 
     h3 {
       color: #141414;
-      font-size: 10.5pt;
+      font-size: 19px;
       line-height: 1.15;
     }
 
     p {
       color: #3d3d3d;
-      font-size: 7.85pt;
-      line-height: 1.34;
+      font-size: 15px;
+      line-height: 1.4;
     }
 
     .accent {
@@ -150,15 +166,15 @@
 
     .hero {
       display: grid;
-      grid-template-columns: 1.03fr 0.97fr;
-      gap: 7mm;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+      gap: clamp(20px, 4vw, 52px);
       align-items: stretch;
     }
 
     .proposal-label {
       margin-bottom: 2.4mm;
       color: #c32127;
-      font-size: 7.6pt;
+      font-size: 12px;
       font-weight: 800;
       line-height: 1;
       text-transform: uppercase;
@@ -166,27 +182,27 @@
 
     .subtitle {
       margin-top: 3mm;
-      max-width: 112mm;
+      max-width: 720px;
       color: #303030;
-      font-size: 9.2pt;
-      line-height: 1.35;
+      font-size: clamp(17px, 1.65vw, 21px);
+      line-height: 1.45;
     }
 
     .title-note {
       margin-top: 3mm;
-      padding: 2.5mm 3mm;
-      border-left: 1.1mm solid #d9a441;
+      padding: 12px 14px;
+      border-left: 4px solid #d9a441;
       background: rgba(217, 164, 65, 0.12);
       color: #343434;
-      font-size: 7.65pt;
-      line-height: 1.28;
+      font-size: 15px;
+      line-height: 1.38;
     }
 
     .hero-photo {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3mm;
-      height: 58mm;
+      gap: 12px;
+      height: auto;
     }
 
     .portrait,
@@ -201,6 +217,7 @@
     .portrait {
       position: relative;
       border-radius: 6px;
+      aspect-ratio: 4 / 5;
     }
 
     .portrait img,
@@ -242,8 +259,8 @@
 
     .highlights {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 3mm;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
     }
 
     .metric,
@@ -259,21 +276,21 @@
 
     .metric {
       min-height: 18mm;
-      padding: 2.7mm;
+      padding: clamp(14px, 2vw, 22px);
     }
 
     .metric strong {
       display: block;
       margin-bottom: 1.2mm;
       color: #c32127;
-      font-size: 12pt;
+      font-size: 25px;
       line-height: 1;
     }
 
     .metric span {
       display: block;
       color: #333;
-      font-size: 7.35pt;
+      font-size: 13px;
       font-weight: 700;
       line-height: 1.28;
     }
@@ -281,25 +298,25 @@
     .content-grid {
       display: grid;
       grid-template-columns: 1.02fr 0.98fr;
-      gap: 4mm;
+      gap: 18px;
       min-height: 0;
     }
 
     .stack {
       display: grid;
       align-content: start;
-      gap: 3mm;
+      gap: 18px;
       min-height: 0;
     }
 
     .panel {
-      padding: 3.5mm;
+      padding: clamp(14px, 2vw, 22px);
     }
 
     .section-label {
       margin-bottom: 2.2mm;
       color: #c32127;
-      font-size: 7.4pt;
+      font-size: 12px;
       font-weight: 800;
       line-height: 1;
       text-transform: uppercase;
@@ -321,8 +338,8 @@
       position: relative;
       padding-left: 4mm;
       color: #333;
-      font-size: 7.5pt;
-      line-height: 1.25;
+      font-size: 15px;
+      line-height: 1.4;
     }
 
     .bullets li::before {
@@ -339,7 +356,7 @@
     .audience-strip {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2.2mm;
+      gap: 8px;
       margin-top: 2.6mm;
     }
 
@@ -347,30 +364,30 @@
       border-radius: 5px;
       background: #17191b;
       color: #fff;
-      font-size: 6.8pt;
+      font-size: 12px;
       font-weight: 800;
       line-height: 1.2;
-      padding: 2mm;
+      padding: 10px;
       text-align: center;
       text-transform: uppercase;
     }
 
     .expert-list {
       display: grid;
-      gap: 2.5mm;
+      gap: 12px;
     }
 
     .expert {
       display: grid;
-      grid-template-columns: 17mm 1fr;
-      gap: 2.8mm;
+      grid-template-columns: 58px 1fr;
+      gap: 12px;
       align-items: center;
-      padding: 2.8mm;
+      padding: 14px;
     }
 
     .headshot {
-      width: 17mm;
-      height: 17mm;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
     }
 
@@ -378,7 +395,7 @@
       display: block;
       margin-top: 0.8mm;
       color: #555;
-      font-size: 6.9pt;
+      font-size: 13px;
       font-weight: 700;
       line-height: 1.25;
     }
@@ -393,8 +410,8 @@
       position: relative;
       padding-left: 3.6mm;
       color: #3f3f3f;
-      font-size: 7pt;
-      line-height: 1.22;
+      font-size: 15px;
+      line-height: 1.4;
     }
 
     .credential-list div::before {
@@ -409,47 +426,48 @@
 
     .module-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.5mm;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
     }
 
     .mini-card {
-      padding: 2.7mm;
-      min-height: 24mm;
+      padding: clamp(14px, 2vw, 22px);
+      min-height: 0;
     }
 
     .mini-card strong {
       display: block;
       margin-bottom: 1.2mm;
       color: #151515;
-      font-size: 8.3pt;
+      font-size: 17px;
       line-height: 1.16;
     }
 
     .mini-card span {
       display: block;
       color: #4a4a4a;
-      font-size: 7.05pt;
-      line-height: 1.22;
+      font-size: 15px;
+      line-height: 1.4;
     }
 
     .outcomes-layout {
       display: grid;
       grid-template-columns: 1fr 0.92fr;
-      gap: 3mm;
+      gap: 18px;
       align-items: stretch;
     }
 
     .engagement-gallery {
       display: grid;
-      gap: 2mm;
+      gap: 12px;
       align-content: stretch;
     }
 
     .engagement-photo {
       position: relative;
       border-radius: 6px;
-      height: 25.5mm;
+      height: auto;
+      aspect-ratio: 16 / 7;
       margin: 0;
     }
 
@@ -480,12 +498,12 @@
     .camp-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2.7mm;
+      gap: 14px;
       margin-top: 2.5mm;
     }
 
     .camp-card {
-      padding: 2.8mm;
+      padding: clamp(14px, 2vw, 22px);
     }
 
     .camp-card h3 {
@@ -497,8 +515,8 @@
       margin: 0;
       padding-left: 4mm;
       color: #3b3b3b;
-      font-size: 7.1pt;
-      line-height: 1.25;
+      font-size: 15px;
+      line-height: 1.4;
     }
 
     .camp-card li {
@@ -508,7 +526,7 @@
     .credibility-row {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 2.4mm;
+      gap: 10px;
       margin-top: 2.6mm;
     }
 
@@ -516,10 +534,10 @@
       border-radius: 5px;
       background: rgba(195, 33, 39, 0.1);
       color: #17191b;
-      font-size: 7pt;
+      font-size: 12px;
       font-weight: 800;
       line-height: 1.2;
-      padding: 2.1mm;
+      padding: 10px;
       text-align: center;
       text-transform: uppercase;
     }
@@ -527,12 +545,12 @@
     .contact-grid {
       display: grid;
       grid-template-columns: 1.12fr 0.88fr;
-      gap: 3mm;
+      gap: 18px;
       align-items: stretch;
     }
 
     .contact-card {
-      padding: 3mm;
+      padding: clamp(14px, 2vw, 22px);
       background: #17191b;
       color: #fff;
     }
@@ -544,8 +562,8 @@
 
     .contact-card p {
       margin-top: 1.4mm;
-      font-size: 7.5pt;
-      line-height: 1.3;
+      font-size: 15px;
+      line-height: 1.4;
     }
 
     .contact-lines {
@@ -553,9 +571,9 @@
       gap: 1.1mm;
       margin-top: 2.2mm;
       color: #fff;
-      font-size: 7.7pt;
+      font-size: 15px;
       font-weight: 700;
-      line-height: 1.25;
+      line-height: 1.4;
     }
 
     .footer {
@@ -588,12 +606,273 @@
       .page {
         width: 210mm;
         height: 297mm;
+        max-width: none;
+        overflow: hidden;
         box-shadow: none;
         break-after: page;
       }
 
       .page:last-child {
         break-after: auto;
+      }
+
+      .page::before {
+        height: 7mm;
+      }
+
+      .sheet {
+        height: 100%;
+        padding: 13mm 12mm 8mm;
+        grid-template-rows: auto auto auto 1fr auto;
+        gap: 4mm;
+      }
+
+      .topline,
+      .footer {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8mm;
+        font-size: 7.5pt;
+      }
+
+      .brand-mark {
+        gap: 2mm;
+      }
+
+      .brand-mark span {
+        width: 4mm;
+        height: 4mm;
+        margin-right: 9mm;
+        box-shadow: 5mm 0 0 #d9a441, 10mm 0 0 #17191b;
+      }
+
+      h1 {
+        font-size: 29pt;
+        line-height: 0.98;
+      }
+
+      h2 {
+        font-size: 13.4pt;
+        line-height: 1.12;
+      }
+
+      h3 {
+        font-size: 10.5pt;
+        line-height: 1.15;
+      }
+
+      p {
+        font-size: 7.85pt;
+        line-height: 1.34;
+      }
+
+      .hero {
+        grid-template-columns: 1.03fr 0.97fr;
+        gap: 7mm;
+      }
+
+      .proposal-label {
+        font-size: 7.6pt;
+      }
+
+      .subtitle {
+        max-width: 112mm;
+        font-size: 9.2pt;
+        line-height: 1.35;
+      }
+
+      .title-note {
+        padding: 2.5mm 3mm;
+        border-left-width: 1.1mm;
+        font-size: 7.65pt;
+        line-height: 1.28;
+      }
+
+      .hero-photo {
+        grid-template-columns: 1fr 1fr;
+        gap: 3mm;
+        height: 58mm;
+      }
+
+      .portrait {
+        aspect-ratio: auto;
+      }
+
+      .highlights {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3mm;
+      }
+
+      .metric {
+        min-height: 18mm;
+        padding: 2.7mm;
+      }
+
+      .metric strong {
+        font-size: 12pt;
+      }
+
+      .metric span {
+        font-size: 7.35pt;
+      }
+
+      .content-grid {
+        grid-template-columns: 1.02fr 0.98fr;
+        gap: 4mm;
+      }
+
+      .stack {
+        gap: 3mm;
+      }
+
+      .panel {
+        padding: 3.5mm;
+      }
+
+      .section-label {
+        font-size: 7.4pt;
+      }
+
+      .bullets li {
+        padding-left: 4mm;
+        font-size: 7.5pt;
+        line-height: 1.25;
+      }
+
+      .bullets li::before {
+        top: 1.55mm;
+        width: 2mm;
+        height: 2mm;
+      }
+
+      .audience-strip {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.2mm;
+      }
+
+      .audience-strip span {
+        font-size: 6.8pt;
+        padding: 2mm;
+      }
+
+      .expert-list {
+        gap: 2.5mm;
+      }
+
+      .expert {
+        grid-template-columns: 17mm 1fr;
+        gap: 2.8mm;
+        padding: 2.8mm;
+      }
+
+      .headshot {
+        width: 17mm;
+        height: 17mm;
+      }
+
+      .expert small {
+        font-size: 6.9pt;
+      }
+
+      .credential-list div {
+        padding-left: 3.6mm;
+        font-size: 7pt;
+        line-height: 1.22;
+      }
+
+      .credential-list div::before {
+        top: 1.35mm;
+        width: 2mm;
+        height: 0.55mm;
+      }
+
+      .module-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5mm;
+      }
+
+      .mini-card {
+        min-height: 24mm;
+        padding: 2.7mm;
+      }
+
+      .mini-card strong {
+        font-size: 8.3pt;
+      }
+
+      .mini-card span {
+        font-size: 7.05pt;
+        line-height: 1.22;
+      }
+
+      .outcomes-layout {
+        grid-template-columns: 1fr 0.92fr;
+        gap: 3mm;
+      }
+
+      .engagement-gallery {
+        gap: 2mm;
+      }
+
+      .engagement-photo {
+        height: 25.5mm;
+        aspect-ratio: auto;
+      }
+
+      .engagement-photo strong,
+      .portrait strong {
+        left: 3mm;
+        right: 3mm;
+        bottom: 3mm;
+        font-size: 8pt;
+      }
+
+      .portrait strong {
+        font-size: 8.2pt;
+      }
+
+      .camp-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.7mm;
+      }
+
+      .camp-card {
+        padding: 2.8mm;
+      }
+
+      .camp-card ul {
+        font-size: 7.1pt;
+        line-height: 1.25;
+      }
+
+      .credibility-row {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2.4mm;
+      }
+
+      .credibility-row span {
+        font-size: 7pt;
+        padding: 2.1mm;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1.12fr 0.88fr;
+        gap: 3mm;
+      }
+
+      .contact-card {
+        padding: 3mm;
+      }
+
+      .contact-card p {
+        font-size: 7.5pt;
+        line-height: 1.3;
+      }
+
+      .contact-lines {
+        font-size: 7.7pt;
+        line-height: 1.25;
       }
     }
 
@@ -912,7 +1191,7 @@
 
       .hero-photo {
         height: auto;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
         gap: 10px;
       }
 
@@ -924,7 +1203,7 @@
       .module-grid,
       .camp-grid,
       .credibility-row {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 10px;
       }
 
