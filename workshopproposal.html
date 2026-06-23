@@ -597,6 +597,242 @@
       }
     }
 
+    @media screen {
+      body {
+        align-items: center;
+        gap: 0;
+        padding: 0;
+        background: linear-gradient(180deg, #f4f0e8 0%, #ffffff 100%);
+      }
+
+      .print-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        width: 100%;
+        padding: 10px 16px;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.94);
+        border-bottom: 1px solid rgba(23, 25, 27, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .print-toolbar button {
+        width: min(100%, 340px);
+      }
+
+      .page {
+        width: 100%;
+        max-width: 1180px;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+        box-shadow: none;
+        background:
+          linear-gradient(90deg, rgba(195, 33, 39, 0.06), transparent 55%),
+          linear-gradient(180deg, #fff 0%, #fbfaf4 100%);
+      }
+
+      .page + .page {
+        border-top: 1px solid rgba(23, 25, 27, 0.12);
+      }
+
+      .page::before {
+        height: 6px;
+      }
+
+      .sheet {
+        height: auto;
+        padding: clamp(32px, 5vw, 64px) clamp(18px, 4vw, 52px);
+        grid-template-rows: none;
+        gap: clamp(18px, 2.6vw, 30px);
+      }
+
+      .topline,
+      .footer {
+        gap: 18px;
+        font-size: 12px;
+      }
+
+      .brand-mark {
+        gap: 8px;
+      }
+
+      .brand-mark span {
+        width: 13px;
+        height: 13px;
+        margin-right: 28px;
+        box-shadow: 18px 0 0 #d9a441, 36px 0 0 #17191b;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+        gap: clamp(20px, 4vw, 52px);
+      }
+
+      .hero-photo {
+        height: auto;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .portrait {
+        aspect-ratio: 4 / 5;
+      }
+
+      .highlights {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .content-grid,
+      .outcomes-layout,
+      .contact-grid {
+        gap: 18px;
+      }
+
+      .module-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .camp-grid {
+        gap: 14px;
+      }
+
+      .credibility-row {
+        gap: 10px;
+      }
+
+      .panel,
+      .metric,
+      .mini-card,
+      .camp-card,
+      .contact-card {
+        padding: clamp(14px, 2vw, 22px);
+      }
+
+      .metric,
+      .mini-card {
+        min-height: 0;
+      }
+
+      .stack {
+        gap: 18px;
+      }
+
+      .engagement-gallery {
+        gap: 12px;
+      }
+
+      .engagement-photo {
+        height: auto;
+        aspect-ratio: 16 / 7;
+      }
+
+      .headshot {
+        width: 58px;
+        height: 58px;
+      }
+
+      .expert {
+        grid-template-columns: 58px 1fr;
+        gap: 12px;
+        padding: 14px;
+      }
+
+      h1 {
+        font-size: clamp(44px, 6.5vw, 78px);
+        line-height: 0.98;
+        overflow-wrap: anywhere;
+      }
+
+      h2 {
+        font-size: clamp(24px, 2.6vw, 34px);
+        line-height: 1.08;
+      }
+
+      h3 {
+        font-size: 19px;
+      }
+
+      p,
+      .bullets li,
+      .credential-list div,
+      .mini-card span,
+      .camp-card ul,
+      .contact-card p,
+      .contact-lines {
+        font-size: 15px;
+        line-height: 1.4;
+      }
+
+      .subtitle {
+        max-width: 720px;
+        font-size: clamp(17px, 1.65vw, 21px);
+        line-height: 1.45;
+      }
+
+      .proposal-label,
+      .section-label {
+        font-size: 12px;
+      }
+
+      .metric strong {
+        font-size: 25px;
+      }
+
+      .metric span,
+      .expert small {
+        font-size: 13px;
+      }
+
+      .title-note {
+        padding: 12px 14px;
+        font-size: 15px;
+        line-height: 1.38;
+        border-left-width: 4px;
+      }
+
+      .audience-strip {
+        gap: 8px;
+      }
+
+      .audience-strip span,
+      .credibility-row span {
+        font-size: 12px;
+        padding: 10px;
+      }
+
+      .bullets li {
+        padding-left: 18px;
+      }
+
+      .bullets li::before {
+        top: 8px;
+        width: 8px;
+        height: 8px;
+      }
+
+      .credential-list div {
+        padding-left: 16px;
+      }
+
+      .credential-list div::before {
+        top: 9px;
+        width: 9px;
+        height: 2px;
+      }
+
+      .portrait strong,
+      .engagement-photo strong {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        font-size: 13px;
+      }
+    }
+
     @media screen and (max-width: 900px) {
       body {
         display: block;
