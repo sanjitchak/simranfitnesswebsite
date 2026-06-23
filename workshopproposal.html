@@ -596,6 +596,293 @@
         break-after: auto;
       }
     }
+
+    @media screen and (max-width: 900px) {
+      body {
+        display: block;
+        padding: 0;
+        background: linear-gradient(180deg, #faf7f0 0%, #fff 100%);
+      }
+
+      .print-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        width: 100%;
+        padding: 10px 14px;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.92);
+        border-bottom: 1px solid rgba(23, 25, 27, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .print-toolbar button {
+        width: min(100%, 340px);
+      }
+
+      .page {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+        box-shadow: none;
+        background:
+          linear-gradient(90deg, rgba(195, 33, 39, 0.06), transparent 55%),
+          linear-gradient(180deg, #fff 0%, #fbfaf4 100%);
+      }
+
+      .page + .page {
+        border-top: 1px solid rgba(23, 25, 27, 0.12);
+      }
+
+      .page::before {
+        height: 6px;
+      }
+
+      .sheet {
+        height: auto;
+        padding: 28px 16px 34px;
+        display: grid;
+        grid-template-rows: none;
+        gap: 18px;
+      }
+
+      .topline,
+      .footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 11px;
+      }
+
+      .brand-mark {
+        gap: 8px;
+      }
+
+      .brand-mark span {
+        width: 13px;
+        height: 13px;
+        margin-right: 28px;
+        box-shadow: 18px 0 0 #d9a441, 36px 0 0 #17191b;
+      }
+
+      .hero,
+      .content-grid,
+      .outcomes-layout,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .hero-photo {
+        height: auto;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .portrait {
+        aspect-ratio: 4 / 5;
+      }
+
+      .highlights,
+      .module-grid,
+      .camp-grid,
+      .credibility-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .stack {
+        gap: 14px;
+      }
+
+      .panel,
+      .metric,
+      .mini-card,
+      .camp-card,
+      .contact-card {
+        padding: 14px;
+        border-radius: 6px;
+      }
+
+      .metric {
+        min-height: 0;
+      }
+
+      .mini-card {
+        min-height: 0;
+      }
+
+      .engagement-gallery {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .engagement-photo {
+        height: auto;
+        aspect-ratio: 16 / 7;
+      }
+
+      .headshot {
+        width: 58px;
+        height: 58px;
+      }
+
+      .expert {
+        grid-template-columns: 58px 1fr;
+        gap: 12px;
+        padding: 12px;
+      }
+
+      h1 {
+        font-size: clamp(40px, 13vw, 64px);
+        line-height: 0.98;
+        overflow-wrap: anywhere;
+      }
+
+      h2 {
+        font-size: clamp(24px, 7vw, 32px);
+        line-height: 1.08;
+      }
+
+      h3 {
+        font-size: 19px;
+      }
+
+      p,
+      .bullets li,
+      .credential-list div,
+      .mini-card span,
+      .camp-card ul,
+      .contact-card p,
+      .contact-lines {
+        font-size: 15px;
+        line-height: 1.4;
+      }
+
+      .subtitle {
+        max-width: none;
+        font-size: 17px;
+        line-height: 1.45;
+      }
+
+      .proposal-label,
+      .section-label {
+        font-size: 12px;
+      }
+
+      .metric strong {
+        font-size: 24px;
+      }
+
+      .metric span,
+      .expert small {
+        font-size: 13px;
+      }
+
+      .title-note {
+        padding: 12px 14px;
+        font-size: 15px;
+        line-height: 1.38;
+        border-left-width: 4px;
+      }
+
+      .audience-strip {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .audience-strip span,
+      .credibility-row span {
+        font-size: 12px;
+        padding: 10px;
+      }
+
+      .bullets li {
+        padding-left: 18px;
+      }
+
+      .bullets li::before {
+        top: 8px;
+        width: 8px;
+        height: 8px;
+      }
+
+      .credential-list div {
+        padding-left: 16px;
+      }
+
+      .credential-list div::before {
+        top: 9px;
+        width: 9px;
+        height: 2px;
+      }
+
+      .portrait strong,
+      .engagement-photo strong {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        font-size: 13px;
+      }
+    }
+
+    @media screen and (max-width: 560px) {
+      .sheet {
+        padding: 26px 14px 32px;
+        gap: 16px;
+      }
+
+      .hero-photo,
+      .highlights,
+      .module-grid,
+      .camp-grid,
+      .credibility-row {
+        grid-template-columns: 1fr;
+      }
+
+      .portrait {
+        aspect-ratio: 16 / 12;
+      }
+
+      .portrait.simran img {
+        object-position: center 15%;
+      }
+
+      .portrait.anurag img {
+        object-position: center 18%;
+      }
+
+      .engagement-photo {
+        aspect-ratio: 16 / 8.5;
+      }
+
+      .expert {
+        align-items: flex-start;
+      }
+
+      h1 {
+        font-size: clamp(34px, 12vw, 46px);
+      }
+
+      h2 {
+        font-size: clamp(22px, 7vw, 28px);
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+
+      p,
+      .bullets li,
+      .credential-list div,
+      .mini-card span,
+      .camp-card ul,
+      .contact-card p,
+      .contact-lines {
+        font-size: 14.5px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -620,8 +907,8 @@
 
         <div class="hero-photo" aria-label="Workshop experts">
           <div class="portrait simran">
-            <img src="proposal-images/simran-agarwal-full.jpeg" alt="Simran Agarwal">
-            <strong>Simran Agarwal<br>Fitness Coach | EatLiftMove</strong>
+            <img src="proposal-images/simran-agarwal-full.jpeg" alt="Coach Simran Agarwal">
+            <strong>Coach Simran Agarwal<br>Fitness Coach | EatLiftMove</strong>
           </div>
           <div class="portrait anurag">
             <img src="proposal-images/anurag-jaiswal-full.jpeg" alt="Dr Anuraag Jaiswal">
@@ -655,7 +942,7 @@
             <h2>Strength education, musculoskeletal pain awareness, and live fascia-related demonstration in one accessible session.</h2>
             <p class="body-copy">Designed especially for adults above 40, while remaining relevant for any participant who wants better mobility, posture, strength, energy, and practical daily wellness habits.</p>
             <ul class="bullets">
-              <li>Presentation and discussion led by Simran Agarwal and Dr Anuraag Jaiswal.</li>
+              <li>Presentation and discussion led by Coach Simran Agarwal and Dr Anuraag Jaiswal.</li>
               <li>Live fascia manipulation or pain/posture demonstration on 1-2 selected volunteers where appropriate.</li>
               <li>Clear real-life guidance instead of gym intimidation, crash diets, or one-size-fits-all fitness advice.</li>
             </ul>
@@ -668,9 +955,9 @@
             <div class="section-label">Expert Profiles</div>
             <div class="expert-list">
               <div class="expert">
-                <div class="headshot"><img src="proposal-images/simran-agarwal-headshot.jpeg" alt="Simran Agarwal headshot"></div>
+                <div class="headshot"><img src="proposal-images/simran-agarwal-headshot.jpeg" alt="Coach Simran Agarwal headshot"></div>
                 <div>
-                  <h3>Simran Agarwal</h3>
+                  <h3>Coach Simran Agarwal</h3>
                   <small>Fitness Coach | Strength Training | Founder, EatLiftMove</small>
                 </div>
               </div>
@@ -685,7 +972,7 @@
           </div>
 
           <div class="panel">
-            <div class="section-label">Simran's Strengths</div>
+            <div class="section-label">Coach Simran's Strengths</div>
             <div class="credential-list">
               <div>Strength training, practical wellness education, nutrition habits, and 40+ fitness guidance.</div>
               <div>CrossFit Level 1 and 2, Kettlebell Level 1 and 2, EKFA Kettlebell, and University of Mumbai personal fitness training.</div>
@@ -741,11 +1028,11 @@
 
           <div class="engagement-gallery">
             <figure class="engagement-photo">
-              <img src="photowithHarleyDavidsonGroup.webp" alt="Simran Agarwal with Harley-Davidson group">
+              <img src="photowithHarleyDavidsonGroup.webp" alt="Coach Simran Agarwal with Harley-Davidson group">
               <strong>Harley-Davidson community engagement.</strong>
             </figure>
             <figure class="engagement-photo">
-              <img src="simranworkshop/simranworkshop8.jpeg" alt="Simran Agarwal at Rotary Club workshop">
+              <img src="simranworkshop/simranworkshop8.jpeg" alt="Coach Simran Agarwal at Rotary Club workshop">
               <strong>Rotary Club wellness workshop.</strong>
             </figure>
           </div>
@@ -793,7 +1080,7 @@
             <h3>Contact Details</h3>
             <p>For workshop scheduling, audience fit, and camp-format discussions.</p>
             <div class="contact-lines">
-              <div>Simran Agarwal - EatLiftMove</div>
+              <div>Coach Simran Agarwal - EatLiftMove</div>
               <div>WhatsApp: +91 62903 72390</div>
               <div>Website: EatLiftMove.in</div>
               <div>Format: 90-minute session, 1-day camp, or 2-day camp</div>
