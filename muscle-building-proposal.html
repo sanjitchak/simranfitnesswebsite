@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muscle Building Proposal | EatLiftMove</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff6b00'><rect x='1' y='5' width='3' height='14' rx='1'/><rect x='5' y='7' width='3' height='10' rx='1'/><rect x='16' y='7' width='3' height='10' rx='1'/><rect x='20' y='5' width='3' height='14' rx='1'/></svg>">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome & Google Fonts -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#ff6b00',
+                            darkOrange: '#e05d00',
+                            green: '#25D366',
+                            darkGreen: '#1da851',
+                            dark: '#0a0a0a',
+                            slateBg: '#f8fafc',
+                            cardBg: '#ffffff',
+                            textDark: '#0f172a',
+                            textMuted: '#475569'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        display: ['Oswald', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 15px;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        .a4-container {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: #ffffff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 8mm 10mm;
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .top-gradient-bar {
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b00 0%, #25D366 100%);
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .pillar-card {
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            border-radius: 8px;
+        }
+
+        /* Print Specific Styles for Single-Page A4 Fit with ZERO squishing */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+
+            html, body {
+                background: #ffffff !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                font-size: 14.5px !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .a4-container {
+                margin: 0 !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                max-height: 297mm !important;
+                padding: 6mm 8mm !important;
+                box-shadow: none !important;
+                border: none !important;
+                overflow: hidden !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: space-between !important;
+                gap: 6px !important;
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            .pillar-card {
+                border: 1px solid #cbd5e1 !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Small Print Button Outside Proposal (Screen Only) -->
+    <div class="no-print fixed top-4 right-4 z-50">
+        <button onclick="window.print()" class="bg-brand-orange hover:bg-brand-darkOrange text-white text-[15px] font-bold py-2 px-4 rounded-full shadow-lg flex items-center gap-2 transition cursor-pointer border border-white/20">
+            <i class="fas fa-print"></i> Print (1 Page A4)
+        </button>
+    </div>
+
+    <!-- MAIN A4 PROPOSAL SHEET -->
+    <div class="a4-container">
+        <div class="top-gradient-bar"></div>
+
+        <!-- HEADER SECTION -->
+        <header class="border-b border-slate-200 pb-2 shrink-0">
+            <div class="flex justify-between items-center">
+                <!-- Brand Logo -->
+                <div>
+                    <a href="#" class="font-display text-[32px] font-extrabold tracking-wider text-slate-900 flex items-center gap-1.5 leading-none">
+                        <span>EAT</span><span class="text-brand-orange">LIFT</span><span class="text-brand-green">MOVE</span>
+                        <i class="fas fa-dumbbell text-brand-orange text-xl ml-0.5"></i>
+                    </a>
+                    <p class="text-[14px] font-bold text-slate-600 uppercase tracking-wide mt-1">Customized Muscle Hypertrophy & Fat Loss Strategy</p>
+                </div>
+                
+                <!-- Metadata -->
+                <div class="flex flex-col items-end justify-center text-right gap-1">
+                    <span class="inline-block bg-orange-50 text-brand-orange border border-orange-200 text-[14px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
+                        1-on-1 VIP Coaching
+                    </span>
+                    <div class="text-right leading-tight">
+                        <p class="text-[15px] font-semibold text-slate-700">Client: <span class="text-slate-900 font-bold">Personal Proposal</span></p>
+                        <p class="text-[14px] text-slate-600">Date: <span id="current-date">July 2026</span></p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- HEADLINE BANNER -->
+        <section class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white rounded-xl p-3 shadow-sm relative overflow-hidden shrink-0">
+            <div class="absolute right-0 top-0 w-32 h-full bg-brand-orange/10 transform skew-x-12"></div>
+            <div class="relative z-10">
+                <div class="flex items-center gap-2 mb-1.5">
+                    <span class="bg-brand-orange text-white text-[13px] font-black uppercase px-2 py-0.5 rounded tracking-wide">Goal Focused</span>
+                    <span class="text-brand-green text-[14px] font-bold tracking-wide"><i class="fas fa-check-circle mr-1"></i> Practical & Realistic Approach</span>
+                </div>
+                <h1 class="font-display text-2xl font-bold tracking-wide uppercase text-white leading-tight">
+                    Build pure lean muscle <span class="text-brand-orange">while doing weight loss.</span>
+                </h1>
+                <p class="text-slate-300 text-[15px] mt-1 leading-snug">
+                    A personalized fitness plan designed to build real muscle strength while your body burns fat naturally as a result.
+                </p>
+            </div>
+        </section>
+
+        <!-- THE 5 CORE PILLARS OF SUPPORT -->
+        <section class="shrink-0">
+            <div class="flex justify-between items-end mb-1.5 border-b border-slate-200 pb-1">
+                <h2 class="font-display text-[19px] font-bold text-slate-900 uppercase tracking-wide flex items-center gap-1.5">
+                    <i class="fas fa-cubes text-brand-orange"></i> What You Get in This Program
+                </h2>
+                <span class="text-[14px] font-semibold text-slate-600 uppercase tracking-wider">Complete Support System</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2">
+
+                <!-- Pillar 1: Diet Support -->
+                <div class="pillar-card p-2 bg-slate-50/60 border-l-4 border-l-brand-orange">
+                    <div class="flex items-center justify-between mb-1">
+                        <h3 class="font-display text-[17px] font-bold text-slate-900 flex items-center gap-1.5">
+                            <i class="fas fa-utensils text-brand-orange text-sm"></i> 1. Diet & Nutrition Support
+                        </h3>
+                        <span class="text-[13px] font-bold bg-orange-100 text-brand-orange px-1.5 py-0.5 rounded">Customized</span>
+                    </div>
+                    <ul class="text-[14.5px] text-slate-700 space-y-0.5 leading-snug">
+                        <li><i class="fas fa-check text-brand-orange mr-1 text-[14px]"></i> Tailored meal plans matched to your daily routine.</li>
+                        <li><i class="fas fa-check text-brand-orange mr-1 text-[14px]"></i> High protein targets for faster muscle recovery.</li>
+                        <li><i class="fas fa-check text-brand-orange mr-1 text-[14px]"></i> Simple home cooked food without strict starvation.</li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 2: Exercise Support -->
+                <div class="pillar-card p-2 bg-slate-50/60 border-l-4 border-l-slate-800">
+                    <div class="flex items-center justify-between mb-1">
+                        <h3 class="font-display text-[17px] font-bold text-slate-900 flex items-center gap-1.5">
+                            <i class="fas fa-dumbbell text-slate-800 text-sm"></i> 2. Exercise & Workout Support
+                        </h3>
+                        <span class="text-[13px] font-bold bg-slate-200 text-slate-800 px-1.5 py-0.5 rounded">Progressive</span>
+                    </div>
+                    <ul class="text-[14.5px] text-slate-700 space-y-0.5 leading-snug">
+                        <li><i class="fas fa-check text-slate-800 mr-1 text-[14px]"></i> Structured workouts tailored to gym or home setup.</li>
+                        <li><i class="fas fa-check text-slate-800 mr-1 text-[14px]"></i> Video form feedback to ensure safe lifting technique.</li>
+                        <li><i class="fas fa-check text-slate-800 mr-1 text-[14px]"></i> Steady progress to keep building strength every week.</li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 3: 24x7 WhatsApp Support -->
+                <div class="pillar-card p-2 bg-slate-50/60 border-l-4 border-l-brand-green">
+                    <div class="flex items-center justify-between mb-1">
+                        <h3 class="font-display text-[17px] font-bold text-slate-900 flex items-center gap-1.5">
+                            <i class="fab fa-whatsapp text-brand-green text-base"></i> 3. 24x7 WhatsApp Support
+                        </h3>
+                        <span class="text-[13px] font-bold bg-green-100 text-brand-darkGreen px-1.5 py-0.5 rounded">Direct Access</span>
+                    </div>
+                    <ul class="text-[14.5px] text-slate-700 space-y-0.5 leading-snug">
+                        <li><i class="fas fa-check text-brand-green mr-1 text-[14px]"></i> Direct message line for your daily questions.</li>
+                        <li><i class="fas fa-check text-brand-green mr-1 text-[14px]"></i> Quick workout or meal adjustments whenever needed.</li>
+                        <li><i class="fas fa-check text-brand-green mr-1 text-[14px]"></i> Constant encouragement and guidance through your journey.</li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 4: Daily Accountability & Travel Protocol -->
+                <div class="pillar-card p-2 bg-slate-50/60 border-l-4 border-l-brand-orange">
+                    <div class="flex items-center justify-between mb-1">
+                        <h3 class="font-display text-[17px] font-bold text-slate-900 flex items-center gap-1.5">
+                            <i class="fas fa-camera text-brand-orange text-sm"></i> 4. Daily Accountability & Travel
+                        </h3>
+                        <span class="text-[13px] font-bold bg-orange-100 text-brand-orange px-1.5 py-0.5 rounded">Daily Photos</span>
+                    </div>
+                    <ul class="text-[14.5px] text-slate-700 space-y-0.5 leading-snug">
+                        <li><i class="fas fa-check text-brand-orange mr-1 text-[14px]"></i> Send daily food photos for feedback before eating.</li>
+                        <li><i class="fas fa-check text-brand-orange mr-1 text-[14px]"></i> Daily diet changes provided whenever you are travelling.</li>
+                        <li><i class="fas fa-check text-brand-orange mr-1 text-[14px]"></i> Restaurant menu choices guided in real time.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- VALUE BANNER: WEIGHT LOSS IS THE BY-PRODUCT -->
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-2 flex items-center gap-2.5 shrink-0">
+            <div class="w-8 h-8 rounded-full bg-brand-green text-white flex items-center justify-center shrink-0 shadow-xs text-sm">
+                <i class="fas fa-fire-alt"></i>
+            </div>
+            <div class="flex-1">
+                <div class="flex items-center justify-between">
+                    <h4 class="font-display text-[17px] font-bold text-emerald-950 uppercase tracking-wide">
+                        Weight Loss is the By-Product of Building Muscle
+                    </h4>
+                    <span class="text-[13px] font-extrabold bg-brand-green text-white px-2 py-0.5 rounded-full uppercase">Body Recomposition</span>
+                </div>
+                <p class="text-[14.5px] text-emerald-900 leading-snug mt-0.5">
+                    When you focus on muscle building, your metabolic rate increases naturally. More muscle means your body burns more calories throughout the day, making weight loss a smooth and automatic outcome.
+                </p>
+            </div>
+        </section>
+
+        <!-- REAL CLIENT TRANSFORMATIONS (FULL IMAGES - NO CROPPING) -->
+        <section class="shrink-0">
+            <div class="flex justify-between items-center mb-1 border-b border-slate-200 pb-0.5">
+                <h2 class="font-display text-[19px] font-bold text-slate-900 uppercase tracking-wide flex items-center gap-1.5">
+                    <i class="fas fa-award text-brand-orange"></i> Client Transformations
+                </h2>
+                <span class="text-[14px] font-semibold text-slate-600">Real Results • Muscle Building & Weight Loss</span>
+            </div>
+
+            <div class="grid grid-cols-4 gap-2">
+                <!-- Photo 1 -->
+                <div class="rounded-lg border border-slate-200 bg-slate-50 text-center p-1 flex flex-col justify-between items-center h-32">
+                    <div class="w-full h-24 flex items-center justify-center bg-white rounded overflow-hidden border border-slate-200">
+                        <img src="./beforeafter1.webp" onerror="this.onerror=null; this.src='https://eatliftmove.in/beforeafter1.webp';" alt="Client Transformation 1" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <span class="text-[13px] font-bold text-slate-800 block truncate mt-0.5">Lean Muscle Gain</span>
+                </div>
+                <!-- Photo 2 -->
+                <div class="rounded-lg border border-slate-200 bg-slate-50 text-center p-1 flex flex-col justify-between items-center h-32">
+                    <div class="w-full h-24 flex items-center justify-center bg-white rounded overflow-hidden border border-slate-200">
+                        <img src="./beforeafter2.webp" onerror="this.onerror=null; this.src='https://eatliftmove.in/beforeafter2.webp';" alt="Client Transformation 2" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <span class="text-[13px] font-bold text-slate-800 block truncate mt-0.5">Body Recomposition</span>
+                </div>
+                <!-- Photo 3 -->
+                <div class="rounded-lg border border-slate-200 bg-slate-50 text-center p-1 flex flex-col justify-between items-center h-32">
+                    <div class="w-full h-24 flex items-center justify-center bg-white rounded overflow-hidden border border-slate-200">
+                        <img src="./beforeafter3.webp" onerror="this.onerror=null; this.src='https://eatliftmove.in/beforeafter3.webp';" alt="Client Transformation 3" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <span class="text-[13px] font-bold text-slate-800 block truncate mt-0.5">Fat Loss & Toning</span>
+                </div>
+                <!-- Photo 4 -->
+                <div class="rounded-lg border border-slate-200 bg-slate-50 text-center p-1 flex flex-col justify-between items-center h-32">
+                    <div class="w-full h-24 flex items-center justify-center bg-white rounded overflow-hidden border border-slate-200">
+                        <img src="./beforeafter4.webp" onerror="this.onerror=null; this.src='https://eatliftmove.in/beforeafter4.webp';" alt="Client Transformation 4" class="max-w-full max-h-full object-contain">
+                    </div>
+                    <span class="text-[13px] font-bold text-slate-800 block truncate mt-0.5">Strength & Muscle</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- DAILY ACCOUNTABILITY WORKFLOW -->
+        <section class="bg-slate-50 border border-slate-200 rounded-lg p-2 shrink-0">
+            <h3 class="font-display text-[17px] font-bold text-slate-900 uppercase tracking-wide mb-1 flex items-center gap-1.5">
+                <i class="fas fa-tasks text-brand-orange"></i> Daily Routine & How We Work Together
+            </h3>
+            <div class="grid grid-cols-3 gap-2 text-[14px]">
+                <div class="bg-white p-1.5 rounded border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <div class="font-bold text-slate-900 flex items-center gap-1 text-[14.5px]">
+                            <span class="w-4 h-4 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black shrink-0">1</span>
+                            Daily Food Photos
+                        </div>
+                        <p class="text-slate-700 text-[14px] mt-0.5 leading-snug">Send pictures of your daily meals on WhatsApp before eating.</p>
+                    </div>
+                    <span class="text-brand-orange font-bold text-[13px] uppercase mt-1">Daily Habit</span>
+                </div>
+                <div class="bg-white p-1.5 rounded border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <div class="font-bold text-slate-900 flex items-center gap-1 text-[14.5px]">
+                            <span class="w-4 h-4 rounded-full bg-slate-800 text-white flex items-center justify-center text-[10px] font-black shrink-0">2</span>
+                            Travel Diet Adjustments
+                        </div>
+                        <p class="text-slate-700 text-[14px] mt-0.5 leading-snug">Travelling or dining out? Get instant menu advice and diet tweaks.</p>
+                    </div>
+                    <span class="text-slate-800 font-bold text-[13px] uppercase mt-1">Flexible Travel</span>
+                </div>
+                <div class="bg-white p-1.5 rounded border border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <div class="font-bold text-slate-900 flex items-center gap-1 text-[14.5px]">
+                            <span class="w-4 h-4 rounded-full bg-green-600 text-white flex items-center justify-center text-[10px] font-black shrink-0">3</span>
+                            Weekly Feedback
+                        </div>
+                        <p class="text-slate-700 text-[14px] mt-0.5 leading-snug">Review weekly energy, strength, and measurements to adjust targets.</p>
+                    </div>
+                    <span class="text-brand-green font-bold text-[13px] uppercase mt-1">Continuous Progress</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER & CTA -->
+        <footer class="pt-1.5 border-t border-slate-200 shrink-0">
+            <div class="bg-slate-900 text-white rounded-lg p-2.5 flex justify-between items-center">
+                <div>
+                    <h4 class="font-display text-[17px] font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
+                        Ready to start your muscle building journey?
+                    </h4>
+                    <p class="text-slate-300 text-[14px] mt-0.5">
+                        Get personalized diet, workout plan, and daily WhatsApp accountability.
+                    </p>
+                </div>
+                <div class="text-right shrink-0 ml-2">
+                    <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%20reviewed%20the%20Muscle%20Building%20Proposal%20and%20want%20to%20get%20started!" target="_blank" class="inline-flex items-center gap-1.5 bg-brand-green hover:bg-brand-darkGreen text-white text-[14.5px] font-extrabold px-3 py-1.5 rounded-lg transition shadow-md">
+                        <i class="fab fa-whatsapp text-base"></i> Start on WhatsApp
+                    </a>
+                </div>
+            </div>
+            
+            <div class="flex justify-between items-center text-[13.5px] text-slate-600 font-medium mt-1.5 px-0.5">
+                <span><strong>EatLiftMove</strong> • www.eatliftmove.in</span>
+                <span>WhatsApp: +91 62903 72390</span>
+                <span>Personalized Proposal • Page 1 of 1</span>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Script to Auto Fill Date -->
+    <script>
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', {
+            month: 'long',
+            year: 'numeric'
+        });
+    </script>
+</body>
+</html>
