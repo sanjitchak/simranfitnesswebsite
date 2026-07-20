@@ -54,19 +54,30 @@
             print-color-adjust: exact !important;
         }
 
+        /* Responsive Container: Fluid on Mobile, A4 Sheet on Desktop */
         .a4-container {
-            width: 210mm;
-            min-height: 297mm;
-            margin: 20px auto;
+            width: 100%;
+            max-width: 210mm;
+            min-height: auto;
+            margin: 10px auto;
             background: #ffffff;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            padding: 8mm 10mm;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 16px;
             box-sizing: border-box;
             position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            gap: 10px;
+            gap: 14px;
+        }
+
+        @media (min-width: 768px) {
+            .a4-container {
+                width: 210mm;
+                min-height: 297mm;
+                margin: 20px auto;
+                padding: 8mm 10mm;
+                gap: 10px;
+            }
         }
 
         .top-gradient-bar {
@@ -84,7 +95,7 @@
             border-radius: 8px;
         }
 
-        /* Print Specific Styles for Single-Page A4 Fit with ZERO squishing */
+        /* Strict Print Overrides: Forces 1-Page A4 Grid Layout */
         @media print {
             @page {
                 size: A4 portrait;
@@ -107,6 +118,7 @@
             .a4-container {
                 margin: 0 !important;
                 width: 210mm !important;
+                max-width: 210mm !important;
                 height: 297mm !important;
                 max-height: 297mm !important;
                 padding: 6mm 8mm !important;
@@ -121,6 +133,38 @@
                 page-break-inside: avoid !important;
             }
 
+            .print-row {
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+            }
+
+            .print-grid-2 {
+                display: grid !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                gap: 8px !important;
+            }
+
+            .print-grid-3 {
+                display: grid !important;
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+                gap: 8px !important;
+            }
+
+            .print-grid-4 {
+                display: grid !important;
+                grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+                gap: 8px !important;
+            }
+
+            .print-img-card {
+                height: 128px !important;
+            }
+
+            .print-img-box {
+                height: 96px !important;
+            }
+
             .pillar-card {
                 border: 1px solid #cbd5e1 !important;
             }
@@ -129,54 +173,54 @@
 </head>
 <body class="antialiased">
 
-    <!-- Small Print Button Outside Proposal (Screen Only) -->
-    <div class="no-print fixed top-4 right-4 z-50">
-        <button onclick="window.print()" class="bg-brand-orange hover:bg-brand-darkOrange text-white text-[15px] font-bold py-2 px-4 rounded-full shadow-lg flex items-center gap-2 transition cursor-pointer border border-white/20">
+    <!-- Floating Print Button (Screen Only) -->
+    <div class="no-print fixed top-3 right-3 sm:top-4 sm:right-4 z-50">
+        <button onclick="window.print()" class="bg-brand-orange hover:bg-brand-darkOrange text-white text-xs sm:text-[15px] font-bold py-2 px-3.5 sm:px-4 rounded-full shadow-xl flex items-center gap-2 transition cursor-pointer border border-white/20 active:scale-95">
             <i class="fas fa-print"></i> Print (1 Page A4)
         </button>
     </div>
 
-    <!-- MAIN A4 PROPOSAL SHEET -->
+    <!-- MAIN PROPOSAL SHEET (Mobile Fluid / Desktop & Print A4 Sheet) -->
     <div class="a4-container">
         <div class="top-gradient-bar"></div>
 
         <!-- HEADER SECTION -->
-        <header class="border-b border-slate-200 pb-2 shrink-0">
-            <div class="flex justify-between items-center">
+        <header class="border-b border-slate-200 pb-3 sm:pb-2 shrink-0">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0 print-row">
                 <!-- Brand Logo -->
                 <div>
-                    <a href="#" class="font-display text-[32px] font-extrabold tracking-wider text-slate-900 flex items-center gap-1.5 leading-none">
+                    <a href="#" class="font-display text-2xl sm:text-[32px] font-extrabold tracking-wider text-slate-900 flex items-center gap-1.5 leading-none">
                         <span>EAT</span><span class="text-brand-orange">LIFT</span><span class="text-brand-green">MOVE</span>
-                        <i class="fas fa-dumbbell text-brand-orange text-xl ml-0.5"></i>
+                        <i class="fas fa-dumbbell text-brand-orange text-lg sm:text-xl ml-0.5"></i>
                     </a>
-                    <p class="text-[14px] font-bold text-slate-600 uppercase tracking-wide mt-1">Customized Muscle Hypertrophy & Fat Loss Strategy</p>
+                    <p class="text-xs sm:text-[14px] font-bold text-slate-600 uppercase tracking-wide mt-1">Customized Muscle Hypertrophy & Fat Loss Strategy</p>
                 </div>
                 
                 <!-- Metadata -->
-                <div class="flex flex-col items-end justify-center text-right gap-1">
-                    <span class="inline-block bg-orange-50 text-brand-orange border border-orange-200 text-[14px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
+                <div class="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-center w-full sm:w-auto text-left sm:text-right gap-1 pt-1 sm:pt-0">
+                    <span class="inline-block bg-orange-50 text-brand-orange border border-orange-200 text-xs sm:text-[14px] font-bold px-2.5 sm:px-3 py-0.5 rounded-full uppercase tracking-wider">
                         1-on-1 VIP Coaching
                     </span>
                     <div class="text-right leading-tight">
-                        <p class="text-[15px] font-semibold text-slate-700">Client: <span class="text-slate-900 font-bold">Personal Proposal</span></p>
-                        <p class="text-[14px] text-slate-600">Date: <span id="current-date">July 2026</span></p>
+                        <p class="text-xs sm:text-[15px] font-semibold text-slate-700">Client: <span class="text-slate-900 font-bold">Personal Proposal</span></p>
+                        <p class="text-[11px] sm:text-[14px] text-slate-600">Date: <span id="current-date">July 2026</span></p>
                     </div>
                 </div>
             </div>
         </header>
 
         <!-- HEADLINE BANNER -->
-        <section class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white rounded-xl p-3 shadow-sm relative overflow-hidden shrink-0">
+        <section class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white rounded-xl p-3 sm:p-3.5 shadow-sm relative overflow-hidden shrink-0">
             <div class="absolute right-0 top-0 w-32 h-full bg-brand-orange/10 transform skew-x-12"></div>
             <div class="relative z-10">
-                <div class="flex items-center gap-2 mb-1.5">
-                    <span class="bg-brand-orange text-white text-[13px] font-black uppercase px-2 py-0.5 rounded tracking-wide">Goal Focused</span>
-                    <span class="text-brand-green text-[14px] font-bold tracking-wide"><i class="fas fa-check-circle mr-1"></i> Practical & Realistic Approach</span>
+                <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                    <span class="bg-brand-orange text-white text-xs sm:text-[13px] font-black uppercase px-2 py-0.5 rounded tracking-wide">Goal Focused</span>
+                    <span class="text-brand-green text-xs sm:text-[14px] font-bold tracking-wide"><i class="fas fa-check-circle mr-1"></i> Practical & Realistic Approach</span>
                 </div>
-                <h1 class="font-display text-2xl font-bold tracking-wide uppercase text-white leading-tight">
+                <h1 class="font-display text-xl sm:text-2xl font-bold tracking-wide uppercase text-white leading-tight">
                     Build pure lean muscle <span class="text-brand-orange">while doing weight loss.</span>
                 </h1>
-                <p class="text-slate-300 text-[15px] mt-1 leading-snug">
+                <p class="text-slate-300 text-xs sm:text-[15px] mt-1 leading-snug">
                     A personalized fitness plan designed to build real muscle strength while your body burns fat naturally as a result.
                 </p>
             </div>
@@ -184,72 +228,72 @@
 
         <!-- THE 5 CORE PILLARS OF SUPPORT -->
         <section class="shrink-0">
-            <div class="flex justify-between items-end mb-1.5 border-b border-slate-200 pb-1">
-                <h2 class="font-display text-[19px] font-bold text-slate-900 uppercase tracking-wide flex items-center gap-1.5">
+            <div class="flex justify-between items-end mb-2 sm:mb-1.5 border-b border-slate-200 pb-1">
+                <h2 class="font-display text-base sm:text-[19px] font-bold text-slate-900 uppercase tracking-wide flex items-center gap-1.5">
                     <i class="fas fa-cubes text-brand-orange"></i> What You Get in This Program
                 </h2>
-                <span class="text-[14px] font-semibold text-slate-600 uppercase tracking-wider">Complete Support System</span>
+                <span class="text-xs sm:text-[14px] font-semibold text-slate-600 uppercase tracking-wider">Complete Support System</span>
             </div>
 
-            <div class="grid grid-cols-2 gap-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-2 print-grid-2">
 
                 <!-- Pillar 1: Diet Support -->
-                <div class="pillar-card p-2 bg-slate-50/60 border-l-4 border-l-brand-orange">
+                <div class="pillar-card p-2.5 sm:p-2 bg-slate-50/60 border-l-4 border-l-brand-orange">
                     <div class="flex items-center justify-between mb-1">
-                        <h3 class="font-display text-[17px] font-bold text-slate-900 flex items-center gap-1.5">
+                        <h3 class="font-display text-sm sm:text-[17px] font-bold text-slate-900 flex items-center gap-1.5">
                             <i class="fas fa-utensils text-brand-orange text-sm"></i> 1. Diet & Nutrition Support
                         </h3>
-                        <span class="text-[13px] font-bold bg-orange-100 text-brand-orange px-1.5 py-0.5 rounded">Customized</span>
+                        <span class="text-xs sm:text-[13px] font-bold bg-orange-100 text-brand-orange px-1.5 py-0.5 rounded">Customized</span>
                     </div>
-                    <ul class="text-[14.5px] text-slate-700 space-y-0.5 leading-snug">
-                        <li><i class="fas fa-check text-brand-orange mr-1 text-[14px]"></i> Tailored meal plans matched to your daily routine.</li>
-                        <li><i class="fas fa-check text-brand-orange mr-1 text-[14px]"></i> High protein targets for faster muscle recovery.</li>
-                        <li><i class="fas fa-check text-brand-orange mr-1 text-[14px]"></i> Simple home cooked food without strict starvation.</li>
+                    <ul class="text-xs sm:text-[14.5px] text-slate-700 space-y-1 sm:space-y-0.5 leading-snug">
+                        <li><i class="fas fa-check text-brand-orange mr-1 text-xs sm:text-[14px]"></i> Tailored meal plans matched to your daily routine.</li>
+                        <li><i class="fas fa-check text-brand-orange mr-1 text-xs sm:text-[14px]"></i> High protein targets for faster muscle recovery.</li>
+                        <li><i class="fas fa-check text-brand-orange mr-1 text-xs sm:text-[14px]"></i> Simple home cooked food without strict starvation.</li>
                     </ul>
                 </div>
 
                 <!-- Pillar 2: Exercise Support -->
-                <div class="pillar-card p-2 bg-slate-50/60 border-l-4 border-l-slate-800">
+                <div class="pillar-card p-2.5 sm:p-2 bg-slate-50/60 border-l-4 border-l-slate-800">
                     <div class="flex items-center justify-between mb-1">
-                        <h3 class="font-display text-[17px] font-bold text-slate-900 flex items-center gap-1.5">
+                        <h3 class="font-display text-sm sm:text-[17px] font-bold text-slate-900 flex items-center gap-1.5">
                             <i class="fas fa-dumbbell text-slate-800 text-sm"></i> 2. Exercise & Workout Support
                         </h3>
-                        <span class="text-[13px] font-bold bg-slate-200 text-slate-800 px-1.5 py-0.5 rounded">Progressive</span>
+                        <span class="text-xs sm:text-[13px] font-bold bg-slate-200 text-slate-800 px-1.5 py-0.5 rounded">Progressive</span>
                     </div>
-                    <ul class="text-[14.5px] text-slate-700 space-y-0.5 leading-snug">
-                        <li><i class="fas fa-check text-slate-800 mr-1 text-[14px]"></i> Structured workouts tailored to gym or home setup.</li>
-                        <li><i class="fas fa-check text-slate-800 mr-1 text-[14px]"></i> Video form feedback to ensure safe lifting technique.</li>
-                        <li><i class="fas fa-check text-slate-800 mr-1 text-[14px]"></i> Steady progress to keep building strength every week.</li>
+                    <ul class="text-xs sm:text-[14.5px] text-slate-700 space-y-1 sm:space-y-0.5 leading-snug">
+                        <li><i class="fas fa-check text-slate-800 mr-1 text-xs sm:text-[14px]"></i> Structured workouts tailored to gym or home setup.</li>
+                        <li><i class="fas fa-check text-slate-800 mr-1 text-xs sm:text-[14px]"></i> Video form feedback to ensure safe lifting technique.</li>
+                        <li><i class="fas fa-check text-slate-800 mr-1 text-xs sm:text-[14px]"></i> Steady progress to keep building strength every week.</li>
                     </ul>
                 </div>
 
                 <!-- Pillar 3: 24x7 WhatsApp Support -->
-                <div class="pillar-card p-2 bg-slate-50/60 border-l-4 border-l-brand-green">
+                <div class="pillar-card p-2.5 sm:p-2 bg-slate-50/60 border-l-4 border-l-brand-green">
                     <div class="flex items-center justify-between mb-1">
-                        <h3 class="font-display text-[17px] font-bold text-slate-900 flex items-center gap-1.5">
+                        <h3 class="font-display text-sm sm:text-[17px] font-bold text-slate-900 flex items-center gap-1.5">
                             <i class="fab fa-whatsapp text-brand-green text-base"></i> 3. 24x7 WhatsApp Support
                         </h3>
-                        <span class="text-[13px] font-bold bg-green-100 text-brand-darkGreen px-1.5 py-0.5 rounded">Direct Access</span>
+                        <span class="text-xs sm:text-[13px] font-bold bg-green-100 text-brand-darkGreen px-1.5 py-0.5 rounded">Direct Access</span>
                     </div>
-                    <ul class="text-[14.5px] text-slate-700 space-y-0.5 leading-snug">
-                        <li><i class="fas fa-check text-brand-green mr-1 text-[14px]"></i> Direct message line for your daily questions.</li>
-                        <li><i class="fas fa-check text-brand-green mr-1 text-[14px]"></i> Quick workout or meal adjustments whenever needed.</li>
-                        <li><i class="fas fa-check text-brand-green mr-1 text-[14px]"></i> Constant encouragement and guidance through your journey.</li>
+                    <ul class="text-xs sm:text-[14.5px] text-slate-700 space-y-1 sm:space-y-0.5 leading-snug">
+                        <li><i class="fas fa-check text-brand-green mr-1 text-xs sm:text-[14px]"></i> Direct message line for your daily questions.</li>
+                        <li><i class="fas fa-check text-brand-green mr-1 text-xs sm:text-[14px]"></i> Quick workout or meal adjustments whenever needed.</li>
+                        <li><i class="fas fa-check text-brand-green mr-1 text-xs sm:text-[14px]"></i> Constant encouragement and guidance through your journey.</li>
                     </ul>
                 </div>
 
                 <!-- Pillar 4: Daily Accountability & Travel Protocol -->
-                <div class="pillar-card p-2 bg-slate-50/60 border-l-4 border-l-brand-orange">
+                <div class="pillar-card p-2.5 sm:p-2 bg-slate-50/60 border-l-4 border-l-brand-orange">
                     <div class="flex items-center justify-between mb-1">
-                        <h3 class="font-display text-[17px] font-bold text-slate-900 flex items-center gap-1.5">
+                        <h3 class="font-display text-sm sm:text-[17px] font-bold text-slate-900 flex items-center gap-1.5">
                             <i class="fas fa-camera text-brand-orange text-sm"></i> 4. Daily Accountability & Travel
                         </h3>
-                        <span class="text-[13px] font-bold bg-orange-100 text-brand-orange px-1.5 py-0.5 rounded">Daily Photos</span>
+                        <span class="text-xs sm:text-[13px] font-bold bg-orange-100 text-brand-orange px-1.5 py-0.5 rounded">Daily Photos</span>
                     </div>
-                    <ul class="text-[14.5px] text-slate-700 space-y-0.5 leading-snug">
-                        <li><i class="fas fa-check text-brand-orange mr-1 text-[14px]"></i> Send daily food photos for feedback before eating.</li>
-                        <li><i class="fas fa-check text-brand-orange mr-1 text-[14px]"></i> Daily diet changes provided whenever you are travelling.</li>
-                        <li><i class="fas fa-check text-brand-orange mr-1 text-[14px]"></i> Restaurant menu choices guided in real time.</li>
+                    <ul class="text-xs sm:text-[14.5px] text-slate-700 space-y-1 sm:space-y-0.5 leading-snug">
+                        <li><i class="fas fa-check text-brand-orange mr-1 text-xs sm:text-[14px]"></i> Send daily food photos for feedback before eating.</li>
+                        <li><i class="fas fa-check text-brand-orange mr-1 text-xs sm:text-[14px]"></i> Daily diet changes provided whenever you are travelling.</li>
+                        <li><i class="fas fa-check text-brand-orange mr-1 text-xs sm:text-[14px]"></i> Restaurant menu choices guided in real time.</li>
                     </ul>
                 </div>
 
@@ -257,18 +301,18 @@
         </section>
 
         <!-- VALUE BANNER: WEIGHT LOSS IS THE BY-PRODUCT -->
-        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-2 flex items-center gap-2.5 shrink-0">
+        <section class="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5 sm:p-2 flex flex-col sm:flex-row items-start sm:items-center gap-2.5 shrink-0 print-row">
             <div class="w-8 h-8 rounded-full bg-brand-green text-white flex items-center justify-center shrink-0 shadow-xs text-sm">
                 <i class="fas fa-fire-alt"></i>
             </div>
             <div class="flex-1">
-                <div class="flex items-center justify-between">
-                    <h4 class="font-display text-[17px] font-bold text-emerald-950 uppercase tracking-wide">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-0">
+                    <h4 class="font-display text-sm sm:text-[17px] font-bold text-emerald-950 uppercase tracking-wide">
                         Weight Loss is the By-Product of Building Muscle
                     </h4>
-                    <span class="text-[13px] font-extrabold bg-brand-green text-white px-2 py-0.5 rounded-full uppercase">Body Recomposition</span>
+                    <span class="text-[11px] sm:text-[13px] font-extrabold bg-brand-green text-white px-2 py-0.5 rounded-full uppercase">Body Recomposition</span>
                 </div>
-                <p class="text-[14.5px] text-emerald-900 leading-snug mt-0.5">
+                <p class="text-xs sm:text-[14.5px] text-emerald-900 leading-snug mt-0.5">
                     When you focus on muscle building, your metabolic rate increases naturally. More muscle means your body burns more calories throughout the day, making weight loss a smooth and automatic outcome.
                 </p>
             </div>
@@ -277,102 +321,102 @@
         <!-- REAL CLIENT TRANSFORMATIONS (FULL IMAGES - NO CROPPING) -->
         <section class="shrink-0">
             <div class="flex justify-between items-center mb-1 border-b border-slate-200 pb-0.5">
-                <h2 class="font-display text-[19px] font-bold text-slate-900 uppercase tracking-wide flex items-center gap-1.5">
+                <h2 class="font-display text-base sm:text-[19px] font-bold text-slate-900 uppercase tracking-wide flex items-center gap-1.5">
                     <i class="fas fa-award text-brand-orange"></i> Client Transformations
                 </h2>
-                <span class="text-[14px] font-semibold text-slate-600">Real Results • Muscle Building & Weight Loss</span>
+                <span class="text-xs sm:text-[14px] font-semibold text-slate-600">Real Results • Muscle Building & Fat Loss</span>
             </div>
 
-            <div class="grid grid-cols-4 gap-2">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 print-grid-4">
                 <!-- Photo 1 -->
-                <div class="rounded-lg border border-slate-200 bg-slate-50 text-center p-1 flex flex-col justify-between items-center h-32">
-                    <div class="w-full h-24 flex items-center justify-center bg-white rounded overflow-hidden border border-slate-200">
+                <div class="rounded-lg border border-slate-200 bg-slate-50 text-center p-1.5 sm:p-1 flex flex-col justify-between items-center h-40 sm:h-32 print-img-card">
+                    <div class="w-full h-32 sm:h-24 flex items-center justify-center bg-white rounded overflow-hidden border border-slate-200 print-img-box">
                         <img src="./beforeafter1.webp" onerror="this.onerror=null; this.src='https://eatliftmove.in/beforeafter1.webp';" alt="Client Transformation 1" class="max-w-full max-h-full object-contain">
                     </div>
-                    <span class="text-[13px] font-bold text-slate-800 block truncate mt-0.5">Lean Muscle Gain</span>
+                    <span class="text-xs sm:text-[13px] font-bold text-slate-800 block truncate mt-0.5">Lean Muscle Gain</span>
                 </div>
                 <!-- Photo 2 -->
-                <div class="rounded-lg border border-slate-200 bg-slate-50 text-center p-1 flex flex-col justify-between items-center h-32">
-                    <div class="w-full h-24 flex items-center justify-center bg-white rounded overflow-hidden border border-slate-200">
+                <div class="rounded-lg border border-slate-200 bg-slate-50 text-center p-1.5 sm:p-1 flex flex-col justify-between items-center h-40 sm:h-32 print-img-card">
+                    <div class="w-full h-32 sm:h-24 flex items-center justify-center bg-white rounded overflow-hidden border border-slate-200 print-img-box">
                         <img src="./beforeafter2.webp" onerror="this.onerror=null; this.src='https://eatliftmove.in/beforeafter2.webp';" alt="Client Transformation 2" class="max-w-full max-h-full object-contain">
                     </div>
-                    <span class="text-[13px] font-bold text-slate-800 block truncate mt-0.5">Body Recomposition</span>
+                    <span class="text-xs sm:text-[13px] font-bold text-slate-800 block truncate mt-0.5">Body Recomposition</span>
                 </div>
                 <!-- Photo 3 -->
-                <div class="rounded-lg border border-slate-200 bg-slate-50 text-center p-1 flex flex-col justify-between items-center h-32">
-                    <div class="w-full h-24 flex items-center justify-center bg-white rounded overflow-hidden border border-slate-200">
+                <div class="rounded-lg border border-slate-200 bg-slate-50 text-center p-1.5 sm:p-1 flex flex-col justify-between items-center h-40 sm:h-32 print-img-card">
+                    <div class="w-full h-32 sm:h-24 flex items-center justify-center bg-white rounded overflow-hidden border border-slate-200 print-img-box">
                         <img src="./beforeafter3.webp" onerror="this.onerror=null; this.src='https://eatliftmove.in/beforeafter3.webp';" alt="Client Transformation 3" class="max-w-full max-h-full object-contain">
                     </div>
-                    <span class="text-[13px] font-bold text-slate-800 block truncate mt-0.5">Fat Loss & Toning</span>
+                    <span class="text-xs sm:text-[13px] font-bold text-slate-800 block truncate mt-0.5">Fat Loss & Toning</span>
                 </div>
                 <!-- Photo 4 -->
-                <div class="rounded-lg border border-slate-200 bg-slate-50 text-center p-1 flex flex-col justify-between items-center h-32">
-                    <div class="w-full h-24 flex items-center justify-center bg-white rounded overflow-hidden border border-slate-200">
+                <div class="rounded-lg border border-slate-200 bg-slate-50 text-center p-1.5 sm:p-1 flex flex-col justify-between items-center h-40 sm:h-32 print-img-card">
+                    <div class="w-full h-32 sm:h-24 flex items-center justify-center bg-white rounded overflow-hidden border border-slate-200 print-img-box">
                         <img src="./beforeafter4.webp" onerror="this.onerror=null; this.src='https://eatliftmove.in/beforeafter4.webp';" alt="Client Transformation 4" class="max-w-full max-h-full object-contain">
                     </div>
-                    <span class="text-[13px] font-bold text-slate-800 block truncate mt-0.5">Strength & Muscle</span>
+                    <span class="text-xs sm:text-[13px] font-bold text-slate-800 block truncate mt-0.5">Strength & Muscle</span>
                 </div>
             </div>
         </section>
 
         <!-- DAILY ACCOUNTABILITY WORKFLOW -->
-        <section class="bg-slate-50 border border-slate-200 rounded-lg p-2 shrink-0">
-            <h3 class="font-display text-[17px] font-bold text-slate-900 uppercase tracking-wide mb-1 flex items-center gap-1.5">
+        <section class="bg-slate-50 border border-slate-200 rounded-lg p-2.5 sm:p-2 shrink-0">
+            <h3 class="font-display text-base sm:text-[17px] font-bold text-slate-900 uppercase tracking-wide mb-1.5 sm:mb-1 flex items-center gap-1.5">
                 <i class="fas fa-tasks text-brand-orange"></i> Daily Routine & How We Work Together
             </h3>
-            <div class="grid grid-cols-3 gap-2 text-[14px]">
-                <div class="bg-white p-1.5 rounded border border-slate-200 flex flex-col justify-between">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-2 text-xs sm:text-[14px] print-grid-3">
+                <div class="bg-white p-2 sm:p-1.5 rounded border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <div class="font-bold text-slate-900 flex items-center gap-1 text-[14.5px]">
+                        <div class="font-bold text-slate-900 flex items-center gap-1.5 text-sm sm:text-[14.5px]">
                             <span class="w-4 h-4 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black shrink-0">1</span>
                             Daily Food Photos
                         </div>
-                        <p class="text-slate-700 text-[14px] mt-0.5 leading-snug">Send pictures of your daily meals on WhatsApp before eating.</p>
+                        <p class="text-slate-700 text-xs sm:text-[14px] mt-0.5 leading-snug">Send pictures of your daily meals on WhatsApp before eating.</p>
                     </div>
-                    <span class="text-brand-orange font-bold text-[13px] uppercase mt-1">Daily Habit</span>
+                    <span class="text-brand-orange font-bold text-xs sm:text-[13px] uppercase mt-1">Daily Habit</span>
                 </div>
-                <div class="bg-white p-1.5 rounded border border-slate-200 flex flex-col justify-between">
+                <div class="bg-white p-2 sm:p-1.5 rounded border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <div class="font-bold text-slate-900 flex items-center gap-1 text-[14.5px]">
+                        <div class="font-bold text-slate-900 flex items-center gap-1.5 text-sm sm:text-[14.5px]">
                             <span class="w-4 h-4 rounded-full bg-slate-800 text-white flex items-center justify-center text-[10px] font-black shrink-0">2</span>
                             Travel Diet Adjustments
                         </div>
-                        <p class="text-slate-700 text-[14px] mt-0.5 leading-snug">Travelling or dining out? Get instant menu advice and diet tweaks.</p>
+                        <p class="text-slate-700 text-xs sm:text-[14px] mt-0.5 leading-snug">Travelling or dining out? Get instant menu advice and diet tweaks.</p>
                     </div>
-                    <span class="text-slate-800 font-bold text-[13px] uppercase mt-1">Flexible Travel</span>
+                    <span class="text-slate-800 font-bold text-xs sm:text-[13px] uppercase mt-1">Flexible Travel</span>
                 </div>
-                <div class="bg-white p-1.5 rounded border border-slate-200 flex flex-col justify-between">
+                <div class="bg-white p-2 sm:p-1.5 rounded border border-slate-200 flex flex-col justify-between">
                     <div>
-                        <div class="font-bold text-slate-900 flex items-center gap-1 text-[14.5px]">
+                        <div class="font-bold text-slate-900 flex items-center gap-1.5 text-sm sm:text-[14.5px]">
                             <span class="w-4 h-4 rounded-full bg-green-600 text-white flex items-center justify-center text-[10px] font-black shrink-0">3</span>
                             Weekly Feedback
                         </div>
-                        <p class="text-slate-700 text-[14px] mt-0.5 leading-snug">Review weekly energy, strength, and measurements to adjust targets.</p>
+                        <p class="text-slate-700 text-xs sm:text-[14px] mt-0.5 leading-snug">Review weekly energy, strength, and measurements to adjust targets.</p>
                     </div>
-                    <span class="text-brand-green font-bold text-[13px] uppercase mt-1">Continuous Progress</span>
+                    <span class="text-brand-green font-bold text-xs sm:text-[13px] uppercase mt-1">Continuous Progress</span>
                 </div>
             </div>
         </section>
 
         <!-- FOOTER & CTA -->
-        <footer class="pt-1.5 border-t border-slate-200 shrink-0">
-            <div class="bg-slate-900 text-white rounded-lg p-2.5 flex justify-between items-center">
+        <footer class="pt-2 sm:pt-1.5 border-t border-slate-200 shrink-0">
+            <div class="bg-slate-900 text-white rounded-lg p-3 sm:p-2.5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0 print-row">
                 <div>
-                    <h4 class="font-display text-[17px] font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
+                    <h4 class="font-display text-sm sm:text-[17px] font-bold uppercase tracking-wider text-white flex items-center gap-1.5">
                         Ready to start your muscle building journey?
                     </h4>
-                    <p class="text-slate-300 text-[14px] mt-0.5">
+                    <p class="text-slate-300 text-xs sm:text-[14px] mt-0.5">
                         Get personalized diet, workout plan, and daily WhatsApp accountability.
                     </p>
                 </div>
-                <div class="text-right shrink-0 ml-2">
-                    <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%20reviewed%20the%20Muscle%20Building%20Proposal%20and%20want%20to%20get%20started!" target="_blank" class="inline-flex items-center gap-1.5 bg-brand-green hover:bg-brand-darkGreen text-white text-[14.5px] font-extrabold px-3 py-1.5 rounded-lg transition shadow-md">
-                        <i class="fab fa-whatsapp text-base"></i> Start on WhatsApp
+                <div class="text-left sm:text-right shrink-0 w-full sm:w-auto">
+                    <a href="https://wa.me/916290372390?text=Hi%20Simran%2C%20I%20reviewed%20the%20Muscle%20Building%20Proposal%20and%20want%20to%20get%20started!" target="_blank" class="inline-flex justify-center items-center gap-1.5 bg-brand-green hover:bg-brand-darkGreen text-white text-xs sm:text-[14.5px] font-extrabold px-4 sm:px-3 py-2 sm:py-1.5 rounded-lg transition shadow-md w-full sm:w-auto">
+                        <i class="fab fa-whatsapp text-sm sm:text-base"></i> Start on WhatsApp
                     </a>
                 </div>
             </div>
             
-            <div class="flex justify-between items-center text-[13.5px] text-slate-600 font-medium mt-1.5 px-0.5">
+            <div class="flex flex-col sm:flex-row justify-between items-center text-xs sm:text-[13.5px] text-slate-600 font-medium mt-2 sm:mt-1.5 px-0.5 gap-1 sm:gap-0 text-center sm:text-left print-row">
                 <span><strong>EatLiftMove</strong> • www.eatliftmove.in</span>
                 <span>WhatsApp: +91 62903 72390</span>
                 <span>Personalized Proposal • Page 1 of 1</span>
