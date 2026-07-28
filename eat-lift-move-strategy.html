@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Evidence-supported niche, offer and scale strategy for Eat Lift Move." />
+  <title>Strong After 40 | Eat Lift Move Strategy</title>
+  <style>
+    :root {
+      --ink: #13231d;
+      --muted: #637069;
+      --forest: #0f3b2b;
+      --forest-2: #174f3b;
+      --emerald: #238761;
+      --mint: #dff4e8;
+      --lime: #dff29f;
+      --cream: #f6f2e8;
+      --paper: #fffdf8;
+      --gold: #d8a33e;
+      --rose: #f6dfd9;
+      --line: #dbe4de;
+      --shadow: 0 18px 55px rgba(15, 59, 43, 0.10);
+      --radius: 22px;
+      --radius-sm: 14px;
+      --max: 1440px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 2%, rgba(216,163,62,.16), transparent 24rem),
+        radial-gradient(circle at 95% 18%, rgba(35,135,97,.12), transparent 28rem),
+        var(--cream);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--emerald); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--forest); }
+    button { font: inherit; }
+
+    .progress {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      height: 4px;
+      background: rgba(255,255,255,.25);
+    }
+    .progress span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--lime));
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(15,59,43,.98), rgba(9,36,27,.96)),
+        var(--forest);
+      border-radius: 0 0 44px 44px;
+    }
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(1px);
+      pointer-events: none;
+    }
+    .hero::before {
+      width: 460px;
+      height: 460px;
+      right: -130px;
+      top: -180px;
+      background: rgba(223,242,159,.12);
+      border: 1px solid rgba(223,242,159,.16);
+    }
+    .hero::after {
+      width: 260px;
+      height: 260px;
+      left: -90px;
+      bottom: -150px;
+      background: rgba(216,163,62,.16);
+      border: 1px solid rgba(216,163,62,.18);
+    }
+    .hero-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 76px 0 64px;
+      position: relative;
+      z-index: 1;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--lime);
+    }
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: var(--gold);
+    }
+    h1, h2, h3, h4 { line-height: 1.12; margin-top: 0; letter-spacing: -.025em; }
+    h1 {
+      max-width: 900px;
+      margin: 24px 0 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 8vw, 6.7rem);
+      font-weight: 700;
+    }
+    .hero-lead {
+      max-width: 790px;
+      margin: 0;
+      font-size: clamp(1.08rem, 2.2vw, 1.45rem);
+      color: rgba(255,255,255,.78);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 18px;
+      cursor: pointer;
+      font-weight: 800;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--lime); color: #153222; }
+    .btn-secondary { background: rgba(255,255,255,.10); color: #fff; border: 1px solid rgba(255,255,255,.20); }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 42px;
+    }
+    .hero-stat {
+      min-height: 125px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 18px;
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(8px);
+    }
+    .hero-stat b {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.65rem;
+      color: #fff;
+    }
+    .hero-stat span { color: rgba(255,255,255,.70); font-size: .93rem; }
+
+    .page-shell {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 38px auto 80px;
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+    .toc {
+      position: sticky;
+      top: 24px;
+      max-height: calc(100vh - 48px);
+      overflow: auto;
+      padding: 20px;
+      border-radius: var(--radius);
+      background: rgba(255,253,248,.86);
+      border: 1px solid rgba(219,228,222,.9);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(15px);
+    }
+    .toc h2 {
+      margin-bottom: 14px;
+      font-size: .76rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .toc a {
+      display: block;
+      padding: 8px 10px;
+      border-radius: 10px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      line-height: 1.35;
+    }
+    .toc a:hover, .toc a.active { background: var(--mint); color: var(--forest); font-weight: 750; }
+
+    main { min-width: 0; }
+    .section {
+      scroll-margin-top: 24px;
+      margin-bottom: 28px;
+      padding: clamp(24px, 4vw, 46px);
+      border: 1px solid rgba(219,228,222,.95);
+      border-radius: var(--radius);
+      background: rgba(255,253,248,.92);
+      box-shadow: var(--shadow);
+    }
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      background: var(--forest);
+      color: #fff;
+      font-weight: 900;
+    }
+    .section h2 {
+      margin-bottom: 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      color: var(--forest);
+    }
+    .section h3 { margin: 32px 0 10px; font-size: 1.35rem; color: var(--forest); }
+    .section h4 { margin: 24px 0 8px; font-size: 1.05rem; }
+    .section-intro { max-width: 850px; color: var(--muted); font-size: 1.02rem; }
+
+    .verdict {
+      margin: -4px 0 28px;
+      padding: 22px 24px;
+      border-radius: 18px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--forest), var(--forest-2));
+      border-left: 5px solid var(--gold);
+    }
+    .verdict strong { color: var(--lime); }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin: 0 7px 7px 0;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: .76rem;
+      font-weight: 850;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+    .confirmed { background: #dff4e8; color: #15563d; }
+    .estimate { background: #e3edf9; color: #244d78; }
+    .hypothesis { background: #f7e9c7; color: #77530c; }
+    .unknown { background: #f1e6ef; color: #71445f; }
+    .validate { background: #f6dfd9; color: #7a3729; }
+
+    .summary-grid,
+    .card-grid,
+    .three-grid,
+    .two-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .summary-grid { grid-template-columns: repeat(4, minmax(0,1fr)); margin: 24px 0 8px; }
+    .card-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .three-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .two-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+    .card h3, .card h4 { margin-top: 0; }
+    .card p:last-child, .card ul:last-child { margin-bottom: 0; }
+    .card-accent { background: linear-gradient(145deg, #fff, var(--mint)); }
+    .metric {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--forest);
+    }
+    .muted { color: var(--muted); }
+    .small { font-size: .88rem; }
+
+    .quote {
+      margin: 24px 0;
+      padding: 22px 24px;
+      border-radius: 18px;
+      background: var(--mint);
+      color: var(--forest);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 18px 0 28px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+    table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      font-size: .9rem;
+    }
+    th, td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: var(--forest);
+      color: #fff;
+      font-size: .78rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:nth-child(even) { background: #fbfcfa; }
+    tbody tr:hover { background: #f1f8f4; }
+    td strong { color: var(--forest); }
+
+    ul, ol { padding-left: 1.25rem; }
+    li { margin: 6px 0; }
+    .clean-list { list-style: none; padding: 0; }
+    .clean-list li {
+      position: relative;
+      padding-left: 24px;
+      margin: 10px 0;
+    }
+    .clean-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--emerald);
+      font-weight: 900;
+    }
+    .risk-list li::before { content: "!"; color: #b4523d; }
+
+    details {
+      margin: 12px 0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: clip;
+    }
+    summary {
+      cursor: pointer;
+      padding: 16px 18px;
+      font-weight: 850;
+      color: var(--forest);
+      background: #fbfcfa;
+    }
+    details > div { padding: 4px 18px 18px; }
+
+    .score {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 50px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-weight: 900;
+      background: var(--lime);
+      color: var(--forest);
+    }
+    .scorebar {
+      width: 100%;
+      min-width: 110px;
+      height: 9px;
+      border-radius: 999px;
+      background: #e8eee9;
+      overflow: hidden;
+      margin-top: 7px;
+    }
+    .scorebar span { display: block; height: 100%; background: linear-gradient(90deg, var(--emerald), var(--gold)); }
+
+    .winner {
+      padding: 28px;
+      border: 1px solid rgba(216,163,62,.45);
+      border-radius: 22px;
+      background: linear-gradient(145deg, #fff9e9, #fff);
+    }
+    .winner h3 { font-size: 1.7rem; }
+    .mechanism {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .mechanism div {
+      padding: 18px;
+      border-radius: 16px;
+      color: #fff;
+      background: var(--forest);
+    }
+    .mechanism b { display: block; color: var(--lime); font-size: 1.1rem; }
+
+    .callout {
+      margin: 20px 0;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: #fff8e8;
+      border: 1px solid #ead7a7;
+    }
+    .callout.danger { background: var(--rose); border-color: #e7bfb5; }
+    .callout.success { background: var(--mint); border-color: #bedfc9; }
+
+    .sources {
+      columns: 2;
+      column-gap: 30px;
+      font-size: .88rem;
+    }
+    .sources li { break-inside: avoid; margin-bottom: 10px; }
+
+    .footer {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto 48px;
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .footer strong { color: var(--forest); }
+
+    @media (max-width: 1100px) {
+      .page-shell { grid-template-columns: 1fr; }
+      .toc {
+        position: static;
+        display: flex;
+        gap: 4px;
+        overflow-x: auto;
+        max-height: none;
+        white-space: nowrap;
+      }
+      .toc h2 { display: none; }
+      .toc a { flex: 0 0 auto; }
+      .hero-stats, .summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .hero { border-radius: 0 0 28px 28px; }
+      .hero-inner { width: min(100% - 28px, 1180px); padding: 60px 0 44px; }
+      .hero-stats, .summary-grid, .card-grid, .three-grid, .two-grid, .mechanism { grid-template-columns: 1fr; }
+      .page-shell { width: min(100% - 20px, var(--max)); margin-top: 18px; }
+      .section { padding: 24px 18px; border-radius: 18px; }
+      .sources { columns: 1; }
+      h1 { font-size: 3rem; }
+    }
+
+    @media print {
+      body { background: #fff; color: #111; }
+      .progress, .toc, .hero-actions { display: none !important; }
+      .hero { color: #111; background: #fff; border-radius: 0; border-bottom: 2px solid #111; }
+      .hero-lead, .hero-stat span { color: #333; }
+      .hero-stat { border: 1px solid #bbb; background: #fff; }
+      .hero-stat b, h1 { color: #111; }
+      .page-shell { display: block; width: 100%; margin: 0; }
+      .section { box-shadow: none; border: 0; border-radius: 0; padding: 24px 0; break-inside: auto; }
+      .card, .table-wrap, .winner, .callout, details { break-inside: avoid; }
+      th { position: static; background: #eee; color: #111; }
+      a { color: #111; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">Eat Lift Move • Niche and Program Strategy</div>
+      <h1>Strong After 40</h1>
+      <p class="hero-lead">An evidence-supported group coaching strategy for Indian male business owners who want to rebuild strength, improve mobility, reduce their waist trend and stay consistent without crash diets or daily gym sessions.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#final-recommendation">See the final recommendation</a>
+        <button class="btn btn-secondary" type="button" onclick="window.print()">Print or save as PDF</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>12 weeks</b><span>Recommended flagship cohort length</span></div>
+        <div class="hero-stat"><b>8 to 10</b><span>Founding students for the first paid test</span></div>
+        <div class="hero-stat"><b>₹18,000</b><span>Recommended founding cohort price</span></div>
+        <div class="hero-stat"><b>₹45K to ₹50K</b><span>Target standard price after strong proof</span></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <nav class="toc" aria-label="Table of contents">
+      <h2>Contents</h2>
+      <a href="#overview">Overview</a>
+      <a href="#skills">1. Founder skill assessment</a>
+      <a href="#right-to-teach">2. Right to teach</a>
+      <a href="#candidates">3. Fifty niches</a>
+      <a href="#rejected">4. Rejected ideas</a>
+      <a href="#market">5. Market evidence</a>
+      <a href="#competitors">6. Competitor evidence</a>
+      <a href="#scores">7. Top 10 scores</a>
+      <a href="#opportunities">8. Top opportunities</a>
+      <a href="#winner">9. Winner and backup</a>
+      <a href="#economics">10. Business math</a>
+      <a href="#program">11. Winning program</a>
+      <a href="#founding">12. Founding offer</a>
+      <a href="#validation">13. Validation plan</a>
+      <a href="#risks">14. Risks and unknowns</a>
+      <a href="#final-recommendation">15. Final recommendation</a>
+      <a href="#sources">Sources</a>
+    </nav>
+
+    <main>
+      <section class="section" id="overview">
+        <div class="section-number">✓</div>
+        <h2>Recommended direction</h2>
+        <p class="section-intro">The strongest current opportunity is a premium, India-first group programme for a narrow buyer with a measurable fitness result.</p>
+
+        <div class="verdict">
+          <strong>Ruthless verdict:</strong> The current positioning is too broad. “People aged 35 to 65 who want to become stronger and sexier” mixes buyers with different bodies, motivations and risks. The current delivery also depends on intensive one-to-one calls and unlimited chat. That model cannot reach ₹10 lakh per month without exhausting the founder.
+        </div>
+
+        <div class="winner">
+          <span class="label estimate">Evidence-supported estimate</span>
+          <h3>Best initial niche</h3>
+          <p><strong>Indian male SME and family-business owners aged 40 to 55 who have gained waist size, lost strength and cannot maintain a routine because of work, travel and social eating.</strong></p>
+          <h4>Recommended programme</h4>
+          <p><strong>Strong After 40: The Business Owner Reset</strong></p>
+          <h4>Starting market</h4>
+          <p>Kolkata first, then urban India.</p>
+        </div>
+
+        <div class="summary-grid">
+          <div class="card"><span class="metric">Group only</span><span class="muted">No weekly private coaching</span></div>
+          <div class="card"><span class="metric">3 sessions</span><span class="muted">Two workouts and one coaching call each week</span></div>
+          <div class="card"><span class="metric">₹10 lakh</span><span class="muted">First monthly revenue milestone</span></div>
+          <div class="card"><span class="metric">₹1 crore</span><span class="muted">Long-term company scale, not founder-only delivery</span></div>
+        </div>
+
+        <div class="callout success">
+          <strong>The first objective is not national scale.</strong> The first objective is eight paid men who complete the programme, improve and provide clean proof.
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="section-number">1</div>
+        <h2>Founder skill assessment</h2>
+        <p class="section-intro">The public material supports a credible foundation in strength, mobility, sustainable fat loss, Indian home-food nutrition, form correction and accountability.</p>
+
+        <div class="two-grid">
+          <div class="card card-accent">
+            <span class="label confirmed">Confirmed fact</span>
+            <h3>Current public positioning</h3>
+            <ul class="clean-list">
+              <li>Strength</li>
+              <li>Mobility</li>
+              <li>Fat loss</li>
+              <li>Adults aged 35 to 65</li>
+              <li>Weight training and personalised nutrition</li>
+            </ul>
+            <p class="small muted">The website also displays 17,000 Instagram followers and 9,200 Facebook followers. These figures are self-reported and were not independently verified.</p>
+          </div>
+          <div class="card">
+            <span class="label confirmed">Confirmed fact</span>
+            <h3>Current listed services</h3>
+            <ul class="clean-list">
+              <li>Kolkata one-to-one personal training at ₹50,000 for 15 sessions over two months</li>
+              <li>Online one-to-one coaching at ₹30,000 per month</li>
+              <li>Sixteen WhatsApp video sessions per month</li>
+              <li>Unlimited WhatsApp support</li>
+              <li>Home-food nutrition and home or gym workouts</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>A. Technical skills</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Skill cluster</th><th>Who needs it</th><th>Problem solved</th><th>Urgency and measurement</th><th>Group fit</th><th>Credibility</th><th>Proof still needed</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Strength-training technique</strong></td><td>Men returning after years of inactivity</td><td>Poor form, injury fear and random routines</td><td>High. Track strength tests and adherence</td><td>Strong</td><td>Strong</td><td>Standard baseline and final tests</td></tr>
+              <tr><td><strong>Progressive resistance training</strong></td><td>Men who train but do not progress</td><td>No clear progression system</td><td>Track repetitions, load and exercise level</td><td>Strong</td><td>Strong</td><td>Documented 12-week progression cases</td></tr>
+              <tr><td><strong>Mobility and functional movement</strong></td><td>Deskbound men with stiffness</td><td>Difficulty squatting, bending and moving well</td><td>Track selected movement tests</td><td>Strong</td><td>Moderate to strong</td><td>Consistent assessment protocol and safety boundaries</td></tr>
+              <tr><td><strong>Indian home-food nutrition</strong></td><td>Men who cannot sustain Western meal plans</td><td>Family food, vegetarian protein and portion control</td><td>Track adherence, weight trend and waist</td><td>Strong</td><td>Strong</td><td>Meal examples across Indian regions and diets</td></tr>
+              <tr><td><strong>Sustainable fat-loss coaching</strong></td><td>Men who repeatedly regain weight</td><td>Extreme dieting and rebound</td><td>Track waist and weight trends</td><td>Strong</td><td>Moderate to strong</td><td>Duration and method for past transformations</td></tr>
+              <tr><td><strong>Home and basic-equipment workouts</strong></td><td>Busy men who avoid gyms</td><td>Travel, commute and schedule barriers</td><td>Track completion and progression</td><td>Very strong</td><td>Strong</td><td>Proof of progress without heavy private correction</td></tr>
+              <tr><td><strong>Kettlebell and functional training</strong></td><td>Men wanting compact home training</td><td>Limited equipment and time</td><td>Track strength and work capacity</td><td>Moderate</td><td>Strong technical fit</td><td>Beginner regressions and group safety process</td></tr>
+              <tr><td><strong>Fitness assessment</strong></td><td>Adults unsure where to start</td><td>No baseline or progress visibility</td><td>Highly measurable</td><td>Strong</td><td>Moderate to strong</td><td>Written assessment SOP and retest reliability</td></tr>
+              <tr><td><strong>Exercise form correction</strong></td><td>Beginners worried about injury</td><td>Poor technique and low confidence</td><td>Review video-based improvement</td><td>Moderate</td><td>Strong</td><td>A scalable video review process</td></tr>
+              <tr><td><strong>Basic recovery and exercise safety</strong></td><td>Adults restarting training</td><td>Doing too much too soon</td><td>Track soreness, adherence and missed sessions</td><td>Strong</td><td>Moderate</td><td>Updated screening, referral and emergency procedures</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="three-grid">
+          <div class="card">
+            <h3>B. Strategic skills</h3>
+            <ul class="clean-list">
+              <li>Turn broad goals into practical routines</li>
+              <li>Adjust exercise difficulty</li>
+              <li>Link home food with fat loss</li>
+              <li>Keep beginners accountable</li>
+              <li>Combine strength, mobility and body transformation</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>C. Communication skills</h3>
+            <ul class="clean-list">
+              <li>Teach health concepts to groups</li>
+              <li>Speak to adult audiences</li>
+              <li>Motivate clients</li>
+              <li>Give feedback</li>
+              <li>Build accountability</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>D. Industry knowledge</h3>
+            <ul class="clean-list">
+              <li>Adult fitness</li>
+              <li>Strength training</li>
+              <li>Home exercise</li>
+              <li>Online coaching</li>
+              <li>Indian food routines</li>
+              <li>Beginner training</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>E. Transformation experience</h3>
+        <div class="two-grid">
+          <div class="card card-accent">
+            <h4>What the proof supports</h4>
+            <ul class="clean-list">
+              <li>Personal transformation through strength training</li>
+              <li>Experience coaching men and women</li>
+              <li>Client reports of better strength, stamina and routines</li>
+              <li>Visible male body-composition changes</li>
+              <li>Repeated evidence that accountability is a coaching strength</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>What the proof does not yet support</h4>
+            <ul class="clean-list risk-list">
+              <li>A guaranteed number of kilograms lost</li>
+              <li>A guaranteed waist reduction</li>
+              <li>A documented success rate</li>
+              <li>A business-owner specific result</li>
+              <li>A result produced through group coaching</li>
+              <li>Medical improvement claims</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>F. Transferable skills</h3>
+        <p>These skills can transfer into executive fitness, business-owner performance programmes, corporate leadership wellness, association-sponsored challenges, frequent-traveller fitness and alumni maintenance memberships.</p>
+        <div class="quote">The highest-value skill is not writing workouts. It is making fitness usable for normal adults who struggle with consistency.</div>
+      </section>
+
+      <section class="section" id="right-to-teach">
+        <div class="section-number">2</div>
+        <h2>Five strongest right-to-teach areas</h2>
+        <div class="card-grid">
+          <div class="card card-accent"><span class="label estimate">Strongest</span><h3>Strength after 40</h3><p>Strength training for men restarting after 40, supported by relevant credentials, personal experience, male transformations and form-focused coaching.</p></div>
+          <div class="card"><h3>Indian home-food fat loss</h3><p>Sustainable nutrition using ordinary home food. The safe promise is a practical food system and improved trends, not a guaranteed number of kilograms.</p></div>
+          <div class="card"><h3>Mobility for deskbound adults</h3><p>Help medically cleared adults move better and become stronger without claiming to treat injury, arthritis or chronic pain.</p></div>
+          <div class="card"><h3>Consistency and accountability</h3><p>Free workout information is abundant. Repeatable implementation and accountability are harder to replace.</p></div>
+          <div class="card"><h3>Home and basic-equipment strength</h3><p>Repeatable tracks using bodyweight, resistance bands, dumbbells, kettlebells and gym alternatives.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="candidates">
+        <div class="section-number">3</div>
+        <h2>Fifty candidate niches</h2>
+        <p class="section-intro"><span class="label hypothesis">Hypotheses</span> None of these ideas should be treated as validated demand until buyers pay.</p>
+
+        <details open>
+          <summary>Business-owner and professional segments, 1 to 15</summary>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>No.</th><th>Specific candidate</th><th>Result, format and time</th><th>Pay and reach</th><th>Proof needed and failure risk</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Urban Indian male SME owners aged 40 to 55 with waist gain, stiffness and no routine</td><td>12-week group improving adherence, strength, mobility and waist trend</td><td>High potential through BNI, Rotary, LinkedIn and referrals</td><td>Need owner-specific cases. Occupation may not matter enough</td></tr>
+                <tr><td>2</td><td>BNI male members aged 40 to 60 who miss workouts because of business commitments</td><td>12-week chapter-based strength and accountability cohort</td><td>High potential through association access</td><td>Need chapter partner. Dependent on approval</td></tr>
+                <tr><td>3</td><td>Rotary and Lions Club men aged 45 to 65 who want to remain active</td><td>12-week functional-strength and mobility cohort</td><td>Medium to high. Existing workshop credibility</td><td>Need medical screening. Wider age raises complexity</td></tr>
+                <tr><td>4</td><td>Family-business owners aged 40 to 60 with social eating and sedentary workdays</td><td>Home-food nutrition and three weekly strength sessions</td><td>High. Local business communities</td><td>Need cultural and occupational proof</td></tr>
+                <tr><td>5</td><td>Male agency and consulting owners aged 35 to 50 working long desk hours</td><td>8-week routine reset with short strength sessions</td><td>High. LinkedIn and business communities</td><td>Crowded busy-founder message</td></tr>
+                <tr><td>6</td><td>Indian startup founders aged 35 to 50 with irregular sleep, travel and workouts</td><td>12-week minimum-effective-dose fitness system</td><td>High. Founder groups and accelerators</td><td>Stress may reduce adherence</td></tr>
+                <tr><td>7</td><td>Male senior corporate leaders aged 40 to 55 with declining strength</td><td>12-week executive strength cohort</td><td>High. Corporate HR and LinkedIn</td><td>Long sales cycle and no corporate cases yet</td></tr>
+                <tr><td>8</td><td>Male sales directors aged 35 to 50 who travel and eat outside frequently</td><td>10-week travel-proof fitness and food system</td><td>High. Sales communities</td><td>Schedules may create delivery complexity</td></tr>
+                <tr><td>9</td><td>Male IT managers aged 38 to 50 working from home</td><td>12-week desk-to-strength reset</td><td>Medium to high. Technology communities</td><td>Many low-cost alternatives</td></tr>
+                <tr><td>10</td><td>Male chartered accountants aged 38 to 55 with seasonal overwork</td><td>12-week strength system around tax-season constraints</td><td>High. Professional associations</td><td>Seasonality may reduce year-round demand</td></tr>
+                <tr><td>11</td><td>Male lawyers aged 40 to 55 with court and desk-heavy schedules</td><td>12-week strength and mobility routine</td><td>High. Bar associations and referrals</td><td>Harder access without an industry network</td></tr>
+                <tr><td>12</td><td>Male doctors aged 40 to 60 with long shifts</td><td>12-week short-session strength cohort</td><td>High. Medical associations</td><td>May demand stronger clinical credentials</td></tr>
+                <tr><td>13</td><td>Male bank and finance managers aged 40 to 55</td><td>12-week waist and strength reset</td><td>Medium to high. Employer partnerships</td><td>Generic corporate fitness competition</td></tr>
+                <tr><td>14</td><td>Male real-estate owners and brokers aged 40 to 55</td><td>12-week mobile fitness system</td><td>High. Local associations</td><td>May prefer flexible one-to-one delivery</td></tr>
+                <tr><td>15</td><td>Male manufacturing owners aged 40 to 60</td><td>12-week business-owner strength programme</td><td>High. Industrial associations</td><td>Harder national reach and varied fitness levels</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <details>
+          <summary>Life-stage and restart segments, 16 to 30</summary>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>No.</th><th>Specific candidate</th><th>Result, format and time</th><th>Pay and reach</th><th>Proof needed and failure risk</th></tr></thead>
+              <tbody>
+                <tr><td>16</td><td>Men aged 45 to 60 restarting after ten or more inactive years</td><td>12-week safe return-to-strength cohort</td><td>Medium to high. Content and referrals</td><td>Greater screening needs and injury fear</td></tr>
+                <tr><td>17</td><td>Men aged 40 to 55 who repeatedly start and stop fitness</td><td>12-week consistency system with minimum standards</td><td>Medium to high. Strong content pain</td><td>Historically low adherence</td></tr>
+                <tr><td>18</td><td>First-time gym users aged 40 to 55 who feel intimidated</td><td>8-week gym-confidence and form programme</td><td>Medium. Gyms and social media</td><td>May choose a local trainer</td></tr>
+                <tr><td>19</td><td>Fathers aged 35 to 45 who gained weight after parenthood</td><td>12-week dad-strength reset</td><td>Medium to high. Parenting communities</td><td>Crowded dad-bod market</td></tr>
+                <tr><td>20</td><td>Deskbound men aged 40 to 55 with stiffness and low confidence</td><td>12-week mobility-first strength system</td><td>Medium to high. LinkedIn and social</td><td>Must avoid pain-treatment claims</td></tr>
+                <tr><td>21</td><td>Men aged 50 to 65 who want to preserve everyday strength</td><td>16-week functional-strength programme</td><td>Medium to high. Associations</td><td>More medical complexity</td></tr>
+                <tr><td>22</td><td>Men approaching their 40th or 50th birthday</td><td>12-week milestone strength challenge</td><td>Medium. Social media and referrals</td><td>Urgency disappears after event</td></tr>
+                <tr><td>23</td><td>Men preparing for an anniversary or family event</td><td>8 to 12-week appearance and strength programme</td><td>Medium to high</td><td>High refund risk with aggressive visual promises</td></tr>
+                <tr><td>24</td><td>Men aged 40 and above preparing for a trek</td><td>12-week strength, walking and mobility preparation</td><td>Medium. Trek groups</td><td>Seasonal and smaller market</td></tr>
+                <tr><td>25</td><td>Men aged 40 and above preparing for their first 5K</td><td>10-week beginner conditioning programme</td><td>Medium. Running communities</td><td>Running is not the strongest proof area</td></tr>
+                <tr><td>26</td><td>Male motorcyclists aged 40 and above with stiffness</td><td>10-week biker mobility and strength programme</td><td>Medium. Biker communities</td><td>Smaller market and unclear willingness to pay</td></tr>
+                <tr><td>27</td><td>Male golfers aged 40 and above</td><td>12-week golf-support strength programme</td><td>High ability to pay</td><td>Requires golf-specific proof</td></tr>
+                <tr><td>28</td><td>Male recreational badminton players aged 35 and above</td><td>10-week strength and conditioning cohort</td><td>Medium</td><td>Sport-specific proof is weak</td></tr>
+                <tr><td>29</td><td>Male weekend cricketers aged 35 and above</td><td>10-week mobility and conditioning cohort</td><td>Medium</td><td>Seasonal and injury-sensitive</td></tr>
+                <tr><td>30</td><td>Frequent male business travellers aged 35 to 55</td><td>12-week hotel, home and gym programme</td><td>High</td><td>Schedules may require too much customisation</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <details>
+          <summary>Method and problem-specific segments, 31 to 45</summary>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>No.</th><th>Specific candidate</th><th>Result, format and time</th><th>Pay and reach</th><th>Proof needed and failure risk</th></tr></thead>
+              <tbody>
+                <tr><td>31</td><td>Vegetarian Indian men aged 40 to 55 struggling with protein and strength</td><td>12-week vegetarian strength and home-food programme</td><td>Medium to high. Content and communities</td><td>Nutrition credentials need current substantiation</td></tr>
+                <tr><td>32</td><td>Men aged 40 to 55 who want fat loss without separate diet food</td><td>12-week family-food body-composition programme</td><td>Medium to high</td><td>Broad fat-loss competition</td></tr>
+                <tr><td>33</td><td>Businessmen who lose control at dinners, travel and family events</td><td>10-week social-eating consistency programme</td><td>High</td><td>Nutrition alone may feel less valuable</td></tr>
+                <tr><td>34</td><td>Men aged 40 to 55 with dumbbells at home but no structure</td><td>12-week dumbbell strength cohort</td><td>Medium. Search and social</td><td>Free alternatives are abundant</td></tr>
+                <tr><td>35</td><td>Men aged 40 to 55 with no equipment</td><td>8-week home strength starter</td><td>Low to medium</td><td>Low perceived premium value</td></tr>
+                <tr><td>36</td><td>Men who can train only 30 minutes in the morning</td><td>12-week short-session programme</td><td>Medium to high</td><td>Time-saving message is heavily used</td></tr>
+                <tr><td>37</td><td>Men willing to train only twice each week</td><td>12-week minimalist-strength programme</td><td>Medium to high</td><td>Visual progress may be slower</td></tr>
+                <tr><td>38</td><td>Stiff deskbound men who want to move before training harder</td><td>8-week mobility-to-strength programme</td><td>Medium</td><td>May attract people needing physiotherapy</td></tr>
+                <tr><td>39</td><td>Medically cleared men with previous back discomfort</td><td>12-week return-to-strength group</td><td>Medium to high</td><td>High legal, screening and reputation risk</td></tr>
+                <tr><td>40</td><td>Medically cleared men with knee sensitivity</td><td>12-week low-impact strength programme</td><td>Medium to high</td><td>Strict boundaries and referrals required</td></tr>
+                <tr><td>41</td><td>Men discharged from physiotherapy and cleared to train</td><td>12-week post-physio strength transition</td><td>High through partnerships</td><td>Clinical collaboration required</td></tr>
+                <tr><td>42</td><td>Men who lost at least 10 kg and fear regaining it</td><td>12-week maintenance and strength programme</td><td>Medium to high</td><td>Existing proof does not document maintenance</td></tr>
+                <tr><td>43</td><td>Men focused on reducing waist while gaining strength</td><td>12-week body-recomposition cohort</td><td>High demand</td><td>High expectation and refund risk</td></tr>
+                <tr><td>44</td><td>Male kettlebell beginners aged 40 to 55</td><td>8-week kettlebell foundations cohort</td><td>Medium</td><td>Technique feedback can become labour intensive</td></tr>
+                <tr><td>45</td><td>Male gym beginners aged 40 to 55 who want correct form</td><td>8-week strength-confidence programme</td><td>Medium</td><td>Local trainers are a strong substitute</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+
+        <details>
+          <summary>Distribution-led and recurring models, 46 to 50</summary>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>No.</th><th>Specific candidate</th><th>Result, format and time</th><th>Pay and reach</th><th>Proof needed and failure risk</th></tr></thead>
+              <tbody>
+                <tr><td>46</td><td>Remote male technology professionals aged 35 to 50</td><td>12-week work-from-home strength cohort</td><td>Medium to high. LinkedIn and employer groups</td><td>Crowded market</td></tr>
+                <tr><td>47</td><td>Male night-shift managers aged 30 to 45</td><td>12-week schedule-adapted routine</td><td>Medium to high</td><td>Sleep and recovery complexity</td></tr>
+                <tr><td>48</td><td>Kolkata-based Marwari male business owners aged 40 to 60</td><td>12-week culturally relevant cohort</td><td>High. Local referrals and communities</td><td>Narrow geography and cultural acceptance need testing</td></tr>
+                <tr><td>49</td><td>Employer-sponsored male leadership cohorts aged 40 to 55</td><td>12-week corporate strength and accountability programme</td><td>High contract value</td><td>Long sales cycle and procurement barriers</td></tr>
+                <tr><td>50</td><td>Graduates of the core programme</td><td>Monthly strength and accountability membership</td><td>Medium recurring value</td><td>Requires a successful alumni base</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </section>
+
+      <section class="section" id="rejected">
+        <div class="section-number">4</div>
+        <h2>Rejected ideas</h2>
+        <p class="section-intro">These offers create legal, ethical, proof or delivery problems that outweigh their commercial appeal.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Rejected idea</th><th>Exact reason</th></tr></thead>
+            <tbody>
+              <tr><td>Diabetes-reversal coaching</td><td>Medical claim, insufficient clinical authority and high legal risk</td></tr>
+              <tr><td>Hypertension-reversal programme</td><td>Requires medical supervision and cannot be promised through coaching</td></tr>
+              <tr><td>Hormone or testosterone optimisation</td><td>Testing and medical interpretation fall outside visible expertise</td></tr>
+              <tr><td>Injury rehabilitation</td><td>Material supports injury-aware training, not licensed rehabilitation</td></tr>
+              <tr><td>Chronic-pain treatment</td><td>Pain may require diagnosis and clinical care</td></tr>
+              <tr><td>Sarcopenia treatment</td><td>Clinical term. Safer offer is strength and function after 40</td></tr>
+              <tr><td>Mental-health or depression fitness coaching</td><td>Insufficient mental-health credentials and high-risk positioning</td></tr>
+              <tr><td>Guaranteed 10 kg or 15 kg weight loss</td><td>Results depend on starting point, health, adherence and individual response</td></tr>
+              <tr><td>Competitive bodybuilding preparation</td><td>No strong public competition-prep proof</td></tr>
+              <tr><td>Elite sports performance</td><td>Strongest evidence is adult fitness, not elite performance</td></tr>
+              <tr><td>Children or teenage fitness</td><td>Different safeguarding and programming requirements</td></tr>
+              <tr><td>Trainer-certification business</td><td>Current proof does not establish authority to certify professionals</td></tr>
+              <tr><td>Women-only programme</td><td>Directly conflicts with the stated exclusion</td></tr>
+              <tr><td>Everyone aged 35 to 65</td><td>Weak message, mixed needs and poor group cohesion</td></tr>
+              <tr><td>Very low-cost mass classes</td><td>Requires high volume and competes with low-cost memberships</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <strong>Penalised, not fully rejected:</strong> Doctors, lawyers, golfers, runners and sport-specific segments may pay well, but proof and distribution are weak. Back-sensitive, knee-sensitive and post-physio programmes may become viable later with formal clinical partnerships.
+        </div>
+      </section>
+
+      <section class="section" id="market">
+        <div class="section-number">5</div>
+        <h2>Current market evidence</h2>
+        <div class="two-grid">
+          <div class="card card-accent">
+            <span class="label confirmed">Confirmed fact</span>
+            <h3>Physical inactivity</h3>
+            <p>WHO’s 2024 India physical-activity profile estimates that 42% of adult Indian men are insufficiently active. WHO also recommends muscle-strengthening activity involving major muscle groups on at least two days each week.</p>
+          </div>
+          <div class="card">
+            <span class="label confirmed">Confirmed fact</span>
+            <h3>Overweight and obesity</h3>
+            <p>NFHS-6 reports that 27.3% of Indian men aged 15 to 49 are overweight or obese. The proportion reaches 36.3% among urban men.</p>
+          </div>
+        </div>
+
+        <h3>Language buyers use</h3>
+        <p>Public discussions from men approaching or passing 40 repeatedly mention stubborn belly fat, fear that it may be too late, work stress, skipped workouts, repeated restarts, family functions, social food and difficulty getting enough protein through Indian vegetarian diets.</p>
+        <div class="quote">The buyer does not wake up thinking, “I need to prevent sarcopenia.” He thinks, “My stomach has grown. I feel weak. My body is stiff. I keep starting and stopping.”</div>
+
+        <h3>Evidence of spending</h3>
+        <div class="card-grid">
+          <div class="card"><span class="metric">₹1,499</span><span class="muted">Monthly live online group training</span></div>
+          <div class="card"><span class="metric">₹7,900</span><span class="muted">Example 90-day group transformation</span></div>
+          <div class="card"><span class="metric">₹17,999</span><span class="muted">Example 12-week personalised programme</span></div>
+          <div class="card"><span class="metric">₹20K to ₹47K</span><span class="muted">Examples of 3-month personalised programmes</span></div>
+          <div class="card"><span class="metric">₹16K+</span><span class="muted">Premium one-to-one monthly service examples</span></div>
+        </div>
+        <p><span class="label estimate">Evidence-supported estimate</span> Buyers already spend on this category.</p>
+        <p><span class="label unknown">Unknown</span> Public research does not prove that Indian male business owners will pay ₹45,000 for this exact group programme. Paid presales must answer that question.</p>
+
+        <h3>Demand confidence</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Question</th><th>Assessment</th></tr></thead>
+            <tbody>
+              <tr><td>Does the problem exist?</td><td><strong>High confidence</strong></td></tr>
+              <tr><td>Do men recognise the problem?</td><td><strong>High confidence</strong></td></tr>
+              <tr><td>Are people already paying for fitness help?</td><td><strong>High confidence</strong></td></tr>
+              <tr><td>Is there direct evidence for the exact business-owner offer?</td><td><strong>Low confidence</strong></td></tr>
+              <tr><td>Can buyers influence the outcome?</td><td>High, if medically cleared and compliant</td></tr>
+              <tr><td>Can the process be taught in a group?</td><td>High</td></tr>
+              <tr><td>Is ₹45,000 validated?</td><td>No</td></tr>
+              <tr><td>Is the market large enough for ₹10 lakh monthly?</td><td>Likely, acquisition remains unvalidated</td></tr>
+              <tr><td>Is the market large enough for ₹1 crore monthly?</td><td>Likely in population terms, operations remain unproven</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="competitors">
+        <div class="section-number">6</div>
+        <h2>Competitor evidence</h2>
+        <p class="section-intro">Public proof and testimonials on competitor websites are self-published unless stated otherwise. They are evidence of positioning and offer design, not independent outcome verification.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Type</th><th>Competitor or alternative</th><th>Audience and offer</th><th>Public price and format</th><th>Strength</th><th>Opening</th></tr></thead>
+            <tbody>
+              <tr><td>Direct</td><td><strong>Fit Father Project</strong></td><td>Busy fathers and men over 40. Fat loss, muscle, short workouts and accountability</td><td>Programme and membership products. All-access example at $87 per quarter</td><td>Specific buyer and strong content ecosystem</td><td>Not built around Indian food, Indian business schedules or live Indian cohorts</td></tr>
+              <tr><td>Near-direct</td><td><strong>Physique Expert</strong></td><td>Busy professionals seeking fat loss, strength and metabolic health</td><td>Personalised coaching. Public price unclear</td><td>Strong busy-professional positioning</td><td>Not clearly male-only, age-specific or group-led</td></tr>
+              <tr><td>Indirect</td><td><strong>FITTR</strong></td><td>Broad fitness audience with nutrition, strength and personal training</td><td>Example ₹11,999 monthly PT Lite and ₹32,999 quarterly</td><td>Large marketplace and extensive choice</td><td>Broad audience and primarily one-to-one delivery</td></tr>
+              <tr><td>Indirect</td><td><strong>HealthifyMe</strong></td><td>Broad weight-loss and fitness market</td><td>App plus diet and fitness coaches. Many prices require enquiry</td><td>Tracking and brand awareness</td><td>Generic market and weak cohort identity</td></tr>
+              <tr><td>Indirect</td><td><strong>Fitelo</strong></td><td>Weight management with coach, app and support</td><td>Example ₹20,000 for three months</td><td>Indian-food and behaviour positioning</td><td>Diet-led, broad and increasingly medicalised</td></tr>
+              <tr><td>Indirect</td><td><strong>Fitterfly</strong></td><td>Three-month expert-led weight-loss programme</td><td>Brochure example ₹12,349 with a discounted ₹7,500 offer</td><td>Multi-expert and medical credibility</td><td>Broad weight loss and lower price anchor</td></tr>
+              <tr><td>Indirect</td><td><strong>Studio FIT India</strong></td><td>Live online yoga, HIIT, strength and weight loss</td><td>₹1,499 monthly and ₹7,900 for 90 days</td><td>Live group delivery and affordability</td><td>Generic classes with little niche identity</td></tr>
+              <tr><td>Near-direct</td><td><strong>Parambodyfitmind</strong></td><td>Men and women seeking body transformation</td><td>₹17,999 for 12 weeks with one-to-one attention</td><td>Transparent price and clear structure</td><td>Broad audience and heavy personalisation</td></tr>
+              <tr><td>Indirect</td><td><strong>Cult.fit</strong></td><td>Urban consumers seeking gym and group-class access</td><td>Examples around ₹899 to ₹2,458 monthly</td><td>Convenience, brand and infrastructure</td><td>Membership access, not a specific transformation</td></tr>
+              <tr><td>Done for you</td><td><strong>YourTrainer and similar services</strong></td><td>Busy professionals seeking personal coaching</td><td>Starting around ₹5,000 monthly online</td><td>Flexible and personalised</td><td>Fragmented and hard to scale without more trainers</td></tr>
+              <tr><td>Free</td><td><strong>Polarity Fitness and Skool groups</strong></td><td>Busy men over 40 seeking minimal workouts and community</td><td>Free community with paid products behind it</td><td>Specific identity and community</td><td>Mostly international and not India-specific</td></tr>
+              <tr><td>Free</td><td><strong>YouTube, books and apps</strong></td><td>Men over 40 seeking workout and diet information</td><td>Free or low cost</td><td>Huge information supply</td><td>Weak accountability and implementation feedback</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="winner">
+          <span class="label estimate">Positioning gap</span>
+          <h3>An India-first, male-only, live group programme for business owners aged 40 to 55</h3>
+          <ul class="clean-list">
+            <li>Indian food and social-event context</li>
+            <li>Home and gym options</li>
+            <li>Business-travel strategies</li>
+            <li>Measurable strength and adherence scorecard</li>
+            <li>Live group accountability</li>
+            <li>No disease-reversal promise</li>
+            <li>No daily gym requirement</li>
+            <li>No unlimited private access</li>
+          </ul>
+        </div>
+
+        <div class="callout">
+          <strong>Research limitation:</strong> Searches did not surface an obvious India-first programme with this exact combination. That does not prove no competitor exists. Quora, private communities, Meta Ads Library depth and many sales-call-only prices remain incomplete.
+        </div>
+      </section>
+
+      <section class="section" id="scores">
+        <div class="section-number">7</div>
+        <h2>Top 10 scored niches</h2>
+        <p class="section-intro">Scores are evidence-supported estimates, not scientific measurements. They combine founder fit, pain, measurability, purchasing power, demand, reach, group potential, repeatability, proof, recurring revenue and market gap, minus risk penalties.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Rank</th><th>Niche</th><th>Founder fit</th><th>Pain</th><th>Pay</th><th>Group fit</th><th>Penalty</th><th>Final</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td><strong>Male business owners aged 40 to 55</strong><div class="scorebar"><span style="width:90%"></span></div></td><td>14/15</td><td>14/15</td><td>10/10</td><td>9/10</td><td>3</td><td><span class="score">90</span></td></tr>
+              <tr><td>2</td><td><strong>Men aged 45 to 60 returning after a long break</strong><div class="scorebar"><span style="width:86%"></span></div></td><td>15/15</td><td>13/15</td><td>8/10</td><td>10/10</td><td>2</td><td><span class="score">86</span></td></tr>
+              <tr><td>3</td><td><strong>BNI and Rotary business-owner cohorts</strong><div class="scorebar"><span style="width:85%"></span></div></td><td>14/15</td><td>13/15</td><td>9/10</td><td>10/10</td><td>4</td><td><span class="score">85</span></td></tr>
+              <tr><td>4</td><td><strong>Urban men seeking waist reduction and strength</strong><div class="scorebar"><span style="width:84%"></span></div></td><td>14/15</td><td>15/15</td><td>8/10</td><td>9/10</td><td>4</td><td><span class="score">84</span></td></tr>
+              <tr><td>5</td><td><strong>Men aged 50 to 65 seeking functional strength</strong><div class="scorebar"><span style="width:82%"></span></div></td><td>14/15</td><td>12/15</td><td>8/10</td><td>9/10</td><td>3</td><td><span class="score">82</span></td></tr>
+              <tr><td>6</td><td><strong>Corporate male leadership cohorts</strong><div class="scorebar"><span style="width:81%"></span></div></td><td>12/15</td><td>12/15</td><td>10/10</td><td>10/10</td><td>2</td><td><span class="score">81</span></td></tr>
+              <tr><td>7</td><td><strong>Vegetarian men aged 40 to 55</strong><div class="scorebar"><span style="width:79%"></span></div></td><td>13/15</td><td>12/15</td><td>9/10</td><td>9/10</td><td>5</td><td><span class="score">79</span></td></tr>
+              <tr><td>8</td><td><strong>Fathers aged 35 to 45 with a dad bod</strong><div class="scorebar"><span style="width:78%"></span></div></td><td>12/15</td><td>13/15</td><td>8/10</td><td>9/10</td><td>5</td><td><span class="score">78</span></td></tr>
+              <tr><td>9</td><td><strong>Frequent-travelling founders and sales leaders</strong><div class="scorebar"><span style="width:76%"></span></div></td><td>12/15</td><td>13/15</td><td>9/10</td><td>9/10</td><td>5</td><td><span class="score">76</span></td></tr>
+              <tr><td>10</td><td><strong>Home-dumbbell strength for men aged 40 to 55</strong><div class="scorebar"><span style="width:75%"></span></div></td><td>13/15</td><td>12/15</td><td>7/10</td><td>10/10</td><td>8</td><td><span class="score">75</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <details open><summary>Why the winner scored first</summary><div><p>It offers the best combination of painful symptoms, purchasing power, reachable communities, premium positioning and a repeatable group process. The main penalty is the lack of occupation-specific case studies and the untested fit of a woman leading a male-only cohort.</p></div></details>
+        <details><summary>Why the runner-up is safer but less premium</summary><div><p>Men returning after a long break are an excellent technical fit and easy to structure into a group. However, the audience includes more price-sensitive buyers and carries greater screening complexity.</p></div></details>
+        <details><summary>Why corporate cohorts are not the first move</summary><div><p>Corporate leadership programmes can produce larger contracts, but buyers expect proof, reporting, screening, insurance, reliable coach capacity and longer procurement cycles.</p></div></details>
+      </section>
+
+      <section class="section" id="opportunities">
+        <div class="section-number">8</div>
+        <h2>Top three detailed opportunities</h2>
+        <div class="card-grid">
+          <div class="card card-accent">
+            <span class="label estimate">Opportunity 1</span>
+            <h3>Male business owners, 40 to 55</h3>
+            <p><strong>Pain:</strong> Increasing waist, lower strength, stiffness, gym anxiety, repeated restarts and business-driven inconsistency.</p>
+            <p><strong>Desired result:</strong> Three weekly sessions, better strength tests, improved mobility, better food control and a routine that survives travel.</p>
+            <p><strong>Biggest unknown:</strong> Whether occupation-specific positioning adds enough value and whether men will join a woman-led, male-only cohort.</p>
+          </div>
+          <div class="card">
+            <span class="label estimate">Opportunity 2</span>
+            <h3>Men returning after a long break</h3>
+            <p><strong>Pain:</strong> Years of inactivity, fear of injury and confusion about where to restart.</p>
+            <p><strong>Desired result:</strong> Complete a safe 12-week return-to-strength plan and leave with an independent routine.</p>
+            <p><strong>Limitation:</strong> Wider health complexity and mixed ability to pay.</p>
+          </div>
+          <div class="card">
+            <span class="label estimate">Opportunity 3</span>
+            <h3>BNI, Rotary and association cohorts</h3>
+            <p><strong>Pain:</strong> Members want accountability and associations want useful programming.</p>
+            <p><strong>Desired result:</strong> Chapter-based 12-week strength challenge with scorecards and recognition.</p>
+            <p><strong>Strategic role:</strong> Use associations as a distribution channel, not necessarily as the permanent niche.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="winner">
+        <div class="section-number">9</div>
+        <h2>Winner and backup</h2>
+        <div class="winner">
+          <span class="label estimate">Best niche now</span>
+          <h3>Indian male SME and family-business owners aged 40 to 55</h3>
+          <p>They have gained waist size, lost strength and cannot maintain a routine because of work, travel and social eating.</p>
+        </div>
+
+        <div class="two-grid" style="margin-top:16px">
+          <div class="card"><h3>Best niche after more proof</h3><p>Employer-sponsored strength and mobility cohorts for male managers and leaders aged 40 to 55.</p></div>
+          <div class="card"><h3>Easiest niche to validate</h3><p>Kolkata-based male business owners reached through previous clients, Rotary, local referrals and business groups.</p></div>
+          <div class="card"><h3>Best long-term scale</h3><p>Strong After 40 India, delivered through consumer cohorts, assistant coaches, corporate programmes and an alumni membership.</p></div>
+          <div class="card"><h3>Safest legal position</h3><p>A strength, mobility and consistency programme for medically cleared men, with no disease or pain-treatment claims.</p></div>
+        </div>
+
+        <h3>Biggest risk for each finalist</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Finalist</th><th>Biggest risk</th></tr></thead>
+            <tbody>
+              <tr><td>Business owners aged 40 to 55</td><td>No proof that occupation-specific positioning increases purchases</td></tr>
+              <tr><td>Men returning after a long break</td><td>Medical and injury complexity</td></tr>
+              <tr><td>Association cohorts</td><td>Dependence on gatekeepers</td></tr>
+              <tr><td>Corporate leadership</td><td>Long sales cycles and procurement</td></tr>
+              <tr><td>Men aged 50 to 65</td><td>Screening requirements and slower progress</td></tr>
+              <tr><td>Vegetarian men</td><td>Offer may become a diet course rather than a full transformation</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="economics">
+        <div class="section-number">10</div>
+        <h2>Million-dollar business math</h2>
+        <p class="section-intro">The numbers expose what can scale and what cannot. A ₹1 crore monthly business cannot depend on the founder personally coaching every student.</p>
+
+        <h3>USD model stress test</h3>
+        <p class="small muted">Modelling assumptions: coached offers close 20% of held, qualified calls. Five percent of well-matched contacts become held calls. Self-paced offers convert one percent of qualified page visitors.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Model</th><th>Sales for $10K, $100K and $1M monthly</th><th>Approx. active students</th><th>Calls</th><th>Contacts or visitors</th><th>Reality</th></tr></thead>
+            <tbody>
+              <tr><td>$500 self-paced</td><td>20, 200, 2,000</td><td>20, 200, 2,000 monthly buyers</td><td>Usually none</td><td>2,000, 20,000, 200,000</td><td>Traffic scale, high acquisition risk</td></tr>
+              <tr><td>$2,000 eight-week group</td><td>5, 50, 500</td><td>10, 100, 1,000</td><td>25, 250, 2,500</td><td>500, 5,000, 50,000</td><td>Large scale needs many coaches and sales staff</td></tr>
+              <tr><td>$5,000 twelve-week DWY</td><td>2, 20, 200</td><td>6, 60, 600</td><td>10, 100, 1,000</td><td>200, 2,000, 20,000</td><td>Custom feedback can destroy margins</td></tr>
+              <tr><td>$10,000 high-touch group</td><td>1, 10, 100</td><td>3, 30, 300</td><td>5, 50, 500</td><td>100, 1,000, 10,000</td><td>Requires exceptional proof and premium buyers</td></tr>
+              <tr><td>$200 membership</td><td>50, 500, 5,000 active</td><td>50, 500, 5,000</td><td>Not always call-led</td><td>Depends on content and referrals</td><td>Churn becomes the core problem</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Practical India model at ₹50,000</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Monthly billed target</th><th>New sales</th><th>Approx. active students</th><th>Held calls at 20%</th><th>Matched contacts at 5%</th></tr></thead>
+            <tbody>
+              <tr><td><strong>₹10 lakh</strong></td><td>20</td><td>60</td><td>100</td><td>2,000</td></tr>
+              <tr><td><strong>₹1 crore</strong></td><td>200</td><td>600</td><td>1,000</td><td>20,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>At a combined 5% loss from refunds, failed payments and collections, ₹10 lakh collected needs about 22 sales. ₹1 crore collected needs about 211 sales.</p>
+
+        <div class="two-grid">
+          <div class="card card-accent">
+            <h3>Team near ₹10 lakh monthly</h3>
+            <ul class="clean-list">
+              <li>One lead coach</li>
+              <li>One assistant coach</li>
+              <li>One community or support person</li>
+              <li>One closer, possibly part time</li>
+              <li>Shared operations support</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Team near ₹1 crore monthly</h3>
+            <ul class="clean-list">
+              <li>Multiple lead coaches and assistants</li>
+              <li>Screening and onboarding staff</li>
+              <li>Sales and customer success teams</li>
+              <li>Content and acquisition team</li>
+              <li>Finance, collections and quality control</li>
+              <li>Medical referral partners</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>Possible ₹1 crore blended model</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Revenue source</th><th>Volume</th><th>Monthly billed revenue</th></tr></thead>
+            <tbody>
+              <tr><td>Flagship programme</td><td>100 new students at ₹50,000</td><td>₹50 lakh</td></tr>
+              <tr><td>Alumni membership</td><td>1,500 members at ₹3,000</td><td>₹45 lakh</td></tr>
+              <tr><td>Corporate cohort</td><td>One contract</td><td>₹5 lakh</td></tr>
+              <tr><td><strong>Total</strong></td><td></td><td><strong>₹1 crore</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout danger"><strong>Reality check:</strong> This is a scale hypothesis, not a forecast. At this size the founder becomes programme director and brand leader, not everyone’s trainer.</div>
+      </section>
+
+      <section class="section" id="program">
+        <div class="section-number">11</div>
+        <h2>Complete winning programme</h2>
+        <div class="winner">
+          <span class="label estimate">Programme name</span>
+          <h3>Strong After 40: The Business Owner Reset</h3>
+          <p><strong>Positioning statement:</strong> We help Indian male business owners aged 40 to 55 build measurable strength, improve mobility and create a fitness routine they can maintain in 12 weeks using the 4R Strong Owner Method, without crash diets or daily gym sessions.</p>
+          <div class="mechanism">
+            <div><b>1. Readiness</b>Screening, baselines, movement level and equipment.</div>
+            <div><b>2. Resistance</b>Progressive strength using home or gym options.</div>
+            <div><b>3. Real Food</b>Indian portions, protein, travel and social meals.</div>
+            <div><b>4. Repeatability</b>Minimum standards and a routine that survives busy weeks.</div>
+          </div>
+        </div>
+
+        <h3>A. Exact audience</h3>
+        <div class="two-grid">
+          <div class="card card-accent">
+            <h4>Best-fit buyer</h4>
+            <ul class="clean-list">
+              <li>Indian male SME, family-business or professional-service owner</li>
+              <li>Age 40 to 55</li>
+              <li>Beginner or returning exerciser</li>
+              <li>Has gained waist size and lost strength</li>
+              <li>Sits for long hours and attends social meals</li>
+              <li>Can invest in coaching</li>
+              <li>Has medical clearance where necessary</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Who should not join</h4>
+            <ul class="clean-list risk-list">
+              <li>People seeking medical treatment</li>
+              <li>Anyone needing injury rehabilitation</li>
+              <li>People with acute pain or unstable conditions</li>
+              <li>Anyone wanting a guaranteed number of kilograms</li>
+              <li>People refusing screening</li>
+              <li>Anyone demanding private daily coaching</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>B. Delivery structure</h3>
+        <div class="summary-grid">
+          <div class="card"><span class="metric">12 weeks</span><span class="muted">Plus a preparation week</span></div>
+          <div class="card"><span class="metric">8 to 10</span><span class="muted">Founding cohort size</span></div>
+          <div class="card"><span class="metric">15 to 20</span><span class="muted">After proof</span></div>
+          <div class="card"><span class="metric">25 max</span><span class="muted">Initially, with an assistant coach</span></div>
+        </div>
+        <ul class="clean-list">
+          <li>Two 35-minute live group strength sessions each week</li>
+          <li>One 60-minute coaching and accountability call each week</li>
+          <li>One 45-minute office hour every two weeks</li>
+          <li>One optional third workout from the library</li>
+          <li>No private weekly calls</li>
+        </ul>
+
+        <h3>C. Weekly curriculum</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Week</th><th>Curriculum</th><th>Student outcome</th></tr></thead>
+            <tbody>
+              <tr><td>0</td><td>Screening, consent, baseline tests and equipment setup</td><td>Safe starting level and complete scorecard</td></tr>
+              <tr><td>1</td><td>Minimum viable fitness week</td><td>Three protected training slots</td></tr>
+              <tr><td>2</td><td>Squat, hinge, push, pull, brace and carry</td><td>Correct foundation movement patterns</td></tr>
+              <tr><td>3</td><td>Indian home-food plate and protein system</td><td>Repeatable meal framework</td></tr>
+              <tr><td>4</td><td>Hips, shoulders, spine and desk mobility</td><td>Ten-minute daily mobility plan</td></tr>
+              <tr><td>5</td><td>Progressive overload without ego lifting</td><td>Know when to add load, repetitions or difficulty</td></tr>
+              <tr><td>6</td><td>Travel, restaurants and business dinners</td><td>Written travel and social-meal plan</td></tr>
+              <tr><td>7</td><td>Steps, conditioning and cardiovascular basics</td><td>Personal activity target</td></tr>
+              <tr><td>8</td><td>Recovery, soreness and difficult weeks</td><td>Minimum-workout and recovery protocol</td></tr>
+              <tr><td>9</td><td>Plateaus and consistency failures</td><td>Diagnose why progress slowed</td></tr>
+              <tr><td>10</td><td>Strength autonomy</td><td>Select safe exercises and regressions</td></tr>
+              <tr><td>11</td><td>Maintenance during holidays and busy periods</td><td>Never-miss-twice plan</td></tr>
+              <tr><td>12</td><td>Final tests and next 90 days</td><td>Graduation scorecard and continuation plan</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="three-grid">
+          <div class="card"><h3>Assignments</h3><ul class="clean-list"><li>Complete screening</li><li>Submit baselines</li><li>Schedule workouts</li><li>Log weekly adherence</li><li>Submit one form video weekly</li><li>Complete final tests</li></ul></div>
+          <div class="card"><h3>Templates</h3><ul class="clean-list"><li>Readiness questionnaire</li><li>Home and gym workout tracks</li><li>Indian protein builder</li><li>Restaurant guide</li><li>Travel checklist</li><li>90-day continuation planner</li></ul></div>
+          <div class="card"><h3>Scripts</h3><ul class="clean-list"><li>Family portion conversation</li><li>Restaurant ordering</li><li>Alcohol and late-dinner plan</li><li>Missed-workout recovery</li><li>Doctor clearance discussion</li><li>Unsafe gym pressure refusal</li></ul></div>
+        </div>
+
+        <h3>D. Tracking and accountability</h3>
+        <div class="two-grid">
+          <div class="card card-accent">
+            <h4>Track</h4>
+            <ul class="clean-list">
+              <li>Workout completion</li>
+              <li>Load, repetitions and exercise level</li>
+              <li>Waist using one standard method</li>
+              <li>Seven-day weight trend where appropriate</li>
+              <li>Push-up or incline push-up</li>
+              <li>30-second sit-to-stand</li>
+              <li>Selected mobility tests</li>
+              <li>Food-system adherence</li>
+              <li>Energy and confidence</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>Accountability</h4>
+            <ul class="clean-list">
+              <li>Monday commitment</li>
+              <li>Friday completion score</li>
+              <li>Cohort partner</li>
+              <li>Public weekly scorecard</li>
+              <li>Missed-week recovery protocol</li>
+              <li>Recognition for consistency, not only weight loss</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>E. Community and support boundaries</h3>
+        <p>Use WhatsApp first because the audience already understands it. Separate announcements, daily accountability, form checks, food and travel, and wins and questions.</p>
+        <div class="callout danger">
+          <strong>Support boundaries:</strong> Questions answered on business days. No unlimited private WhatsApp. No diagnosis, treatment, emergency support or private rehabilitation. One form submission per student each week. Programme changes happen by training level, not unlimited customisation.
+        </div>
+
+        <h3>F. Graduation criteria</h3>
+        <ul class="clean-list">
+          <li>Complete at least 80% of required sessions</li>
+          <li>Complete baseline and final assessments</li>
+          <li>Demonstrate safe form on core movements</li>
+          <li>Improve at least one agreed performance measure</li>
+          <li>Create a 90-day continuation plan</li>
+          <li>Know when to stop and seek medical help</li>
+        </ul>
+      </section>
+
+      <section class="section" id="founding">
+        <div class="section-number">12</div>
+        <h2>Founding-cohort offer</h2>
+        <div class="winner">
+          <h3>Eight Indian male business owners aged 40 to 55</h3>
+          <p>They complete a 12-week strength, mobility and fitness-consistency programme using Indian home food, home or gym training and live group accountability.</p>
+          <span class="metric">₹18,000 plus applicable taxes</span>
+          <p class="muted">Do not run it free. Free students give compliments. Paid students give market evidence.</p>
+        </div>
+
+        <h3>Pricing path</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Stage</th><th>Recommended price</th></tr></thead>
+            <tbody>
+              <tr><td>Founding cohort</td><td>₹18,000</td></tr>
+              <tr><td>Second cohort</td><td>₹30,000</td></tr>
+              <tr><td>Standard after strong proof</td><td>₹45,000</td></tr>
+              <tr><td>Mature programme</td><td>₹50,000</td></tr>
+              <tr><td>Two-payment option</td><td>₹24,000 twice, ₹48,000 total</td></tr>
+              <tr><td>Alumni membership</td><td>₹3,000 to ₹4,000 monthly</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><span class="label hypothesis">Pricing hypothesis</span> These are recommendations, not validated market facts.</p>
+
+        <div class="two-grid">
+          <div class="card card-accent"><h3>Included</h3><ul class="clean-list"><li>Readiness screening</li><li>Two live strength sessions weekly</li><li>Weekly coaching call</li><li>Fortnightly office hour</li><li>Workout tracks and food system</li><li>Community and scorecards</li><li>Final assessment</li><li>90-day continuation plan</li></ul></div>
+          <div class="card"><h3>Costs extra</h3><ul class="clean-list risk-list"><li>Medical consultations</li><li>Physiotherapy</li><li>Laboratory tests</li><li>Gym membership</li><li>Equipment and supplements</li><li>Private one-to-one coaching</li><li>Custom rehabilitation</li></ul></div>
+        </div>
+
+        <h3>Refund boundaries</h3>
+        <ul class="clean-list">
+          <li>Full refund before onboarding begins</li>
+          <li>No refund after programme access and onboarding</li>
+          <li>One cohort deferral for a documented medical reason</li>
+          <li>No weight-loss or disease-improvement guarantee</li>
+          <li>No results-or-your-money-back promise</li>
+        </ul>
+        <div class="callout success"><strong>Safer completion assurance:</strong> A student who completes at least 85% of required work but does not improve any agreed non-medical performance measure may repeat the next cohort once without another programme fee. Local counsel should review the final policy.</div>
+
+        <h3>Proof plan</h3>
+        <div class="two-grid">
+          <div class="card"><h4>Recruit through</h4><ul class="clean-list"><li>Previous male clients</li><li>Client referrals</li><li>Rotary and BNI contacts</li><li>Local business groups</li><li>LinkedIn</li><li>Instagram and Facebook</li><li>Personal WhatsApp network</li></ul></div>
+          <div class="card"><h4>Measure before and after</h4><ul class="clean-list"><li>Age and occupation</li><li>Training history</li><li>Main obstacle</li><li>Medical-clearance status</li><li>Waist and weight trend</li><li>Strength and movement tests</li><li>Attendance and adherence</li><li>Energy and confidence</li></ul></div>
+        </div>
+
+        <h3>Proof threshold before raising to ₹45,000</h3>
+        <ul class="clean-list">
+          <li>At least 8 paid students enrolled</li>
+          <li>At least 6 complete 80% of the programme</li>
+          <li>At least 5 improve one or more strength measures</li>
+          <li>Several show a positive waist or weight trend</li>
+          <li>At least 5 provide detailed testimonials</li>
+          <li>At least 3 explicitly value the group model</li>
+          <li>No major safety or delivery failures</li>
+          <li>Repeated demand from similar buyers</li>
+        </ul>
+      </section>
+
+      <section class="section" id="validation">
+        <div class="section-number">13</div>
+        <h2>Thirty-day validation plan</h2>
+        <div class="card-grid">
+          <div class="card card-accent"><span class="label validate">Week 1</span><h3>Learn the market</h3><ul class="clean-list"><li>Interview 10 target buyers</li><li>Study competitors</li><li>Collect exact pain language</li><li>Create a one-page offer</li></ul></div>
+          <div class="card"><span class="label validate">Week 2</span><h3>Test demand</h3><ul class="clean-list"><li>Contact 100 matched prospects</li><li>Publish five problem posts</li><li>Invite interviews and calls</li><li>Test three positioning messages</li></ul></div>
+          <div class="card"><span class="label validate">Week 3</span><h3>Presell</h3><ul class="clean-list"><li>Run qualified calls</li><li>Offer eight paid places</li><li>Collect payment</li><li>Record every objection</li></ul></div>
+          <div class="card"><span class="label validate">Week 4</span><h3>Decide</h3><ul class="clean-list"><li>Launch</li><li>Change the audience or offer</li><li>Change delivery</li><li>Reject the niche if the evidence is weak</li></ul></div>
+        </div>
+
+        <h3>Interview questions</h3>
+        <ol>
+          <li>What has changed physically since turning 40?</li>
+          <li>What bothers you most about your current fitness?</li>
+          <li>What have you tried, and why did it stop working?</li>
+          <li>How often does business interrupt your routine?</li>
+          <li>What happens during travel and social meals?</li>
+          <li>What would make a group useful?</li>
+          <li>What would make you reject a group?</li>
+          <li>What have you spent on gyms, trainers or nutrition?</li>
+          <li>Would a woman-led, male-only cohort feel acceptable or uncomfortable?</li>
+          <li>What result would justify ₹18,000? What would justify ₹45,000?</li>
+        </ol>
+
+        <h3>Three messages to test</h3>
+        <div class="three-grid">
+          <div class="card"><h4>A. Waist and appearance</h4><p>A 12-week group for male business owners over 40 who want to improve their waist trend and rebuild strength without crash diets.</p></div>
+          <div class="card"><h4>B. Strength and ageing</h4><p>A 12-week group for male business owners over 40 who feel weaker and stiffer than they did five years ago.</p></div>
+          <div class="card"><h4>C. Consistency</h4><p>A 12-week group for male business owners who know what to do but cannot keep doing it when work becomes busy.</p></div>
+        </div>
+
+        <h3>Decision signals</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Signal</th><th>Meaning</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Strong go</strong></td><td>100 contacts, 10 meaningful replies, 10 interviews, 5 qualified calls, at least 2 paid students, repeated pain and acceptable group format</td></tr>
+              <tr><td><strong>Weak</strong></td><td>People praise the idea but nobody pays. Compliments are not demand</td></tr>
+              <tr><td><strong>Pivot</strong></td><td>Buyers want the result but reject the audience, timing, format, message or price</td></tr>
+              <tr><td><strong>Stop</strong></td><td>Fewer than 5 meaningful replies, no repeated pain, no qualified calls and no payments after proper follow-up</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Failure diagnosis</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Symptom</th><th>Likely diagnosis</th></tr></thead>
+            <tbody>
+              <tr><td>Prospects do not reply</td><td>Weak targeting or outreach</td></tr>
+              <tr><td>They reply but do not take calls</td><td>Problem lacks urgency</td></tr>
+              <tr><td>They take calls but do not buy</td><td>Weak proof, price, trust or offer</td></tr>
+              <tr><td>They ask for one-to-one coaching</td><td>Group value is unclear</td></tr>
+              <tr><td>They ask only about weight loss</td><td>Strength positioning is not landing</td></tr>
+              <tr><td>They reject the business-owner label</td><td>Occupation filter adds no value</td></tr>
+              <tr><td>They resist a woman-led cohort</td><td>Trust or market-fit issue</td></tr>
+              <tr><td>They pay but do not participate</td><td>Screening or accountability failure</td></tr>
+              <tr><td>Results vary wildly</td><td>Curriculum or level segmentation problem</td></tr>
+              <tr><td>Many need medical help</td><td>Audience boundary is too broad</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="risks">
+        <div class="section-number">14</div>
+        <h2>Risks and unknowns</h2>
+        <div class="card-grid">
+          <div class="card"><h3>Proof is not packaged</h3><p>Transformations need age, occupation, starting condition, duration, method, attendance, strength progress, waist trend and maintenance.</p></div>
+          <div class="card"><h3>No group proof</h3><p>Good one-to-one coaching does not automatically become good group coaching. The founding cohort must test facilitation and support load.</p></div>
+          <div class="card"><h3>Female coach fit is unknown</h3><p>It could be a barrier, neutral or a differentiator. Interviews and paid sales must answer it.</p></div>
+          <div class="card"><h3>Website contradiction</h3><p>The current site is broad, mixed-gender, one-to-one heavy and uses a different promise. It will weaken the new offer until rewritten.</p></div>
+          <div class="card"><h3>Credentials may need updating</h3><p>Confirm CPR, first aid, insurance, nutrition scope, trainer certification, screening and emergency procedures.</p></div>
+          <div class="card"><h3>Hidden one-to-one work</h3><p>If 25 students each send four videos weekly, the group becomes 100 private reviews. Cap feedback clearly.</p></div>
+          <div class="card"><h3>₹45,000 is unvalidated</h3><p>A price displayed on a website is not proof of demand. Paid presales matter.</p></div>
+          <div class="card"><h3>₹1 crore requires a company</h3><p>Scale needs coach recruitment, training, quality control, acquisition, sales, support, finance and partnerships.</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="final-recommendation">
+        <div class="section-number">15</div>
+        <h2>Final recommendation</h2>
+        <div class="winner">
+          <h3>Build this</h3>
+          <p><strong>Niche:</strong> Indian male business owners aged 40 to 55 who have gained waist size, lost strength and repeatedly fail to maintain fitness because of work, travel and social eating.</p>
+          <p><strong>Offer:</strong> Strong After 40: The Business Owner Reset.</p>
+          <p><strong>Promise:</strong> Build measurable strength, improve mobility and create a fitness routine that survives business life in 12 weeks.</p>
+          <p><strong>Mechanism:</strong> Readiness, Resistance, Real Food and Repeatability.</p>
+          <p><strong>Delivery:</strong> Group only. Two live workouts, one coaching call, one fortnightly office hour, home and gym tracks, Indian home-food system, WhatsApp community and measurable scorecards.</p>
+        </div>
+
+        <div class="two-grid" style="margin-top:16px">
+          <div class="card card-accent"><h3>Pricing</h3><ul class="clean-list"><li>Founding cohort: ₹18,000</li><li>Second cohort: ₹30,000</li><li>Standard after proof: ₹45,000</li><li>Mature target: ₹50,000</li><li>Alumni membership: ₹3,000 to ₹4,000 monthly</li></ul></div>
+          <div class="card"><h3>Do not build</h3><ul class="clean-list risk-list"><li>Generic 35 to 65 fitness coaching</li><li>Medical-condition coaching</li><li>Unlimited WhatsApp access</li><li>Sixteen private calls each month</li><li>Guaranteed weight loss</li><li>A huge course before presales</li><li>A low-cost mass class</li></ul></div>
+        </div>
+
+        <div class="quote">Do not spend the next month building content. Get 10 interviews, 5 qualified calls, 2 paid presales and 8 founding members.</div>
+
+        <div class="two-grid">
+          <div class="card card-accent">
+            <span class="label confirmed">What we know</span>
+            <ul class="clean-list">
+              <li>Credible strength, fitness and nutrition foundation</li>
+              <li>Personal transformation experience</li>
+              <li>Experience coaching male clients</li>
+              <li>Visible transformations and accountability testimonials</li>
+              <li>Workshop experience</li>
+              <li>Current one-to-one model is difficult to scale</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="label estimate">What we estimate</span>
+            <ul class="clean-list">
+              <li>Male business owners aged 40 to 55 are the strongest first niche</li>
+              <li>Kolkata and business communities are the easiest channels</li>
+              <li>A 12-week live cohort is the right initial format</li>
+              <li>₹18,000 is a reasonable founding test</li>
+              <li>₹45,000 to ₹50,000 may work after proof</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="label unknown">What remains unknown</span>
+            <ul class="clean-list risk-list">
+              <li>Whether occupation-specific positioning matters</li>
+              <li>Whether men accept a woman-led male cohort</li>
+              <li>Whether buyers pay ₹18,000 or ₹45,000</li>
+              <li>Whether the current audience contains enough qualified men</li>
+              <li>Whether group support remains scalable</li>
+              <li>Preferred delivery language</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="label validate">What must be validated</span>
+            <ul class="clean-list">
+              <li>10 buyer interviews</li>
+              <li>One repeated painful problem</li>
+              <li>Acceptance of group format</li>
+              <li>5 qualified calls</li>
+              <li>2 paid presales</li>
+              <li>8 founding students</li>
+              <li>Safe screening</li>
+              <li>Measurable outcomes and strong completion</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="sources">
+        <div class="section-number">S</div>
+        <h2>Research sources</h2>
+        <p class="section-intro">These links were used in the source report. Competitor claims and testimonials should be treated as company-published unless independently verified.</p>
+        <ol class="sources">
+          <li><a href="https://eatliftmove.in/" target="_blank" rel="noopener">Eat Lift Move website</a></li>
+          <li><a href="https://eatliftmove.in/certificates1.webp" target="_blank" rel="noopener">Eat Lift Move certificate gallery image</a></li>
+          <li><a href="https://eatliftmove.in/artemarch2026.pdf" target="_blank" rel="noopener">ARTE Magazine feature</a></li>
+          <li><a href="https://eatliftmove.in/beforeafter6.webp" target="_blank" rel="noopener">Before and after proof image</a></li>
+          <li><a href="https://cdn.who.int/media/docs/default-source/searo/pa-factsheet2024/pa-factsheet-_india2024.pdf" target="_blank" rel="noopener">WHO India physical activity factsheet, 2024</a></li>
+          <li><a href="https://www.pib.gov.in/PressReleasePage.aspx?PRID=2266600&lang=1&reg=3" target="_blank" rel="noopener">Government of India, NFHS-6 release</a></li>
+          <li><a href="https://factly.in/obesity-and-high-blood-sugar-rise-across-india-nfhs-6-shows/" target="_blank" rel="noopener">NFHS-6 summary</a></li>
+          <li><a href="https://www.reddit.com/r/Fitness_India/comments/1iwdrix/belly_fat_how_to_reduce_it/" target="_blank" rel="noopener">Fitness India buyer-language discussion</a></li>
+          <li><a href="https://bni-india.in/en-IN/about" target="_blank" rel="noopener">BNI India network information</a></li>
+          <li><a href="https://www.fitfatherproject.com/shop-programs/" target="_blank" rel="noopener">Fit Father Project</a></li>
+          <li><a href="https://physiqueexpert.in/" target="_blank" rel="noopener">Physique Expert</a></li>
+          <li><a href="https://www.fittr.com/" target="_blank" rel="noopener">FITTR</a></li>
+          <li><a href="https://plans.healthifyme.com/" target="_blank" rel="noopener">HealthifyMe plans</a></li>
+          <li><a href="https://fitelo.co/" target="_blank" rel="noopener">Fitelo</a></li>
+          <li><a href="https://www.fitterfly.com/" target="_blank" rel="noopener">Fitterfly</a></li>
+          <li><a href="https://studiofitindia.com/" target="_blank" rel="noopener">Studio FIT India</a></li>
+          <li><a href="https://www.parambodyfitmind.com/" target="_blank" rel="noopener">Parambodyfitmind</a></li>
+          <li><a href="https://www.cult.fit/" target="_blank" rel="noopener">Cult.fit</a></li>
+          <li><a href="https://www.yourtrainer.in/personal-trainer-cost-calculator" target="_blank" rel="noopener">YourTrainer cost information</a></li>
+          <li><a href="https://www.skool.com/polarity-fitness-free-3855" target="_blank" rel="noopener">Polarity Fitness community</a></li>
+        </ol>
+      </section>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <strong>Eat Lift Move</strong><br />
+    Evidence-supported niche, offer and scale strategy • July 2026
+  </footer>
+
+  <script>
+    const bar = document.getElementById('progressBar');
+    const updateProgress = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      bar.style.width = pct + '%';
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    const links = [...document.querySelectorAll('.toc a')];
+    const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + visible.target.id));
+    }, { rootMargin: '-20% 0px -65% 0px', threshold: [0.01, 0.2, 0.5] });
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
